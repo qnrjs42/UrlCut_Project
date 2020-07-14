@@ -1,16 +1,11 @@
+import mainImg from '../static/main.png'
+
+// UIkit.img(element, options);
 
 const AppLayout = () => {
     return (
       <div>
-        <p className="uk-margin">
-          <a className="uk-button uk-button-default" href="#">
-            Link
-          </a>
-          <button className="uk-button uk-button-default">Button</button>
-          <button className="uk-button uk-button-default" disabled>
-            Disabled
-          </button>
-        </p>
+        <img src={mainImg} alt="Hello" />
       </div>
     );
 }
