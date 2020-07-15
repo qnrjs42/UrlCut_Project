@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import Head from "next/head";
 
 import 'uikit/dist/css/uikit.css'
+import "uikit/dist/css/uikit.min.css";
 import 'uikit/dist/js/uikit'
-import "uikit/dist/js/uikit-icons";
+import 'uikit/dist/js/uikit-icons'
+import 'uikit/dist/js/uikit-icons.min'
 
 import '../css/marketing.css'
 
