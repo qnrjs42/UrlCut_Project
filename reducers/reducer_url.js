@@ -36,34 +36,15 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         draft.urlCutDone = false;
         draft.urlCutError = null;
         break;
-    //   return {
-    //     ...state,
-    //     urlCutLoading: true,
-    //     urlCutDone: false,
-    //     urlCutError: null,
-    //   };
     case URL_CUT_SUCCESS:
         console.log("state", state);
         console.log("action", action);
         draft.urlCutLoading = false;
         draft.urlCutDone = true;
         draft.url = action.data;
-    //   return {
-    //     ...state,
-    //     urlCutLoading: false,
-    //     urlCutDone: true,
-
-    //     // url: action.data.newUrl, // axios 이용할 때
-    //     url: action.data,
-    //   };
     case URL_CUT_FAILURE:
         draft.urlCutLoading = false;
         draft.urlCutError = action.error;
-    //   return {
-    //     ...state,
-    //     urlCutLoading: false,
-    //     urlCutError: action.error,
-    //   };
   }
 });
 

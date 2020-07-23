@@ -5,27 +5,19 @@ import {
   Button,
   Input,
   Layout,
-  Menu,
-  Dropdown,
   Form,
   Card,
   Divider,
 } from "antd";
 import {
   LinkOutlined,
-  DownOutlined,
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
 
-import { MenuItemGroup } from "rc-menu";
 import { useDispatch, useSelector } from 'react-redux';
 import { urlCutRequestAction } from "../reducers/reducer_url";
 
 const { Header, Content, Footer } = Layout;
-const { SubMenu } = Menu;
 
 const FormWrapper = styled(Form)`
   padding: 10px;
@@ -54,36 +46,6 @@ const AppLayout = () => {
   return (
     <>
       <Layout className="layout">
-        <div className="nav" style={{ marginTop: "5vh" }}>
-          <Menu mode="horizontal">
-            <Menu.Item key="1">Main</Menu.Item>
-            <Menu.Item key="2">URL 안전검사</Menu.Item>
-            <Menu.Item key="3">부가 서비스</Menu.Item>
-
-            <Menu.Item key="6" style={{ float: "right" }}>
-              회원가입
-            </Menu.Item>
-
-            <Menu.Item key="5" style={{ float: "right" }}>
-              로그인
-            </Menu.Item>
-
-            <SubMenu
-              style={{ float: "right" }}
-              title={<span>서비스 안내</span>}
-            >
-              <MenuItemGroup title="Item 1">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </MenuItemGroup>
-              <MenuItemGroup title="Item 2">
-                <Menu.Item key="setting:3">Option 3</Menu.Item>
-                <Menu.Item key="setting:4">Option 4</Menu.Item>
-              </MenuItemGroup>
-            </SubMenu>
-          </Menu>
-        </div>
-
         <Content style={{ padding: "0 50px", margin: "16px 0" }}>
           <FormWrapper onFinish={onSubmitForm}>
             <Row justify="center">
@@ -91,10 +53,13 @@ const AppLayout = () => {
             </Row>
 
             <Row justify="center">
+              {/* xs: <576, sm: >=576 md: >=768, lg: >=992, xl: >=1200 */}
               <Col
-                xs={{ span: 32 }}
-                md={{ span: 16 }}
-                lg={{ span: 7 }}
+                xs={32}
+                sm={14}
+                md={12}
+                lg={10}
+                xl={7}
                 style={{ textAlign: "center" }}
               >
                 <Input
@@ -122,7 +87,7 @@ const AppLayout = () => {
 
             {copyed ? (
               <Row justify="center" style={{ margin: "4vh 0 4vh 0" }}>
-                <Col xs={{ span: 24 }} md={{ span: 16 }} lg={{ span: 7 }}>
+                <Col xs={32} sm={14} md={12} lg={10} xl={7}>
                   <div className="site-card-border-less-wrapper">
                     <Card
                       title={url}

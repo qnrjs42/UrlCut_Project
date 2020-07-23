@@ -18,17 +18,10 @@ app
 
     server.use("/api", apiRoutes);
 
-    server.listen(9090, (err) => {
+    server.listen(5000, (err) => {
       if (err) throw err;
-      console.log("> Ready on Server Port: 9090");
+      console.log("> Ready on Server Port: 5000");
     });
-
-    server.post("/urlCut", (req, res) => {
-      if(req) {
-        return res.status(200).json({ success: true });
-      }
-      return  res.status(400).json({ success: false });
-    })
   })
   .catch((ex) => {
     console.error(ex.stack);
