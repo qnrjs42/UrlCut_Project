@@ -20,7 +20,7 @@ function* logIn(action) {
   try {
     yield delay(1000); // 가짜 데이터
     // const result = yield call(loginAPI, action.data); // 아직 서버가 없어서 요청을 못 보냄
-
+    console.log('saga의 action', action);
     yield put({
       type: LOG_IN_SUCCESS,
       data: action.data,

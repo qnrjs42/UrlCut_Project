@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 
@@ -17,6 +17,7 @@ const App = ({ Component }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
         <title>App</title>
       </Head>
+
       <NavBar />
       <Component />
     </>
