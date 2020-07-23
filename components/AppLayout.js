@@ -21,8 +21,8 @@ import {
 import styled from "styled-components";
 
 import { MenuItemGroup } from "rc-menu";
-import { useDispatch } from 'react-redux'
-import { urlCutAction } from "../reducers";
+import { useDispatch, useSelector } from 'react-redux';
+import { urlCutRequestAction } from "../reducers/reducer_url";
 
 const { Header, Content, Footer } = Layout;
 const { SubMenu } = Menu;
@@ -33,6 +33,7 @@ const FormWrapper = styled(Form)`
 
 const AppLayout = () => {
   const dispatch = useDispatch();
+  const urlInfo = useSelector(state => state.url);
 
   const [url, setUrl] = useState("");
   const [changeUrl, setChangeUrl] = useState('');
@@ -46,9 +47,7 @@ const AppLayout = () => {
     setUrl(changeUrl);
     setCopyed(true);
 
-    console.log("submitUrl : ", changeUrl);
-
-    dispatch(urlCutAction());
+    dispatch(urlCutRequestAction());
 
   }, [changeUrl])
 
@@ -137,7 +136,7 @@ const AppLayout = () => {
                             marginRight: "5px",
                           }}
                         >
-                          단축링크 :
+                          단축링크 : {urlInfo.url}
                         </p>
                         <p style={{ display: "inline-block" }}></p>
                       </div>
