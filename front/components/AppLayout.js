@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { urlCutRequestAction } from "../reducers/reducer_url";
 
 const { Header, Content, Footer } = Layout;
+const { Meta } = Card;
 
 const FormWrapper = styled(Form)`
   padding: 10px;
@@ -46,9 +47,9 @@ const AppLayout = () => {
 
   return (
     <>
-      <Layout className="layout" style={{ height: "60vh" }}>
-        <div class="bg-image"></div>
-          <div class="bg-text">
+      <Layout className="layout" style={{ height: "100vh" }}>
+        <div className="bg-image"></div>
+          <div className="bg-text">
             <FormWrapper onFinish={onSubmitForm}>
               <Row justify="center">
                 <h2>링크는 간단하게 CUT</h2>
@@ -58,10 +59,10 @@ const AppLayout = () => {
                 {/* xs: <576, sm: >=576 md: >=768, lg: >=992, xl: >=1200 */}
                 <Col
                   xs={32}
-                  sm={14}
-                  md={12}
+                  sm={15}
+                  md={13}
                   lg={10}
-                  xl={7}
+                  xl={9}
                   style={{ textAlign: "center" }}
                 >
                   <Input
@@ -133,6 +134,29 @@ const AppLayout = () => {
                 <p>loeram</p>
               </Row>
             </FormWrapper>
+			  	<Row justify="center">
+					<Card
+						hoverable
+						style={{ width: 240, marginRight: '40px' }}
+						cover={<img alt="example" src="../static/main.jpg" />}
+					>
+					<Meta title="Europe Street beat" description="www.instagram.com" />
+					</Card>
+				<Card
+					hoverable
+					style={{ width: 240, marginRight: '40px' }}
+					cover={<img alt="example" src="../static/main.jpg" />}
+				>
+				<Meta title="Europe Street beat" description="www.instagram.com" />
+				</Card>
+				<Card
+					hoverable
+					style={{ width: 240 }}
+					cover={<img alt="example" src="../static/main.jpg" />}
+				>
+				<Meta title="Europe Street beat" description="www.instagram.com" />
+				</Card>
+				</Row>
           </div>
       </Layout>
       <br />
