@@ -5,7 +5,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const apiRoutes = require("./server/routes/index.js");
+const apiRoutes = require("./server/routes");
 
 app
   .prepare()
