@@ -17,16 +17,47 @@ import { END } from 'redux-saga';
 import wrapper from '../store';
 
 사용 예)
+import { END } from 'redux-saga';
+import wrapper from '../store';
+
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
     context.store.dispatch({
-        type: LOAD_USER_REQUEST,
+        type: LOAD_MY_INFO_REQUEST,
     });
     context.store.dispatch({
         type: LOAD_POSTS_REQUEST,
     });
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
-})
+});
+
+export default Home;
 
 HYDRATE : getServerSideProps 실행 되고 나서 위의 코드 디스패치가 실행 된 결과를 HYDRATE로 보내진다.
 reducers/index HYDRATE
+
+------------------------------------------------------------------------------------------
+
+SSR시 쿠키 공유
+
+기존 : 브라우저 -> 백엔드
+SSR  : 프론트   -> 백엔드
+
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+    const cookie = context.req ? context.req.headers.cookie : '';
+    axios.defaults.headers.Cookie = '';
+
+    // 다른 사람이 내 정보로 로그인 할 수 없도록 함(즉, 내 쿠키로 다른 사람이 로그인하는 걸 방지)
+    if(context.req && cookie) {
+        axios.defaults.headers.Cookie = cookie;
+    }
+
+    context.store.dispatch({
+        type: LOAD_MY_INFO_REQUEST,
+    });
+    context.store.dispatch({
+        type: LOAD_POSTS_REQUEST,
+    });
+    context.store.dispatch(END);
+    await context.store.sagaTask.toPromise();
+});
