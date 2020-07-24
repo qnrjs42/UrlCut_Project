@@ -53,14 +53,16 @@ function* logOut() {
   }
 }
 
-function signUpAPI() {
-  return axios.post("/api/logout");
+function signUpAPI(data) {
+  return axios.post("/api/logout", data);
 }
 
-function* signUp() {
+function* signUp(action) {
   try {
     yield delay(1000); // 가짜 데이터
-    // const result = yield call(signUpAPI);
+    // const result = yield call(signUpAPI, action.data);
+
+    console.log('saga의 signUp Action', action);
 
     yield put({
       type: SIGN_UP_SUCCESS,

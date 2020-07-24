@@ -26,4 +26,11 @@ router.post("/logOut", (req, res) => {
   return res.status(400).json({ success: false });
 });
 
+router.post("/signUp", (req, res) => {
+  if (req) {
+    return res.status(200).json({ success: true, user: 'Axios를 이용한 회원가입 성공' });
+  }
+  return res.status(400).json({ success: false });
+});
+
 module.exports = router;

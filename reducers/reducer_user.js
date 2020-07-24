@@ -55,12 +55,22 @@ export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 const dummyUser = (data) => ({
   email: data,
   nickname: "제로초",
-  id: 1,
-  Posts: [{ id: 1 }],
+  id: 1
+});
+
+const dummySignUpUser = (data) => ({
+  email: data,
+  nickname: "제로초",
+  id: 2,
 });
 
 export const loginRequestAction = (data) => ({
   type: LOG_IN_REQUEST,
+  data,
+});
+
+export const signupRequestAction = (data) => ({
+  type: SIGN_UP_REQUEST,
   data,
 });
 
@@ -129,6 +139,7 @@ const reducer = (state = initialState, action) =>
       case SIGN_UP_SUCCESS:
         draft.signUpLoading = false;
         draft.signUpDone = true;
+
         break;
 
       case SIGN_UP_FAILURE:

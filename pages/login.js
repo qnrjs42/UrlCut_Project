@@ -11,11 +11,22 @@ import {
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
+import styled from "styled-components";
 
 import useInput from "../hooks/useInput";
 import { loginRequestAction } from "../reducers/reducer_user";
 
 const { Title } = Typography;
+
+const SquareInput = () => ({
+  borderRadius: "0px",
+});
+
+
+const SquareButton = () => ({
+  minWidth: '100%',
+  borderRadius: '0px',
+});
 
 const logIn = () => {
     const [form] = Form.useForm();
@@ -41,62 +52,67 @@ const logIn = () => {
     <>
       <Layout className="layout" style={{ height: "100vh" }}>
         <Row justify="space-around" align="middle" style={{ padding: "15% 0" }}>
-            <div className="app">
-              <Title level={2} style={{ textAlign: "center" }}>
-                로그인
-              </Title>
-              <Form form={form} onFinish={onLogInSubmit} style={{ width: "350px" }}>
-                <Form.Item required>
-                  <Input
-                    id="email"
-                    prefix={
-                      <UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    placeholder="Enter your Email"
-                    type="id"
-                    value={Email}
-                    onChange={onChangeEmail}
-                  />
-                </Form.Item>
+          <div className="app">
+            <Title level={2} style={{ textAlign: "center" }}>
+              로그인
+            </Title>
+            <Form
+              form={form}
+              onFinish={onLogInSubmit}
+              style={{ width: "350px" }}
+            >
+              <Form.Item required>
+                <Input
+                  id="email"
+                  size="large"
+                  prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  placeholder="이메일"
+                  type="id"
+                  value={Email}
+                  onChange={onChangeEmail}
+                  style={SquareInput()}
+                />
+              </Form.Item>
 
-                <Form.Item required>
-                  <Input
-                    id="password"
-                    prefix={
-                      <LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    placeholder="Enter your password"
-                    type="password"
-                    value={Password}
-                    onChange={onChangePassword}
-                  />
-                </Form.Item>
+              <Form.Item required>
+                <Input
+                  id="password"
+                  size="large"
+                  prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  placeholder="패스워드"
+                  type="password"
+                  value={Password}
+                  onChange={onChangePassword}
+                  style={SquareInput()}
+                />
+              </Form.Item>
 
-                <Form.Item valuePropName="checked">
-                  <Checkbox id="rememberMe">Remember me</Checkbox>
-                  <a
-                    className="login-form-forgot"
-                    href="/reset_user"
-                    style={{ float: "right" }}
+              <Form.Item valuePropName="checked">
+                <Checkbox id="rememberMe">Remember me</Checkbox>
+                <a
+                  className="login-form-forgot"
+                  href="/reset_user"
+                  style={{ float: "right" }}
+                >
+                  forgot password
+                </a>
+                <div>
+                  <br />
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button"
+                    size="large"
+                    onSubmit={onLogInSubmit}
+                    style={SquareButton()}
                   >
-                    forgot password
-                  </a>
-                  <div>
-                    <br />
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="login-form-button"
-                      style={{ minWidth: "100%" }}
-                      onSubmit={onLogInSubmit}
-                    >
-                      로그인
-                    </Button>
-                  </div>
-                  {/* Or <a href="/register">register now!</a> */}
-                </Form.Item>
-              </Form>
-            </div>
+                    로그인
+                  </Button>
+                </div>
+                {/* Or <a href="/register">register now!</a> */}
+              </Form.Item>
+            </Form>
+          </div>
         </Row>
       </Layout>
     </>

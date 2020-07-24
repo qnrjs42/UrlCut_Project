@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import Router from "next/router";
 
 import useInput from "../hooks/useInput";
-import { loginRequestAction } from "../reducers/reducer_user";
+import { signupRequestAction } from "../reducers/reducer_user";
 
 const { Title } = Typography;
 
@@ -32,6 +32,15 @@ const tailFormItemLayout = {
   },
 };
 
+const SquareInput = () => ({
+  borderRadius: "0px",
+});
+
+const SquareButton = () => ({
+  minWidth: "100%",
+  borderRadius: "0px",
+});
+
 const signUp = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -44,6 +53,14 @@ const signUp = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
+  const [term, setTerm] = useState("");
+  const [termError, setTermError] = useState(false);
+
+  const onChangeTerm = useCallback((e) => {
+    setTerm(e.target.checked);
+    setTermError(false);
+  }, []);
+
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
@@ -52,11 +69,19 @@ const signUp = () => {
     [Password]
   );
 
-  const onLogInSubmit = useCallback(() => {
+  const onSignUpSubmit = useCallback(() => {
+      if (Password !== passwordCheck) {
+        return setPasswordError(true);
+      }
 
+      if (!term) {
+        return setTermError(true);
+      }
+
+    dispatch(signupRequestAction({Email, NickName, Password}));
 
     // Router.push("/");
-  }, []);
+  }, [Email, NickName, Password, term]);
 
   return (
     <>
@@ -68,7 +93,7 @@ const signUp = () => {
             </Title>
             <Form
               form={form}
-              onFinish={onLogInSubmit}
+              onFinish={onSignUpSubmit}
               style={{ width: "350px" }}
             >
               <Form.Item
@@ -86,10 +111,12 @@ const signUp = () => {
               >
                 <Input
                   id="email"
+                  size="large"
                   prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
                   placeholder="이메일 주소"
                   value={Email}
                   onChange={onChangeEmail}
+                  style={SquareInput()}
                 />
               </Form.Item>
 
@@ -104,10 +131,12 @@ const signUp = () => {
               >
                 <Input
                   id="id"
+                  size="large"
                   prefix={<EditOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
                   placeholder="닉네임"
                   value={NickName}
                   onChange={onChangeNickName}
+                  style={SquareInput()}
                 />
               </Form.Item>
 
@@ -123,11 +152,13 @@ const signUp = () => {
               >
                 <Input
                   id="password"
+                  size="large"
                   prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
                   placeholder="비밀번호"
                   type="password"
                   value={Password}
                   onChange={onChangePassword}
+                  style={SquareInput()}
                 />
               </Form.Item>
 
@@ -143,8 +174,10 @@ const signUp = () => {
                   ({ getFieldValue }) => ({
                     validator(rule, value) {
                       if (!value || getFieldValue("password") === value) {
+                        setPasswordError(false);
                         return Promise.resolve();
                       }
+                      setPasswordError(true);
                       return Promise.reject(
                         "입력한 비밀번호와 동일한지 확인하세요"
                       );
@@ -154,11 +187,13 @@ const signUp = () => {
               >
                 <Input
                   id="password"
+                  size="large"
                   prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
                   placeholder="비밀번호 확인"
                   type="password"
                   value={passwordCheck}
                   onChange={onChangePasswordCheck}
+                  style={SquareInput()}
                 />
               </Form.Item>
 
@@ -176,7 +211,11 @@ const signUp = () => {
                 ]}
                 {...tailFormItemLayout}
               >
-                <Checkbox>
+                <Checkbox
+                  name="user-term"
+                  checked={term}
+                  onChange={onChangeTerm}
+                >
                   약관에 동의합니다. <a href="">(이용약관)</a>
                 </Checkbox>
               </Form.Item>
@@ -187,8 +226,9 @@ const signUp = () => {
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
-                    style={{ minWidth: "100%" }}
-                    onSubmit={onLogInSubmit}
+                    size="large"
+                    style={SquareButton()}
+                    onSubmit={onSignUpSubmit}
                   >
                     회원가입하기
                   </Button>

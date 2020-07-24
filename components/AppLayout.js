@@ -70,12 +70,16 @@ const AppLayout = () => {
                 onChange={onChangeUrl}
                 required
                 autoComplete="off"
-                style={{ borderRadius: "0px" }}
+                style={{
+                  borderRadius: "0px",
+                  padding: "0 0 0 11px",
+                  height: "55px",
+                }}
                 prefix={<LinkOutlined />}
                 suffix={
                   <Button
                     type="primary"
-                    style={{ height: "40px", borderRadius: "0px" }}
+                    style={{ height: "55px", borderRadius: "0px" }}
                     htmlType="submit"
                   >
                     CUT
@@ -110,7 +114,7 @@ const AppLayout = () => {
                       <Button
                         type="primary"
                         size="large"
-                        style={{ borderRadius: "0px" }}
+                        style={{ height: "45px", borderRadius: "0px" }}
                       >
                         로그인
                       </Button>
@@ -138,7 +142,7 @@ const AppLayout = () => {
       <Layout className="layout" style={{ height: "60vh" }}>
         <div>레이아웃3</div>
       </Layout>
-      
+
       <Footer style={{ textAlign: "center" }}>
         We Are ©2020 Created by Ant UED
       </Footer>

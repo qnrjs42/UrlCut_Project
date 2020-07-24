@@ -18,7 +18,7 @@ const NavBar = () => {
   }, []);
 
     return (
-      <div className="nav" style={{ marginTop: "1vh" }}>
+      <div style={{ marginTop: "1vh" }}>
         <Menu mode="horizontal">
           <Menu.Item key="1">
             <Link href="/">
