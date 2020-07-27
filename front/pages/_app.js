@@ -6,7 +6,8 @@ import wrapper from "../store";
 import NavBar from '../components/NavBar';
 
 import "antd/dist/antd.css";
-import '../css/main.css'
+import '../css/main.css';
+import "../css/S-Core-Dream-light/s-core-dream.css";
 
 
 const App = ({ Component }) => {

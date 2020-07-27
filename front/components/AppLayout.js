@@ -135,43 +135,74 @@ const AppLayout = () => {
               <p>loeram</p>
             </Row>
           </FormWrapper>
-          <Row justify="center">
-            <Card
-              hoverable
-              style={{ width: 240, marginRight: "40px" }}
-              cover={<img alt="example" src="../static/main.jpg" />}
-            >
-              <Meta
-                title="Europe Street beat"
-                description="www.instagram.com"
-              />
-            </Card>
-            <Card
-              hoverable
-              style={{ width: 240, marginRight: "40px" }}
-              cover={<img alt="example" src="../static/main.jpg" />}
-            >
-              <Meta
-                title="Europe Street beat"
-                description="www.instagram.com"
-              />
-            </Card>
-            <Card
-              hoverable
-              style={{ width: 240 }}
-              cover={<img alt="example" src="../static/main.jpg" />}
-            >
-              <Meta
-                title="Europe Street beat"
-                description="www.instagram.com"
-              />
-            </Card>
-          </Row>
+          {/* 카드형 레이아웃 미완성 */}
+          <div>
+            {/* <div
+            className="site-card-wrapper cardLayout"
+            style={{ overflowX: "scroll" }}
+          >
+            <div className="">
+              <Row justify="center" gutter={16}>
+                <Col span={8}>
+                  <Card
+                    hoverable
+                    bordered={false}
+                    style={{
+                      width: 240,
+                      whiteSpace: "nowrap",
+                      marginLeft: "50px",
+                    }}
+                    cover={<img alt="example" src="../static/main.jpg" />}
+                  >
+                    <Meta
+                      title="Europe Street beat"
+                      description="www.instagram.com"
+                    />
+                  </Card>
+                </Col>
+                <Col span={8}>
+                  <Card
+                    hoverable
+                    bordered={false}
+                    style={{
+                      width: 240,
+                      whiteSpace: "nowrap",
+                      marginLeft: "50px",
+                    }}
+                    cover={<img alt="example" src="../static/main.jpg" />}
+                  >
+                    <Meta
+                      title="Europe Street beat"
+                      description="www.instagram.com"
+                    />
+                  </Card>
+                </Col>
+                <Col span={8}>
+                  <Card
+                    hoverable
+                    bordered={false}
+                    style={{
+                      width: 240,
+                      whiteSpace: "nowrap",
+                      marginLeft: "50px",
+                    }}
+                    cover={<img alt="example" src="../static/main.jpg" />}
+                  >
+                    <Meta
+                      title="Europe Street beat"
+                      description="www.instagram.com"
+                    />
+                  </Card>
+                </Col>
+              </Row>
+            </div>
+          </div> */}
+          </div>
         </div>
       </Layout>
       <br />
 
-      <Layout className="layout" style={{ height: "60vh" }}>
+      <Layout className="layout" style={{ height: "60vh", backgroundColor: '#fafbfe' }}>
         <div>레이아웃2</div>
       </Layout>
       <br />
