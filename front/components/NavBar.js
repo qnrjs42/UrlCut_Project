@@ -1,60 +1,66 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import {
-  Menu,
+  Menu, Button, Drawer
 } from "antd";
+import { UnorderedListOutlined } from "@ant-design/icons";
 import { MenuItemGroup } from "rc-menu";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutRequestAction } from "../reducers/reducer_user";
+import LeftMenu from "./Sections/LeftMenu";
+import RightMenu from "./Sections/RightMenu";
 
 const { SubMenu } = Menu;
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
+  const [visible, setVisible] = useState(false);
 
-  const onLogOutSubmit = useCallback(() => {
-    dispatch(logoutRequestAction());
-  }, []);
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
     return (
       <div>
-        <Menu mode="horizontal" className="bg-text2">
-          <Menu.Item key="1">
-            <Link href="/">
-              <a>Main</a>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="2">URL 안전검사</Menu.Item>
-          <Menu.Item key="3">부가 서비스</Menu.Item>
-
-          <Menu.Item key="signUp" style={{ float: "right" }}>
-            <Link href="/signup">
-              <a>회원가입</a>
-            </Link>
-          </Menu.Item>
-
-          <Menu.Item key="logIn" style={{ float: "right" }}>
-            {me ? (
-              <a onClick={onLogOutSubmit}>로그아웃</a>
-            ) : (
-              <Link href="/login">
-                <a>로그인</a>
-              </Link>
-            )}
-          </Menu.Item>
-
-          <SubMenu style={{ float: "right" }} title={<span>서비스 안내</span>}>
-            <MenuItemGroup title="Item 1">
-              <Menu.Item key="setting:1">Option 1</Menu.Item>
-              <Menu.Item key="setting:2">Option 2</Menu.Item>
-            </MenuItemGroup>
-            <MenuItemGroup title="Item 2">
-              <Menu.Item key="setting:3">Option 3</Menu.Item>
-              <Menu.Item key="setting:4">Option 4</Menu.Item>
-            </MenuItemGroup>
-          </SubMenu>
-        </Menu>
+        <nav
+          className="menu"
+          style={{ position: "absolute", zIndex: 5, width: "70%", left: "15%" }}
+        >
+          <div className="menu__logo">
+            <a href="/">Logo</a>
+          </div>
+          <div className="menu__container">
+            <div className="menu_left">
+              <LeftMenu mode="horizontal" />
+            </div>
+            <div className="menu_rigth">
+              <RightMenu mode="horizontal" />
+            </div>
+            <Button
+              className="menu__mobile-button"
+              type="primary"
+              onClick={showDrawer}
+            >
+              <UnorderedListOutlined />
+            </Button>
+            <Drawer
+              title="Basic Drawer"
+              placement="right"
+              className="menu_drawer"
+              closable={false}
+              onClose={onClose}
+              visible={visible}
+            >
+              <LeftMenu mode="inline" />
+              <RightMenu mode="inline" />
+            </Drawer>
+          </div>
+        </nav>
       </div>
     );
 }

@@ -7,6 +7,7 @@ import NavBar from '../components/NavBar';
 
 import "antd/dist/antd.css";
 import '../css/main.css';
+import '../css/Navbar.css';
 import "../css/S-Core-Dream-light/s-core-dream.css";
 
 

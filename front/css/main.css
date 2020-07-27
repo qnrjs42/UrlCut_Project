@@ -6,6 +6,25 @@ body, html {
   box-sizing: border-box;
   font-family: 's-core-dream-light', sans-serif !important;
   color: #454545;
+  font-weight: 700;
+}
+
+h1{
+  font-size: 3em;
+  font-family: 's-core-dream-extrabold', sans-serif !important;
+  color: #454545;
+
+}
+
+.menu__logo {
+  width: 100px;
+  float: left;
+}
+
+.menu__logo a {
+  display: inline-block;
+  font-size: 20px;
+  padding: 19px 20px;
 }
 
 .bg-image {
@@ -45,15 +64,12 @@ body, html {
   position: absolute;
   top: 0;
   left: 10%;
-  width: 80%;
+  width: 40%;
   color: black;
   z-index: 1;
   background-color: rgba(255, 255, 255, 0);
   border: 0;
-  /* top: 40%; */
-  /* left: 50%; */
-  /* width: 80%; */
-  /* transform: translate(-20%, -50%); */
+  padding-top: 5px;
 }
 
 .site-layout-content {
@@ -71,7 +87,10 @@ body, html {
 
 /* width가 900이하일 때 */
 @media all and (max-width: 900px) {
-  .cardLayout {
+  /* .cardLayout {
     min-width: 500px;
+  } */
+  * {
+    font-size: 0.73rem;
   }
 }
