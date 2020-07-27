@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { urlCutRequestAction } from "../reducers/reducer_url";
 
-const { Header, Content, Footer } = Layout;
 const { Meta } = Card;
 
 const FormWrapper = styled(Form)`
@@ -18,20 +17,24 @@ const Main = () => {
     const urlInfo = useSelector((state) => state.url);
     const { me } = useSelector((state) => state.user);
     
-    const [url, setUrl] = useState("");
-    const [changeUrl, setChangeUrl] = useState("");
-    const [copyed, setCopyed] = useState(false);
+    const [Url, setUrl] = useState("");
+    const [ChangeUrl, setChangeUrl] = useState("");
+    const [UrlLoading, setUrlLoading] = useState(false);
+    const [Copyed, setCopyed] = useState(false);
 
     const onChangeUrl = useCallback((e) => {
       setChangeUrl(e.target.value);
     }, []);
 
     const onSubmitForm = useCallback(() => {
-      setUrl(changeUrl);
+      setUrlLoading(true);
+      setUrl(ChangeUrl);
       setCopyed(true);
 
       dispatch(urlCutRequestAction());
-    }, [changeUrl]);
+
+      setUrlLoading(false);
+    }, [ChangeUrl]);
 
     return (
       <>
@@ -57,7 +60,7 @@ const Main = () => {
                     size="large"
                     name="url"
                     placeholder="URL Paste"
-                    value={changeUrl}
+                    value={ChangeUrl}
                     onChange={onChangeUrl}
                     required
                     autoComplete="off"
@@ -72,6 +75,7 @@ const Main = () => {
                         type="primary"
                         style={{ height: "55px", borderRadius: "0px" }}
                         htmlType="submit"
+                        loading={UrlLoading}
                       >
                         CUT
                       </Button>
@@ -80,12 +84,12 @@ const Main = () => {
                 </Col>
               </Row>
 
-              {copyed ? (
+              {Copyed ? (
                 <Row justify="center" style={{ marginTop: "4vh" }}>
                   <Col xs={32} sm={14} md={12} lg={10} xl={7}>
                     <div className="site-card-border-less-wrapper">
                       <Card
-                        title={url}
+                        title={Url}
                         bordered={false}
                         style={{ borderRadius: "0px" }}
                       >
