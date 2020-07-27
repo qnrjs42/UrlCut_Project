@@ -9,6 +9,7 @@ body, html {
 .bg-image {
   /* The image used */
   background-image: url("../static/main.jpg");
+  position: relative;
 
   /* Add the blur effect */
   filter: blur(15px);
@@ -27,17 +28,30 @@ body, html {
 .bg-text {
   /* background-color: rgb(0,0,0); Fallback color */
   /* background-color: rgba(0,0,0, 0.4); Black w/opacity/see-through */
-  color: white;
-  font-weight: bold;
-  /* border: 3px solid #f1f1f1; */
+  /* color: white;
   position: absolute;
-  top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  /* z-index: 2; */
-  width: 80%;
-  /* padding: 20px; */
-  /* text-align: center; */
+  transform: translate(-50%, -50%); */
+  top: 15%;
+  width: 100%;
+  display: inline-block;
+  position: absolute;
+}
+
+.bg-text2 {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: black;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+  /* top: 40%; */
+  /* left: 50%; */
+  /* width: 80%; */
+  /* transform: translate(-20%, -50%); */
 }
 
 .site-layout-content {

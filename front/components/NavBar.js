@@ -18,8 +18,8 @@ const NavBar = () => {
   }, []);
 
     return (
-      <div style={{ marginTop: "1vh" }}>
-        <Menu mode="horizontal">
+      <div>
+        <Menu mode="horizontal" className="bg-text2">
           <Menu.Item key="1">
             <Link href="/">
               <a>Main</a>
