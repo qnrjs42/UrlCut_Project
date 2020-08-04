@@ -16,6 +16,14 @@ h1{
 
 }
 
+.main-layout {
+  height: 100vh;
+}
+
+.main-layout2 {
+  height: 120vh;
+}
+
 .menu__logo {
   width: 100px;
   float: left;
@@ -47,30 +55,11 @@ h1{
 
 /* Position text in the middle of the page/image */
 .bg-text {
-  /* background-color: rgb(0,0,0); Fallback color */
-  /* background-color: rgba(0,0,0, 0.4); Black w/opacity/see-through */
-  /* color: white;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   top: 15%;
   width: 100%;
   display: inline-block;
   position: absolute;
 }
-/* 
-.bg-text2 {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 10%;
-  width: 40%;
-  color: black;
-  z-index: 1;
-  background-color: rgba(255, 255, 255, 0);
-  border: 0;
-  padding-top: 5px;
-} */
 
 .site-layout-content {
   background: #fff;

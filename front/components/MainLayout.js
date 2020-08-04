@@ -22,6 +22,8 @@ const Main = () => {
     const [UrlLoading, setUrlLoading] = useState(false);
     const [Copyed, setCopyed] = useState(false);
 
+    const [MainLayout, setMainLayout] = useState("main-layout");
+
     const onChangeUrl = useCallback((e) => {
       setChangeUrl(e.target.value);
     }, []);
@@ -30,6 +32,7 @@ const Main = () => {
       setUrlLoading(true);
       setUrl(ChangeUrl);
       setCopyed(true);
+      setMainLayout("main-layout2");
 
       dispatch(urlCutRequestAction());
 
@@ -38,7 +41,7 @@ const Main = () => {
 
     return (
       <>
-        <Layout className="layout" style={{ height: "100vh" }}>
+        <Layout className={`layout ${MainLayout}`}>
           <div className="bg-image"></div>
           <div className="bg-text">
             <FormWrapper onFinish={onSubmitForm}>
