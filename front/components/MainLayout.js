@@ -130,6 +130,22 @@ const Main = () => {
               </Row>
             </FormWrapper>
 
+            <Row justify="center" style={{ marginTop: "6vh" }}>
+              <div className="image-container">
+                <div className="image-list">
+                  <div className="image-item image-margin">
+                    <img src="../static/IU1.jpg" className="image-content" />
+                  </div>
+                  <div className="image-item image-margin">
+                    <img src="../static/IU2.jpg" className="image-content" />
+                  </div>
+                  <div className="image-item">
+                    <img src="../static/IU3.jpg" className="image-content" />
+                  </div>
+                </div>
+              </div>
+            </Row>
+
             {/* 카드형 레이아웃 미완성 */}
             <div>
               {/* <div

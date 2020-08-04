@@ -17,11 +17,11 @@ h1{
 }
 
 .main-layout {
-  height: 100vh;
+  height: 115vh;
 }
 
 .main-layout2 {
-  height: 120vh;
+  height: 145vh;
 }
 
 .menu__logo {
@@ -61,6 +61,48 @@ h1{
   position: absolute;
 }
 
+.image-content {
+  width: 300px;
+  height: 500px;
+}
+
+.image-list {
+  width: 90vw;
+  height: 530px;
+  overflow-x: auto;
+  padding: 5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.image-list .image-item {
+  display: inline-block;
+  text-align: center;
+}
+
+.image-margin {
+  margin-right: 20px;
+}
+
 .site-layout-content {
   background: #fff;
   padding: 24px;
@@ -82,4 +124,5 @@ h1{
   * {
     font-size: 0.73rem;
   }
+
 }
