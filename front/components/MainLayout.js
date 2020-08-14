@@ -6,8 +6,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { urlCutRequestAction } from "../reducers/reducer_url";
 
-const { Meta } = Card;
-
 const FormWrapper = styled(Form)`
   padding: 10px;
 `;
@@ -22,7 +20,7 @@ const Main = () => {
     const [UrlLoading, setUrlLoading] = useState(false);
     const [Copyed, setCopyed] = useState(false);
 
-    const [MainLayout, setMainLayout] = useState("main-layout");
+    const [MainLayout, setMainLayout] = useState("main-layout-before");
 
     const onChangeUrl = useCallback((e) => {
       setChangeUrl(e.target.value);
@@ -32,7 +30,7 @@ const Main = () => {
       setUrlLoading(true);
       setUrl(ChangeUrl);
       setCopyed(true);
-      setMainLayout("main-layout2");
+      setMainLayout("main-layout-after");
 
       dispatch(urlCutRequestAction());
 
@@ -42,8 +40,8 @@ const Main = () => {
     return (
       <>
         <Layout className={`layout ${MainLayout}`}>
-          <div className="bg-image"></div>
-          <div className="bg-text">
+          <div className="main-bg-image"></div>
+          <div className="main-bg-text">
             <FormWrapper onFinish={onSubmitForm}>
               <Row justify="center">
                 <h1>링크는 간단하게 CUT</h1>
@@ -131,84 +129,20 @@ const Main = () => {
             </FormWrapper>
 
             <Row justify="center" style={{ marginTop: "6vh" }}>
-              <div className="image-container">
-                <div className="image-list">
-                  <div className="image-item image-margin">
-                    <img src="../static/IU1.jpg" className="image-content" />
+              <div className="main-image-container">
+                <div className="main-image-list">
+                  <div className="main-image-item main-image-margin">
+                    <img src="../static/IU1.jpg" className="main-image-content" />
                   </div>
-                  <div className="image-item image-margin">
-                    <img src="../static/IU2.jpg" className="image-content" />
+                  <div className="main-image-item main-image-margin">
+                    <img src="../static/IU2.jpg" className="main-image-content" />
                   </div>
-                  <div className="image-item">
-                    <img src="../static/IU3.jpg" className="image-content" />
+                  <div className="main-image-item">
+                    <img src="../static/IU3.jpg" className="main-image-content" />
                   </div>
                 </div>
               </div>
             </Row>
-
-            {/* 카드형 레이아웃 미완성 */}
-            <div>
-              {/* <div
-            className="site-card-wrapper cardLayout"
-            style={{ overflowX: "scroll" }}
-          >
-            <div className="">
-              <Row justify="center" gutter={16}>
-                <Col span={8}>
-                  <Card
-                    hoverable
-                    bordered={false}
-                    style={{
-                      width: 240,
-                      whiteSpace: "nowrap",
-                      marginLeft: "50px",
-                    }}
-                    cover={<img alt="example" src="../static/main.jpg" />}
-                  >
-                    <Meta
-                      title="Europe Street beat"
-                      description="www.instagram.com"
-                    />
-                  </Card>
-                </Col>
-                <Col span={8}>
-                  <Card
-                    hoverable
-                    bordered={false}
-                    style={{
-                      width: 240,
-                      whiteSpace: "nowrap",
-                      marginLeft: "50px",
-                    }}
-                    cover={<img alt="example" src="../static/main.jpg" />}
-                  >
-                    <Meta
-                      title="Europe Street beat"
-                      description="www.instagram.com"
-                    />
-                  </Card>
-                </Col>
-                <Col span={8}>
-                  <Card
-                    hoverable
-                    bordered={false}
-                    style={{
-                      width: 240,
-                      whiteSpace: "nowrap",
-                      marginLeft: "50px",
-                    }}
-                    cover={<img alt="example" src="../static/main.jpg" />}
-                  >
-                    <Meta
-                      title="Europe Street beat"
-                      description="www.instagram.com"
-                    />
-                  </Card>
-                </Col>
-              </Row>
-            </div>
-          </div> */}
-            </div>
           </div>
         </Layout>
       </>

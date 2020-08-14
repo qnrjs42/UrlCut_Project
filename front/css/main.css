@@ -16,14 +16,6 @@ h1{
 
 }
 
-.main-layout {
-  height: 115vh;
-}
-
-.main-layout2 {
-  height: 145vh;
-}
-
 .menu__logo {
   width: 100px;
   float: left;
@@ -35,7 +27,18 @@ h1{
   padding: 19px 20px;
 }
 
-.bg-image {
+/*
+  메인 레이아웃 시작
+*/
+.main-layout-before {
+  height: 115vh;
+}
+
+.main-layout-after {
+  height: 145vh;
+}
+
+.main-bg-image {
   /* The image used */
   background-image: url("../static/main.jpg");
   position: relative;
@@ -54,19 +57,19 @@ h1{
 }
 
 /* Position text in the middle of the page/image */
-.bg-text {
+.main-bg-text {
   top: 15%;
   width: 100%;
   display: inline-block;
   position: absolute;
 }
 
-.image-content {
+.main-image-content {
   width: 300px;
   height: 500px;
 }
 
-.image-list {
+.main-image-list {
   width: 90vw;
   height: 530px;
   overflow-x: auto;
@@ -75,6 +78,18 @@ h1{
   white-space: nowrap;
 }
 
+.main-image-list .main-image-item {
+  display: inline-block;
+  text-align: center;
+}
+
+.main-image-margin {
+  margin-right: 20px;
+}
+
+/*
+  스크롤바 커스텀 시작
+*/
 ::-webkit-scrollbar {
   height: 6px;
 }
@@ -94,14 +109,30 @@ h1{
   background: #555; 
 }
 
-.image-list .image-item {
-  display: inline-block;
-  text-align: center;
+/*
+  스크롤바 커스텀 끝
+*/
+
+/*
+  메인 레이아웃 끝
+*/
+
+/*
+  서브 레이아웃 1 시작
+*/
+
+
+.sub-layout-one-image {
+  display: flex;
+  width: 1200px;
+  height: 700px;
+  overflow-x: auto;
+  justify-content: center;
 }
 
-.image-margin {
-  margin-right: 20px;
-}
+/*
+  서브 레이아웃 1 끝
+*/
 
 .site-layout-content {
   background: #fff;
@@ -124,5 +155,13 @@ h1{
   * {
     font-size: 0.73rem;
   }
+  .sub-layout-button-size > span > svg {
+    width: 2.0em;
+    height: 2.0em;
+   }
+
+   .sub-layout-button-size > span {
+     font-size: 1.0rem;
+   }
 
 }
