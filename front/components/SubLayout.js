@@ -2,8 +2,6 @@ import React, { useCallback, useState } from "react";
 import { Row, Col, Button, Layout } from "antd";
 import { WechatOutlined, PushpinFilled, TeamOutlined } from "@ant-design/icons";
 
-const { Footer } = Layout;
-
 const SubLayout = () => {
 
     const [ImgName, setImgName] = useState("chat");
@@ -16,7 +14,7 @@ const SubLayout = () => {
     <Layout
       className="layout sub-layout-one"
       style={{
-        height: "125vh",
+        height: "110vh",
         backgroundColor: "#fafaf9",
         paddingTop: "80px",
       }}
@@ -74,12 +72,15 @@ const SubLayout = () => {
           <div className="sub-layout-one-image">
             <img
               src={`../static/${ImgName}.jpg`}
-              style={{ minWidth: "900px", height: "700px" }}
+              style={{ minWidth: "900px", width: '1200px', height: "700px" }}
             />
           </div>
         </Row>
       </div>
     </Layout>
+
+
+      
   );
 };
 

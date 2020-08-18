@@ -16,6 +16,18 @@ h1{
 
 }
 
+h2{
+  font-size: 2.2em;
+  font-family: 's-core-dream-extrabold', sans-serif !important;
+  color: #454545;
+}
+
+h3{
+  font-size: 1.4em;
+  font-family: 's-core-dream-bold', sans-serif !important;
+  color: #454545;
+}
+
 .menu__logo {
   width: 100px;
   float: left;
@@ -134,18 +146,24 @@ h1{
   서브 레이아웃 1 끝
 */
 
-.site-layout-content {
-  background: #fff;
-  padding: 24px;
-  min-height: 280px;
+
+/*
+  서브 레이아웃 2 시작
+*/
+
+.sub-layout-two-image {
+  width: 500px;
+  height: 450px;
 }
-#components-layout-demo-top .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
-}
+
+.sub-layout-two-first-col { order: 1; }
+
+.sub-layout-two-second-col { order: 2; }
+
+/*
+  서브 레이아웃 2 끝
+*/
+
 
 /* width가 900이하일 때 */
 @media all and (max-width: 900px) {
@@ -164,4 +182,27 @@ h1{
      font-size: 1.0rem;
    }
 
+    .sub-layout-two-first-col { order: 2; }
+
+    .sub-layout-two-second-col { order: 1; }
+
+   .sub-layout-two-image {
+     width: 300px;
+     height: 250px;
+   }
+
+
+}
+
+.site-layout-content {
+  background: #fff;
+  padding: 24px;
+  min-height: 280px;
+}
+#components-layout-demo-top .logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
 }
