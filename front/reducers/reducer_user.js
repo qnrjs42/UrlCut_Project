@@ -101,9 +101,12 @@ const reducer = (state = initialState, action) =>
         // me: { ...action.data, nickname: "zerocho" }, // 더미 데이터
         console.log("state", state);
         console.log("action", action);
+
+        localStorage.setItem("me", JSON.stringify(dummyUser(action.data))); // Object Object 뜨면 서버 재시작
+
         draft.logInLoading = false;
-        draft.me = dummyUser(action.data); // 더미 데이터
         draft.logInDone = true;
+        draft.me = dummyUser(action.data); // 더미 데이터
         break;
 
       case LOG_IN_FAILURE:

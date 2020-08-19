@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import {
   Menu, Button, Drawer
 } from "antd";
@@ -6,7 +6,7 @@ import { UnorderedListOutlined } from "@ant-design/icons";
 import { MenuItemGroup } from "rc-menu";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutRequestAction } from "../reducers/reducer_user";
+import { logoutRequestAction } from "../../reducers/reducer_user";
 import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 

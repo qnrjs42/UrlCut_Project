@@ -1,9 +1,9 @@
 import React from "react";
 
-import MainLayout from './MainLayout';
-import SubLayout from './SubLayout';
-import SecondSubLayout from "./SecondSubLayout";
-import FooterLayout from "./FooterLayout";
+import MainLayout from './MainLayout/MainLayout';
+import SubLayout from "./MainLayout/SubLayout";
+import SecondSubLayout from "./MainLayout/SecondSubLayout";
+import FooterLayout from "./MainLayout/FooterLayout";
 
 const AppLayout = () => {
 

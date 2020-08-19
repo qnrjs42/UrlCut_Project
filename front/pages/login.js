@@ -45,7 +45,7 @@ const logIn = () => {
         setEmail(null);
         setPassword(null);
 
-        Router.push("/");
+        Router.push('/user');
     }, [Email, Password]);
 
   return (

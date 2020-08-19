@@ -4,7 +4,7 @@ import { LinkOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { urlCutRequestAction } from "../reducers/reducer_url";
+import { urlCutRequestAction } from "../../reducers/reducer_url";
 
 const FormWrapper = styled(Form)`
   padding: 10px;
