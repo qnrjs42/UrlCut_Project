@@ -9,6 +9,7 @@ import PagesUser from './user';
 
 import "antd/dist/antd.css";
 import '../css/main.css';
+import "../css/user.css";
 import '../css/Navbar.css';
 import "../css/S-Core-Dream-light/s-core-dream.css";
 

@@ -1,0 +1,21 @@
+.user_logo {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 19px 0;
+}
+
+.user-sider-header-open {
+    display: flex;
+    padding: 20px 0 15px 20px;
+    font-size: 15px;
+    color: #ABABAB;
+}
+
+.user-sider-header-close {
+    display: none;
+}
+
+.user-sider-header-menu-item {
+    color: #E3E3E3;
+}

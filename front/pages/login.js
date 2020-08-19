@@ -10,13 +10,14 @@ import {
 } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import styled from "styled-components";
 
 import useInput from "../hooks/useInput";
 import { loginRequestAction } from "../reducers/reducer_user";
 
 const { Title } = Typography;
+
 
 const SquareInput = () => ({
   borderRadius: "0px",
@@ -35,6 +36,8 @@ const logIn = () => {
     const [Email, onChangeEmail, setEmail] = useInput("");
     const [Password, onChangePassword, setPassword] = useInput("");
 
+    const uRouter = useRouter();
+
     const onLogInSubmit = useCallback(() => {
         console.log(Email, Password)
 
@@ -45,7 +48,8 @@ const logIn = () => {
         setEmail(null);
         setPassword(null);
 
-        Router.push('/user');
+        // uRouter.push("/user");
+        document.location.href = "/user";
     }, [Email, Password]);
 
   return (
@@ -98,16 +102,16 @@ const logIn = () => {
                 </a>
                 <div>
                   <br />
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="login-form-button"
-                    size="large"
-                    onSubmit={onLogInSubmit}
-                    style={SquareButton()}
-                  >
-                    로그인
-                  </Button>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="login-form-button"
+                      size="large"
+                      onSubmit={onLogInSubmit}
+                      style={SquareButton()}
+                    >
+                      로그인
+                    </Button>
                 </div>
                 {/* Or <a href="/register">register now!</a> */}
               </Form.Item>
