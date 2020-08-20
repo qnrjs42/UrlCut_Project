@@ -5,6 +5,11 @@
     padding: 19px 0;
 }
 
+.user-main-search {
+    width: 500px;
+}
+
+
 .user-sider-header-open {
     display: flex;
     padding: 20px 0 15px 20px;
@@ -18,4 +23,31 @@
 
 .user-sider-header-menu-item {
     color: #E3E3E3;
+}
+
+.mobile-sider-on-off {
+    display: none;
+}
+
+.mobile-sider-on-off > span > svg {
+    font-size: 25px !important;
+    margin: 10px;
+}
+
+@media all and (max-width: 900px) {
+    * {
+        font-size: 0.93rem !important;
+    }
+}
+
+
+@media all and (max-width: 650px) {
+
+    .user-sider {
+        display: none;
+     }
+
+    .mobile-sider-on-off {
+        display: flex;
+    }
 }

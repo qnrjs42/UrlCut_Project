@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
-import { Layout, Menu, Breadcrumb, Row, Col } from "antd";
+import { Layout, Menu, Breadcrumb, Row, Col, Input } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  
 } from "@ant-design/icons";
 
 import SiderMenu from './SiderMenu';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 const UserLayout = () => {
     const [Cllapsed, setCllapsed] = useState(false);
@@ -23,12 +25,14 @@ const UserLayout = () => {
 
 
     return (
-      <div>
+      <div className="user">
         <Layout style={{ minHeight: "100vh" }}>
-            <SiderMenu />
-          
+          <SiderMenu />
+
           <Layout className="site-layout">
+            
             <Header className="site-layout-background" style={{ padding: 0 }} />
+
             <Content style={{ margin: "0 16px" }}>
               <Breadcrumb style={{ margin: "16px 0" }}>
                 <Breadcrumb.Item>User</Breadcrumb.Item>
