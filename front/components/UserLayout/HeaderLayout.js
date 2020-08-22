@@ -44,7 +44,7 @@ const HeaderLayout = () => {
       <Row>
         <DrawerSection />
 
-        <Col xs={16}>
+        <Col xs={14}>
           <Search
             placeholder="input search text"
             onSearch={(value) => console.log(value)}
