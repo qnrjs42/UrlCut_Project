@@ -49,7 +49,8 @@
 
     .mobile-sider-on-off {
         display: flex;
-        background-color: white;
-        height: 64px;
+        padding: 8px 10px 0px 5px;
+        /* background-color: white;
+        height: 64px; */
     }
 }
