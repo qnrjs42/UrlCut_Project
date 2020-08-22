@@ -4,15 +4,8 @@ import { Row, Col, Button, Layout, Badge, Card } from "antd";
 const SecondSubLayout = () => {
     return (
       <Layout
-        className="layout"
-        style={{
-          height: "auto",
-          backgroundColor: "#fafaf9",
-          padding: "80px 0 80px 0",
-        }}
-      >
+        className="layout sub-layout-two">
         <Row justify="center">
-          <div>
             <Badge
               className="site-badge-count-109"
               count={`브랜딩 서비스`}
@@ -23,7 +16,6 @@ const SecondSubLayout = () => {
                 paddingTop: "6px",
               }}
             />
-          </div>
         </Row>
         <br />
         <Row justify="center">
@@ -31,7 +23,7 @@ const SecondSubLayout = () => {
         </Row>
 
         <Row justify="center">
-          <p>
+          <p className="sub-layout-font-medium">
             사용자 니즈에 맞춰 기능을 개선하고, 연구 개발하고 있습니다.
             <br />
             차별화된 서비스를 통해 성공적인 마케팅을 시작하세요.
@@ -40,26 +32,35 @@ const SecondSubLayout = () => {
         <br />
 
         <Row gutter={[16, 16]} justify="center">
-          <Col className="" xs={{ order: 2 }} sm={{ order: 2 }} md={{ order: 1 }} lg={{ order: 1 }} xl={{ order: 1 }}  >
+          <Col
+            className=""
+            xs={{ order: 2 }}
+            sm={{ order: 2 }}
+            md={{ order: 1 }}
+            lg={{ order: 1 }}
+            xl={{ order: 1 }}
+          >
             <img className="sub-layout-two-image" src={`../static/IU4.jpg`} />
           </Col>
           <Col
             className=""
             style={{ textAlign: "center" }}
-             xs={{ order: 1 }} sm={{ order: 1 }} md={{ order: 2 }} lg={{ order: 2 }} xl={{ order: 2 }}
+            xs={{ order: 1 }}
+            sm={{ order: 1 }}
+            md={{ order: 2 }}
+            lg={{ order: 2 }}
+            xl={{ order: 2 }}
           >
             <br />
             <h2>
-              기업의 도메인으로 사용 가능한 
+              기업의 도메인으로 사용 가능한
               <br /> '브랜딩 서비스'
             </h2>
             <br />
-            <p>
+            <p className="sub-layout-font-medium">
               VOLA의 도메인을 사용하지 않고 회원이 보유하고 있는 도메인으로
               <br />
               사용할 수 있습니다. 단독으로 사용할 수 있어 브랜딩에 효과적입니다.
-              <br />
-              sub-layout-two-first-col, sub-layout-two-second-col
             </p>
           </Col>
         </Row>
@@ -74,7 +75,7 @@ const SecondSubLayout = () => {
               <br /> '대량 변환 프로그램'
             </h2>
             <br />
-            <p>
+            <p className="sub-layout-font-medium">
               빠른 시간내에 대량으로 단축링크가 필요한 경우 엑셀파일
               <br />
               업로드만으로 매우 빠르게 대량변환이 가능한 프로그램이 유용하게

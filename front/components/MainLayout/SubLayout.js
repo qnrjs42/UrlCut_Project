@@ -11,20 +11,12 @@ const SubLayout = () => {
     }, []);
 
   return (
-    <Layout
-      className="layout sub-layout-one"
-      style={{
-        height: "110vh",
-        backgroundColor: "#fafaf9",
-        paddingTop: "80px",
-      }}
-    >
-      <div style={{ padding: "10px" }}>
+    <Layout className="layout sub-layout-one">
         <Row justify="center">
           <h1>링크는 CUT으로 간단하게, 그것뿐이니까</h1>
         </Row>
         <Row justify="center">
-          <p>
+          <p className="sub-layout-font-medium">
             고객을 놓치지 않고 매출로 연결하며, 떠나간 고객도 메시지를 보내
             돌아오게 합니다. 꼭 필요한 팀 메신저도 무료로 제공됩니다.
           </p>
@@ -76,11 +68,7 @@ const SubLayout = () => {
             />
           </div>
         </Row>
-      </div>
     </Layout>
-
-
-      
   );
 };
 

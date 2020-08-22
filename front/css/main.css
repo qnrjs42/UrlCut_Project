@@ -103,7 +103,8 @@ h3{
   스크롤바 커스텀 시작
 */
 ::-webkit-scrollbar {
-  height: 6px;
+  height: 8px;
+  width: 8px;
 }
 
 /* Track */
@@ -133,6 +134,11 @@ h3{
   서브 레이아웃 1 시작
 */
 
+.sub-layout-one {
+  height: 110vh;
+  background-color: #fafaf9;
+  padding-top: 80px;
+}
 
 .sub-layout-one-image {
   display: flex;
@@ -150,15 +156,16 @@ h3{
 /*
   서브 레이아웃 2 시작
 */
+.sub-layout-two {
+  height: 200vh;
+  background-color: #fafaf9;
+  padding-top: 80px;
+}
 
 .sub-layout-two-image {
   width: 500px;
   height: 450px;
 }
-
-.sub-layout-two-first-col { order: 1; }
-
-.sub-layout-two-second-col { order: 2; }
 
 /*
   서브 레이아웃 2 끝
@@ -167,29 +174,46 @@ h3{
 
 /* width가 900이하일 때 */
 @media all and (max-width: 900px) {
-  /* .cardLayout {
-    min-width: 500px;
-  } */
-  * {
-    font-size: 0.73rem;
+  h1 {
+    font-size: 1.9rem;
+    text-align: center;
   }
+  h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .sub-layout-one {
+    height: 90vh;
+  }
+  .sub-layout-two {
+    height: 290vh;
+    padding-top: 200px;
+  }
+
   .sub-layout-button-size > span > svg {
-    width: 2.0em;
-    height: 2.0em;
+    width: 0.85em;
+    height: 0.85em;
    }
 
    .sub-layout-button-size > span {
-     font-size: 1.0rem;
+     font-size: 0.8rem;
    }
 
-    .sub-layout-two-first-col { order: 2; }
-
-    .sub-layout-two-second-col { order: 1; }
+   .sub-layout-one-image {
+     width: 700px;
+    height: 500px;
+   }
 
    .sub-layout-two-image {
      width: 300px;
      height: 250px;
    }
+
+   .sub-layout-font-medium {
+    font-size: 0.8rem;
+    text-align: center;
+  }
 
 
 }
