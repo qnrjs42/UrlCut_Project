@@ -31,7 +31,7 @@
 
 .mobile-sider-on-off > span > svg {
     font-size: 25px !important;
-    margin: 17px 0 10px 10px;
+    margin: 10px 0 10px 10px;
 }
 
 @media all and (max-width: 900px) {
