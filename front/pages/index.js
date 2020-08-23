@@ -10,7 +10,6 @@ const Home = () => {
   const [value, setValue] = useState(() => {
     if (typeof window !== "undefined") {
       const stickyValue = window.localStorage.getItem("me");
-      
       return stickyValue !== null ? JSON.parse(stickyValue) : null;
     }
   });
@@ -35,7 +34,7 @@ const Home = () => {
   }, [value]);
   return (
     <>
-      {!me ? (
+      {!value ? (
         <AppLayout />
       ) : (
         <UserPages />
