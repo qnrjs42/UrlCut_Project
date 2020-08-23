@@ -10,6 +10,7 @@ import {
 } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 import Router, { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -37,6 +38,7 @@ const logIn = () => {
     const [Password, onChangePassword, setPassword] = useInput("");
 
     const uRouter = useRouter();
+    const { register, handleSubmit } = useForm();
 
     const onLogInSubmit = useCallback(() => {
         console.log(Email, Password)
@@ -48,8 +50,8 @@ const logIn = () => {
         setEmail(null);
         setPassword(null);
 
-        // uRouter.push("/user");
-        document.location.href = "/user";
+        uRouter.push("/user");
+        // document.location.href = "/user";
     }, [Email, Password]);
 
   return (
@@ -62,11 +64,12 @@ const logIn = () => {
             </Title>
             <Form
               form={form}
-              onFinish={onLogInSubmit}
+              onFinish={handleSubmit(onLogInSubmit)}
               style={{ width: "350px" }}
             >
               <Form.Item required>
                 <Input
+                  name="email"
                   id="email"
                   size="large"
                   prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
@@ -75,11 +78,13 @@ const logIn = () => {
                   value={Email}
                   onChange={onChangeEmail}
                   style={SquareInput()}
+                  ref={register({ required: true })}
                 />
               </Form.Item>
 
               <Form.Item required>
                 <Input
+                  name="password"
                   id="password"
                   size="large"
                   prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
@@ -88,6 +93,7 @@ const logIn = () => {
                   value={Password}
                   onChange={onChangePassword}
                   style={SquareInput()}
+                  ref={register({ required: true })}
                 />
               </Form.Item>
 
@@ -102,16 +108,16 @@ const logIn = () => {
                 </a>
                 <div>
                   <br />
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="login-form-button"
-                      size="large"
-                      onSubmit={onLogInSubmit}
-                      style={SquareButton()}
-                    >
-                      로그인
-                    </Button>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button"
+                    size="large"
+                    onSubmit={onLogInSubmit}
+                    style={SquareButton()}
+                  >
+                    로그인
+                  </Button>
                 </div>
                 {/* Or <a href="/register">register now!</a> */}
               </Form.Item>
