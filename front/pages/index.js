@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import Router from 'next/router';
 
 import AppLayout from '../components/AppLayout';
 import UserPages from "./user";
-import { useSelector } from 'react-redux';
 
 const Home = () => {
   const { me } = useSelector((state) => state.user);
