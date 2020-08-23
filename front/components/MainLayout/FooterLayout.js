@@ -7,7 +7,11 @@ const FooterLayout = () => {
     return (
       <Footer>
         <Row justify="center">
-          <Col span={6} offset={3}>
+          <Col
+            span={8}
+            order={1}
+            style={{ minWidth: "300px", marginLeft: 100, paddingBottom: 20 }}
+          >
             <div className="menu__logo">
               <a href="/">Logo</a>
             </div>
@@ -17,11 +21,15 @@ const FooterLayout = () => {
             <p style={{ textAlign: "left" }}>
               대표자명: sistinafibel
               <br />
-              대표자의 노예: qnrjs42
+              대표자의 파트너: qnrjs42
             </p>
           </Col>
 
-          <Col span={4} offset={1}>
+          <Col
+            span={4}
+            order={2}
+            style={{ minWidth: "170px", paddingBottom: 20 }}
+          >
             <h3>INFORMATION</h3>
             <a>서비스 소개</a>
             <br />
@@ -32,7 +40,11 @@ const FooterLayout = () => {
             <a>서비스 쿠키 수집정책</a>
           </Col>
 
-          <Col span={4}>
+          <Col
+            span={4}
+            order={2}
+            style={{ minWidth: "170px", paddingBottom: 20 }}
+          >
             <h3>부가 서비스</h3>
             <a>URL 안전검사</a>
             <br />
@@ -41,7 +53,11 @@ const FooterLayout = () => {
             <a>SI & SM BIZ</a>
           </Col>
 
-          <Col span={4}>
+          <Col
+            span={4}
+            order={2}
+            style={{ minWidth: "170px", paddingBottom: 20 }}
+          >
             <h3>Service center</h3>
             <a>채팅 상담</a>
             <br />
