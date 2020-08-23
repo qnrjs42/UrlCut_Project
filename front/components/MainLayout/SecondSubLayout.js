@@ -3,19 +3,18 @@ import { Row, Col, Button, Layout, Badge, Card } from "antd";
 
 const SecondSubLayout = () => {
     return (
-      <Layout
-        className="layout sub-layout-two">
+      <Layout className="layout sub-layout-two">
         <Row justify="center">
-            <Badge
-              className="site-badge-count-109"
-              count={`브랜딩 서비스`}
-              style={{
-                backgroundColor: "#52c41a",
-                width: "110px",
-                height: "30px",
-                paddingTop: "6px",
-              }}
-            />
+          <Badge
+            className="site-badge-count-109"
+            count={`브랜딩 서비스`}
+            style={{
+              backgroundColor: "#52c41a",
+              width: "110px",
+              height: "30px",
+              paddingTop: "6px",
+            }}
+          />
         </Row>
         <br />
         <Row justify="center">
@@ -92,14 +91,14 @@ const SecondSubLayout = () => {
 
         <div className="site-card-wrapper">
           <Row gutter={24} justify="center">
-            <Col span={9}>
+            <Col span={9} xs={{ order: 1 }} className="sub-layout-two-card">
               <Card title="365 X 24 빠르고 안정적인 서비스">
                 앞선 기술력과 노하우를 바탕으로 항상 빠르고 안정적인 서비스를
                 제공합니다. 언제나 최고의 서비스를 이용하실 수 있도록 최선을
                 다하겠습니다.
               </Card>
             </Col>
-            <Col span={9}>
+            <Col span={9} xs={{ order: 2 }} className="sub-layout-two-card">
               <Card title="디바이스 제한 없이 언제 어디서나">
                 PC환경은 물론 모바일, 태블릿 등 어떠한 디바이스에서도 언제
                 어디서나 서비스 이용에 불편함이 없도록 UI & UX 개선 작업에
@@ -112,14 +111,14 @@ const SecondSubLayout = () => {
         <br />
         <div className="site-card-wrapper">
           <Row gutter={24} justify="center">
-            <Col span={9}>
+            <Col span={9} xs={{ order: 1 }} className="sub-layout-two-card">
               <Card title="빠른 해결을 위한 고객센터 운영">
                 서비스 이용에 있어 불편함이 있거나 문의 내용에 대해 실시간
                 채팅상담, 이메일 문의를 통해 빠른 문제해결 될 수 있도록
                 고객센터를 운영하고 있습니다.
               </Card>
             </Col>
-            <Col span={9}>
+            <Col span={9} xs={{ order: 2 }} className="sub-layout-two-card">
               <Card title="맞춤형 커스터마이징 지원">
                 사용자 요구사항을 반영한 SI 지원이 필요한 경우, 전문 상담사와의
                 기능에 대한 자세한 상담을 통해, 최적화된 맞춤형 커스터마이징

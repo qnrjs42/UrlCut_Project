@@ -135,7 +135,7 @@ h3{
 */
 
 .sub-layout-one {
-  height: 110vh;
+  height: auto;
   background-color: #fafaf9;
   padding-top: 80px;
 }
@@ -157,9 +157,9 @@ h3{
   서브 레이아웃 2 시작
 */
 .sub-layout-two {
-  height: 200vh;
+  height: auto;
   background-color: #fafaf9;
-  padding-top: 80px;
+  padding: 80px 0;
 }
 
 .sub-layout-two-image {
@@ -167,13 +167,20 @@ h3{
   height: 450px;
 }
 
+.sub-layout-two-card {
+  min-width: 350px;
+  margin-bottom: 15px;
+}
+
 /*
   서브 레이아웃 2 끝
 */
 
 
+
+
 /* width가 900이하일 때 */
-@media all and (max-width: 900px) {
+@media screen and (max-width: 900px) {
   h1 {
     font-size: 1.9rem;
     text-align: center;
@@ -181,14 +188,6 @@ h3{
   h2 {
     font-size: 1.4rem;
     text-align: center;
-  }
-
-  .sub-layout-one {
-    height: 90vh;
-  }
-  .sub-layout-two {
-    height: 290vh;
-    padding-top: 200px;
   }
 
   .sub-layout-button-size > span > svg {
@@ -214,6 +213,4 @@ h3{
     font-size: 0.8rem;
     text-align: center;
   }
-
-
 }
