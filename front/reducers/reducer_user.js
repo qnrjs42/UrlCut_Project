@@ -102,7 +102,7 @@ const reducer = (state = initialState, action) =>
         console.log("state", state);
         console.log("action", action);
 
-        localStorage.setItem("me", JSON.stringify(dummyUser(action.data))); // Object Object 뜨면 서버 재시작
+        // localStorage.setItem("me", JSON.stringify(dummyUser(action.data))); // Object Object 뜨면 서버 재시작
 
         draft.logInLoading = false;
         draft.logInDone = true;

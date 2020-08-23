@@ -12,15 +12,26 @@ import {
   SIGN_UP_FAILURE,
 } from "../reducers/reducer_user";
 
+
+
 function loginAPI(data) {
   return axios.post("/api/login", data);
 }
+
+const dummyUser = (data) => ({
+  email: data,
+  nickname: "제로초",
+  id: 1,
+});
 
 function* logIn(action) {
   try {
     yield delay(1000); // 가짜 데이터
     // const result = yield call(loginAPI, action.data); // 아직 서버가 없어서 요청을 못 보냄
     console.log('saga의 action', action);
+
+    localStorage.setItem("me", JSON.stringify(dummyUser(action.data))); // Object Object 뜨면 서버 재시작
+
     yield put({
       type: LOG_IN_SUCCESS,
       data: action.data,
