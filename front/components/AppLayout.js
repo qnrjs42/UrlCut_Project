@@ -1,5 +1,6 @@
 import React from "react";
 
+import NavBar from './MainLayout/NavBar';
 import MainLayout from './MainLayout/MainLayout';
 import SubLayout from "./MainLayout/SubLayout";
 import SecondSubLayout from "./MainLayout/SecondSubLayout";
@@ -9,6 +10,7 @@ const AppLayout = () => {
 
   return (
     <>
+      <NavBar />
       <MainLayout />
       <SubLayout />
       <SecondSubLayout />
