@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
-import Router, { withRouter } from "next/router";
+import React from 'react';
 
 import UserLayout from '../components/UserLayout/UserLayout';
 
 
 const user = () => {
-
-    // const { me } = useSelector((state) => state.user);
-
     return (
         <>
             <UserLayout />
@@ -16,4 +11,4 @@ const user = () => {
     )
 }
 
-export default withRouter(user)
+export default user
