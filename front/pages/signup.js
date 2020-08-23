@@ -6,6 +6,7 @@ import Router from "next/router";
 
 import useInput from "../hooks/useInput";
 import { signupRequestAction } from "../reducers/reducer_user";
+import NavBar from "../components/MainLayout/NavBar";
 
 const { Title } = Typography;
 
@@ -85,6 +86,7 @@ const signUp = () => {
 
   return (
     <>
+      <NavBar />
       <Layout className="layout" style={{ height: "100vh" }}>
         <Row justify="space-around" align="middle" style={{ padding: "15% 0" }}>
           <div className="app">

@@ -16,6 +16,7 @@ import styled from "styled-components";
 
 import useInput from "../hooks/useInput";
 import { loginRequestAction } from "../reducers/reducer_user";
+import NavBar from '../components/MainLayout/NavBar';
 
 const { Title } = Typography;
 
@@ -56,6 +57,7 @@ const logIn = () => {
 
   return (
     <>
+      <NavBar />
       <Layout className="layout" style={{ height: "100vh" }}>
         <Row justify="space-around" align="middle" style={{ padding: "15% 0" }}>
           <div className="app">
@@ -64,7 +66,8 @@ const logIn = () => {
             </Title>
             <Form
               form={form}
-              onFinish={handleSubmit(onLogInSubmit)}
+              // onFinish={handleSubmit(onLogInSubmit)}
+              onFinish={onLogInSubmit}
               style={{ width: "350px" }}
             >
               <Form.Item required>
@@ -78,7 +81,7 @@ const logIn = () => {
                   value={Email}
                   onChange={onChangeEmail}
                   style={SquareInput()}
-                  ref={register({ required: true })}
+                  // ref={register({ required: true })}
                 />
               </Form.Item>
 
@@ -93,7 +96,7 @@ const logIn = () => {
                   value={Password}
                   onChange={onChangePassword}
                   style={SquareInput()}
-                  ref={register({ required: true })}
+                  // ref={register({ required: true })}
                 />
               </Form.Item>
 
