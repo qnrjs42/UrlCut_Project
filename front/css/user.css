@@ -34,9 +34,25 @@
     margin: 10px 0 10px 10px;
 }
 
+.fontMedium {
+    font-size: 1.2em;
+    margin-bottom: 3px;
+}
+
+.fontSmall {
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+}
+
+.ant-table-thead > tr > th {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+
 @media all and (max-width: 900px) {
     * {
-        font-size: 0.93rem !important;
+        /* font-size: 0.95rem !important; */
     }
 }
 
@@ -52,5 +68,15 @@
         padding: 8px 10px 0px 5px;
         /* background-color: white;
         height: 64px; */
+    }
+
+    .fontMedium {
+        font-size: 1.2em !important;
+        margin-bottom: 3px;
+    }
+
+    .fontSmall {
+        font-size: 0.75rem !important;
+        margin-bottom: 5px;
     }
 }
