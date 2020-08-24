@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import Router from 'next/router';
 
 import AppLayout from '../components/AppLayout';
-import UserPages from "./user";
+import UserLayout from "../components/UserLayout";
+
+import MainManageLayout from "../components/UserLayout/Dashboard/MainManageLayout";
 
 const Home = () => {
   const { me } = useSelector((state) => state.user);
@@ -38,7 +40,9 @@ const Home = () => {
       {!value ? (
         <AppLayout />
       ) : (
-        <UserPages />
+        <UserLayout>
+          <MainManageLayout />
+        </UserLayout>
       )}
     </>
   );
