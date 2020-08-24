@@ -7,9 +7,9 @@ const UserIndex = () => {
 
   return (
     <>
-        <UserLayout>
-            <MainManageLayout />
-        </UserLayout>
+      <UserLayout>
+        <MainManageLayout />
+      </UserLayout>
     </>
   );
 };
