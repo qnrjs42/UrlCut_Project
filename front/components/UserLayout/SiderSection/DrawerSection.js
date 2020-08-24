@@ -1,12 +1,59 @@
 import React, { useState } from "react";
-import { Layout, Menu, Breadcrumb, Row, Col, Drawer, Button } from "antd";
+import { Menu, Drawer } from "antd";
 import {
+  AppstoreOutlined,
+  ApartmentOutlined,
+  FolderOutlined,
   DesktopOutlined,
-  PieChartOutlined,
-  UnorderedListOutlined,
+  CarryOutOutlined,
+  FileAddOutlined,
+  GoldOutlined,
+  TeamOutlined,
+  CreditCardOutlined,
+  UnorderedListOutlined
 } from "@ant-design/icons";
+import Link from 'next/link';
 
-const { Header } = Layout;
+const userIndex = "/user";
+
+const userList = [
+  {
+    key: "dashboard_main",
+    url: userIndex,
+  },
+  {
+    key: "dashboard_link",
+    url: `${userIndex}/manage_url`,
+  },
+  {
+    key: "management_link_storage",
+    url: `${userIndex}/link_storage`,
+  },
+  {
+    key: "management_expired",
+    url: `${userIndex}/expired`,
+  },
+  {
+    key: "link_option_multi_links",
+    url: `${userIndex}/multi_links`,
+  },
+  {
+    key: "tools_create_quick_link",
+    url: `${userIndex}/create_quick_link`,
+  },
+  {
+    key: "tools_full_page_script",
+    url: `${userIndex}/full_page_script`,
+  },
+  {
+    key: "privacy_profile",
+    url: `${userIndex}/profile`,
+  },
+  {
+    key: "privacy_payment",
+    url: `${userIndex}/payment`,
+  },
+];
 
 const DrawerSection = () => {
   const [Visible, setVisible] = useState(false);
@@ -35,38 +82,126 @@ const DrawerSection = () => {
         >
           <Menu>
             <span style={{ padding: "10px 0 10px 0" }}>DASHBOARD</span>
-            <Menu.Item key="12" icon={<PieChartOutlined />} onClick={onClose}>
-              <span>관리페이지</span>
+            <Menu.Item
+              key="dashboard_main"
+              icon={<AppstoreOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user">
+                <a>
+                  <span>관리페이지</span>
+                </a>
+              </Link>
             </Menu.Item>
-            <Menu.Item key="13" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>전체 링크 관리</span>
+            <Menu.Item
+              key="dashboard_link"
+              icon={<ApartmentOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user/manage_url">
+                <a>
+                  <span>전체 링크 관리</span>
+                </a>
+              </Link>
             </Menu.Item>
             <Menu.Divider />
 
             <span>MANAGEMENT</span>
-            <Menu.Item key="14" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>링크 보관함</span>
+            <Menu.Item
+              key="management_link_storage"
+              icon={<FolderOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user/link_storage">
+                <a>
+                  <span>
+                    링크 보관함
+                  </span>
+                </a>
+              </Link>
             </Menu.Item>
-            <Menu.Item key="15" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>설정기간 만료</span>
+            <Menu.Item
+              key="management_expired"
+              icon={<DesktopOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user/expired">
+                <a>
+                  <span>
+                    설정기간 만료
+                  </span>
+                </a>
+              </Link>
+            </Menu.Item>
+            <Menu.Divider />
+
+            <span>LINK OPTION</span>
+            <Menu.Item
+              key="link_option_multi_links"
+              icon={<CarryOutOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user/multi_links">
+                <a>
+                  <span>멀티링크</span>
+                </a>
+              </Link>
             </Menu.Item>
             <Menu.Divider />
 
             <span>TOOLS</span>
-            <Menu.Item key="16" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>빠른 단축URL 생성</span>
+            <Menu.Item
+              key="tools_create_quick_link"
+              icon={<FileAddOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user/create_quick_link">
+                <a>
+                  <span>
+                    빠른 단축 URL 생성
+                  </span>
+                </a>
+              </Link>
             </Menu.Item>
-            <Menu.Item key="17" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>전체 페이지 스크립트</span>
+            <Menu.Item
+              key="tools_full_page_script"
+              icon={<GoldOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user/full_page_script">
+                <a>
+                  <span>
+                    전체 페이지 스크립트
+                  </span>
+                </a>
+              </Link>
             </Menu.Item>
             <Menu.Divider />
 
             <span>PRIVACY</span>
-            <Menu.Item key="18" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>프로필 설정</span>
+            <Menu.Item
+              key="privacy_profile"
+              icon={<TeamOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user/profile">
+                <a>
+                  <span>
+                    프로필 설정
+                  </span>
+                </a>
+              </Link>
             </Menu.Item>
-            <Menu.Item key="19" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>결제 정보</span>
+            <Menu.Item
+              key="privacy_payment"
+              icon={<CreditCardOutlined />}
+              onClick={onClose}
+            >
+              <Link href="/user/payment">
+                <a>
+                  <span>결제 정보</span>
+                </a>
+              </Link>
             </Menu.Item>
           </Menu>
         </Drawer>

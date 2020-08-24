@@ -92,7 +92,7 @@ const BaseSection = () => {
       >
         <div className="user_logo">
           <Link href="/">
-            <a>Logo</a>
+            <a>Link_Project</a>
           </Link>
         </div>
         <Menu theme="dark" mode="inline">
