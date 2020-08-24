@@ -50,13 +50,6 @@
 }
 
 
-@media all and (max-width: 900px) {
-    * {
-        /* font-size: 0.95rem !important; */
-    }
-}
-
-
 @media all and (max-width: 650px) {
 
     .user-sider {

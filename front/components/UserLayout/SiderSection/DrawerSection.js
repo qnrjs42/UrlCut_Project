@@ -50,31 +50,22 @@ const DrawerSection = () => {
             <Menu.Item key="15" icon={<DesktopOutlined />} onClick={onClose}>
               <span>설정기간 만료</span>
             </Menu.Item>
-            <Menu.Item key="16" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>링크 패키지</span>
-            </Menu.Item>
             <Menu.Divider />
 
             <span>TOOLS</span>
-            <Menu.Item key="17" icon={<DesktopOutlined />} onClick={onClose}>
+            <Menu.Item key="16" icon={<DesktopOutlined />} onClick={onClose}>
               <span>빠른 단축URL 생성</span>
             </Menu.Item>
-            <Menu.Item key="18" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>북마클릿</span>
-            </Menu.Item>
-            <Menu.Item key="19" icon={<DesktopOutlined />} onClick={onClose}>
-              <span>개발용 API</span>
-            </Menu.Item>
-            <Menu.Item key="20" icon={<DesktopOutlined />} onClick={onClose}>
+            <Menu.Item key="17" icon={<DesktopOutlined />} onClick={onClose}>
               <span>전체 페이지 스크립트</span>
             </Menu.Item>
             <Menu.Divider />
 
             <span>PRIVACY</span>
-            <Menu.Item key="21" icon={<DesktopOutlined />} onClick={onClose}>
+            <Menu.Item key="18" icon={<DesktopOutlined />} onClick={onClose}>
               <span>프로필 설정</span>
             </Menu.Item>
-            <Menu.Item key="22" icon={<DesktopOutlined />} onClick={onClose}>
+            <Menu.Item key="19" icon={<DesktopOutlined />} onClick={onClose}>
               <span>결제 정보</span>
             </Menu.Item>
           </Menu>

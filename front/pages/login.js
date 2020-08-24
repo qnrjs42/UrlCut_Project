@@ -34,7 +34,6 @@ const SquareButton = () => ({
 const logIn = () => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const [formErrorMessage, setFormErrorMessage] = useState("");
     const [Email, onChangeEmail, setEmail] = useInput("");
     const [Password, onChangePassword, setPassword] = useInput("");
 
