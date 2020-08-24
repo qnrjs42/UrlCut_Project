@@ -1,8 +1,15 @@
 import React, { useState, useCallback } from "react";
 import { Layout, Menu, Button } from "antd";
 import {
+  AppstoreOutlined,
+  ApartmentOutlined,
+  FolderOutlined,
   DesktopOutlined,
-  PieChartOutlined,
+  CarryOutOutlined,
+  FileAddOutlined,
+  GoldOutlined,
+  TeamOutlined,
+  CreditCardOutlined
 } from "@ant-design/icons";
 import Router, { withRouter } from 'next/router';
 import Link from 'next/link';
@@ -13,40 +20,40 @@ const userIndex = '/user';
 
 const userList = [
   {
-    key: 1,
+    key: "dashboard_main",
     url: userIndex,
   },
   {
-    key: 2,
+    key: "dashboard_link",
     url: `${userIndex}/manage_url`,
   },
   {
-    key: 3,
-    url: `${userIndex}/test`,
+    key: "management_link_storage",
+    url: `${userIndex}/link_storage`,
   },
   {
-    key: 4,
-    url: `${userIndex}/manage_url`,
+    key: "management_expired",
+    url: `${userIndex}/expired`,
   },
   {
-    key: 5,
-    url: `${userIndex}/test`,
+    key: "link_option_multi_links",
+    url: `${userIndex}/multi_links`,
   },
   {
-    key: 6,
-    url: `${userIndex}/manage_url`,
+    key: "tools_create_quick_link",
+    url: `${userIndex}/create_quick_link`,
   },
   {
-    key: 7,
-    url: `${userIndex}/test`,
+    key: "tools_full_page_script",
+    url: `${userIndex}/full_page_script`,
   },
   {
-    key: 8,
-    url: `${userIndex}/manage_url`,
+    key: "privacy_profile",
+    url: `${userIndex}/profile`,
   },
   {
-    key: 9,
-    url: `${userIndex}/test`,
+    key: "privacy_payment",
+    url: `${userIndex}/payment`,
   },
 ];
 
@@ -90,15 +97,22 @@ const BaseSection = () => {
         </div>
         <Menu theme="dark" mode="inline">
           <span className={SiderHeader}>DASHBOARD</span>
-          <Menu.Item key="1" icon={<PieChartOutlined />} onClick={onClickMenu}>
-            {/* onClick={onPagination} */}
+          <Menu.Item
+            key="dashboard_main"
+            icon={<AppstoreOutlined />}
+            onClick={onClickMenu}
+          >
             <Link href="/user">
               <a>
                 <span className="user-sider-header-menu-item">관리페이지</span>
               </a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />} onClick={onClickMenu}>
+          <Menu.Item
+            key="dashboard_link"
+            icon={<ApartmentOutlined />}
+            onClick={onClickMenu}
+          >
             <Link href="/user/manage_url">
               <a>
                 <span className="user-sider-header-menu-item">
@@ -110,33 +124,69 @@ const BaseSection = () => {
           <Menu.Divider />
 
           <span className={SiderHeader}>MANAGEMENT</span>
-          <Menu.Item key="3" icon={<DesktopOutlined />}>
-            <span className="user-sider-header-menu-item">링크 보관함</span>
+          <Menu.Item key="management_link_storage" icon={<FolderOutlined />}>
+            <Link href="/user/link_storage">
+              <a>
+                <span className="user-sider-header-menu-item">링크 보관함</span>
+              </a>
+            </Link>
           </Menu.Item>
-          <Menu.Item key="4" icon={<DesktopOutlined />}>
-            <span className="user-sider-header-menu-item">설정기간 만료</span>
+          <Menu.Item key="management_expired" icon={<DesktopOutlined />}>
+            <Link href="/user/expired">
+              <a>
+                <span className="user-sider-header-menu-item">
+                  설정기간 만료
+                </span>
+              </a>
+            </Link>
+          </Menu.Item>
+          <Menu.Divider />
+
+          <span className={SiderHeader}>LINK OPTION</span>
+          <Menu.Item key="link_option_multi_links" icon={<CarryOutOutlined />}>
+            <Link href="/user/multi_links">
+              <a>
+                <span className="user-sider-header-menu-item">멀티링크</span>
+              </a>
+            </Link>
           </Menu.Item>
           <Menu.Divider />
 
           <span className={SiderHeader}>TOOLS</span>
-          <Menu.Item key="5" icon={<DesktopOutlined />}>
-            <span className="user-sider-header-menu-item">
-              빠른 단축URL 생성
-            </span>
+          <Menu.Item key="tools_create_quick_link" icon={<FileAddOutlined />}>
+            <Link href="/user/create_quick_link">
+              <a>
+                <span className="user-sider-header-menu-item">
+                  빠른 단축 URL 생성
+                </span>
+              </a>
+            </Link>
           </Menu.Item>
-          <Menu.Item key="6" icon={<DesktopOutlined />}>
-            <span className="user-sider-header-menu-item">
-              전체 페이지 스크립트
-            </span>
+          <Menu.Item key="tools_full_page_script" icon={<GoldOutlined />}>
+            <Link href="/user/full_page_script">
+              <a>
+                <span className="user-sider-header-menu-item">
+                  전체 페이지 스크립트
+                </span>
+              </a>
+            </Link>
           </Menu.Item>
           <Menu.Divider />
 
           <span className={SiderHeader}>PRIVACY</span>
-          <Menu.Item key="7" icon={<DesktopOutlined />}>
-            <span className="user-sider-header-menu-item">프로필 설정</span>
+          <Menu.Item key="privacy_profile" icon={<TeamOutlined />}>
+            <Link href="/user/profile">
+              <a>
+                <span className="user-sider-header-menu-item">프로필 설정</span>
+              </a>
+            </Link>
           </Menu.Item>
-          <Menu.Item key="8" icon={<DesktopOutlined />}>
-            <span className="user-sider-header-menu-item">결제 정보</span>
+          <Menu.Item key="privacy_payment" icon={<CreditCardOutlined />}>
+            <Link href="/user/payment">
+              <a>
+                <span className="user-sider-header-menu-item">결제 정보</span>
+              </a>
+            </Link>
           </Menu.Item>
         </Menu>
       </Sider>
