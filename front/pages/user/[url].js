@@ -17,19 +17,20 @@ import UserLayout from "../../components/UserLayout";
 // };
 
 
-// 초기 /user 진입했을 때 | null로 하면 에러 발생
-let UserComponent = loadable(() =>
-  import("../../components/UserLayout/Dashboard/MainManageLayout")
-);
-
 // 아래 코드는 웹펙, 바벨을 사용할 때 사용할 수 있다. 나중에 시도해보자
 // let UserComponent = loadable((props) => import(`${cl[props.url]}`), {
 //     cacheKey: (props) => props.url,
 // });
 
 
+
+// 초기 /user 진입했을 때 | null로 하면 에러 발생
+let UserComponent = loadable(() =>
+  import("../../components/UserLayout/Dashboard/MainManageLayout")
+);
+
 const UserIndex = () => {
-    const router = useRouter();
+  const router = useRouter();
 
   // 컴포넌트에서 넘겨준 값 비교해서 알맞는 컴포넌트 할당
   switch (router.query.url) {
