@@ -4,17 +4,17 @@ import loadable from "@loadable/component";
 
 import UserLayout from "../../components/UserLayout";
 
-const componentLayout = {
-  index: "../../components/UserLayout/Dashboard/MainManageLayout.",
-  manage_url: "../../components/UserLayout/Dashboard/LinkManageLayout",
-  link_storage: "../../components/UserLayout/Management/LinkStorageLayout",
-  expired: "../../components/UserLayout/Management/ExpiredLayout",
-  multi_link: "../../components/UserLayout/LinkOption/MultiLinkLayout",
-  create_quick_link: "../../components/UserLayout/Tools/CreateQuickLinkLayout",
-  full_page_script: "../../components/UserLayout/Tools/FullPageScriptLayout",
-  profile: "../../components/UserLayout/Privacy/ProfileLayout",
-  payment: "../../components/UserLayout/Privacy/PaymentLayout",
-};
+// const componentLayout = {
+//   index: "../../components/UserLayout/Dashboard/MainManageLayout.",
+//   manage_url: "../../components/UserLayout/Dashboard/LinkManageLayout",
+//   link_storage: "../../components/UserLayout/Management/LinkStorageLayout",
+//   expired: "../../components/UserLayout/Management/ExpiredLayout",
+//   multi_link: "../../components/UserLayout/LinkOption/MultiLinkLayout",
+//   create_quick_link: "../../components/UserLayout/Tools/CreateQuickLinkLayout",
+//   full_page_script: "../../components/UserLayout/Tools/FullPageScriptLayout",
+//   profile: "../../components/UserLayout/Privacy/ProfileLayout",
+//   payment: "../../components/UserLayout/Privacy/PaymentLayout",
+// };
 
 
 // 초기 /user 진입했을 때 | null로 하면 에러 발생
@@ -30,8 +30,6 @@ let UserComponent = loadable(() =>
 
 const UserIndex = () => {
     const router = useRouter();
-
-  console.log('router', router);
 
   // 컴포넌트에서 넘겨준 값 비교해서 알맞는 컴포넌트 할당
   switch (router.query.url) {
