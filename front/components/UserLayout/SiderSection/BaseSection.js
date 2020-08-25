@@ -60,11 +60,14 @@ const BaseSection = () => {
 
     const [Cllapsed, setCllapsed] = useState(false);
     const [Visible, setVisible] = useState(false);
+    const [Title, setTitle] = useState('Link_Project');
     const [SelectedKey, setSelectedKey] = useState(0);
     const [SiderHeader, setSiderHeader] = useState("user-sider-header-open");
 
     const toggle = useCallback(() => {
       setCllapsed(!Cllapsed);
+
+      setTitle(Cllapsed ? 'Link_Project' : 'LP')
 
       if (SiderHeader === "user-sider-header-open") {
         setSiderHeader("user-sider-header-close");
@@ -81,8 +84,8 @@ const BaseSection = () => {
         className="user-sider"
       >
         <div className="user_logo">
-          <Link href="/user/[url]" as={`${userList[0].url}/index`}>
-            <a>Link_Project</a>
+          <Link href="/user">
+            <a>{Title}</a>
           </Link>
         </div>
         <Menu theme="dark" mode="inline">
