@@ -11,7 +11,6 @@ import {
   TeamOutlined,
   CreditCardOutlined
 } from "@ant-design/icons";
-import Router, { withRouter } from 'next/router';
 import Link from 'next/link';
 
 const {Sider } = Layout;
@@ -74,15 +73,6 @@ const BaseSection = () => {
       }
     }, [Cllapsed]);
 
-    const onClickMenu = useCallback((e) => {
-      for(const user of userList) {
-        if(user.key === parseInt(e.key)) {
-          console.log(e);
-          break;
-        }
-      }
-     }, [SelectedKey]);
-
     return (
       <Sider
         collapsible
@@ -91,7 +81,7 @@ const BaseSection = () => {
         className="user-sider"
       >
         <div className="user_logo">
-          <Link href="/">
+          <Link href="/user/[url]" as={`${userList[0].url}/index`}>
             <a>Link_Project</a>
           </Link>
         </div>
@@ -100,9 +90,8 @@ const BaseSection = () => {
           <Menu.Item
             key="dashboard_main"
             icon={<AppstoreOutlined />}
-            onClick={onClickMenu}
           >
-            <Link href="/user">
+            <Link href="/user/[url]" as={`${userList[0].url}/index`}>
               <a>
                 <span className="user-sider-header-menu-item">관리페이지</span>
               </a>
@@ -111,9 +100,8 @@ const BaseSection = () => {
           <Menu.Item
             key="dashboard_link"
             icon={<ApartmentOutlined />}
-            onClick={onClickMenu}
           >
-            <Link href="/user/manage_url">
+            <Link href="/user/[url]" as={`${userList[1].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">
                   전체 링크 관리
@@ -193,4 +181,4 @@ const BaseSection = () => {
     );
 }
 
-export default withRouter(BaseSection)
+export default BaseSection
