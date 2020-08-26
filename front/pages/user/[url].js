@@ -54,7 +54,7 @@ const UserIndex = () => {
         import("../../components/UserLayout/Management/ExpiredLayout")
       );
       break;
-    case "multi_link":
+    case "multi_links":
       UserComponent = loadable(() =>
         import("../../components/UserLayout/LinkOption/MultiLinkLayout")
       );
