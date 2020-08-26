@@ -66,16 +66,10 @@ const StaticToDynamic = () => {
         );
       break;
   }
-
-    const test = () => {
-      console.log('router', router);
-    }
     
     return (
       <>
         <UserLayout>
-          {/* {router && <UserComponent url={router.query.url} />} */}
-          <Button onClick={test}>asdasd </Button>
           <UserComponent />
         </UserLayout>
       </>
