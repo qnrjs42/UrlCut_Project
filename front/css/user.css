@@ -49,6 +49,12 @@
     font-weight: 700;
 }
 
+/*  */
+.code-box {
+    background-color: '#ABABAB' !important;
+    padding: 20;
+}
+
 
 @media all and (max-width: 650px) {
 
