@@ -29,10 +29,8 @@ const SecondSubLayout = () => {
           </p>
         </Row>
         <br />
-
-        <Row gutter={[16, 16]} justify="center">
+        <Row justify="center">
           <Col
-            className=""
             xs={{ order: 2 }}
             sm={{ order: 2 }}
             md={{ order: 1 }}
@@ -42,13 +40,13 @@ const SecondSubLayout = () => {
             <img className="sub-layout-two-image" src={`../static/IU4.jpg`} />
           </Col>
           <Col
-            className=""
-            style={{ textAlign: "center" }}
+            offset={1}
             xs={{ order: 1 }}
             sm={{ order: 1 }}
             md={{ order: 2 }}
             lg={{ order: 2 }}
             xl={{ order: 2 }}
+            style={{ textAlign: "center" }}
           >
             <br />
             <h2>
@@ -66,7 +64,7 @@ const SecondSubLayout = () => {
         <br />
         <br />
 
-        <Row gutter={[16, 16]} justify="center">
+        <Row justify="center">
           <Col style={{ textAlign: "center" }}>
             <br />
             <h2>
@@ -82,7 +80,7 @@ const SecondSubLayout = () => {
               사용될 수 있습니다.
             </p>
           </Col>
-          <Col>
+          <Col offset={1}>
             <img className="sub-layout-two-image" src={`../static/IU5.jpg`} />
           </Col>
         </Row>
@@ -90,7 +88,7 @@ const SecondSubLayout = () => {
         <br />
 
         <div className="site-card-wrapper">
-          <Row gutter={24} justify="center">
+          <Row justify="center">
             <Col span={9} xs={{ order: 1 }} className="sub-layout-two-card">
               <Card title="365 X 24 빠르고 안정적인 서비스">
                 앞선 기술력과 노하우를 바탕으로 항상 빠르고 안정적인 서비스를
@@ -98,7 +96,13 @@ const SecondSubLayout = () => {
                 다하겠습니다.
               </Card>
             </Col>
-            <Col span={9} xs={{ order: 2 }} className="sub-layout-two-card">
+            <Col
+              span={9}
+              offset={1}
+              xs={{ order: 2, offset: 0 }}
+              md={{ order: 2, offset: 1 }}
+              className="sub-layout-two-card"
+            >
               <Card title="디바이스 제한 없이 언제 어디서나">
                 PC환경은 물론 모바일, 태블릿 등 어떠한 디바이스에서도 언제
                 어디서나 서비스 이용에 불편함이 없도록 UI & UX 개선 작업에
@@ -110,7 +114,7 @@ const SecondSubLayout = () => {
         <br />
         <br />
         <div className="site-card-wrapper">
-          <Row gutter={24} justify="center">
+          <Row justify="center">
             <Col span={9} xs={{ order: 1 }} className="sub-layout-two-card">
               <Card title="빠른 해결을 위한 고객센터 운영">
                 서비스 이용에 있어 불편함이 있거나 문의 내용에 대해 실시간
@@ -118,7 +122,13 @@ const SecondSubLayout = () => {
                 고객센터를 운영하고 있습니다.
               </Card>
             </Col>
-            <Col span={9} xs={{ order: 2 }} className="sub-layout-two-card">
+            <Col
+              span={9}
+              offset={1}
+              xs={{ order: 2, offset: 0 }}
+              md={{ order: 2, offset: 1 }}
+              className="sub-layout-two-card"
+            >
               <Card title="맞춤형 커스터마이징 지원">
                 사용자 요구사항을 반영한 SI 지원이 필요한 경우, 전문 상담사와의
                 기능에 대한 자세한 상담을 통해, 최적화된 맞춤형 커스터마이징
