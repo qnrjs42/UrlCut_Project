@@ -12,6 +12,7 @@ import {
   LinkOutlined
 } from "@ant-design/icons";
 import { Line } from "react-chartjs-2";
+import Link from 'next/link';
 
 const { Content } = Layout;
 
@@ -175,17 +176,31 @@ const MainManageLayout = () => {
         {/* 메인 화면에 보여줄 최근 등록된 링크는 최대 5개 나머지는 전체 리스트 통해 확인 */}
         <Row justify="center" style={{ paddingTop: "20px" }}>
           <Col span={24}>
-            <Card style={{ height: 'auto' }}>
+            <Card style={{ height: "auto" }}>
               <Row justify="space-between">
                 <Col>
                   <p style={{ fontSize: 18 }}>최근 등록된 링크</p>
                 </Col>
                 <Col>
-                  <Button>전체 리스트</Button>
+                  <Button>
+                    <Link href="/user/[url]" as={`/user/manage_url`}>
+                      <a>
+                        전체 리스트
+                      </a>
+                    </Link>
+                  </Button>
                 </Col>
-              </Row><br /><br />
+              </Row>
+              <br />
+              <br />
 
-              <Table className="latest_link_table" dataSource={dataSource} columns={columns} pagination={false} scroll={{ x: 1000 }} />
+              <Table
+                className="latest_link_table"
+                dataSource={dataSource}
+                columns={columns}
+                pagination={false}
+                scroll={{ x: 1000 }}
+              />
             </Card>
           </Col>
         </Row>
