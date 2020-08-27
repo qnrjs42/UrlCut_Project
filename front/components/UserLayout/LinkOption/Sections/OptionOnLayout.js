@@ -127,8 +127,8 @@ export const OptionOnLayout = () => {
               <h3>테스트입니다</h3>
 
               <Switch
-                checkedChildren="On"
-                unCheckedChildren="Off"
+                checkedChildren="공개"
+                unCheckedChildren="비공개"
                 onChange={onMessageChange}
               />
             </Space>

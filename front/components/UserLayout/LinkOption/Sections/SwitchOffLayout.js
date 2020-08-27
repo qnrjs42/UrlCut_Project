@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Row,
   Button,
@@ -9,7 +9,10 @@ import {
   InfoCircleTwoTone,
 } from "@ant-design/icons";
 
-export const SwitchOffLeftLayout = (props) => {
+
+export const SwitchOffLeftLayout = ({ onModalDisplay }) => {
+
+
     return (
       <>
         <Row gutter={[16, 16]} justify="center">
@@ -21,7 +24,7 @@ export const SwitchOffLeftLayout = (props) => {
             type="primary"
             icon={<PlusOutlined />}
             size="large"
-            onClick={props.onModalDisplay}
+            onClick={() => onModalDisplay()}
           >
             멀티링크 생성
           </Button>

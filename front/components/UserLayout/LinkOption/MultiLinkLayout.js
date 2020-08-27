@@ -17,6 +17,7 @@ import {
   SubnodeOutlined,
   ArrowRightOutlined,
 } from "@ant-design/icons";
+import PropTypes from "prop-types";
 
 import useInput from "../../../hooks/useInput";
 import { SwitchOffLeftLayout, SwitchOffRightLayout } from './Sections/SwitchOffLayout';
@@ -33,8 +34,29 @@ const MultiLinkLayout = () => {
     const [CreateModal, setCreateModal] = useState(false); // 멀티링크 생성 버튼 모달
     const [RadioPublicPrivate, onRadioChange, setRadioPublicPrivate] = useInput(1); // 모달 - 라디오 버튼
 
+    const onSwitchChange = useCallback(() => {
+      setMultiLinkCreateOnOff(!MultiLinkCreateOnOff);
+    });
+
+    const onOptionChange = useCallback(() => {
+      setOptionOnOff(!OptionOnOff);
+    });
+
+    const onModalDisplay = useCallback(() => {
+      setCreateModal(true);
+    });
+
+    const onMultiLinkCreateOk = useCallback(() => {
+      setCreateModal(false);
+    });
+
+    // 모달 밖, 화면을 클릭해도 Cancel
+    const onMultiLinkCreateCancel = useCallback(() => {
+      setCreateModal(false);
+    });
+
     // 멀티링크 없을 때
-    let SwitchOptionLeftLayout = <SwitchOffLeftLayout onModalDisplay={onModalDisplay} />;
+    let SwitchOptionLeftLayout = <SwitchOffLeftLayout onModalDisplay={ onModalDisplay} />;
 
     // 멀티링크는 생겨났지만 옵션은 클릭 안 했을 때
     if (MultiLinkCreateOnOff && !OptionOnOff) {
@@ -46,29 +68,10 @@ const MultiLinkLayout = () => {
 
         // 멀티링크 없을 때
     } else {
-        SwitchOptionLeftLayout = <SwitchOffLeftLayout onModalDisplay={onModalDisplay} />;
+        SwitchOptionLeftLayout = <SwitchOffLeftLayout onModalDisplay={ onModalDisplay} />;
     }
 
-    const onSwitchChange = useCallback(() => {
-        setMultiLinkCreateOnOff(!MultiLinkCreateOnOff);
-    })
-
-    const onOptionChange = useCallback(() => {
-      setOptionOnOff(!OptionOnOff);
-    });
-
-    const onModalDisplay = useCallback(() => {
-        setCreateModal(true);
-    });
-
-    const onMultiLinkCreateOk = useCallback(() => {
-      setCreateModal(false);
-    });
-
-    // 모달 밖, 화면을 클릭해도 Cancel
-    const onMultiLinkCreateCancel = useCallback(() => {
-      setCreateModal(false);
-    });
+    
 
   return (
     <>
@@ -153,12 +156,6 @@ const MultiLinkLayout = () => {
           >
             <Card style={{ height: "auto" }}>
               {SwitchOptionLeftLayout}
-
-              {/* {MultiLinkCreateOnOff ? (
-                <SwitchOnLeftLayout />
-              ) : (
-                <SwitchOffLeftLayout onModalDisplay={onModalDisplay} />
-              )} */}
             </Card>
           </Col>
           <br />
@@ -202,6 +199,10 @@ const MultiLinkLayout = () => {
       ></div>
     </>
   );
+};
+
+MultiLinkLayout.propTypes = {
+  onModalDisplay: PropTypes.func,
 };
 
 export default MultiLinkLayout;
