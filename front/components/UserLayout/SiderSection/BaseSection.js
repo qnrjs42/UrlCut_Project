@@ -91,14 +91,14 @@ const BaseSection = () => {
         <Menu theme="dark" mode="inline">
           <span className={SiderHeader}>DASHBOARD</span>
           <Menu.Item key="dashboard_main" icon={<AppstoreOutlined />}>
-            <Link href="/user/[user]" as={`${userList[0].url}/index`}>
+            <Link href="/user/[userPages]" as={`${userList[0].url}/index`}>
               <a>
                 <span className="user-sider-header-menu-item">관리페이지</span>
               </a>
             </Link>
           </Menu.Item>
           <Menu.Item key="dashboard_link" icon={<ApartmentOutlined />}>
-            <Link href="/user/[user]" as={`${userList[1].url}`}>
+            <Link href="/user/[userPages]" as={`${userList[1].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">
                   전체 링크 관리
@@ -110,14 +110,14 @@ const BaseSection = () => {
 
           <span className={SiderHeader}>MANAGEMENT</span>
           <Menu.Item key="management_link_storage" icon={<FolderOutlined />}>
-            <Link href="/user/[user]" as={`${userList[2].url}`}>
+            <Link href="/user/[userPages]" as={`${userList[2].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">링크 보관함</span>
               </a>
             </Link>
           </Menu.Item>
           <Menu.Item key="management_expired" icon={<DesktopOutlined />}>
-            <Link href="/user/[user]" as={`${userList[3].url}`}>
+            <Link href="/user/[userPages]" as={`${userList[3].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">
                   설정기간 만료
@@ -129,7 +129,7 @@ const BaseSection = () => {
 
           <span className={SiderHeader}>LINK OPTION</span>
           <Menu.Item key="link_option_multi_links" icon={<CarryOutOutlined />}>
-            <Link href="/user/[user]" as={`${userList[4].url}`}>
+            <Link href="/user/[userPages]" as={`${userList[4].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">멀티링크</span>
               </a>
@@ -139,7 +139,7 @@ const BaseSection = () => {
 
           <span className={SiderHeader}>TOOLS</span>
           <Menu.Item key="tools_create_quick_link" icon={<FileAddOutlined />}>
-            <Link href="/user/[user]" as={`${userList[5].url}`}>
+            <Link href="/user/[userPages]" as={`${userList[5].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">
                   빠른 단축 URL 생성
@@ -148,7 +148,7 @@ const BaseSection = () => {
             </Link>
           </Menu.Item>
           <Menu.Item key="tools_full_page_script" icon={<GoldOutlined />}>
-            <Link href="/user/[user]" as={`${userList[6].url}`}>
+            <Link href="/user/[userPages]" as={`${userList[6].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">
                   전체 페이지 스크립트
@@ -160,14 +160,14 @@ const BaseSection = () => {
 
           <span className={SiderHeader}>PRIVACY</span>
           <Menu.Item key="privacy_profile" icon={<TeamOutlined />}>
-            <Link href="/user/[url]" as={`${userList[7].url}`}>
+            <Link href="/user/[userPages]" as={`${userList[7].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">프로필 설정</span>
               </a>
             </Link>
           </Menu.Item>
           <Menu.Item key="privacy_payment" icon={<CreditCardOutlined />}>
-            <Link href="/user/[url]" as={`${userList[8].url}`}>
+            <Link href="/user/[userPages]" as={`${userList[8].url}`}>
               <a>
                 <span className="user-sider-header-menu-item">결제 정보</span>
               </a>

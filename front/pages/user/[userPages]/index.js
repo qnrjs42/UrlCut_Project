@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import loadable from "@loadable/component";
+import { Layout, Menu, Button } from "antd";
 
 import UserLayout from "../../../components/UserLayout";
 
@@ -13,7 +14,7 @@ const StaticToDynamic = () => {
     const router = useRouter();
     
   // 컴포넌트에서 넘겨준 값 비교해서 알맞는 컴포넌트 할당
-  switch (router.query.user) {
+  switch (router.query.userPages) {
     case "index":
       UserComponent = loadable(() =>
         import("../../../components/UserLayout/Dashboard/MainManageLayout")
@@ -56,7 +57,7 @@ const StaticToDynamic = () => {
       break;
     case "payment":
       UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Tools/FullPageScriptLayout")
+        import("../../../components/UserLayout/Privacy/PaymentLayout")
       );
       break;
       default: // 올바르지 않은 페이지 접근 시 User 메인 화면으로 이동 ( 404 페이지 만들어야 함)
@@ -65,10 +66,15 @@ const StaticToDynamic = () => {
         );
       break;
   }
+
+  const buttonClick = () => {
+    console.log('router:', router);
+  }
     
     return (
       <>
         <UserLayout>
+          <Button onClick={buttonClick}>Test</Button>
           <UserComponent />
         </UserLayout>
       </>

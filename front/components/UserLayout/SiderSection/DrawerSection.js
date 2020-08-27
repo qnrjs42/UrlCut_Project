@@ -87,7 +87,7 @@ const DrawerSection = () => {
               icon={<AppstoreOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[0].url}/index`}>
+              <Link href="/user/[userPages]" as={`${userList[0].url}/index`}>
                 <a>
                   <span>관리페이지</span>
                 </a>
@@ -98,7 +98,7 @@ const DrawerSection = () => {
               icon={<ApartmentOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[1].url}`}>
+              <Link href="/user/[userPages]" as={`${userList[1].url}`}>
                 <a>
                   <span>전체 링크 관리</span>
                 </a>
@@ -112,7 +112,7 @@ const DrawerSection = () => {
               icon={<FolderOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[2].url}`}>
+              <Link href="/user/userPages]" as={`${userList[2].url}`}>
                 <a>
                   <span>링크 보관함</span>
                 </a>
@@ -123,7 +123,7 @@ const DrawerSection = () => {
               icon={<DesktopOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[3].url}`}>
+              <Link href="/user/[userPages]" as={`${userList[3].url}`}>
                 <a>
                   <span>설정기간 만료</span>
                 </a>
@@ -137,7 +137,7 @@ const DrawerSection = () => {
               icon={<CarryOutOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[4].url}`}>
+              <Link href="/user/[userPages]" as={`${userList[4].url}`}>
                 <a>
                   <span>멀티링크</span>
                 </a>
@@ -151,7 +151,7 @@ const DrawerSection = () => {
               icon={<FileAddOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[5].url}`}>
+              <Link href="/user/[userPages]" as={`${userList[5].url}`}>
                 <a>
                   <span>빠른 단축 URL 생성</span>
                 </a>
@@ -162,7 +162,7 @@ const DrawerSection = () => {
               icon={<GoldOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[6].url}`}>
+              <Link href="/user/[userPages]" as={`${userList[6].url}`}>
                 <a>
                   <span>전체 페이지 스크립트</span>
                 </a>
@@ -176,7 +176,7 @@ const DrawerSection = () => {
               icon={<TeamOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[7].url}`}>
+              <Link href="/user/[userPages]" as={`${userList[7].url}`}>
                 <a>
                   <span>프로필 설정</span>
                 </a>
@@ -187,7 +187,7 @@ const DrawerSection = () => {
               icon={<CreditCardOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/[url]" as={`${userList[8].url}`}>
+              <Link href="/user/[userPages]" as={`${userList[8].url}`}>
                 <a>
                   <span>결제 정보</span>
                 </a>

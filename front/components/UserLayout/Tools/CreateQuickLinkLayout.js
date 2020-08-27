@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Layout, Row, Col, Button, Card, Progress, Table } from "antd";
-import { LinkOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import React from "react";
+import { Layout, Row, Col, Card} from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
