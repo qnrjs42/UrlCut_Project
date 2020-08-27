@@ -27,7 +27,7 @@ const data = {
   ],
   datasets: [
     {
-      label: "Temperature",
+      label: "일별 클릭통계",
       data: [0, 0, 0],
       fill: true, // Don't fill area under the line
       borderColor: "green", // Line color
@@ -165,7 +165,6 @@ const MainManageLayout = () => {
             lg={{ span: 16 }}
           >
             <Card style={{ height: 380 }}>
-              <p>일별 클릭통계</p>
               <article className="canvas-container">
                 <Line data={data} options={options} height={300} />
               </article>
@@ -184,9 +183,7 @@ const MainManageLayout = () => {
                 <Col>
                   <Button>
                     <Link href="/user/[url]" as={`/user/manage_url`}>
-                      <a>
-                        전체 리스트
-                      </a>
+                      <a>전체 리스트</a>
                     </Link>
                   </Button>
                 </Col>

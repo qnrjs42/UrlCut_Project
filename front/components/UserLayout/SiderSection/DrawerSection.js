@@ -112,7 +112,7 @@ const DrawerSection = () => {
               icon={<FolderOutlined />}
               onClick={onClose}
             >
-              <Link href="/user/userPages]" as={`${userList[2].url}`}>
+              <Link href="/user/[userPages]" as={`${userList[2].url}`}>
                 <a>
                   <span>링크 보관함</span>
                 </a>
