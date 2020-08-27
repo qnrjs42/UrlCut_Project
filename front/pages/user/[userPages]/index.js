@@ -67,14 +67,14 @@ const StaticToDynamic = () => {
       break;
   }
 
-  const buttonClick = () => {
-    console.log('router:', router);
-  }
+  // const buttonClick = () => {
+  //   console.log('router:', router);
+  // }
     
     return (
       <>
         <UserLayout>
-          <Button onClick={buttonClick}>Test</Button>
+          {/* <Button onClick={buttonClick}>Test</Button> */}
           <UserComponent />
         </UserLayout>
       </>
