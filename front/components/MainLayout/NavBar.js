@@ -32,7 +32,7 @@ const NavBar = () => {
           style={{ position: "absolute", zIndex: 5, width: "70%", left: "15%" }}
         >
           <div className="menu__logo">
-            <a href="/">Logo</a>
+            <a href="/">Link_Project</a>
           </div>
           <div className="menu__container">
             <div className="menu_left">

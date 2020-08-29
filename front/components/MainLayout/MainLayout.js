@@ -38,15 +38,15 @@ const Main = () => {
     }, [ChangeUrl]);
 
     return (
-      <>
-        <Layout className={`layout ${MainLayout}`}>
-          <div className="main-bg-image"></div>
-          <div className="main-bg-text">
-            <FormWrapper onFinish={onSubmitForm}>
+        // <Layout className={`layout ${MainLayout}`}>
+        <Layout className="layout main-layout-before">
+          {/* <div className="main-bg-image"></div> */}
+          {/* <div className="main-bg-text"> */}
+          <div>
+            <FormWrapper onFinish={onSubmitForm} style={{ paddingTop: 150 }}>
               <Row justify="center">
                 <h1>링크는 간단하게 CUT</h1>
               </Row>
-
               <Row justify="center">
                 {/* xs: <576, sm: >=576 md: >=768, lg: >=992, xl: >=1200 */}
                 <Col
@@ -145,7 +145,6 @@ const Main = () => {
             </Row>
           </div>
         </Layout>
-      </>
     );
 }
 

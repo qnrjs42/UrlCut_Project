@@ -16,6 +16,7 @@ import Link from 'next/link';
 
 const { Content } = Layout;
 
+// charts data
 const data = {
   labels: [
     "08/04/2020",
@@ -35,6 +36,7 @@ const data = {
   ],
 };
 
+// tables data
 const dataSource = [
   {
     key: "url1",
@@ -73,6 +75,12 @@ const dataSource = [
   },
 ];
 
+// charts options
+const options = {
+  maintainAspectRatio: false, // Don't maintain w/h ratio
+};
+
+// tables setting
 const columns = [
   {
     title: "단축 URL",
@@ -100,12 +108,8 @@ const columns = [
   },
 ];
 
-const options = {
-  maintainAspectRatio: false, // Don't maintain w/h ratio
-};
 
 const MainManageLayout = () => {
-
     return (
       <Content style={{ margin: "20px 16px" }}>
         <Row justify="end">
@@ -182,7 +186,7 @@ const MainManageLayout = () => {
                 </Col>
                 <Col>
                   <Button>
-                    <Link href="/user/[url]" as={`/user/manage_url`}>
+                    <Link href="/user/[userPages]" as={`/user/manage_url`}>
                       <a>전체 리스트</a>
                     </Link>
                   </Button>

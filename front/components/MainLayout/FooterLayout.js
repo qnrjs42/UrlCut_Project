@@ -13,7 +13,7 @@ const FooterLayout = () => {
             style={{ minWidth: "300px", marginLeft: 100, paddingBottom: 20 }}
           >
             <div className="menu__logo">
-              <a href="/">Logo</a>
+              <a href="/">Link_Project</a>
             </div>
             <br />
             <br />
