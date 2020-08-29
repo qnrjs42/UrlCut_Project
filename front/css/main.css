@@ -1,7 +1,7 @@
-body, html {
+body,
+html {
   height: 100%;
 }
-
 
 /* * {
   box-sizing: border-box;
@@ -31,28 +31,27 @@ h3{
 
 * {
   box-sizing: border-box;
-  font-family: 'IBMPlexSansKR-Light', sans-serif !important;
+  font-family: "IBMPlexSansKR-Light", sans-serif !important;
   color: #454545;
   font-weight: 350;
 }
 
-h1{
+h1 {
   font-size: 3em;
-  font-family: 'IBMPlexSansKR-Regular', sans-serif !important;
+  font-family: "IBMPlexSansKR-Regular", sans-serif !important;
   color: #454545;
   font-weight: 600;
-
 }
 
-h2{
+h2 {
   font-size: 2.2em;
-  font-family: 'IBMPlexSansKR-Regular', sans-serif !important;
+  font-family: "IBMPlexSansKR-Regular", sans-serif !important;
   color: #454545;
 }
 
-h3{
+h3 {
   font-size: 1.4em;
-  font-family: 'IBMPlexSansKR-Regular', sans-serif !important;
+  font-family: "IBMPlexSansKR-Regular", sans-serif !important;
   color: #454545;
 }
 
@@ -70,41 +69,14 @@ h3{
 /*
   메인 레이아웃 시작
 */
-.main-layout-before {
+.main-layout {
   background-image: url("../static/main.jpg");
-  height: auto;
-  padding-bottom: 100px;
-  overflow: hidden;
-}
-
-.main-layout-after {
-  height: auto;
-}
-
-.main-bg-image {
-  /* The image used */
-  background-image: url("../static/main.jpg");
-  position: relative;
-
-  /* Add the blur effect */
-  filter: blur(15px);
-  -webkit-filter: blur(15px); 
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-/* Position text in the middle of the page/image */
-.main-bg-text {
-  top: 15%;
-  width: 100%;
-  display: inline-block;
-  position: absolute;
+  background-position: center center;
+  width: auto;
+  height: auto;
+  padding-bottom: 30px;
 }
 
 .main-image-content {
@@ -140,17 +112,17 @@ h3{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 /*
@@ -183,7 +155,6 @@ h3{
   서브 레이아웃 1 끝
 */
 
-
 /*
   서브 레이아웃 2 시작
 */
@@ -207,9 +178,6 @@ h3{
   서브 레이아웃 2 끝
 */
 
-
-
-
 /* width가 900이하일 때 */
 @media screen and (max-width: 900px) {
   h1 {
@@ -224,23 +192,23 @@ h3{
   .sub-layout-button-size > span > svg {
     width: 0.85em;
     height: 0.85em;
-   }
+  }
 
-   .sub-layout-button-size > span {
-     font-size: 0.8rem;
-   }
+  .sub-layout-button-size > span {
+    font-size: 0.8rem;
+  }
 
-   .sub-layout-one-image {
-     width: 700px;
+  .sub-layout-one-image {
+    width: 700px;
     height: 500px;
-   }
+  }
 
-   .sub-layout-two-image {
-     width: 300px;
-     height: 250px;
-   }
+  .sub-layout-two-image {
+    width: 300px;
+    height: 250px;
+  }
 
-   .sub-layout-font-medium {
+  .sub-layout-font-medium {
     font-size: 0.8rem;
     text-align: center;
   }
