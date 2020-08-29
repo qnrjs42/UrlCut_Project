@@ -12,6 +12,7 @@ import {
   CreditCardOutlined
 } from "@ant-design/icons";
 import Link from 'next/link';
+import { useRouter, withRouter } from 'next/router';
 
 const {Sider } = Layout;
 
@@ -58,9 +59,10 @@ const userList = [
 
 const BaseSection = () => {
 
+    const router = useRouter();
     const [Cllapsed, setCllapsed] = useState(false);
-    const [Visible, setVisible] = useState(false);
     const [Title, setTitle] = useState('Link_Project');
+    const [MenuSelectedKey, setMenuSelectedKey] = useState(1);
     const [SiderHeader, setSiderHeader] = useState("user-sider-header-open");
 
     const toggle = useCallback(() => {
@@ -75,6 +77,17 @@ const BaseSection = () => {
       }
     }, [Cllapsed]);
 
+    // 페이지가 새고로침 되어도 메뉴가 선택 됨
+    const onChangeKey = useCallback(() => {
+      for(const list of userList) {
+        // 현재페이지가 정의된 페이지면 정의된 key 반환
+        if(router.asPath === list.url || router.asPath === '/user/index') {
+          return list.key;
+        }
+      }
+      return '1';
+    })
+
     return (
       <Sider
         collapsible
@@ -88,7 +101,7 @@ const BaseSection = () => {
             <a>{Title}</a>
           </Link>
         </div>
-        <Menu theme="dark" mode="inline">
+        <Menu theme="dark" mode="inline" selectedKeys={`${onChangeKey()}`}>
           <span className={SiderHeader}>DASHBOARD</span>
           <Menu.Item key="dashboard_main" icon={<AppstoreOutlined />}>
             <Link href="/user/[userPages]" as={`${userList[0].url}/index`}>
@@ -178,4 +191,4 @@ const BaseSection = () => {
     );
 }
 
-export default BaseSection
+export default withRouter(BaseSection);
