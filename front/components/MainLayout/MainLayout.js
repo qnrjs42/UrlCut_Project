@@ -10,6 +10,27 @@ const FormWrapper = styled(Form)`
   padding: 10px;
 `;
 
+const ButtonWrapper = styled(Button)`
+  height: 55px;
+  border-raius: 0px;
+  background-color: #d0f2e6;
+  border-color: #d0f2e6;
+
+  &:hover {
+    background-color: #d5f7eb;
+    border-color: #d5f7eb;
+  }
+`;
+
+const InputWrapper = styled(Input)`
+  border-radius: 0px;
+  border-color: white !important;
+  outline: none !important;
+  padding: 0 0 0 11px;
+  border-right: 0;
+  height: 55px;
+`;
+
 const Main = () => {
   const dispatch = useDispatch();
   const urlInfo = useSelector((state) => state.url);
@@ -54,7 +75,7 @@ const Main = () => {
               xl={9}
               style={{ textAlign: "center" }}
             >
-              <Input
+              <InputWrapper
                 size="large"
                 name="url"
                 placeholder="URL Paste"
@@ -62,21 +83,15 @@ const Main = () => {
                 onChange={onChangeUrl}
                 required
                 autoComplete="off"
-                style={{
-                  borderRadius: "0px",
-                  padding: "0 0 0 11px",
-                  height: "55px",
-                }}
                 prefix={<LinkOutlined />}
                 suffix={
-                  <Button
+                  <ButtonWrapper
                     type="primary"
-                    style={{ height: "55px", borderRadius: "0px" }}
                     htmlType="submit"
                     loading={UrlLoading}
                   >
                     CUT
-                  </Button>
+                  </ButtonWrapper>
                 }
               />
             </Col>
@@ -104,13 +119,10 @@ const Main = () => {
                     </div>
                     <Divider dashed />
                     <div style={{ textAlign: "center" }}>
-                      <Button
-                        type="primary"
-                        size="large"
-                        style={{ height: "45px", borderRadius: "0px" }}
-                      >
+                      {/* <ButtonWrapper type="primary" size="large">
                         로그인
-                      </Button>
+                      </ButtonWrapper> */}
+                      <img src="../../static/QRCodeImg_153.jpg" />
                     </div>
                   </Card>
                 </div>
