@@ -2,7 +2,8 @@ body, html {
   height: 100%;
 }
 
-* {
+
+/* * {
   box-sizing: border-box;
   font-family: 's-core-dream-light', sans-serif !important;
   color: #454545;
@@ -26,6 +27,33 @@ h3{
   font-size: 1.4em;
   font-family: 's-core-dream-bold', sans-serif !important;
   color: #454545;
+} */
+
+* {
+  box-sizing: border-box;
+  font-family: 'IBMPlexSansKR-Light', sans-serif !important;
+  color: #454545;
+  font-weight: 350;
+}
+
+h1{
+  font-size: 3em;
+  font-family: 'IBMPlexSansKR-Regular', sans-serif !important;
+  color: #454545;
+  font-weight: 600;
+
+}
+
+h2{
+  font-size: 2.2em;
+  font-family: 'IBMPlexSansKR-Regular', sans-serif !important;
+  color: #454545;
+}
+
+h3{
+  font-size: 1.4em;
+  font-family: 'IBMPlexSansKR-Regular', sans-serif !important;
+  color: #454545;
 }
 
 .menu__logo {
@@ -43,11 +71,14 @@ h3{
   메인 레이아웃 시작
 */
 .main-layout-before {
-  height: 115vh;
+  background-image: url("../static/main.jpg");
+  height: auto;
+  padding-bottom: 100px;
+  overflow: hidden;
 }
 
 .main-layout-after {
-  height: 145vh;
+  height: auto;
 }
 
 .main-bg-image {
