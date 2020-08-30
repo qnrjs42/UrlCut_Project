@@ -1,60 +1,42 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
 body,
 html {
   height: 100%;
 }
 
-/* s-core-dream font */
-/* * {
-  box-sizing: border-box;
-  font-family: 's-core-dream-light', sans-serif !important;
-  color: #454545;
-  font-weight: 700;
-}
-
-h1{
-  font-size: 3em;
-  font-family: 's-core-dream-extrabold', sans-serif !important;
-  color: #454545;
-
-}
-
-h2{
-  font-size: 2.2em;
-  font-family: 's-core-dream-extrabold', sans-serif !important;
-  color: #454545;
-}
-
-h3{
-  font-size: 1.4em;
-  font-family: 's-core-dream-bold', sans-serif !important;
-  color: #454545;
-} */
-
-/* IBM Plex Sans KR font */
 * {
   box-sizing: border-box;
-  font-family: "IBMPlexSansKR-Light", sans-serif !important;
+  font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
+    "Apple SD Gothic Neo", sans-serif !important;
   color: #454545;
-  font-weight: 350;
+  /* font-weight: 350; */
 }
 
 h1 {
   font-size: 3em;
-  font-family: "IBMPlexSansKR-Regular", sans-serif !important;
+  font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
+    "Apple SD Gothic Neo", sans-serif !important;
   color: #454545;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 h2 {
   font-size: 2.2em;
-  font-family: "IBMPlexSansKR-Regular", sans-serif !important;
+  font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
+    "Apple SD Gothic Neo", sans-serif !important;
   color: #454545;
+  font-weight: 400;
 }
 
 h3 {
   font-size: 1.4em;
-  font-family: "IBMPlexSansKR-Regular", sans-serif !important;
+  font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
+    "Apple SD Gothic Neo", sans-serif !important;
   color: #454545;
+  font-weight: 300;
 }
 
 .menu__logo {
@@ -74,7 +56,18 @@ h3 {
   메인 레이아웃 시작
 */
 .main-layout {
-  background-image: url("../static/main.jpg");
+  background-image: url("../static/main2.jpg");
+  /* background-image: linear-gradient(
+    to bottom right,
+    rgba(34, 203, 184, 0.5),
+    rgba(255, 176, 118, 0)
+  ); */
+  /* background-image: radial-gradient(
+    circle,
+    rgba(222, 209, 190, 0.7),
+    rgba(255, 255, 255, 0.8)
+  ); */
+  /* background-color: rgba(81, 136, 253, 0.7); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -143,7 +136,7 @@ h3 {
 .sub-layout-one {
   height: auto;
   background-color: #fafaf9;
-  padding-top: 80px;
+  padding: 80px 0;
 }
 
 .sub-layout-one-image {
@@ -163,7 +156,7 @@ h3 {
 */
 .sub-layout-two {
   height: auto;
-  background-color: #fafaf9;
+  background-color: rgba(222, 209, 190, 0.3);
   padding: 80px 0;
 }
 

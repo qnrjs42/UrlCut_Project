@@ -10,20 +10,27 @@ const FormWrapper = styled(Form)`
   padding: 10px;
 `;
 
+// background-color: #d0f2e6;
+// border-color: #d0f2e6;
+// background-color: #d5f7eb;
+// border-color: #d5f7eb;
+
 const ButtonWrapper = styled(Button)`
   height: 55px;
-  border-raius: 0px;
-  background-color: #d0f2e6;
-  border-color: #d0f2e6;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  width: 90px;
+  background-color: rgba(81, 136, 253, 0.5);
+  border-color: rgba(81, 136, 253, 0.5);
 
   &:hover {
-    background-color: #d5f7eb;
-    border-color: #d5f7eb;
+    background-color: rgba(80, 171, 242, 0.4);
+    border-color: rgba(80, 171, 242, 0.4);
   }
 `;
 
 const InputWrapper = styled(Input)`
-  border-radius: 0px;
+  border-radius: 25px;
   border-color: white !important;
   outline: none !important;
   padding: 0 0 0 11px;
@@ -41,8 +48,6 @@ const Main = () => {
   const [UrlLoading, setUrlLoading] = useState(false);
   const [Copyed, setCopyed] = useState(false);
 
-  const [MainLayout, setMainLayout] = useState("main-layout-before");
-
   const onChangeUrl = useCallback((e) => {
     setChangeUrl(e.target.value);
   }, []);
@@ -51,7 +56,6 @@ const Main = () => {
     setUrlLoading(true);
     setUrl(ChangeUrl);
     setCopyed(true);
-    setMainLayout("main-layout-after");
 
     dispatch(urlCutRequestAction());
 
