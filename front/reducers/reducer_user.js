@@ -55,7 +55,7 @@ export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 const dummyUser = (data) => ({
   email: data,
   nickname: "제로초",
-  id: 1
+  id: 1,
 });
 
 const dummySignUpUser = (data) => ({
@@ -96,14 +96,7 @@ const reducer = (state = initialState, action) =>
         draft.logInError = null;
         draft.logInDone = false;
         break;
-
       case LOG_IN_SUCCESS:
-        // me: { ...action.data, nickname: "zerocho" }, // 더미 데이터
-        console.log("state", state);
-        console.log("action", action);
-
-        // localStorage.setItem("me", JSON.stringify(dummyUser(action.data))); // Object Object 뜨면 서버 재시작
-
         draft.logInLoading = false;
         draft.logInDone = true;
         draft.me = dummyUser(action.data); // 더미 데이터

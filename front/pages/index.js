@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux';
-import Router from 'next/router';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import Router from "next/router";
 
-import AppLayout from '../components/AppLayout';
+import AppLayout from "../components/AppLayout";
 import UserLayout from "../components/UserLayout";
 
 import MainManageLayout from "../components/UserLayout/Dashboard/MainManageLayout";
@@ -22,7 +22,8 @@ const Home = () => {
       window.localStorage.setItem("me", JSON.stringify(value));
     }
 
-    if(value) { // me 정보가 있는 상태에서 루트로 이동 시 /user로 리다이렉션
+    if (value) {
+      // me 정보가 있는 상태에서 루트로 이동 시 /user로 리다이렉션
       if (Router.pathname === "/") {
         Router.push("/user");
       }
@@ -46,6 +47,6 @@ const Home = () => {
       )}
     </>
   );
-}
+};
 
 export default Home;

@@ -12,8 +12,6 @@ import {
   SIGN_UP_FAILURE,
 } from "../reducers/reducer_user";
 
-
-
 function loginAPI(data) {
   return axios.post("/api/login", data);
 }
@@ -28,7 +26,7 @@ function* logIn(action) {
   try {
     yield delay(1000); // 가짜 데이터
     // const result = yield call(loginAPI, action.data); // 아직 서버가 없어서 요청을 못 보냄
-    console.log('saga의 action', action);
+    console.log("saga의 action", action);
 
     localStorage.setItem("me", JSON.stringify(dummyUser(action.data))); // Object Object 뜨면 서버 재시작
 
@@ -53,6 +51,8 @@ function* logOut() {
     yield delay(1000); // 가짜 데이터
     // const result = yield call(logOutAPI);
 
+    localStorage.removeItem("me");
+
     yield put({
       type: LOG_OUT_SUCCESS,
     });
@@ -73,7 +73,7 @@ function* signUp(action) {
     yield delay(1000); // 가짜 데이터
     // const result = yield call(signUpAPI, action.data);
 
-    console.log('saga의 signUp Action', action);
+    console.log("saga의 signUp Action", action);
 
     yield put({
       type: SIGN_UP_SUCCESS,
