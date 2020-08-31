@@ -20,12 +20,12 @@ const ButtonWrapper = styled(Button)`
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   width: 90px;
-  background-color: rgba(81, 136, 253, 0.5);
-  border-color: rgba(81, 136, 253, 0.5);
+  background-color: rgba(113, 117, 216, 0.8);
+  border-color: rgba(113, 117, 216, 0.8);
 
   &:hover {
-    background-color: rgba(80, 171, 242, 0.4);
-    border-color: rgba(80, 171, 242, 0.4);
+    background-color: rgba(113, 117, 216, 0.3);
+    border-color: rgba(113, 117, 216, 0.3);
   }
 `;
 
@@ -108,7 +108,7 @@ const Main = () => {
                   <Card
                     title={Url}
                     bordered={false}
-                    style={{ borderRadius: "0px" }}
+                    style={{ borderRadius: "25px" }}
                   >
                     <div>
                       <p

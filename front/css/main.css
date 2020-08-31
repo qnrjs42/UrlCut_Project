@@ -139,6 +139,10 @@ h3 {
   padding: 80px 0;
 }
 
+.sub-layout-button-size {
+  border-radius: 25px;
+}
+
 .sub-layout-one-image {
   display: flex;
   width: 1200px;
@@ -165,9 +169,13 @@ h3 {
   height: 450px;
 }
 
-.sub-layout-two-card {
+.sub-layout-two-card-col {
   min-width: 350px;
   margin-bottom: 15px;
+}
+
+.sub-layout-two-card {
+  border-radius: 15px;
 }
 
 /*

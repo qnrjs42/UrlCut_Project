@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Form, Input, Button, Checkbox, Typography, Layout, Row } from "antd";
 import { UserOutlined, LockOutlined, EditOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import Router from "next/router";
 
 import useInput from "../hooks/useInput";
@@ -34,13 +35,20 @@ const tailFormItemLayout = {
 };
 
 const SquareInput = () => ({
-  borderRadius: "0px",
+  borderRadius: "15px",
 });
 
-const SquareButton = () => ({
-  minWidth: "100%",
-  borderRadius: "0px",
-});
+const ButtonWrapper = styled(Button)`
+  min-width: 100%;
+  border-radius: 15px;
+  background-color: rgba(113, 117, 216, 0.8);
+  border-color: rgba(113, 117, 216, 0.8);
+
+  &:hover {
+    background-color: rgba(113, 117, 216, 0.3);
+    border-color: rgba(113, 117, 216, 0.3);
+  }
+`;
 
 const signUp = () => {
   const [form] = Form.useForm();
@@ -71,15 +79,15 @@ const signUp = () => {
   );
 
   const onSignUpSubmit = useCallback(() => {
-      if (Password !== passwordCheck) {
-        return setPasswordError(true);
-      }
+    if (Password !== passwordCheck) {
+      return setPasswordError(true);
+    }
 
-      if (!term) {
-        return setTermError(true);
-      }
+    if (!term) {
+      return setTermError(true);
+    }
 
-    dispatch(signupRequestAction({Email, NickName, Password}));
+    dispatch(signupRequestAction({ Email, NickName, Password }));
 
     // Router.push("/");
   }, [Email, NickName, Password, term]);
@@ -224,16 +232,15 @@ const signUp = () => {
 
               <Form.Item>
                 <div>
-                  <Button
+                  <ButtonWrapper
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
                     size="large"
-                    style={SquareButton()}
                     onSubmit={onSignUpSubmit}
                   >
                     회원가입하기
-                  </Button>
+                  </ButtonWrapper>
                 </div>
                 {/* Or <a href="/register">register now!</a> */}
               </Form.Item>

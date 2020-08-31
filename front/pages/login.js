@@ -1,13 +1,5 @@
 import React, { useState, useCallback } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  Checkbox,
-  Typography,
-  Layout,
-  Row,
-} from "antd";
+import { Form, Input, Button, Checkbox, Typography, Layout, Row } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -16,43 +8,48 @@ import styled from "styled-components";
 
 import useInput from "../hooks/useInput";
 import { loginRequestAction } from "../reducers/reducer_user";
-import NavBar from '../components/MainLayout/NavBar';
+import NavBar from "../components/MainLayout/NavBar";
 
 const { Title } = Typography;
 
-
 const SquareInput = () => ({
-  borderRadius: "0px",
+  borderRadius: "15px",
 });
 
+const ButtonWrapper = styled(Button)`
+  min-width: 100%;
+  border-radius: 15px;
+  background-color: rgba(113, 117, 216, 0.8);
+  border-color: rgba(113, 117, 216, 0.8);
 
-const SquareButton = () => ({
-  minWidth: '100%',
-  borderRadius: '0px',
-});
+  &:hover {
+    background-color: rgba(113, 117, 216, 0.3);
+    border-color: rgba(113, 117, 216, 0.3);
+  }
+`;
 
 const logIn = () => {
-    const [form] = Form.useForm();
-    const dispatch = useDispatch();
-    const [Email, onChangeEmail, setEmail] = useInput("");
-    const [Password, onChangePassword, setPassword] = useInput("");
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const [Email, onChangeEmail, setEmail] = useInput("");
+  const [Password, onChangePassword, setPassword] = useInput("");
 
-    const uRouter = useRouter();
-    const { register, handleSubmit } = useForm();
+  const uRouter = useRouter();
+  const { register, handleSubmit } = useForm();
 
-    const onLogInSubmit = useCallback(() => {
-        console.log(Email, Password)
+  const onLogInSubmit = useCallback(() => {
+    console.log(Email, Password);
 
-        dispatch(loginRequestAction(Email, Password));
+    dispatch(loginRequestAction(Email, Password));
 
-        // 폼, 인풋 초기화
-        form.resetFields();
-        setEmail(null);
-        setPassword(null);
+    // 폼, 인풋 초기화
+    form.resetFields();
+    setEmail(null);
+    setPassword(null);
 
-        uRouter.push("/user");
-        // document.location.href = "/user";
-    }, [Email, Password]);
+    uRouter.push("/user");
+    // document.location.href = "/user";
+  }, [Email, Password]);
 
   return (
     <>
@@ -110,16 +107,15 @@ const logIn = () => {
                 </a>
                 <div>
                   <br />
-                  <Button
+                  <ButtonWrapper
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
                     size="large"
                     onSubmit={onLogInSubmit}
-                    style={SquareButton()}
                   >
                     로그인
-                  </Button>
+                  </ButtonWrapper>
                 </div>
                 {/* Or <a href="/register">register now!</a> */}
               </Form.Item>
