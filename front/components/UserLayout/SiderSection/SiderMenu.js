@@ -1,16 +1,13 @@
 import React from "react";
 
-import BaseSection from './BaseSection';
-import DrawerSection from "./DrawerSection";
-
+import BaseSection from "./BaseSection";
 
 const SiderMenu = () => {
-    return (
-      <>
-        <BaseSection />
-        {/* <DrawerSection /> */}
-      </>
-    );
-}
+  return (
+    <>
+      <BaseSection />
+    </>
+  );
+};
 
-export default SiderMenu
+export default SiderMenu;

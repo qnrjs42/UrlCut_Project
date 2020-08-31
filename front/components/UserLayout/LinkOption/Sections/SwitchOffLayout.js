@@ -1,37 +1,31 @@
-import React, { useCallback } from "react";
-import {
-  Row,
-  Button,
-} from "antd";
+import React from "react";
+import { Row, Button } from "antd";
 import {
   SubnodeOutlined,
   PlusOutlined,
   InfoCircleTwoTone,
 } from "@ant-design/icons";
 
-
-export const SwitchOffLeftLayout = ({ onModalDisplay }) => {
-
-
-    return (
-      <>
-        <Row gutter={[16, 16]} justify="center">
-          <SubnodeOutlined style={{ fontSize: 50 }} />
-        </Row>
-        <br />
-        <Row gutter={[16, 16]} justify="center">
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            size="large"
-            onClick={() => onModalDisplay()}
-          >
-            멀티링크 생성
-          </Button>
-        </Row>
-      </>
-    );
-}
+export const SwitchOffLeftLayout = ({ onModalDisplay, ButtonWrapper }) => {
+  return (
+    <>
+      <Row gutter={[16, 16]} justify="center">
+        <SubnodeOutlined style={{ fontSize: 50 }} />
+      </Row>
+      <br />
+      <Row gutter={[16, 16]} justify="center">
+        <ButtonWrapper
+          type="primary"
+          icon={<PlusOutlined />}
+          size="large"
+          onClick={() => onModalDisplay()}
+        >
+          멀티링크 생성
+        </ButtonWrapper>
+      </Row>
+    </>
+  );
+};
 
 export const SwitchOffRightLayout = () => {
   return (

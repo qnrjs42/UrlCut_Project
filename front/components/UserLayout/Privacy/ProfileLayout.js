@@ -13,24 +13,25 @@ import {
   Table,
 } from "antd";
 import { WarningOutlined, UserOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 const { Content } = Layout;
 const { Text } = Typography;
 
 const dataSource = [
-    {
-        key: 'payment1',
-        payment: '결제 내역 없음',
-    },
-//   {
-//     key: "payment1",
-//     payment: "123요금제",
-//     payment_method: "신용카드",
-//     price: "5,900원",
-//     date: "20-08-27",
-//     service_period: "20-08-26",
-//     receipt: "Blank",
-//   },
+  {
+    key: "payment1",
+    payment: "결제 내역 없음",
+  },
+  //   {
+  //     key: "payment1",
+  //     payment: "123요금제",
+  //     payment_method: "신용카드",
+  //     price: "5,900원",
+  //     date: "20-08-27",
+  //     service_period: "20-08-26",
+  //     receipt: "Blank",
+  //   },
 ];
 
 const columns = [
@@ -66,6 +67,21 @@ const columns = [
   },
 ];
 
+const ButtonWrapper = styled(Button)`
+  border-radius: 5px;
+  background-color: rgba(113, 117, 216, 0.9);
+  border-color: rgba(113, 117, 216, 0.9);
+
+  &:hover {
+    background-color: rgba(113, 117, 216, 0.7);
+    border-color: rgba(113, 117, 216, 0.7);
+  }
+
+  span {
+    color: #f6f6f6;
+  }
+`;
+
 const ProfileLayout = () => {
   return (
     <Content style={{ margin: "20px 16px" }}>
@@ -83,9 +99,10 @@ const ProfileLayout = () => {
               <Row>
                 <Col>
                   <Avatar
+                    className="user-header-button-icon"
                     size="large"
                     icon={<UserOutlined />}
-                    style={{ backgroundColor: "#3880FF" }}
+                    style={{ backgroundColor: "rgba(94, 203, 161, 0.9)" }}
                   />
                 </Col>
                 <Col offset={1}>
@@ -210,9 +227,9 @@ const ProfileLayout = () => {
             <br />
             <br />
             <Row justify="center">
-              <Button type="primary" size="large">
+              <ButtonWrapper type="primary" size="large">
                 업데이트
-              </Button>
+              </ButtonWrapper>
             </Row>
           </Card>
         </Col>
@@ -243,7 +260,8 @@ const ProfileLayout = () => {
       <Row>
         <Col span={16}>
           <Card style={{ height: "auto" }}>
-            <h3>최근 거래</h3><br />
+            <h3>최근 거래</h3>
+            <br />
 
             <Table
               className="latest_link_table"

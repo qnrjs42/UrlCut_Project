@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, Row, Col, Button, Card, Table, Tooltip } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 const { Content } = Layout;
 
@@ -94,6 +95,33 @@ const rowSelection = {
   },
 };
 
+const ButtonWrapper = styled(Button)`
+  border-radius: 5px;
+  background-color: rgba(113, 117, 216, 0.9);
+  border-color: rgba(113, 117, 216, 0.9);
+
+  &:hover {
+    background-color: rgba(113, 117, 216, 0.7);
+    border-color: rgba(113, 117, 216, 0.7);
+  }
+
+  span {
+    color: #f6f6f6;
+  }
+`;
+
+const ButtonCardInnerWrapper = styled(Button)`
+  border-radius: 5px;
+  color: #f6f6f6;
+  background-color: rgba(94, 203, 161, 0.9);
+  border-color: rgba(94, 203, 161, 0.9);
+
+  &:hover {
+    background-color: rgba(94, 203, 161, 0.7);
+    border-color: rgba(94, 203, 161, 0.7);
+  }
+`;
+
 const ExpiredLayout = () => {
   return (
     <>
@@ -103,28 +131,33 @@ const ExpiredLayout = () => {
             <h3>만료된 URL</h3>
           </Col>
           <Col>
-            <Button type="primary" icon={<LinkOutlined />} size="large">
+            <ButtonWrapper type="primary" icon={<LinkOutlined />} size="large">
               단축 URL 추가
-            </Button>
+            </ButtonWrapper>
           </Col>
         </Row>
 
         <Card style={{ height: "auto" }}>
           <Row gutter={[16, 16]}>
             <Col>
-              <Button type="primary" size="large" danger>
+              <Button
+                type="primary"
+                size="large"
+                danger
+                style={{ borderRadius: "5px" }}
+              >
                 선택 삭제
               </Button>
             </Col>
             <Col>
-              <Button type="primary" size="large">
-                보관함 해제
-              </Button>
+              <ButtonCardInnerWrapper type="primary" size="large">
+                보관함 이동
+              </ButtonCardInnerWrapper>
             </Col>
             <Col>
-              <Button type="primary" size="large">
+              <ButtonCardInnerWrapper type="primary" size="large">
                 패키지 추가
-              </Button>
+              </ButtonCardInnerWrapper>
             </Col>
           </Row>
 

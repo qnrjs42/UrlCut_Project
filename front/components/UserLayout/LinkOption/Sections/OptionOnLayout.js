@@ -13,8 +13,13 @@ import {
   Table,
 } from "antd";
 import { MoreOutlined, MenuOutlined } from "@ant-design/icons";
-import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
+import {
+  sortableContainer,
+  sortableElement,
+  sortableHandle,
+} from "react-sortable-hoc";
 import arrayMove from "array-move";
+import styled from "styled-components";
 
 const DragHandle = sortableHandle(() => (
   <MenuOutlined style={{ cursor: "pointer", color: "#999" }} />
@@ -69,54 +74,69 @@ const data = [
   {
     key: "3",
     name: "Joe Black",
-    address: "Sidney No. 1 Lake ParkSidney No. 1 Lake ParkSidney No. 1 Lake ParkSidney No. 1 Lake Park",
+    address:
+      "Sidney No. 1 Lake ParkSidney No. 1 Lake ParkSidney No. 1 Lake ParkSidney No. 1 Lake Park",
     index: 2,
   },
 ];
 
+const ButtonCardInnerWrapper = styled(Button)`
+  border-radius: 5px;
+  color: #f6f6f6;
+  background-color: rgba(94, 203, 161, 0.9);
+  border-color: rgba(94, 203, 161, 0.9);
+
+  &:hover {
+    background-color: rgba(94, 203, 161, 0.7);
+    border-color: rgba(94, 203, 161, 0.7);
+  }
+`;
+
 const SortableItem = sortableElement((props) => <tr {...props} />);
 const SortableContainer = sortableContainer((props) => <tbody {...props} />);
 
-
-
 export const OptionOnLayout = () => {
-    const [Message, setMessage] = useState(false);
-    const [DataSource, setDataSource] = useState(data);
+  const [Message, setMessage] = useState(false);
+  const [DataSource, setDataSource] = useState(data);
 
-    const DraggableContainer = (props) => (
-      <SortableContainer
-        useDragHandle
-        helperClass="row-dragging"
-        onSortEnd={onSortEnd}
-        {...props}
-      />
+  const DraggableContainer = (props) => (
+    <SortableContainer
+      useDragHandle
+      helperClass="row-dragging"
+      onSortEnd={onSortEnd}
+      {...props}
+    />
+  );
+
+  const onMessageChange = useCallback(() => {
+    setMessage(!Message);
+
+    message.success(
+      Message
+        ? "멀티링크가 비공개로 설정되었습니다."
+        : " 멀티링크가 공개로 설정되었습니다."
     );
+  });
 
-    const onMessageChange = useCallback (() => {
-        setMessage(!Message);
+  const onSortEnd = useCallback(({ oldIndex, newIndex }) => {
+    if (oldIndex !== newIndex) {
+      const newData = arrayMove(
+        [].concat(DataSource),
+        oldIndex,
+        newIndex
+      ).filter((el) => !!el);
+      console.log("Sorted items: ", newData);
+      setDataSource(newData);
+    }
+  });
 
-        message.success(Message ? '멀티링크가 비공개로 설정되었습니다.' : ' 멀티링크가 공개로 설정되었습니다.')
-    })
-
-    const onSortEnd = useCallback (({ oldIndex, newIndex }) => {
-        if (oldIndex !== newIndex) {
-          const newData = arrayMove(
-            [].concat(DataSource),
-            oldIndex,
-            newIndex
-          ).filter((el) => !!el);
-          console.log("Sorted items: ", newData);
-          setDataSource(newData);
-        }
-    })
-
-    const DraggableBodyRow = useCallback (({ className, style, ...restProps }) => {
-        // function findIndex base on Table rowKey props and should always be a right array index
-        const index = DataSource.findIndex(
-          (x) => x.index === restProps["data-row-key"]
-        );
-        return <SortableItem index={index} {...restProps} />;
-    })
+  const DraggableBodyRow = useCallback(({ className, style, ...restProps }) => {
+    // function findIndex base on Table rowKey props and should always be a right array index
+    const index = DataSource.findIndex(
+      (x) => x.index === restProps["data-row-key"]
+    );
+    return <SortableItem index={index} {...restProps} />;
+  });
 
   return (
     <>
@@ -155,12 +175,12 @@ export const OptionOnLayout = () => {
       <Row justify="space-between">
         <Col>
           <Space>
-            <Button type="primary">설정</Button>
-            <Button>링크 목록</Button>
+            <ButtonCardInnerWrapper type="primary">설정</ButtonCardInnerWrapper>
+            <Button style={{ borderRadius: "5px" }}>링크 목록</Button>
           </Space>
         </Col>
         <Col>
-          <Button type="primary" danger>
+          <Button style={{ borderRadius: "5px" }} type="primary" danger>
             메뉴링크 추가
           </Button>
         </Col>

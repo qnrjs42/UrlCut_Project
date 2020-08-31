@@ -1,26 +1,10 @@
 import React from "react";
-import {
-  Layout,
-  Typography,
-  Row,
-  Col,
-  Button,
-  Card,
-  Avatar,
-  Divider,
-  Input,
-  Switch,
-  Table,
-} from "antd";
-import {
-  WarningOutlined,
-  UserOutlined,
-  ExclamationCircleOutlined,
-} from "@ant-design/icons";
+import { Layout, Typography, Row, Col, Button, Card, Table } from "antd";
+import { WarningOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 const { Content } = Layout;
 const { Text } = Typography;
-
 
 const dataSource = [
   {
@@ -71,6 +55,33 @@ const columns = [
   },
 ];
 
+const ButtonWrapper = styled(Button)`
+  border-radius: 5px;
+  background-color: rgba(113, 117, 216, 0.9);
+  border-color: rgba(113, 117, 216, 0.9);
+
+  &:hover {
+    background-color: rgba(113, 117, 216, 0.7);
+    border-color: rgba(113, 117, 216, 0.7);
+  }
+
+  span {
+    color: #f6f6f6;
+  }
+`;
+
+const ButtonCardInnerWrapper = styled(Button)`
+  border-radius: 5px;
+  color: #f6f6f6;
+  background-color: rgba(94, 203, 161, 0.9);
+  border-color: rgba(94, 203, 161, 0.9);
+
+  &:hover {
+    background-color: rgba(94, 203, 161, 0.7);
+    border-color: rgba(94, 203, 161, 0.7);
+  }
+`;
+
 const PaymentLayout = () => {
   return (
     <Content style={{ margin: "20px 16px" }}>
@@ -98,9 +109,9 @@ const PaymentLayout = () => {
             </Row>
             <br />
             <Row justify="end">
-              <Button type="primary" size="large">
+              <ButtonWrapper type="primary" size="large">
                 서비스 기간연장
-              </Button>
+              </ButtonWrapper>
             </Row>
           </Card>
         </Col>
@@ -161,7 +172,9 @@ const PaymentLayout = () => {
             </p>
             <br />
 
-            <Button type="primary">더 알아보기</Button>
+            <ButtonCardInnerWrapper type="primary">
+              더 알아보기
+            </ButtonCardInnerWrapper>
           </Card>
         </Col>
       </Row>
@@ -169,5 +182,4 @@ const PaymentLayout = () => {
   );
 };
 
-
-export default PaymentLayout
+export default PaymentLayout;

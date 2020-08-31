@@ -1,29 +1,11 @@
 import React from "react";
-import {
-  Layout,
-  Menu,
-  Breadcrumb,
-  Row,
-  Col,
-  Input,
-  Avatar,
-  Dropdown,
-} from "antd";
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  MessageOutlined,
-  DownOutlined,
-} from "@ant-design/icons";
+import { Layout, Menu, Row, Col, Input, Avatar, Dropdown } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 import DrawerSection from "./SiderSection/DrawerSection";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header } = Layout;
 const { Search } = Input;
 
 const menu = (
@@ -40,12 +22,13 @@ const menu = (
 
 const HeaderLayout = () => {
   return (
-    <Header style={{ backgroundColor: "white" , padding: '0 20px'}}>
+    <Header style={{ backgroundColor: "white", padding: "0 20px" }}>
       <Row>
         <DrawerSection />
 
         <Col xs={14}>
           <Search
+            className="user-header-serach user-header-button-icon"
             placeholder="input search text"
             onSearch={(value) => console.log(value)}
             size="large"
@@ -57,20 +40,25 @@ const HeaderLayout = () => {
             }}
           />
         </Col>
-        <Col flex={2}> 
-        <Row justify="end">          
-          <Dropdown overlay={menu} trigger={["click"]} placement="bottomCenter">
-            <a
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
+        <Col flex={2}>
+          <Row justify="end">
+            <Dropdown
+              overlay={menu}
+              trigger={["click"]}
+              placement="bottomCenter"
             >
-              <Avatar
-                size="large"
-                icon={<UserOutlined />}
-                style={{ backgroundColor: "#3880FF" }}
-              />
-            </a>
-          </Dropdown>
+              <a
+                className="ant-dropdown-link"
+                onClick={(e) => e.preventDefault()}
+              >
+                <Avatar
+                  className="user-header-button-icon"
+                  size="large"
+                  icon={<UserOutlined />}
+                  style={{ backgroundColor: "rgba(94, 203, 161, 0.9)" }}
+                />
+              </a>
+            </Dropdown>
           </Row>
         </Col>
       </Row>

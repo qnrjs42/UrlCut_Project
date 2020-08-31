@@ -11,7 +11,7 @@ html {
   box-sizing: border-box;
   font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
     "Apple SD Gothic Neo", sans-serif !important;
-  color: #454545;
+  /* color: #050c42; */
   /* font-weight: 350; */
 }
 
@@ -19,7 +19,7 @@ h1 {
   font-size: 3em;
   font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
     "Apple SD Gothic Neo", sans-serif !important;
-  color: #454545;
+  color: #050c42;
   font-weight: 500;
 }
 
@@ -27,7 +27,7 @@ h2 {
   font-size: 2.2em;
   font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
     "Apple SD Gothic Neo", sans-serif !important;
-  color: #454545;
+  color: #050c42;
   font-weight: 400;
 }
 
@@ -35,7 +35,7 @@ h3 {
   font-size: 1.4em;
   font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
     "Apple SD Gothic Neo", sans-serif !important;
-  color: #454545;
+  color: #050c42;
   font-weight: 300;
 }
 

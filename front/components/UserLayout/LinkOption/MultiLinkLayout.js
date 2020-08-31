@@ -1,4 +1,4 @@
-import React, { useState, useCallback, } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Layout,
   Typography,
@@ -10,68 +10,94 @@ import {
   Modal,
   Input,
   Radio,
-  Menu,
-  Dropdown,
 } from "antd";
-import {
-  SubnodeOutlined,
-  ArrowRightOutlined,
-} from "@ant-design/icons";
+import { SubnodeOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 import useInput from "../../../hooks/useInput";
-import { SwitchOffLeftLayout, SwitchOffRightLayout } from './Sections/SwitchOffLayout';
-import { SwitchOnLeftLayout, SwitchOnRightLayout } from "./Sections/SwitchOnLayout";
-import { OptionOnLayout } from './Sections/OptionOnLayout';
+import {
+  SwitchOffLeftLayout,
+  SwitchOffRightLayout,
+} from "./Sections/SwitchOffLayout";
+import {
+  SwitchOnLeftLayout,
+  SwitchOnRightLayout,
+} from "./Sections/SwitchOnLayout";
+import { OptionOnLayout } from "./Sections/OptionOnLayout";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
 
+const ButtonWrapper = styled(Button)`
+  border-radius: 5px;
+  background-color: rgba(113, 117, 216, 0.9);
+  border-color: rgba(113, 117, 216, 0.9);
+
+  &:hover {
+    background-color: rgba(113, 117, 216, 0.7);
+    border-color: rgba(113, 117, 216, 0.7);
+  }
+
+  span {
+    color: #f6f6f6;
+  }
+`;
 
 const MultiLinkLayout = () => {
-    const [MultiLinkCreateOnOff, setMultiLinkCreateOnOff] = useState(false); // 멀티링크 생성 유무
-    const [OptionOnOff, setOptionOnOff] = useState(false); // 멀티링크 - 옵션 클릭 유무
-    const [CreateModal, setCreateModal] = useState(false); // 멀티링크 생성 버튼 모달
-    const [RadioPublicPrivate, onRadioChange, setRadioPublicPrivate] = useInput(1); // 모달 - 라디오 버튼
+  const [MultiLinkCreateOnOff, setMultiLinkCreateOnOff] = useState(false); // 멀티링크 생성 유무
+  const [OptionOnOff, setOptionOnOff] = useState(false); // 멀티링크 - 옵션 클릭 유무
+  const [CreateModal, setCreateModal] = useState(false); // 멀티링크 생성 버튼 모달
+  const [RadioPublicPrivate, onRadioChange, setRadioPublicPrivate] = useInput(
+    1
+  ); // 모달 - 라디오 버튼
 
-    const onSwitchChange = useCallback(() => {
-      setMultiLinkCreateOnOff(!MultiLinkCreateOnOff);
-    });
+  const onSwitchChange = useCallback(() => {
+    setMultiLinkCreateOnOff(!MultiLinkCreateOnOff);
+  });
 
-    const onOptionChange = useCallback(() => {
-      setOptionOnOff(!OptionOnOff);
-    });
+  const onOptionChange = useCallback(() => {
+    setOptionOnOff(!OptionOnOff);
+  });
 
-    const onModalDisplay = useCallback(() => {
-      setCreateModal(true);
-    });
+  const onModalDisplay = useCallback(() => {
+    setCreateModal(true);
+  });
 
-    const onMultiLinkCreateOk = useCallback(() => {
-      setCreateModal(false);
-    });
+  const onMultiLinkCreateOk = useCallback(() => {
+    setCreateModal(false);
+  });
 
-    // 모달 밖, 화면을 클릭해도 Cancel
-    const onMultiLinkCreateCancel = useCallback(() => {
-      setCreateModal(false);
-    });
+  // 모달 밖, 화면을 클릭해도 Cancel
+  const onMultiLinkCreateCancel = useCallback(() => {
+    setCreateModal(false);
+  });
+
+  // 멀티링크 없을 때
+  let SwitchOptionLeftLayout = (
+    <SwitchOffLeftLayout
+      onModalDisplay={onModalDisplay}
+      ButtonWrapper={ButtonWrapper}
+    />
+  );
+
+  // 멀티링크는 생겨났지만 옵션은 클릭 안 했을 때
+  if (MultiLinkCreateOnOff && !OptionOnOff) {
+    SwitchOptionLeftLayout = <SwitchOnLeftLayout />;
+
+    // 멀티링크 만들었고, 옵션 눌렀을 때
+  } else if (MultiLinkCreateOnOff && OptionOnOff) {
+    SwitchOptionLeftLayout = <OptionOnLayout />;
 
     // 멀티링크 없을 때
-    let SwitchOptionLeftLayout = <SwitchOffLeftLayout onModalDisplay={ onModalDisplay} />;
-
-    // 멀티링크는 생겨났지만 옵션은 클릭 안 했을 때
-    if (MultiLinkCreateOnOff && !OptionOnOff) {
-      SwitchOptionLeftLayout = <SwitchOnLeftLayout />;
-
-      // 멀티링크 만들었고, 옵션 눌렀을 때
-    } else if (MultiLinkCreateOnOff && OptionOnOff) {
-        SwitchOptionLeftLayout = <OptionOnLayout />;
-
-        // 멀티링크 없을 때
-    } else {
-        SwitchOptionLeftLayout = <SwitchOffLeftLayout onModalDisplay={ onModalDisplay} />;
-    }
-
-    
+  } else {
+    SwitchOptionLeftLayout = (
+      <SwitchOffLeftLayout
+        onModalDisplay={onModalDisplay}
+        ButtonWrapper={ButtonWrapper}
+      />
+    );
+  }
 
   return (
     <>
@@ -134,14 +160,14 @@ const MultiLinkLayout = () => {
               <></>
             ) : (
               <>
-                <Button
+                <ButtonWrapper
                   type="primary"
                   icon={<SubnodeOutlined />}
                   size="large"
                   onClick={onModalDisplay}
                 >
                   멀티링크 생성
-                </Button>
+                </ButtonWrapper>
               </>
             )}
           </Col>
@@ -154,9 +180,7 @@ const MultiLinkLayout = () => {
             sm={{ span: 24, order: 1 }}
             lg={{ span: 13 }}
           >
-            <Card style={{ height: "auto" }}>
-              {SwitchOptionLeftLayout}
-            </Card>
+            <Card style={{ height: "auto" }}>{SwitchOptionLeftLayout}</Card>
           </Col>
           <br />
           <br />
