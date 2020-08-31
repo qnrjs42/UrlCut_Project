@@ -145,13 +145,13 @@ const Main = () => {
           <div className="main-image-container">
             <div className="main-image-list">
               <div className="main-image-item main-image-margin">
-                <img src="../static/IU1.jpg" className="main-image-content" />
+                <img src="/static/IU1.jpg" className="main-image-content" />
               </div>
               <div className="main-image-item main-image-margin">
-                <img src="../static/IU2.jpg" className="main-image-content" />
+                <img src="/static/IU2.jpg" className="main-image-content" />
               </div>
               <div className="main-image-item">
-                <img src="../static/IU3.jpg" className="main-image-content" />
+                <img src="/static/IU3.jpg" className="main-image-content" />
               </div>
             </div>
           </div>
