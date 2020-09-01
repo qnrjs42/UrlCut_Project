@@ -7,7 +7,7 @@ const SubLayout = () => {
 
   const onButtonClick = useCallback(async (e) => {
     setImgName(e);
-  }, []);
+  });
 
   return (
     <Layout className="layout sub-layout-one">
@@ -28,7 +28,7 @@ const SubLayout = () => {
             icon={<WechatOutlined />}
             size="large"
             className="sub-layout-button-size"
-            onClick={() => onButtonClick("chat")}
+            onClick={() => onButtonClick("Chat")}
           >
             채팅 상담
           </Button>
@@ -40,7 +40,7 @@ const SubLayout = () => {
             icon={<PushpinFilled />}
             size="large"
             className="sub-layout-button-size"
-            onClick={() => onButtonClick("marketing")}
+            onClick={() => onButtonClick("Marketing")}
           >
             마케팅
           </Button>
@@ -52,7 +52,7 @@ const SubLayout = () => {
             icon={<TeamOutlined />}
             size="large"
             className="sub-layout-button-size"
-            onClick={() => onButtonClick("team")}
+            onClick={() => onButtonClick("Team")}
           >
             팀 메신저
           </Button>

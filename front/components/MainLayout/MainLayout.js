@@ -10,10 +10,14 @@ const FormWrapper = styled(Form)`
   padding: 10px;
 `;
 
-// background-color: #d0f2e6;
-// border-color: #d0f2e6;
-// background-color: #d5f7eb;
-// border-color: #d5f7eb;
+const InputWrapper = styled(Input)`
+  border-radius: 25px;
+  border-color: white !important;
+  outline: none !important;
+  padding: 0 0 0 11px;
+  border-right: 0;
+  height: 55px;
+`;
 
 const ButtonWrapper = styled(Button)`
   height: 55px;
@@ -29,19 +33,10 @@ const ButtonWrapper = styled(Button)`
   }
 `;
 
-const InputWrapper = styled(Input)`
-  border-radius: 25px;
-  border-color: white !important;
-  outline: none !important;
-  padding: 0 0 0 11px;
-  border-right: 0;
-  height: 55px;
-`;
-
 const Main = () => {
   const dispatch = useDispatch();
   const urlInfo = useSelector((state) => state.url);
-  const { me } = useSelector((state) => state.user);
+  // const { me } = useSelector((state) => state.user);
 
   const [Url, setUrl] = useState("");
   const [ChangeUrl, setChangeUrl] = useState("");
