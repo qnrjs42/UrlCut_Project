@@ -9,14 +9,7 @@ const { Content } = Layout;
 
 // charts data
 const data = {
-  labels: [
-    "08/04/2020",
-    "08/05/2020",
-    "08/06/2020",
-    "08/07/2020",
-    "08/08/2020",
-    "08/09/2020",
-  ],
+  labels: ["08/04", "08/05", "08/06", "08/07", "08/08", "08/09"],
   datasets: [
     {
       label: "일별 클릭통계",
@@ -45,6 +38,36 @@ const data = {
 // charts options
 const options = {
   maintainAspectRatio: false, // Don't maintain w/h ratio
+  legend: {
+    labels: {
+      color: "#050c42",
+      fontFamily:
+        "'Jeju Gothic', 'Noto Sans KR', 'Nanum Gothic', 'Apple SD Gothic Neo', sans-serif",
+      fontSize: 16,
+    },
+  },
+  scales: {
+    xAxes: [
+      {
+        ticks: {
+          color: "#050c42",
+          fontFamily:
+            "'Jeju Gothic', 'Noto Sans KR', 'Nanum Gothic', 'Apple SD Gothic Neo', sans-serif",
+          fontSize: 13,
+        },
+      },
+    ],
+    yAxes: [
+      {
+        ticks: {
+          color: "#050c42",
+          fontFamily:
+            "'Jeju Gothic', 'Noto Sans KR', 'Nanum Gothic', 'Apple SD Gothic Neo', sans-serif",
+          fontSize: 13,
+        },
+      },
+    ],
+  },
 };
 
 // tables data
@@ -92,25 +115,27 @@ const columns = [
     title: "단축 URL",
     dataIndex: "url",
     key: "url",
-    width: 600,
+    width: "30%",
   },
   {
     title: "링크 설정옵션",
     dataIndex: "link_option",
     key: "link_option",
-    width: 200,
+    width: "10%",
+    responsive: ["lg"],
   },
   {
     title: "생성일",
     dataIndex: "created",
     key: "created",
-    width: 100,
+    width: "10%",
+    responsive: ["lg"],
   },
   {
     title: "클릭 수",
     dataIndex: "click_count",
     key: "click_count",
-    width: 100,
+    width: "10%",
   },
 ];
 
@@ -220,7 +245,7 @@ const MainManageLayout = () => {
           <Card style={{ height: "auto" }}>
             <Row justify="space-between">
               <Col>
-                <p style={{ fontSize: 18 }}>최근 등록된 링크</p>
+                <h3>최근 등록된 링크</h3>
               </Col>
               <Col>
                 <ButtonCardInnerWrapper>
@@ -238,7 +263,6 @@ const MainManageLayout = () => {
               dataSource={dataSource}
               columns={columns}
               pagination={false}
-              scroll={{ x: 1000 }}
             />
           </Card>
         </Col>
