@@ -11,8 +11,7 @@ html {
   box-sizing: border-box;
   font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
     "Apple SD Gothic Neo", sans-serif !important;
-  /* color: #050c42; */
-  /* font-weight: 350; */
+  line-height: 200%;
 }
 
 h1 {
@@ -21,6 +20,7 @@ h1 {
     "Apple SD Gothic Neo", sans-serif !important;
   color: #050c42;
   font-weight: 500;
+  line-height: 140%;
 }
 
 h2 {
@@ -29,6 +29,7 @@ h2 {
     "Apple SD Gothic Neo", sans-serif !important;
   color: #050c42;
   font-weight: 400;
+  line-height: 140%;
 }
 
 h3 {
@@ -57,17 +58,6 @@ h3 {
 */
 .main-layout {
   background-image: url("../static/main2.jpg");
-  /* background-image: linear-gradient(
-    to bottom right,
-    rgba(34, 203, 184, 0.5),
-    rgba(255, 176, 118, 0)
-  ); */
-  /* background-image: radial-gradient(
-    circle,
-    rgba(222, 209, 190, 0.7),
-    rgba(255, 255, 255, 0.8)
-  ); */
-  /* background-color: rgba(81, 136, 253, 0.7); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
