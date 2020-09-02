@@ -3,7 +3,7 @@ import { Row, Col, Button, Layout } from "antd";
 import { WechatOutlined, PushpinFilled, TeamOutlined } from "@ant-design/icons";
 
 const SubLayout = () => {
-  const [ImgName, setImgName] = useState("chat");
+  const [ImgName, setImgName] = useState("Chat");
 
   const onButtonClick = useCallback(async (e) => {
     setImgName(e);
