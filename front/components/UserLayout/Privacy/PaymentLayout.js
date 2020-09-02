@@ -3,6 +3,13 @@ import { Layout, Typography, Row, Col, Button, Card, Table } from "antd";
 import { WarningOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
+import {
+  ButtonPurpleWrapper,
+  ButtonGreenWrapper,
+  ButtonBorderWrapper,
+  RowWrapper,
+} from "../../../css/overlap-styled";
+
 const { Content } = Layout;
 const { Text } = Typography;
 
@@ -55,44 +62,17 @@ const columns = [
   },
 ];
 
-const ButtonWrapper = styled(Button)`
-  border-radius: 5px;
-  background-color: rgba(113, 117, 216, 0.9);
-  border-color: rgba(113, 117, 216, 0.9);
-
-  &:hover {
-    background-color: rgba(113, 117, 216, 0.7);
-    border-color: rgba(113, 117, 216, 0.7);
-  }
-
-  span {
-    color: #f6f6f6;
-  }
-`;
-
-const ButtonCardInnerWrapper = styled(Button)`
-  border-radius: 5px;
-  color: #f6f6f6;
-  background-color: rgba(94, 203, 161, 0.9);
-  border-color: rgba(94, 203, 161, 0.9);
-
-  &:hover {
-    background-color: rgba(94, 203, 161, 0.7);
-    border-color: rgba(94, 203, 161, 0.7);
-  }
-`;
-
 const PaymentLayout = () => {
   return (
-    <Content style={{ margin: "20px 16px" }}>
-      <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "20px" }}>
+    <Content>
+      <RowWrapper gutter={[16, 16]} justify="center">
         <Col
           span={16}
           xs={{ span: 24, order: 1 }}
           sm={{ span: 24, order: 1 }}
           lg={{ span: 16 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <Row justify="space-around" align="middle">
               <Col>
                 <h3>회원등급</h3>
@@ -109,9 +89,9 @@ const PaymentLayout = () => {
             </Row>
             <br />
             <Row justify="end">
-              <ButtonWrapper type="primary" size="large">
+              <ButtonPurpleWrapper type="primary" size="large">
                 서비스 기간연장
-              </ButtonWrapper>
+              </ButtonPurpleWrapper>
             </Row>
           </Card>
         </Col>
@@ -122,7 +102,7 @@ const PaymentLayout = () => {
           sm={{ span: 24, order: 2 }}
           lg={{ span: 8 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>
               <WarningOutlined /> 유료서비스 만료일이 지나면 어떻게 되나요?
             </h3>
@@ -133,7 +113,7 @@ const PaymentLayout = () => {
             </p>
           </Card>
         </Col>
-      </Row>
+      </RowWrapper>
 
       <Row gutter={[16, 16]} justify="center">
         <Col
@@ -142,7 +122,7 @@ const PaymentLayout = () => {
           sm={{ span: 24, order: 1 }}
           lg={{ span: 16 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>최근 거래</h3>
             <br />
 
@@ -161,7 +141,7 @@ const PaymentLayout = () => {
           sm={{ span: 24, order: 2 }}
           lg={{ span: 8 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>
               <ExclamationCircleOutlined /> 세금계산서 발행 신청방법
             </h3>
@@ -172,9 +152,7 @@ const PaymentLayout = () => {
             </p>
             <br />
 
-            <ButtonCardInnerWrapper type="primary">
-              더 알아보기
-            </ButtonCardInnerWrapper>
+            <ButtonGreenWrapper type="primary">더 알아보기</ButtonGreenWrapper>
           </Card>
         </Col>
       </Row>

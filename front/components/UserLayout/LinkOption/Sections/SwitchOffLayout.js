@@ -5,23 +5,35 @@ import {
   PlusOutlined,
   InfoCircleTwoTone,
 } from "@ant-design/icons";
+import styled from "styled-components";
 
-export const SwitchOffLeftLayout = ({ onModalDisplay, ButtonWrapper }) => {
+const SubnodeOutlinedWrapper = styled(SubnodeOutlined)`
+  font-size: 50px;
+`;
+
+const InfoCircleTwoToneWrapper = styled(InfoCircleTwoTone)`
+  font-size: 60px;
+`;
+
+export const SwitchOffLeftLayout = ({
+  onModalDisplay,
+  ButtonPurpleWrapper,
+}) => {
   return (
     <>
       <Row gutter={[16, 16]} justify="center">
-        <SubnodeOutlined style={{ fontSize: 50 }} />
+        <SubnodeOutlinedWrapper />
       </Row>
       <br />
       <Row gutter={[16, 16]} justify="center">
-        <ButtonWrapper
+        <ButtonPurpleWrapper
           type="primary"
           icon={<PlusOutlined />}
           size="large"
           onClick={() => onModalDisplay()}
         >
           멀티링크 생성
-        </ButtonWrapper>
+        </ButtonPurpleWrapper>
       </Row>
     </>
   );
@@ -31,7 +43,7 @@ export const SwitchOffRightLayout = () => {
   return (
     <>
       <Row justify="center">
-        <InfoCircleTwoTone style={{ fontSize: 60 }} />
+        <InfoCircleTwoToneWrapper />
       </Row>
       <br />
       <Row justify="center">
@@ -53,12 +65,7 @@ export const SwitchOffRightLayout = () => {
       <br />
       <br />
       <div
-        className="site-layout-background"
-        style={{
-          padding: 10,
-          minHeight: 200,
-          backgroundColor: "#A566FF",
-        }}
+        style={{ padding: 10, minHeight: 200, backgroundColor: "#a566ff" }}
       ></div>
       <br />
       <br />

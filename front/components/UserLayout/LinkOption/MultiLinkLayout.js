@@ -26,22 +26,18 @@ import {
 } from "./Sections/SwitchOnLayout";
 import { OptionOnLayout } from "./Sections/OptionOnLayout";
 
+import {
+  ButtonPurpleWrapper,
+  ButtonBorderWrapper,
+} from "../../../css/overlap-styled";
+
 const { Content } = Layout;
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
-const ButtonWrapper = styled(Button)`
-  border-radius: 5px;
-  background-color: rgba(113, 117, 216, 0.9);
-  border-color: rgba(113, 117, 216, 0.9);
-
-  &:hover {
-    background-color: rgba(113, 117, 216, 0.7);
-    border-color: rgba(113, 117, 216, 0.7);
-  }
-
-  span {
-    color: #f6f6f6;
-  }
+const CardWrapper = styled(Card)`
+  width: 400px;
+  height: 700px;
+  background-color: #c1f3ff;
 `;
 
 const MultiLinkLayout = () => {
@@ -77,7 +73,7 @@ const MultiLinkLayout = () => {
   let SwitchOptionLeftLayout = (
     <SwitchOffLeftLayout
       onModalDisplay={onModalDisplay}
-      ButtonWrapper={ButtonWrapper}
+      ButtonPurpleWrapper={ButtonPurpleWrapper}
     />
   );
 
@@ -94,26 +90,30 @@ const MultiLinkLayout = () => {
     SwitchOptionLeftLayout = (
       <SwitchOffLeftLayout
         onModalDisplay={onModalDisplay}
-        ButtonWrapper={ButtonWrapper}
+        ButtonPurpleWrapper={ButtonPurpleWrapper}
       />
     );
   }
 
   return (
     <>
-      <Content style={{ margin: "20px 16px" }}>
+      <Content>
         <Modal
           title={<h3>멀티링크 생성</h3>}
           visible={CreateModal}
           onOk={onMultiLinkCreateOk}
           onCancel={onMultiLinkCreateCancel}
           footer={[
-            <Button key="back" onClick={onMultiLinkCreateCancel}>
+            <ButtonBorderWrapper key="back" onClick={onMultiLinkCreateCancel}>
               Return
-            </Button>,
-            <Button key="submit" type="primary" onClick={onMultiLinkCreateOk}>
+            </ButtonBorderWrapper>,
+            <ButtonPurpleWrapper
+              key="submit"
+              type="primary"
+              onClick={onMultiLinkCreateOk}
+            >
               Submit
-            </Button>,
+            </ButtonPurpleWrapper>,
           ]}
         >
           <Title level={4}>멀티링크 제목</Title>
@@ -160,14 +160,14 @@ const MultiLinkLayout = () => {
               <></>
             ) : (
               <>
-                <ButtonWrapper
+                <ButtonPurpleWrapper
                   type="primary"
                   icon={<SubnodeOutlined />}
                   size="large"
                   onClick={onModalDisplay}
                 >
                   멀티링크 생성
-                </ButtonWrapper>
+                </ButtonPurpleWrapper>
               </>
             )}
           </Col>
@@ -180,7 +180,7 @@ const MultiLinkLayout = () => {
             sm={{ span: 24, order: 1 }}
             lg={{ span: 13 }}
           >
-            <Card style={{ height: "auto" }}>{SwitchOptionLeftLayout}</Card>
+            <Card>{SwitchOptionLeftLayout}</Card>
           </Col>
           <br />
           <br />
@@ -191,15 +191,9 @@ const MultiLinkLayout = () => {
             sm={{ span: 24, order: 2 }}
             lg={{ span: 10 }}
           >
-            <Card style={{ height: "auto" }}>
+            <Card>
               <Row gutter={[16, 16]} justify="center">
-                <Card
-                  style={{
-                    width: 400,
-                    height: 700,
-                    backgroundColor: "#C1F3FF",
-                  }}
-                >
+                <CardWrapper>
                   <div>
                     {MultiLinkCreateOnOff ? (
                       <>
@@ -211,22 +205,20 @@ const MultiLinkLayout = () => {
                       </>
                     )}
                   </div>
-                </Card>
+                </CardWrapper>
               </Row>
             </Card>
           </Col>
         </Row>
       </Content>
-      <div
-        className="site-layout-background"
-        style={{ padding: 24, minHeight: 500 }}
-      ></div>
+      <div className="user-blank-layout"></div>
     </>
   );
 };
 
 MultiLinkLayout.propTypes = {
   onModalDisplay: PropTypes.func,
+  ButtonPurpleWrapper: PropTypes.object,
 };
 
 export default MultiLinkLayout;

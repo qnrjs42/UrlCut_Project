@@ -1,10 +1,17 @@
 import React from "react";
-import { Layout, Row, Col, Button, Card, Table, Tooltip } from "antd";
+import { Layout, Row, Col, Card, Table } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
-import styled from "styled-components";
+
+import {
+  ButtonPurpleWrapper,
+  ButtonGreenWrapper,
+  ButtonBorderWrapper,
+  ColWrapper,
+} from "../../../css/overlap-styled";
 
 const { Content } = Layout;
 
+// table data
 const dataSource = [
   {
     key: "url1",
@@ -43,18 +50,20 @@ const dataSource = [
   },
 ];
 
+// tables setting
 const columns = [
   {
     title: "단축 URL",
     dataIndex: "url",
     key: "url",
-    width: 600,
+    width: "30%",
   },
   {
     title: "링크 설정옵션",
     dataIndex: "link_option",
     key: "link_option",
-    width: 150,
+    width: "10%",
+    responsive: ["lg"],
   },
   {
     title: "생성일",
@@ -64,7 +73,8 @@ const columns = [
       compare: (a, b) => a.created - b.created,
       multiple: 2,
     },
-    width: 125,
+    width: "10%",
+    responsive: ["lg"],
   },
   {
     title: "클릭 수",
@@ -74,7 +84,7 @@ const columns = [
       compare: (a, b) => a.click_count - b.click_count,
       multiple: 1,
     },
-    width: 125,
+    width: "10%",
   },
 ];
 
@@ -93,71 +103,44 @@ const rowSelection = {
   onSelectAll: (selected, selectedRows, changeRows) => {
     console.log(selected, selectedRows, changeRows);
   },
+  columnWidth: "5%",
 };
-
-const ButtonWrapper = styled(Button)`
-  border-radius: 5px;
-  background-color: rgba(113, 117, 216, 0.9);
-  border-color: rgba(113, 117, 216, 0.9);
-
-  &:hover {
-    background-color: rgba(113, 117, 216, 0.7);
-    border-color: rgba(113, 117, 216, 0.7);
-  }
-
-  span {
-    color: #f6f6f6;
-  }
-`;
-
-const ButtonCardInnerWrapper = styled(Button)`
-  border-radius: 5px;
-  color: #f6f6f6;
-  background-color: rgba(94, 203, 161, 0.9);
-  border-color: rgba(94, 203, 161, 0.9);
-
-  &:hover {
-    background-color: rgba(94, 203, 161, 0.7);
-    border-color: rgba(94, 203, 161, 0.7);
-  }
-`;
 
 const ExpiredLayout = () => {
   return (
     <>
-      <Content style={{ margin: "20px 16px" }}>
+      <Content>
         <Row justify="space-between">
-          <Col style={{ paddingTop: 10 }}>
+          <ColWrapper>
             <h3>만료된 URL</h3>
-          </Col>
+          </ColWrapper>
           <Col>
-            <ButtonWrapper type="primary" icon={<LinkOutlined />} size="large">
+            <ButtonPurpleWrapper
+              type="primary"
+              icon={<LinkOutlined />}
+              size="large"
+            >
               단축 URL 추가
-            </ButtonWrapper>
+            </ButtonPurpleWrapper>
           </Col>
         </Row>
 
-        <Card style={{ height: "auto" }}>
+        <Card>
           <Row gutter={[16, 16]}>
             <Col>
-              <Button
-                type="primary"
-                size="large"
-                danger
-                style={{ borderRadius: "5px" }}
-              >
+              <ButtonBorderWrapper type="primary" size="large" danger>
                 선택 삭제
-              </Button>
+              </ButtonBorderWrapper>
             </Col>
             <Col>
-              <ButtonCardInnerWrapper type="primary" size="large">
+              <ButtonGreenWrapper type="primary" size="large">
                 보관함 이동
-              </ButtonCardInnerWrapper>
+              </ButtonGreenWrapper>
             </Col>
             <Col>
-              <ButtonCardInnerWrapper type="primary" size="large">
+              <ButtonGreenWrapper type="primary" size="large">
                 패키지 추가
-              </ButtonCardInnerWrapper>
+              </ButtonGreenWrapper>
             </Col>
           </Row>
 
@@ -167,14 +150,10 @@ const ExpiredLayout = () => {
             columns={columns}
             rowSelection={{ ...rowSelection }}
             pagination={false}
-            scroll={{ x: 1000 }}
           />
         </Card>
       </Content>
-      <div
-        className="site-layout-background"
-        style={{ padding: 24, minHeight: 500 }}
-      ></div>
+      <div className="user-blank-layout"></div>
     </>
   );
 };

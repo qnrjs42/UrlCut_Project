@@ -1,9 +1,15 @@
 import React from "react";
-import { Layout, Row, Col, Button, Card, Progress, Table } from "antd";
+import { Layout, Row, Col, Card, Progress, Table } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
 import { Line } from "react-chartjs-2";
 import Link from "next/link";
 import styled from "styled-components";
+
+import {
+  ButtonPurpleWrapper,
+  ButtonGreenWrapper,
+  RowWrapper,
+} from "../../../css/overlap-styled";
 
 const { Content } = Layout;
 
@@ -139,62 +145,39 @@ const columns = [
   },
 ];
 
-const ButtonWrapper = styled(Button)`
-  border-radius: 5px;
-  background-color: rgba(113, 117, 216, 0.9);
-  border-color: rgba(113, 117, 216, 0.9);
-
-  &:hover {
-    background-color: rgba(113, 117, 216, 0.7);
-    border-color: rgba(113, 117, 216, 0.7);
-  }
-
-  span {
-    color: #f6f6f6;
-  }
-`;
-
-const ButtonCardInnerWrapper = styled(Button)`
-  border-radius: 5px;
-  color: #f6f6f6;
-  background-color: rgba(94, 203, 161, 0.9);
-  border-color: rgba(94, 203, 161, 0.9);
-
-  &:hover {
-    background-color: rgba(94, 203, 161, 0.7);
-    border-color: rgba(94, 203, 161, 0.7);
-  }
+const CardWrapper = styled(Card)`
+  height: 380px;
 `;
 
 const MainManageLayout = () => {
   return (
-    <Content style={{ margin: "20px 16px" }}>
+    <Content>
       <Row justify="end">
-        <ButtonWrapper
+        <ButtonPurpleWrapper
           type="primary"
           icon={<LinkOutlined className="user-button-icon" />}
           size="large"
         >
           단축 URL 추가
-        </ButtonWrapper>
+        </ButtonPurpleWrapper>
       </Row>
 
-      <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "20px" }}>
+      <RowWrapper gutter={[16, 16]} justify="center">
         <Col
           span={8}
           xs={{ span: 24, order: 1 }}
           sm={{ span: 24, order: 1 }}
           lg={{ span: 8 }}
         >
-          <Card style={{ height: 380 }}>
+          <CardWrapper>
             <Row justify="space-between">
-              <Col style={{ paddingTop: 2 }}>
+              <Col>
                 <h3>서비스 현황</h3>
               </Col>
               <Col>
-                <ButtonCardInnerWrapper>
+                <ButtonGreenWrapper>
                   <a>서비스정책</a>
-                </ButtonCardInnerWrapper>
+                </ButtonGreenWrapper>
               </Col>
             </Row>
             <Row>
@@ -223,7 +206,7 @@ const MainManageLayout = () => {
                 단축 URL 생성 수는 매월 초기화 됩니다.
               </p>
             </Row>
-          </Card>
+          </CardWrapper>
         </Col>
         <Col
           span={16}
@@ -231,28 +214,28 @@ const MainManageLayout = () => {
           sm={{ span: 24, order: 2 }}
           lg={{ span: 16 }}
         >
-          <Card style={{ height: 380 }}>
+          <CardWrapper>
             <article className="canvas-container">
               <Line data={data} options={options} height={300} />
             </article>
-          </Card>
+          </CardWrapper>
         </Col>
-      </Row>
+      </RowWrapper>
 
       {/* 메인 화면에 보여줄 최근 등록된 링크는 최대 5개 나머지는 전체 리스트 통해 확인 */}
-      <Row justify="center" style={{ paddingTop: "20px" }}>
+      <RowWrapper justify="center">
         <Col span={24}>
-          <Card style={{ height: "auto" }}>
+          <Card>
             <Row justify="space-between">
               <Col>
                 <h3>최근 등록된 링크</h3>
               </Col>
               <Col>
-                <ButtonCardInnerWrapper>
+                <ButtonGreenWrapper>
                   <Link href="/user/[userPages]" as={`/user/manage_url`}>
                     <a>전체 리스트</a>
                   </Link>
-                </ButtonCardInnerWrapper>
+                </ButtonGreenWrapper>
               </Col>
             </Row>
             <br />
@@ -266,7 +249,7 @@ const MainManageLayout = () => {
             />
           </Card>
         </Col>
-      </Row>
+      </RowWrapper>
     </Content>
   );
 };

@@ -1,14 +1,6 @@
-import {
-  Typography,
-  Row,
-  Col,
-  Button,
-  Menu,
-  Dropdown,
-} from "antd";
-import {
-  MoreOutlined,
-} from "@ant-design/icons";
+import { Typography, Row, Col, Button, Menu, Dropdown } from "antd";
+import { MoreOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 const { Text, Paragraph } = Typography;
 
@@ -27,6 +19,10 @@ const menu = (
   </Menu>
 );
 
+const MoreOutlinedWrapper = styled(MoreOutlined)`
+  font-size: 25px;
+`;
+
 export const SwitchOnLeftLayout = () => {
   return (
     <>
@@ -40,7 +36,7 @@ export const SwitchOnLeftLayout = () => {
               className="ant-dropdown-link"
               onClick={(e) => e.preventDefault()}
             >
-              <MoreOutlined style={{ fontSize: "25px" }} />
+              <MoreOutlinedWrapper />
             </a>
           </Dropdown>
         </Col>

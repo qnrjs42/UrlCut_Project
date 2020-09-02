@@ -15,6 +15,12 @@ import {
 import { WarningOutlined, UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
+import {
+  ButtonPurpleWrapper,
+  ButtonBorderWrapper,
+  RowWrapper,
+} from "../../../css/overlap-styled";
+
 const { Content } = Layout;
 const { Text } = Typography;
 
@@ -67,42 +73,40 @@ const columns = [
   },
 ];
 
-const ButtonWrapper = styled(Button)`
-  border-radius: 5px;
-  background-color: rgba(113, 117, 216, 0.9);
-  border-color: rgba(113, 117, 216, 0.9);
+const AvatarWrapper = styled(Avatar)`
+  background-color: rgba(94, 203, 161, 0.9);
+`;
 
-  &:hover {
-    background-color: rgba(113, 117, 216, 0.7);
-    border-color: rgba(113, 117, 216, 0.7);
-  }
+const ColEmailPasswordWrapper = styled(Col)`
+  min-width: 200px;
+  paddingbottom: 20px;
+`;
 
-  span {
-    color: #f6f6f6;
-  }
+const ColProfileGatewayWrapper = styled(Col)`
+  min-width: 200px;
+  padding: 30px 20px;
 `;
 
 const ProfileLayout = () => {
   return (
-    <Content style={{ margin: "20px 16px" }}>
-      <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "20px" }}>
+    <Content>
+      <RowWrapper gutter={[16, 16]} justify="center">
         <Col
           span={16}
           xs={{ span: 24, order: 1 }}
           sm={{ span: 24, order: 1 }}
           lg={{ span: 16 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>프로필 설정</h3>
             {/* 아바타, 이메일, 아이디 */}
-            <Card style={{ height: "auto" }}>
+            <Card>
               <Row>
                 <Col>
-                  <Avatar
+                  <AvatarWrapper
                     className="user-header-button-icon"
                     size="large"
                     icon={<UserOutlined />}
-                    style={{ backgroundColor: "rgba(94, 203, 161, 0.9)" }}
                   />
                 </Col>
                 <Col offset={1}>
@@ -113,7 +117,7 @@ const ProfileLayout = () => {
               <Divider />
 
               <Row>
-                <Col xs={12} style={{ minWidth: 200, paddingBottom: 20 }}>
+                <ColEmailPasswordWrapper xs={12}>
                   <Row justify="start">
                     <Col xs={6}>이메일</Col>
                   </Row>
@@ -129,7 +133,7 @@ const ProfileLayout = () => {
                     이메일을 변경하는 경우 계정을 <br />
                     다시 활성화해야 합니다.
                   </Text>
-                </Col>
+                </ColEmailPasswordWrapper>
                 <Col xs={{ span: 12, order: 2 }}>
                   아이디
                   <Row justify="start">
@@ -150,14 +154,14 @@ const ProfileLayout = () => {
             <br />
             <br />
             {/* 비밀번호 */}
-            <Card style={{ height: "auto" }}>
+            <Card>
               <Row>
                 <h2>비밀번호</h2>
               </Row>
               <Divider />
 
               <Row>
-                <Col xs={12} style={{ minWidth: 200, paddingBottom: 20 }}>
+                <ColEmailPasswordWrapper xs={12}>
                   <Row justify="start">
                     <Col xs={6}>비밀번호</Col>
                   </Row>
@@ -166,7 +170,7 @@ const ProfileLayout = () => {
                   </Row>
                   <br />
                   <Text type="secondary">유지하려면 비워 두세요.</Text>
-                </Col>
+                </ColEmailPasswordWrapper>
                 <Col xs={{ span: 12, order: 2 }}>
                   비밀번호 확인
                   <Row justify="start">
@@ -180,9 +184,9 @@ const ProfileLayout = () => {
             <br />
             <br />
             {/* 프로필 공개, 미디어 게이트웨이 */}
-            <Card style={{ height: "auto" }}>
+            <Card>
               <Row>
-                <Col xs={24} style={{ minWidth: 200, padding: "30px 20px" }}>
+                <ColProfileGatewayWrapper xs={24}>
                   <Row justify="space-between" align="middle">
                     <Col>
                       프로필 공개
@@ -200,8 +204,8 @@ const ProfileLayout = () => {
                       />
                     </Col>
                   </Row>
-                </Col>
-                <Col xs={24} style={{ minWidth: 200, padding: "30px 20px" }}>
+                </ColProfileGatewayWrapper>
+                <ColProfileGatewayWrapper xs={24}>
                   <Row justify="space-between" align="middle">
                     <Col>
                       미디어 게이트웨이
@@ -221,15 +225,15 @@ const ProfileLayout = () => {
                       />
                     </Col>
                   </Row>
-                </Col>
+                </ColProfileGatewayWrapper>
               </Row>
             </Card>
             <br />
             <br />
             <Row justify="center">
-              <ButtonWrapper type="primary" size="large">
+              <ButtonPurpleWrapper type="primary" size="large">
                 업데이트
-              </ButtonWrapper>
+              </ButtonPurpleWrapper>
             </Row>
           </Card>
         </Col>
@@ -240,7 +244,7 @@ const ProfileLayout = () => {
           sm={{ span: 24, order: 2 }}
           lg={{ span: 8 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>
               <WarningOutlined /> 회원 탈퇴
             </h3>
@@ -250,16 +254,16 @@ const ProfileLayout = () => {
               후 취소는 불가능 하오니 신중한 결정 바랍니다.
             </p>
 
-            <Button type="primary" danger block>
+            <ButtonBorderWrapper type="primary" danger block>
               회원 탈퇴
-            </Button>
+            </ButtonBorderWrapper>
           </Card>
         </Col>
-      </Row>
+      </RowWrapper>
 
       <Row>
         <Col span={16}>
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>최근 거래</h3>
             <br />
 

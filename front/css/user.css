@@ -68,7 +68,18 @@
   margin-bottom: 5px;
 }
 
+.user-blank-layout {
+  padding: 24px;
+  min-height: 500px;
+}
+
 /* antd overriding */
+.ant-layout-content {
+  flex: auto;
+  margin: 20px 16px;
+  min-height: 0;
+}
+
 .ant-table-thead > tr > th {
   font-size: 1.2rem;
   font-weight: 700;

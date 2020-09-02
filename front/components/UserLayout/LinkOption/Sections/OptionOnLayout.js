@@ -21,6 +21,11 @@ import {
 import arrayMove from "array-move";
 import styled from "styled-components";
 
+import {
+  ButtonGreenWrapper,
+  ButtonBorderWrapper,
+} from "../../../../css/overlap-styled";
+
 const DragHandle = sortableHandle(() => (
   <MenuOutlined style={{ cursor: "pointer", color: "#999" }} />
 ));
@@ -80,20 +85,12 @@ const data = [
   },
 ];
 
-const ButtonCardInnerWrapper = styled(Button)`
-  border-radius: 5px;
-  color: #f6f6f6;
-  background-color: rgba(94, 203, 161, 0.9);
-  border-color: rgba(94, 203, 161, 0.9);
-
-  &:hover {
-    background-color: rgba(94, 203, 161, 0.7);
-    border-color: rgba(94, 203, 161, 0.7);
-  }
-`;
-
 const SortableItem = sortableElement((props) => <tr {...props} />);
 const SortableContainer = sortableContainer((props) => <tbody {...props} />);
+
+const MoreOutlinedWrapper = styled(MoreOutlined)`
+  font-size: 25px;
+`;
 
 export const OptionOnLayout = () => {
   const [Message, setMessage] = useState(false);
@@ -161,7 +158,7 @@ export const OptionOnLayout = () => {
               className="ant-dropdown-link"
               onClick={(e) => e.preventDefault()}
             >
-              <MoreOutlined style={{ fontSize: "25px" }} />
+              <MoreOutlinedWrapper />
             </a>
           </Dropdown>
         </Col>
@@ -175,14 +172,14 @@ export const OptionOnLayout = () => {
       <Row justify="space-between">
         <Col>
           <Space>
-            <ButtonCardInnerWrapper type="primary">설정</ButtonCardInnerWrapper>
-            <Button style={{ borderRadius: "5px" }}>링크 목록</Button>
+            <ButtonGreenWrapper type="primary">설정</ButtonGreenWrapper>
+            <ButtonBorderWrapper>링크 목록</ButtonBorderWrapper>
           </Space>
         </Col>
         <Col>
-          <Button style={{ borderRadius: "5px" }} type="primary" danger>
+          <ButtonBorderWrapper type="primary" danger>
             메뉴링크 추가
-          </Button>
+          </ButtonBorderWrapper>
         </Col>
       </Row>
       <br />
