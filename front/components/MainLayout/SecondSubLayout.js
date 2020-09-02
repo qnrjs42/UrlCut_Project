@@ -41,8 +41,8 @@ const SecondSubLayout = () => {
         </Col>
         <Col
           offset={1}
-          xs={{ order: 1 }}
-          sm={{ order: 1 }}
+          xs={{ order: 1, offset: 0 }}
+          sm={{ order: 1, offset: 0 }}
           md={{ order: 2 }}
           lg={{ order: 2 }}
           xl={{ order: 2 }}
