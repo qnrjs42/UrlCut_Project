@@ -47,7 +47,7 @@ const NavBar = () => {
             <UnorderedListOutlined />
           </Button>
           <Drawer
-            title="Basic Drawer"
+            title="&nbsp; Link_Project"
             placement="right"
             className="menu_drawer"
             closable={false}
