@@ -131,7 +131,6 @@ const PaymentLayout = () => {
               dataSource={dataSource}
               columns={columns}
               pagination={false}
-              scroll={{ x: 1000 }}
             />
           </Card>
         </Col>

@@ -87,6 +87,10 @@ const ColProfileGatewayWrapper = styled(Col)`
   padding: 30px 20px;
 `;
 
+const ColPaddingBottomWrapper = styled(Col)`
+  padding-bottom: 15px;
+`;
+
 const ProfileLayout = () => {
   return (
     <Content>
@@ -188,14 +192,14 @@ const ProfileLayout = () => {
               <Row>
                 <ColProfileGatewayWrapper xs={24}>
                   <Row justify="space-between" align="middle">
-                    <Col>
+                    <ColPaddingBottomWrapper span={20}>
                       프로필 공개
                       <br />
                       <Text type="secondary">
                         이메일을 변경하는 경우 계정을 <br />
                         다시 활성화해야 합니다.
                       </Text>
-                    </Col>
+                    </ColPaddingBottomWrapper>
                     <Col>
                       <Switch
                         checkedChildren="공개"
@@ -207,7 +211,7 @@ const ProfileLayout = () => {
                 </ColProfileGatewayWrapper>
                 <ColProfileGatewayWrapper xs={24}>
                   <Row justify="space-between" align="middle">
-                    <Col>
+                    <ColPaddingBottomWrapper span={20}>
                       미디어 게이트웨이
                       <br />
                       <Text type="secondary">
@@ -216,7 +220,7 @@ const ProfileLayout = () => {
                         특수 페이지가 자동으로 <br />
                         생성됩니다 (e.g. youtube, vimeo, dailymotion...)
                       </Text>
-                    </Col>
+                    </ColPaddingBottomWrapper>
                     <Col>
                       <Switch
                         checkedChildren="사용"
@@ -262,7 +266,7 @@ const ProfileLayout = () => {
       </RowWrapper>
 
       <Row>
-        <Col span={16}>
+        <Col span={16} xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 16 }}>
           <Card>
             <h3>최근 거래</h3>
             <br />
@@ -272,7 +276,6 @@ const ProfileLayout = () => {
               dataSource={dataSource}
               columns={columns}
               pagination={false}
-              scroll={{ x: 1000 }}
             />
           </Card>
         </Col>
