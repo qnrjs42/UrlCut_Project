@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function LeftMenu(props) {
   return (
-    <Menu mode={props.mode}>
+    <Menu theme="dark" mode={props.mode}>
       <Menu.Item key="home">
         <Link href="/">
           <a>Home</a>
