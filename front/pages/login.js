@@ -1,32 +1,21 @@
-import React, { useState, useCallback } from "react";
-import { Form, Input, Button, Checkbox, Typography, Layout, Row } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import React, { useCallback } from "react";
+import { Form, Checkbox } from "antd";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import Router, { useRouter } from "next/router";
-import styled from "styled-components";
+import { useRouter } from "next/router";
 
 import useInput from "../hooks/useInput";
 import { loginRequestAction } from "../reducers/reducer_user";
 import NavBar from "../components/MainLayout/NavBar";
-
-const { Title } = Typography;
-
-const SquareInput = () => ({
-  borderRadius: "15px",
-});
-
-const ButtonWrapper = styled(Button)`
-  min-width: 100%;
-  border-radius: 15px;
-  background-color: rgba(113, 117, 216, 0.8);
-  border-color: rgba(113, 117, 216, 0.8);
-
-  &:hover {
-    background-color: rgba(113, 117, 216, 0.3);
-    border-color: rgba(113, 117, 216, 0.3);
-  }
-`;
+import {
+  MainLayoutWrapper,
+  MainRowPaddingWrapper,
+  MainTitleWrapper,
+  MainInputWrapper,
+  MainButtonWrapper,
+  MainUserOutlinedWrapper,
+  MainLockOutlinedWrapper,
+} from "../css/overlap-styled";
 
 const logIn = () => {
   const [form] = Form.useForm();
@@ -48,18 +37,15 @@ const logIn = () => {
     setPassword(null);
 
     uRouter.push("/user");
-    // document.location.href = "/user";
   }, [Email, Password]);
 
   return (
     <>
       <NavBar />
-      <Layout className="layout" style={{ height: "100vh" }}>
-        <Row justify="space-around" align="middle" style={{ padding: "15% 0" }}>
+      <MainLayoutWrapper className="layout">
+        <MainRowPaddingWrapper justify="space-around" align="middle">
           <div className="app">
-            <Title level={2} style={{ textAlign: "center" }}>
-              로그인
-            </Title>
+            <MainTitleWrapper level={2}>로그인</MainTitleWrapper>
             <Form
               form={form}
               // onFinish={handleSubmit(onLogInSubmit)}
@@ -67,31 +53,29 @@ const logIn = () => {
               style={{ width: "350px" }}
             >
               <Form.Item required>
-                <Input
+                <MainInputWrapper
                   name="email"
                   id="email"
                   size="large"
-                  prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  prefix={<MainUserOutlinedWrapper />}
                   placeholder="이메일"
                   type="id"
                   value={Email}
                   onChange={onChangeEmail}
-                  style={SquareInput()}
                   // ref={register({ required: true })}
                 />
               </Form.Item>
 
               <Form.Item required>
-                <Input
+                <MainInputWrapper
                   name="password"
                   id="password"
                   size="large"
-                  prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  prefix={<MainLockOutlinedWrapper />}
                   placeholder="패스워드"
                   type="password"
                   value={Password}
                   onChange={onChangePassword}
-                  style={SquareInput()}
                   // ref={register({ required: true })}
                 />
               </Form.Item>
@@ -107,7 +91,7 @@ const logIn = () => {
                 </a>
                 <div>
                   <br />
-                  <ButtonWrapper
+                  <MainButtonWrapper
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
@@ -115,14 +99,14 @@ const logIn = () => {
                     onSubmit={onLogInSubmit}
                   >
                     로그인
-                  </ButtonWrapper>
+                  </MainButtonWrapper>
                 </div>
                 {/* Or <a href="/register">register now!</a> */}
               </Form.Item>
             </Form>
           </div>
-        </Row>
-      </Layout>
+        </MainRowPaddingWrapper>
+      </MainLayoutWrapper>
     </>
   );
 };

@@ -8,8 +8,15 @@ import Router from "next/router";
 import useInput from "../hooks/useInput";
 import { signupRequestAction } from "../reducers/reducer_user";
 import NavBar from "../components/MainLayout/NavBar";
-
-const { Title } = Typography;
+import {
+  MainLayoutWrapper,
+  MainRowPaddingWrapper,
+  MainTitleWrapper,
+  MainInputWrapper,
+  MainButtonWrapper,
+  MainUserOutlinedWrapper,
+  MainLockOutlinedWrapper,
+} from "../css/overlap-styled";
 
 const formItemLayout = {
   labelCol: {
@@ -33,22 +40,6 @@ const tailFormItemLayout = {
     },
   },
 };
-
-const SquareInput = () => ({
-  borderRadius: "15px",
-});
-
-const ButtonWrapper = styled(Button)`
-  min-width: 100%;
-  border-radius: 15px;
-  background-color: rgba(113, 117, 216, 0.8);
-  border-color: rgba(113, 117, 216, 0.8);
-
-  &:hover {
-    background-color: rgba(113, 117, 216, 0.3);
-    border-color: rgba(113, 117, 216, 0.3);
-  }
-`;
 
 const signUp = () => {
   const [form] = Form.useForm();
@@ -95,12 +86,14 @@ const signUp = () => {
   return (
     <>
       <NavBar />
-      <Layout className="layout" style={{ height: "100vh" }}>
-        <Row justify="space-around" align="middle" style={{ padding: "15% 0" }}>
+      <MainLayoutWrapper className="layout">
+        <MainRowPaddingWrapper
+          justify="space-around"
+          align="middle"
+          style={{ padding: "15% 0" }}
+        >
           <div className="app">
-            <Title level={2} style={{ textAlign: "center" }}>
-              회원가입
-            </Title>
+            <MainTitleWrapper level={2}>회원가입</MainTitleWrapper>
             <Form
               form={form}
               onFinish={onSignUpSubmit}
@@ -119,14 +112,13 @@ const signUp = () => {
                   },
                 ]}
               >
-                <Input
+                <MainInputWrapper
                   id="email"
                   size="large"
-                  prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  prefix={<MainUserOutlinedWrapper />}
                   placeholder="이메일 주소"
                   value={Email}
                   onChange={onChangeEmail}
-                  style={SquareInput()}
                 />
               </Form.Item>
 
@@ -139,14 +131,13 @@ const signUp = () => {
                   },
                 ]}
               >
-                <Input
+                <MainInputWrapper
                   id="id"
                   size="large"
                   prefix={<EditOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
                   placeholder="닉네임"
                   value={NickName}
                   onChange={onChangeNickName}
-                  style={SquareInput()}
                 />
               </Form.Item>
 
@@ -160,15 +151,14 @@ const signUp = () => {
                 ]}
                 hasFeedback
               >
-                <Input
-                  id="password"
+                <MainInputWrapper
+                  id="passwordCheck"
                   size="large"
-                  prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  prefix={<MainLockOutlinedWrapper />}
                   placeholder="비밀번호"
                   type="password"
                   value={Password}
                   onChange={onChangePassword}
-                  style={SquareInput()}
                 />
               </Form.Item>
 
@@ -195,15 +185,14 @@ const signUp = () => {
                   }),
                 ]}
               >
-                <Input
+                <MainInputWrapper
                   id="password"
                   size="large"
-                  prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  prefix={<MainLockOutlinedWrapper />}
                   placeholder="비밀번호 확인"
                   type="password"
                   value={passwordCheck}
                   onChange={onChangePasswordCheck}
-                  style={SquareInput()}
                 />
               </Form.Item>
 
@@ -232,7 +221,7 @@ const signUp = () => {
 
               <Form.Item>
                 <div>
-                  <ButtonWrapper
+                  <MainButtonWrapper
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
@@ -240,14 +229,14 @@ const signUp = () => {
                     onSubmit={onSignUpSubmit}
                   >
                     회원가입하기
-                  </ButtonWrapper>
+                  </MainButtonWrapper>
                 </div>
                 {/* Or <a href="/register">register now!</a> */}
               </Form.Item>
             </Form>
           </div>
-        </Row>
-      </Layout>
+        </MainRowPaddingWrapper>
+      </MainLayoutWrapper>
     </>
   );
 };
