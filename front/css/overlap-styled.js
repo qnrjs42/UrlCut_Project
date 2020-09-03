@@ -46,12 +46,6 @@ export const ButtonBorderWrapper = styled(Button)`
   border-radius: 5px;
 `;
 
-const CardWrapper = styled(Card)`
-  width: 400px;
-  height: 700px;
-  background-color: #c1f3ff;
-`;
-
 export const RowWrapper = styled(Row)`
   padding-top: 20px;
 `;

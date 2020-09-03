@@ -79,7 +79,7 @@ const AvatarWrapper = styled(Avatar)`
 
 const ColEmailPasswordWrapper = styled(Col)`
   min-width: 200px;
-  paddingbottom: 20px;
+  padding-bottom: 20px;
 `;
 
 const ColProfileGatewayWrapper = styled(Col)`
@@ -121,10 +121,11 @@ const ProfileLayout = () => {
               <Divider />
 
               <Row>
-                <ColEmailPasswordWrapper xs={12}>
+                <ColEmailPasswordWrapper xs={24} md={12}>
                   <Row justify="start">
                     <Col xs={6}>이메일</Col>
                   </Row>
+
                   <Row justify="start">
                     <Input
                       placeholder="Borderless"
@@ -132,13 +133,15 @@ const ProfileLayout = () => {
                       value="link_project@link.com"
                     />
                   </Row>
+
                   <br />
                   <Text type="secondary">
                     이메일을 변경하는 경우 계정을 <br />
                     다시 활성화해야 합니다.
                   </Text>
                 </ColEmailPasswordWrapper>
-                <Col xs={{ span: 12, order: 2 }}>
+
+                <Col xs={{ span: 24, order: 2 }} md={{ span: 12, order: 2 }}>
                   아이디
                   <Row justify="start">
                     <Input
@@ -167,15 +170,18 @@ const ProfileLayout = () => {
               <Row>
                 <ColEmailPasswordWrapper xs={12}>
                   <Row justify="start">
-                    <Col xs={6}>비밀번호</Col>
+                    <Col xs={7}>비밀번호</Col>
                   </Row>
+
                   <Row justify="start">
                     <Input placeholder="Blank" bordered={false} />
                   </Row>
+
                   <br />
                   <Text type="secondary">유지하려면 비워 두세요.</Text>
                 </ColEmailPasswordWrapper>
-                <Col xs={{ span: 12, order: 2 }}>
+
+                <Col xs={{ span: 24, order: 2 }} md={{ span: 12, order: 2 }}>
                   비밀번호 확인
                   <Row justify="start">
                     <Input placeholder="Blank" bordered={false} />
