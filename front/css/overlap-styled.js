@@ -59,3 +59,8 @@ export const RowWrapper = styled(Row)`
 export const ColWrapper = styled(Col)`
   padding-top: 10px;
 `;
+
+export const CodeBox = styled.div`
+  background-color: #eaeaea;
+  padding: 10px;
+`;

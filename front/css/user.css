@@ -93,10 +93,6 @@
 /* --- */
 
 /*  */
-.code-box {
-  background-color: "#ABABAB" !important;
-  padding: 20;
-}
 
 @media all and (max-width: 650px) {
   .user-sider {
@@ -105,7 +101,7 @@
 
   .mobile-sider-on-off {
     display: flex;
-    padding: 8px 10px 0px 5px;
+    padding: 0px 15px 0px 5px;
     /* background-color: white;
         height: 64px; */
   }

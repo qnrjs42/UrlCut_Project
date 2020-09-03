@@ -1,20 +1,21 @@
 import React from "react";
-import { Layout, Row, Col, Card} from "antd";
+import { Layout, Row, Col, Card } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
+import { RowWrapper, CodeBox } from "../../../css/overlap-styled";
 
 const { Content } = Layout;
 
 const CreateQuickLinkLayout = () => {
   return (
-    <Content style={{ margin: "20px 16px" }}>
-      <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "20px" }}>
+    <Content>
+      <RowWrapper gutter={[16, 16]} justify="center">
         <Col
           span={16}
           xs={{ span: 24, order: 1 }}
           sm={{ span: 24, order: 1 }}
           lg={{ span: 16 }}
         >
-          <Card style={{ height: 'auto' }}>
+          <Card>
             <h3>빠른 단축 URL</h3>
             <p>
               이 방법을 사용하면 VOLA 서비스에 방문하지 않고도 단축URL을 빠르게
@@ -24,28 +25,20 @@ const CreateQuickLinkLayout = () => {
               표기된 URL앞에 https://link_project/q/?u= 를 추가하면 회원님의
               대시보드에 단축URL이 생성됩니다.
             </p>
-            <div
-              className="code-box"
-              style={{ backgroundColor: "#EAEAEA", padding: 10 }}
-            >
-              https://link_project/q/?u=URL_OF_SITE
-            </div>
+            <CodeBox>https://link_project/q/?u=URL_OF_SITE</CodeBox>
 
             <br />
             <br />
 
             <p>예제들</p>
-            <div
-              className="code-box"
-              style={{ backgroundColor: "#EAEAEA", padding: 10 }}
-            >
+            <CodeBox>
               https://link_project/q/?u=https://www.google.com
               <br />
               https://link_project/q/?u=naver.com
               <br />
               https://link_project/q/?u=http://www.apple.com/iphone-7/
               <br />
-            </div>
+            </CodeBox>
 
             <br />
             <br />
@@ -63,7 +56,7 @@ const CreateQuickLinkLayout = () => {
           sm={{ span: 24, order: 2 }}
           lg={{ span: 8 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>
               <InfoCircleOutlined /> 정보
             </h3>
@@ -73,7 +66,7 @@ const CreateQuickLinkLayout = () => {
             </p>
           </Card>
         </Col>
-      </Row>
+      </RowWrapper>
     </Content>
   );
 };

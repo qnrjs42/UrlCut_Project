@@ -12,6 +12,24 @@ import DrawerSection from "./SiderSection/DrawerSection";
 const { Header } = Layout;
 const { Search } = Input;
 
+const HeaderWrapper = styled(Header)`
+  background-color: white;
+  padding: 0px 20px;
+`;
+
+const RowPaddingTopWrapper = styled(Row)`
+  padding-top: 12px;
+`;
+
+const SearchWrapper = styled(Search)`
+  max-width: 60%;
+  min-width: 40vw;
+`;
+
+const AvatarWrapper = styled(Avatar)`
+  background-color: rgba(94, 203, 161, 0.9);
+`;
+
 const HeaderLayout = () => {
   const dispatch = useDispatch();
 
@@ -35,22 +53,17 @@ const HeaderLayout = () => {
   );
 
   return (
-    <Header style={{ backgroundColor: "white", padding: "0 20px" }}>
-      <Row>
+    <HeaderWrapper>
+      <RowPaddingTopWrapper>
         <DrawerSection />
 
         <Col xs={14}>
-          <Search
+          <SearchWrapper
             className="user-header-serach user-header-button-icon"
             placeholder="input search text"
             onSearch={(value) => console.log(value)}
             size="large"
             enterButton
-            style={{
-              paddingTop: "12px",
-              maxWidth: "60%",
-              minWidth: "40vw",
-            }}
           />
         </Col>
         <Col flex={2}>
@@ -64,18 +77,17 @@ const HeaderLayout = () => {
                 className="ant-dropdown-link"
                 onClick={(e) => e.preventDefault()}
               >
-                <Avatar
+                <AvatarWrapper
                   className="user-header-button-icon"
                   size="large"
                   icon={<UserOutlined />}
-                  style={{ backgroundColor: "rgba(94, 203, 161, 0.9)" }}
                 />
               </a>
             </Dropdown>
           </Row>
         </Col>
-      </Row>
-    </Header>
+      </RowPaddingTopWrapper>
+    </HeaderWrapper>
   );
 };
 

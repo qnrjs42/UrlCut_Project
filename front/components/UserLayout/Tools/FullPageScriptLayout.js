@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Layout, Row, Col, Button, Card, Progress, Table } from "antd";
-import { LinkOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import React from "react";
+import { Layout, Row, Col, Card } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { RowWrapper, CodeBox } from "../../../css/overlap-styled";
 
 const { Content } = Layout;
 
@@ -8,7 +9,7 @@ const script1 = `
 <script type="text/javascript">var key = "RyazHlyM5103";</script>
 <script
   type="text/javascript"
-  src="https://vo.la/jShortener">
+  src="https://link_project/jShortener">
   </script>
 `;
 
@@ -17,7 +18,7 @@ const script2 = `
 var key = "RyazHlyM5103";
 var selector = ".mylink, .content > a, .comments a";
 </script>
-<script type="text/javascript" src="https://vo.la/jShortener"></script>
+<script type="text/javascript" src="https://link_project/jShortener"></script>
 `;
 
 const script3 = `
@@ -25,20 +26,20 @@ const script3 = `
 var key = "RyazHlyM5103";
 var exclude = ["google.com","naver.com"];
 </script>
-<script type="text/javascript" src="https://vo.la/jShortener"></script>
+<script type="text/javascript" src="https://link_project/jShortener"></script>
 `;
 
 const FullPageScriptLayout = () => {
   return (
-    <Content style={{ margin: "20px 16px" }}>
-      <Row gutter={[16, 16]} justify="center" style={{ paddingTop: "20px" }}>
+    <Content>
+      <RowWrapper gutter={[16, 16]} justify="center">
         <Col
           span={16}
           xs={{ span: 24, order: 1 }}
           sm={{ span: 24, order: 1 }}
           lg={{ span: 16 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>전체 페이지 스크립트</h3>
             <p>
               이 스크립트를 사용하면 웹 사이트의 URL을 모두 짧게 줄일 수 있으며,
@@ -46,12 +47,9 @@ const FullPageScriptLayout = () => {
               있습니다. 아래 소스코드는 회원님의 API키가 적용된 소스로 바로
               복사해 적용하시면 됩니다.
             </p>
-            <div
-              className="code-box"
-              style={{ backgroundColor: "#EAEAEA", padding: 10 }}
-            >
+            <CodeBox>
               <pre>{script1}</pre>
-            </div>
+            </CodeBox>
             <br />
             <br />
 
@@ -63,12 +61,9 @@ const FullPageScriptLayout = () => {
               모든 직접 링크 또는 주석 컨테이너의 모든 링크를 포함하는 URL을
               단축하는 예만 볼 수 있습니다.
             </p>
-            <div
-              className="code-box"
-              style={{ backgroundColor: "#EAEAEA", padding: 10 }}
-            >
+            <CodeBox>
               <pre>{script2}</pre>
-            </div>
+            </CodeBox>
             <br />
             <br />
 
@@ -79,12 +74,9 @@ const FullPageScriptLayout = () => {
               google.com 또는 naver.com에서 URL을 제외한 모든 URL을 줄인
               것입니다.
             </p>
-            <div
-              className="code-box"
-              style={{ backgroundColor: "#EAEAEA", padding: 10 }}
-            >
+            <CodeBox>
               <pre>{script3}</pre>
-            </div>
+            </CodeBox>
           </Card>
         </Col>
         <Col
@@ -93,7 +85,7 @@ const FullPageScriptLayout = () => {
           sm={{ span: 24, order: 2 }}
           lg={{ span: 8 }}
         >
-          <Card style={{ height: "auto" }}>
+          <Card>
             <h3>
               <InfoCircleOutlined /> 정보
             </h3>
@@ -103,7 +95,7 @@ const FullPageScriptLayout = () => {
             </p>
           </Card>
         </Col>
-      </Row>
+      </RowWrapper>
     </Content>
   );
 };
