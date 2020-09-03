@@ -61,7 +61,6 @@ const BaseSection = () => {
   const router = useRouter();
   const [Cllapsed, setCllapsed] = useState(false);
   const [Title, setTitle] = useState("Link_Project");
-  const [MenuSelectedKey, setMenuSelectedKey] = useState(1);
   const [SiderHeader, setSiderHeader] = useState("user-sider-header-open");
 
   const toggle = useCallback(() => {
@@ -97,7 +96,7 @@ const BaseSection = () => {
       <div className="user_logo">
         <Link href="/">
           {/* 새로고침한다고 보면 됨 */}
-          <a style={{ color: "white" }}>{Title}</a>
+          <a className="user-sider-header-menu-item">{Title}</a>
         </Link>
       </div>
       <Menu theme="dark" mode="inline" selectedKeys={`${onChangeKey()}`}>

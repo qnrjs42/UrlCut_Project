@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Menu, Drawer } from "antd";
 import {
   AppstoreOutlined,
@@ -10,9 +10,10 @@ import {
   GoldOutlined,
   TeamOutlined,
   CreditCardOutlined,
-  UnorderedListOutlined
+  UnorderedListOutlined,
 } from "@ant-design/icons";
-import Link from 'next/link';
+import Link from "next/link";
+import { useRouter, withRouter } from "next/router";
 
 const userIndex = "/user";
 
@@ -56,6 +57,7 @@ const userList = [
 ];
 
 const DrawerSection = () => {
+  const router = useRouter();
   const [Visible, setVisible] = useState(false);
 
   const showDrawer = () => {
@@ -65,6 +67,17 @@ const DrawerSection = () => {
   const onClose = () => {
     setVisible(false);
   };
+
+  // 페이지가 새고로침 되어도 메뉴가 선택 됨
+  const onChangeKey = useCallback(() => {
+    for (const list of userList) {
+      // 현재페이지가 정의된 페이지면 정의된 key 반환
+      if (router.asPath === list.url || router.asPath === "/user/index") {
+        return list.key;
+      }
+    }
+    return "1";
+  });
 
   return (
     <>
@@ -78,10 +91,9 @@ const DrawerSection = () => {
           onClose={onClose}
           visible={Visible}
           getContainer={false}
-          style={{ position: "absolute" }}
         >
-          <Menu>
-            <span style={{ padding: "10px 0 10px 0" }}>DASHBOARD</span>
+          <Menu theme="dark" mode="inline" selectedKeys={`${onChangeKey()}`}>
+            <span className="user-sider-header-open">DASHBOARD</span>
             <Menu.Item
               key="dashboard_main"
               icon={<AppstoreOutlined />}
@@ -89,7 +101,9 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[0].url}/index`}>
                 <a>
-                  <span>관리페이지</span>
+                  <span className="user-sider-header-menu-item">
+                    관리페이지
+                  </span>
                 </a>
               </Link>
             </Menu.Item>
@@ -100,13 +114,15 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[1].url}`}>
                 <a>
-                  <span>전체 링크 관리</span>
+                  <span className="user-sider-header-menu-item">
+                    전체 링크 관리
+                  </span>
                 </a>
               </Link>
             </Menu.Item>
             <Menu.Divider />
 
-            <span>MANAGEMENT</span>
+            <span className="user-sider-header-open">MANAGEMENT</span>
             <Menu.Item
               key="management_link_storage"
               icon={<FolderOutlined />}
@@ -114,7 +130,9 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[2].url}`}>
                 <a>
-                  <span>링크 보관함</span>
+                  <span className="user-sider-header-menu-item">
+                    링크 보관함
+                  </span>
                 </a>
               </Link>
             </Menu.Item>
@@ -125,13 +143,15 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[3].url}`}>
                 <a>
-                  <span>설정기간 만료</span>
+                  <span className="user-sider-header-menu-item">
+                    설정기간 만료
+                  </span>
                 </a>
               </Link>
             </Menu.Item>
             <Menu.Divider />
 
-            <span>LINK OPTION</span>
+            <span className="user-sider-header-open">LINK OPTION</span>
             <Menu.Item
               key="link_option_multi_links"
               icon={<CarryOutOutlined />}
@@ -139,13 +159,13 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[4].url}`}>
                 <a>
-                  <span>멀티링크</span>
+                  <span className="user-sider-header-menu-item">멀티링크</span>
                 </a>
               </Link>
             </Menu.Item>
             <Menu.Divider />
 
-            <span>TOOLS</span>
+            <span className="user-sider-header-open">TOOLS</span>
             <Menu.Item
               key="tools_create_quick_link"
               icon={<FileAddOutlined />}
@@ -153,7 +173,9 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[5].url}`}>
                 <a>
-                  <span>빠른 단축 URL 생성</span>
+                  <span className="user-sider-header-menu-item">
+                    빠른 단축 URL 생성
+                  </span>
                 </a>
               </Link>
             </Menu.Item>
@@ -164,13 +186,15 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[6].url}`}>
                 <a>
-                  <span>전체 페이지 스크립트</span>
+                  <span className="user-sider-header-menu-item">
+                    전체 페이지 스크립트
+                  </span>
                 </a>
               </Link>
             </Menu.Item>
             <Menu.Divider />
 
-            <span>PRIVACY</span>
+            <span className="user-sider-header-open">PRIVACY</span>
             <Menu.Item
               key="privacy_profile"
               icon={<TeamOutlined />}
@@ -178,7 +202,9 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[7].url}`}>
                 <a>
-                  <span>프로필 설정</span>
+                  <span className="user-sider-header-menu-item">
+                    프로필 설정
+                  </span>
                 </a>
               </Link>
             </Menu.Item>
@@ -189,7 +215,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[8].url}`}>
                 <a>
-                  <span>결제 정보</span>
+                  <span className="user-sider-header-menu-item">결제 정보</span>
                 </a>
               </Link>
             </Menu.Item>
