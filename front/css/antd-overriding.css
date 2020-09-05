@@ -11,10 +11,12 @@
   color: #050c42;
 }
 
-/* Drawer - selected hover */
-.ant-menu-item-selected a,
-.ant-menu-item-selected a:hover {
-  color: #050c42;
+/* Sider, Drawer - selected font color */
+.ant-menu-item.ant-menu-item-selected > span > svg > path {
+  color: #f6f6f6 !important;
+}
+.ant-menu-item.ant-menu-item-selected > span + span > a > span {
+  color: #f6f6f6 !important;
 }
 
 /* Drawer - hover */

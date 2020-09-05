@@ -101,9 +101,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[0].url}/index`}>
                 <a>
-                  <span className="user-sider-header-menu-item">
-                    관리페이지
-                  </span>
+                  <span>관리페이지</span>
                 </a>
               </Link>
             </Menu.Item>
@@ -114,9 +112,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[1].url}`}>
                 <a>
-                  <span className="user-sider-header-menu-item">
-                    전체 링크 관리
-                  </span>
+                  <span>전체 링크 관리</span>
                 </a>
               </Link>
             </Menu.Item>
@@ -129,9 +125,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[2].url}`}>
                 <a>
-                  <span className="user-sider-header-menu-item">
-                    링크 보관함
-                  </span>
+                  <span>링크 보관함</span>
                 </a>
               </Link>
             </Menu.Item>
@@ -142,9 +136,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[3].url}`}>
                 <a>
-                  <span className="user-sider-header-menu-item">
-                    설정기간 만료
-                  </span>
+                  <span>설정기간 만료</span>
                 </a>
               </Link>
             </Menu.Item>
@@ -157,7 +149,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[4].url}`}>
                 <a>
-                  <span className="user-sider-header-menu-item">멀티링크</span>
+                  <span>멀티링크</span>
                 </a>
               </Link>
             </Menu.Item>
@@ -170,9 +162,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[5].url}`}>
                 <a>
-                  <span className="user-sider-header-menu-item">
-                    빠른 단축 URL 생성
-                  </span>
+                  <span>빠른 단축 URL 생성</span>
                 </a>
               </Link>
             </Menu.Item>
@@ -183,9 +173,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[6].url}`}>
                 <a>
-                  <span className="user-sider-header-menu-item">
-                    전체 페이지 스크립트
-                  </span>
+                  <span>전체 페이지 스크립트</span>
                 </a>
               </Link>
             </Menu.Item>
@@ -198,9 +186,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[7].url}`}>
                 <a>
-                  <span className="user-sider-header-menu-item">
-                    프로필 설정
-                  </span>
+                  <span>프로필 설정</span>
                 </a>
               </Link>
             </Menu.Item>
@@ -211,7 +197,7 @@ const DrawerSection = () => {
             >
               <Link href="/user/[userPages]" as={`${userList[8].url}`}>
                 <a>
-                  <span className="user-sider-header-menu-item">결제 정보</span>
+                  <span>결제 정보</span>
                 </a>
               </Link>
             </Menu.Item>
