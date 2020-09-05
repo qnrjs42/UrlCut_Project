@@ -19,7 +19,7 @@
 }
 
 .menu_left {
-  padding-left: 70px;
+  margin-left: 70px;
 }
 
 .menu__container .ant-menu-item {
@@ -68,7 +68,8 @@
 }
 
 .main-nav-home {
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none !important;
 }
 
 @media (max-width: 767px) {
@@ -102,6 +103,7 @@
   }
 
   .main-nav-home {
-    visibility: visible;
+    /* visibility: visible; */
+    display: inline !important;
   }
 }
