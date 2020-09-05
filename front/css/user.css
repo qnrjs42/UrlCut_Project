@@ -78,6 +78,9 @@
 }
 
 /* antd 오버라이딩 시작 */
+.ant-menu-item a {
+  color: #050c42;
+}
 .ant-layout-content {
   flex: auto;
   margin: 20px 16px;

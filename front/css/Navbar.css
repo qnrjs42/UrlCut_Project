@@ -8,12 +8,18 @@
 .menu__logo {
   width: 90px;
   float: left;
+  padding-left: 30px;
 }
 
 .menu__logo a {
   display: inline-block;
   font-size: 20px;
+  color: #050c42;
   padding: 10px 10px 0px 15px;
+}
+
+.menu_left {
+  padding-left: 70px;
 }
 
 .menu__container .ant-menu-item {
@@ -64,6 +70,10 @@
 @media (max-width: 767px) {
   .menu__mobile-button {
     display: inline-block !important;
+  }
+
+  .menu__logo {
+    padding-left: 0px;
   }
 
   .menu_left,

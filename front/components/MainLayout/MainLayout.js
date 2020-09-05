@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { urlCutRequestAction } from "../../reducers/reducer_url";
 
 const FormWrapper = styled(Form)`
-  padding: 10px;
+  padding: 150px 10px 10px 10px;
 `;
 
 const InputWrapper = styled(Input)`
@@ -60,14 +60,14 @@ const Main = () => {
   return (
     <Layout className="layout main-layout">
       <div>
-        <FormWrapper onFinish={onSubmitForm} style={{ paddingTop: 150 }}>
+        <FormWrapper onFinish={onSubmitForm}>
           <Row justify="center">
             <h1>링크는 간단하게 CUT</h1>
           </Row>
           <Row justify="center">
             {/* xs: <576, sm: >=576 md: >=768, lg: >=992, xl: >=1200 */}
             <Col
-              xs={32}
+              xs={23}
               sm={15}
               md={13}
               lg={10}
@@ -89,7 +89,7 @@ const Main = () => {
                     htmlType="submit"
                     loading={UrlLoading}
                   >
-                    CUT
+                    <span style={{ color: "#f6f6f6" }}>CUT</span>
                   </ButtonWrapper>
                 }
               />

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Menu, Button, Drawer } from "antd";
+import { Menu, Button, Drawer, Row, Col } from "antd";
 import { UnorderedListOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutRequestAction } from "../../reducers/reducer_user";
@@ -20,13 +20,13 @@ const NavBar = () => {
   };
 
   return (
-    <div>
+    <>
       <nav
         className="menu"
         style={{ position: "absolute", zIndex: 5, width: "97%", left: "3%" }}
       >
         <div className="menu__logo">
-          <a href="/">LP</a>
+          <a href="/">Link_Project</a>
         </div>
         <div className="menu__container">
           <div className="menu_left">
@@ -50,12 +50,13 @@ const NavBar = () => {
             onClose={onClose}
             visible={visible}
           >
+            <span>Hello</span>
             <LeftMenu mode="inline" />
             <RightMenu mode="inline" />
           </Drawer>
         </div>
       </nav>
-    </div>
+    </>
   );
 };
 
