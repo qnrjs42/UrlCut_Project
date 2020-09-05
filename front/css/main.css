@@ -11,6 +11,7 @@ html {
   box-sizing: border-box;
   font-family: "Jeju Gothic", "Noto Sans KR", "Nanum Gothic",
     "Apple SD Gothic Neo", sans-serif !important;
+  color: #050c42;
   line-height: 200%;
 }
 
@@ -48,7 +49,7 @@ h3 {
 .menu__logo a {
   display: inline-block;
   font-size: 20px;
-  color: #454545;
+  color: #050c42;
   font-weight: 800;
   padding: 19px 20px;
 }

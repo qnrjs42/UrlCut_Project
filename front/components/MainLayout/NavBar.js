@@ -23,7 +23,7 @@ const NavBar = () => {
     <div>
       <nav
         className="menu"
-        style={{ position: "absolute", zIndex: 5, width: "70%", left: "15%" }}
+        style={{ position: "absolute", zIndex: 5, width: "97%", left: "3%" }}
       >
         <div className="menu__logo">
           <a href="/">LP</a>

@@ -83,20 +83,6 @@
   margin: 20px 16px;
   min-height: 0;
 }
-/* antd drawer custom 시작 */
-.ant-drawer .ant-drawer-content {
-  background-color: #001529;
-}
-.ant-drawer-header {
-  background-color: #001529;
-}
-.ant-drawer-header > div {
-  color: #f6f6f6;
-}
-/* 아이콘 색상 */
-.ant-menu-item > span > svg > path {
-  color: #f6f6f6;
-}
 
 /* antd drawer custom 종료 */
 

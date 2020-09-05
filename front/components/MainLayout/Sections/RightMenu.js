@@ -33,13 +33,13 @@ function RightMenu(props) {
   return (
     <>
       {value ? (
-        <Menu theme="dark" mode={props.mode}>
+        <Menu mode={props.mode}>
           <Menu.Item key="logout">
             <a onClick={onLogOutSubmit}>Logout</a>
           </Menu.Item>
         </Menu>
       ) : (
-        <Menu theme="dark" mode={props.mode}>
+        <Menu mode={props.mode}>
           <Menu.Item key="login">
             <Link href="/login">
               <a>로그인</a>
