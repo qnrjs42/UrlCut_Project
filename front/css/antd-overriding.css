@@ -67,6 +67,31 @@
   border: 0;
 }
 
+/* Input Password Success Close Color */
+.ant-form-item-has-success.ant-form-item-has-feedback
+  .ant-form-item-children-icon
+  > span
+  > svg
+  > path {
+  color: #52c41a !important;
+}
+
+.ant-form-item-has-error.ant-form-item-has-feedback
+  .ant-form-item-children-icon
+  > span
+  > svg
+  > path {
+  color: #ff4d4f !important;
+}
+
+.ant-message-custom-content.ant-message-success > span > svg > path {
+  color: #52c41a !important;
+}
+
+.ant-form-item-explain > div {
+  color: #ff4d4f !important;
+}
+
 @media all and (max-width: 650px) {
   .ant-table-thead > tr > th {
     font-size: 0.9375rem;

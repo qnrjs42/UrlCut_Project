@@ -109,11 +109,9 @@ export const OptionOnLayout = () => {
   const onMessageChange = useCallback(() => {
     setMessage(!Message);
 
-    message.success(
-      Message
-        ? "멀티링크가 비공개로 설정되었습니다."
-        : " 멀티링크가 공개로 설정되었습니다."
-    );
+    Message
+      ? message.error("멀티링크가 비공개로 설정되었습니다.")
+      : message.success("멀티링크가 공개로 설정되었습니다.");
   });
 
   const onSortEnd = useCallback(({ oldIndex, newIndex }) => {

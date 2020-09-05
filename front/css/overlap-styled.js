@@ -32,6 +32,7 @@ export const MainInputWrapper = styled(Input)`
 export const MainButtonWrapper = styled(Button)`
   min-width: 100%;
   border-radius: 15px;
+  padding: 5px 15px;
   background-color: rgba(113, 117, 216, 0.8);
   border-color: rgba(113, 117, 216, 0.8);
 
