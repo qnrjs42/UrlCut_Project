@@ -24,7 +24,7 @@ const dummyUser = (data) => ({
 
 function* logIn(action) {
   try {
-    yield delay(10000); // 가짜 데이터인척하고 시간 지연
+    yield delay(5000); // 가짜 데이터인척하고 시간 지연
     // const result = yield call(loginAPI, action.data); // 아직 서버가 없어서 요청을 못 보냄
     console.log("saga의 action", action);
 
@@ -48,7 +48,7 @@ function logOutAPI() {
 
 function* logOut() {
   try {
-    yield delay(1000); // 가짜 데이터
+    yield delay(3000); // 가짜 데이터
     // const result = yield call(logOutAPI);
 
     localStorage.removeItem("me");

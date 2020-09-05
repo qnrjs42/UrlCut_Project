@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
-import { Layout, Menu, Row, Col, Input, Avatar, Dropdown } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Layout, Menu, Row, Col, Input, Avatar, Dropdown, Spin } from "antd";
+import { UserOutlined, LoadingOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import Router from "next/router";
 import { logoutRequestAction } from "../../reducers/reducer_user";
@@ -11,6 +11,7 @@ import DrawerSection from "./SiderSection/DrawerSection";
 
 const { Header } = Layout;
 const { Search } = Input;
+const antIcon = <LoadingOutlined spin />;
 
 const HeaderWrapper = styled(Header)`
   background-color: white;
@@ -32,6 +33,7 @@ const AvatarWrapper = styled(Avatar)`
 
 const HeaderLayout = () => {
   const dispatch = useDispatch();
+  const { logOutLoading } = useSelector((state) => state.user);
 
   const onLogout = useCallback(() => {
     dispatch(logoutRequestAction());
@@ -77,11 +79,19 @@ const HeaderLayout = () => {
                 className="ant-dropdown-link"
                 onClick={(e) => e.preventDefault()}
               >
-                <AvatarWrapper
-                  className="user-header-button-icon"
-                  size="large"
-                  icon={<UserOutlined />}
-                />
+                {!logOutLoading ? (
+                  <AvatarWrapper
+                    className="user-header-button-icon"
+                    size="large"
+                    icon={<UserOutlined />}
+                  />
+                ) : (
+                  <AvatarWrapper
+                    className="user-header-button-icon"
+                    size="large"
+                    icon={<Spin indicator={antIcon} />}
+                  />
+                )}
               </a>
             </Dropdown>
           </Row>

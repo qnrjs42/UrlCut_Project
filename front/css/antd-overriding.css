@@ -1,7 +1,7 @@
 /* ***** 폰트 색상 시작 ***** */
 
 .ant-menu-item a {
-  color: #050c42;
+  color: #050c42 !important;
 }
 
 /* > 모든 테이블  */
@@ -9,14 +9,6 @@
   font-size: 1rem;
   font-weight: 700;
   color: #050c42;
-}
-
-/* Sider, Drawer - selected font color */
-.ant-menu-item.ant-menu-item-selected > span > svg > path {
-  color: #f6f6f6 !important;
-}
-.ant-menu-item.ant-menu-item-selected > span + span > a > span {
-  color: #f6f6f6 !important;
 }
 
 /* Drawer - hover */
@@ -28,7 +20,49 @@
   color: #050c42;
 }
 
-/* ***** 폰트 색상 종료 ***** */
+/* Sider, Drawer - selected font color */
+.ant-menu-item.ant-menu-item-selected > span > svg > path {
+  color: #f6f6f6 !important;
+}
+.ant-menu-item.ant-menu-item-selected > span + span > a > span {
+  color: #f6f6f6 !important;
+}
+
+.ant-layout-sider-trigger > span > svg > path {
+  color: #f6f6f6;
+}
+
+.ant-spin.ant-spin-spinning {
+  padding-top: 10px;
+}
+.ant-spin.ant-spin-spinning > span > svg > path {
+  color: #f6f6f6;
+}
+
+/* Input Password Success Color */
+.ant-form-item-has-success.ant-form-item-has-feedback
+  .ant-form-item-children-icon
+  > span
+  > svg
+  > path {
+  color: #52c41a !important;
+}
+.ant-message-custom-content.ant-message-success > span > svg > path {
+  color: #52c41a !important;
+}
+/* Input Password Error Color */
+.ant-form-item-has-error.ant-form-item-has-feedback
+  .ant-form-item-children-icon
+  > span
+  > svg
+  > path {
+  color: #ff4d4f !important;
+}
+.ant-form-item-explain > div {
+  color: #ff4d4f !important;
+}
+
+/* ***** 폰트, 아이콘 색상 종료 ***** */
 
 .ant-layout-content {
   flex: auto;
@@ -67,31 +101,6 @@
 .ant-menu-vertical,
 .ant-menu-vertical-left {
   border: 0;
-}
-
-/* Input Password Success Close Color */
-.ant-form-item-has-success.ant-form-item-has-feedback
-  .ant-form-item-children-icon
-  > span
-  > svg
-  > path {
-  color: #52c41a !important;
-}
-
-.ant-form-item-has-error.ant-form-item-has-feedback
-  .ant-form-item-children-icon
-  > span
-  > svg
-  > path {
-  color: #ff4d4f !important;
-}
-
-.ant-message-custom-content.ant-message-success > span > svg > path {
-  color: #52c41a !important;
-}
-
-.ant-form-item-explain > div {
-  color: #ff4d4f !important;
 }
 
 @media all and (max-width: 650px) {
