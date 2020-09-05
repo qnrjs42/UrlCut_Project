@@ -1,20 +1,19 @@
 import React from "react";
 import { Row, Col } from "antd";
+import styled from "styled-components";
+
+const RowWrapper = styled(Row)`
+  padding: 10px 25px;
+  background-color: #fff;
+`;
 
 const FooterLayout = () => {
   return (
     <>
-      <Row
-        className="footer-terms"
-        justify="space-between"
-        style={{
-          padding: "20px",
-          backgroundColor: "rgba(94, 203, 161, 0.9)",
-        }}
-      >
+      <RowWrapper className="footer-terms" justify="space-between">
         <Col>©2020 Link_Project All rights reserved.</Col>
         <Col>Design and Developed by Link_Project</Col>
-      </Row>
+      </RowWrapper>
     </>
   );
 };
