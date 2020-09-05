@@ -52,26 +52,22 @@ const CardWrapper = styled(Card)`
 
 const Main = () => {
   const dispatch = useDispatch();
-  const urlInfo = useSelector((state) => state.url);
+  const { urlCutLoading, urlCutDone, shortenUrl } = useSelector(
+    (state) => state.url
+  );
   // const { me } = useSelector((state) => state.user);
 
-  const [Url, setUrl] = useState("");
+  const [OriginalUrl, setOriginalUrl] = useState("");
   const [ChangeUrl, setChangeUrl] = useState("");
-  const [UrlLoading, setUrlLoading] = useState(false);
-  const [Copyed, setCopyed] = useState(false);
 
   const onChangeUrl = useCallback((e) => {
     setChangeUrl(e.target.value);
   }, []);
 
   const onSubmitForm = useCallback(() => {
-    setUrlLoading(true);
-    setUrl(ChangeUrl);
-    setCopyed(true);
+    setOriginalUrl(ChangeUrl);
 
     dispatch(urlCutRequestAction());
-
-    setUrlLoading(false);
   }, [ChangeUrl]);
 
   return (
@@ -83,7 +79,7 @@ const Main = () => {
           </Row>
           <Row justify="center">
             {/* xs: <576, sm: >=576 md: >=768, lg: >=992, xl: >=1200 */}
-            <ColWrapper xs={23} sm={15} md={13} lg={10} xl={9}>
+            <ColWrapper xs={23} sm={23} md={17} lg={15} xl={10}>
               <InputWrapper
                 size="large"
                 name="url"
@@ -97,7 +93,7 @@ const Main = () => {
                   <ButtonWrapper
                     type="primary"
                     htmlType="submit"
-                    loading={UrlLoading}
+                    loading={urlCutLoading}
                   >
                     <span>CUT</span>
                   </ButtonWrapper>
@@ -106,11 +102,12 @@ const Main = () => {
             </ColWrapper>
           </Row>
 
-          {Copyed ? (
+          {/* url cut이 끝나면 단축된 링크 노출 */}
+          {urlCutDone ? (
             <RowWrapper justify="center">
-              <Col xs={32} sm={14} md={12} lg={10} xl={7}>
+              <Col xs={23} sm={23} md={17} lg={15} xl={10}>
                 <div className="site-card-border-less-wrapper">
-                  <CardWrapper title={Url} bordered={false}>
+                  <CardWrapper title={OriginalUrl} bordered={false}>
                     <div>
                       <p
                         style={{
@@ -118,7 +115,7 @@ const Main = () => {
                           marginRight: "5px",
                         }}
                       >
-                        단축링크 : {urlInfo.url}
+                        단축링크 : {shortenUrl}
                       </p>
                       <p style={{ display: "inline-block" }}></p>
                     </div>

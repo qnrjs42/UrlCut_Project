@@ -13,7 +13,7 @@ export const initialState = {
   logOutDone: false,
   logOutError: null,
 
-  url: null,
+  shortenUrl: null,
 };
 
 export const URL_CUT_REQUEST = "URL_CUT_REQUEST";
@@ -26,26 +26,27 @@ export const urlCutRequestAction = () => {
   };
 };
 
-const reducer = (state = initialState, action) => produce(state, (draft) => {
-  switch (action.type) {
-    default:
-      break;
+const reducer = (state = initialState, action) =>
+  produce(state, (draft) => {
+    switch (action.type) {
+      default:
+        break;
 
-    case URL_CUT_REQUEST:
+      case URL_CUT_REQUEST:
         draft.urlCutLoading = true;
         draft.urlCutDone = false;
         draft.urlCutError = null;
         break;
-    case URL_CUT_SUCCESS:
+      case URL_CUT_SUCCESS:
         console.log("state", state);
         console.log("action", action);
         draft.urlCutLoading = false;
         draft.urlCutDone = true;
-        draft.url = action.data;
-    case URL_CUT_FAILURE:
+        draft.shortenUrl = action.data;
+      case URL_CUT_FAILURE:
         draft.urlCutLoading = false;
         draft.urlCutError = action.error;
-  }
-});
+    }
+  });
 
 export default reducer;
