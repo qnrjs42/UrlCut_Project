@@ -8,6 +8,7 @@ import "antd/dist/antd.css";
 import "../css/main.css";
 import "../css/user.css";
 import "../css/Navbar.css";
+import "../css/antd-overriding.css";
 
 const App = ({ Component }) => {
   return (

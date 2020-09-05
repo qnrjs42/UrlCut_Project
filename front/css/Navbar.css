@@ -67,6 +67,10 @@
   padding: 14px 4px !important;
 }
 
+.main-nav-home {
+  visibility: hidden;
+}
+
 @media (max-width: 767px) {
   .menu__mobile-button {
     display: inline-block !important;
@@ -83,6 +87,7 @@
 
   .menu__logo a {
     margin-left: -20px;
+    padding: 10px 20px;
   }
 
   .menu__container .ant-menu-item,
@@ -90,7 +95,13 @@
     padding: 1px 10px;
   }
 
-  .menu__logo a {
-    padding: 10px 20px;
+  .ant-drawer-title {
+    color: #050c42;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .main-nav-home {
+    visibility: visible;
   }
 }

@@ -23,7 +23,7 @@ const NavBar = () => {
     <>
       <nav
         className="menu"
-        style={{ position: "absolute", zIndex: 5, width: "97%", left: "3%" }}
+        style={{ position: "absolute", zIndex: 5, width: "98%", left: "1%" }}
       >
         <div className="menu__logo">
           <a href="/">Link_Project</a>
@@ -50,7 +50,6 @@ const NavBar = () => {
             onClose={onClose}
             visible={visible}
           >
-            <span>Hello</span>
             <LeftMenu mode="inline" />
             <RightMenu mode="inline" />
           </Drawer>

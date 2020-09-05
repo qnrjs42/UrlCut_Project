@@ -5,6 +5,11 @@ import Link from "next/link";
 function LeftMenu(props) {
   return (
     <Menu mode={props.mode}>
+      <Menu.Item key="1" className="main-nav-home">
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+      </Menu.Item>
       <Menu.Item key="2">
         <Link href="/">
           <a>URL 안전검사</a>

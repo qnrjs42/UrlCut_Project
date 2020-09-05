@@ -1,4 +1,4 @@
-import { Typography, Button, Row, Col, Card, Layout, Input } from "antd";
+import { Typography, Button, Row, Col, Card, Layout, Input, Form } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
@@ -21,6 +21,10 @@ export const MainTitleWrapper = styled(Title)`
   text-align: center;
 `;
 
+export const FormWrapper = styled(Form)`
+  width: 330px;
+`;
+
 export const MainInputWrapper = styled(Input)`
   border-radius: 15px;
 `;
@@ -34,6 +38,10 @@ export const MainButtonWrapper = styled(Button)`
   &:hover {
     background-color: rgba(113, 117, 216, 0.3);
     border-color: rgba(113, 117, 216, 0.3);
+  }
+
+  span {
+    color: #fff;
   }
 `;
 

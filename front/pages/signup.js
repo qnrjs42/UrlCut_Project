@@ -16,6 +16,7 @@ import {
   MainButtonWrapper,
   MainUserOutlinedWrapper,
   MainLockOutlinedWrapper,
+  FormWrapper,
 } from "../css/overlap-styled";
 
 const formItemLayout = {
@@ -94,11 +95,7 @@ const signUp = () => {
         >
           <div className="app">
             <MainTitleWrapper level={2}>회원가입</MainTitleWrapper>
-            <Form
-              form={form}
-              onFinish={onSignUpSubmit}
-              style={{ width: "350px" }}
-            >
+            <FormWrapper form={form} onFinish={onSignUpSubmit}>
               <Form.Item
                 name="email"
                 rules={[
@@ -233,7 +230,7 @@ const signUp = () => {
                 </div>
                 {/* Or <a href="/register">register now!</a> */}
               </Form.Item>
-            </Form>
+            </FormWrapper>
           </div>
         </MainRowPaddingWrapper>
       </MainLayoutWrapper>

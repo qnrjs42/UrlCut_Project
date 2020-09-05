@@ -32,10 +32,10 @@ const ButtonWrapper = styled(Button)`
     background-color: rgba(113, 117, 216, 0.3);
     border-color: rgba(113, 117, 216, 0.3);
   }
-`;
 
-const ButtonIneerSpanWrapper = styled.span`
-  color: #f6f6f6;
+  span {
+    color: #fff;
+  }
 `;
 
 const ColWrapper = styled(Col)`
@@ -99,7 +99,7 @@ const Main = () => {
                     htmlType="submit"
                     loading={UrlLoading}
                   >
-                    <ButtonIneerSpanWrapper>CUT</ButtonIneerSpanWrapper>
+                    <span>CUT</span>
                   </ButtonWrapper>
                 }
               />

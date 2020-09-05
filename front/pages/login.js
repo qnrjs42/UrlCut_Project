@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Form, Checkbox } from "antd";
+import { Form, Checkbox, Row } from "antd";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -15,6 +15,7 @@ import {
   MainButtonWrapper,
   MainUserOutlinedWrapper,
   MainLockOutlinedWrapper,
+  FormWrapper,
 } from "../css/overlap-styled";
 
 const logIn = () => {
@@ -46,11 +47,10 @@ const logIn = () => {
         <MainRowPaddingWrapper justify="space-around" align="middle">
           <div className="app">
             <MainTitleWrapper level={2}>로그인</MainTitleWrapper>
-            <Form
+            <FormWrapper
               form={form}
               // onFinish={handleSubmit(onLogInSubmit)}
               onFinish={onLogInSubmit}
-              style={{ width: "350px" }}
             >
               <Form.Item required>
                 <MainInputWrapper
@@ -103,7 +103,7 @@ const logIn = () => {
                 </div>
                 {/* Or <a href="/register">register now!</a> */}
               </Form.Item>
-            </Form>
+            </FormWrapper>
           </div>
         </MainRowPaddingWrapper>
       </MainLayoutWrapper>
