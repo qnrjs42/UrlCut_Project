@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { urlCutRequestAction } from "../../reducers/reducer_url";
 
+/* Did't use css/overlap-styled */
 const FormWrapper = styled(Form)`
   padding: 150px 10px 10px 10px;
 `;
@@ -31,6 +32,22 @@ const ButtonWrapper = styled(Button)`
     background-color: rgba(113, 117, 216, 0.3);
     border-color: rgba(113, 117, 216, 0.3);
   }
+`;
+
+const ButtonIneerSpanWrapper = styled.span`
+  color: #f6f6f6;
+`;
+
+const ColWrapper = styled(Col)`
+  text-align: center;
+`;
+
+const RowWrapper = styled(Row)`
+  margin-top: 4vh;
+`;
+
+const CardWrapper = styled(Card)`
+  border-radius: 20px;
 `;
 
 const Main = () => {
@@ -66,14 +83,7 @@ const Main = () => {
           </Row>
           <Row justify="center">
             {/* xs: <576, sm: >=576 md: >=768, lg: >=992, xl: >=1200 */}
-            <Col
-              xs={23}
-              sm={15}
-              md={13}
-              lg={10}
-              xl={9}
-              style={{ textAlign: "center" }}
-            >
+            <ColWrapper xs={23} sm={15} md={13} lg={10} xl={9}>
               <InputWrapper
                 size="large"
                 name="url"
@@ -89,22 +99,18 @@ const Main = () => {
                     htmlType="submit"
                     loading={UrlLoading}
                   >
-                    <span style={{ color: "#f6f6f6" }}>CUT</span>
+                    <ButtonIneerSpanWrapper>CUT</ButtonIneerSpanWrapper>
                   </ButtonWrapper>
                 }
               />
-            </Col>
+            </ColWrapper>
           </Row>
 
           {Copyed ? (
-            <Row justify="center" style={{ marginTop: "4vh" }}>
+            <RowWrapper justify="center">
               <Col xs={32} sm={14} md={12} lg={10} xl={7}>
                 <div className="site-card-border-less-wrapper">
-                  <Card
-                    title={Url}
-                    bordered={false}
-                    style={{ borderRadius: "25px" }}
-                  >
+                  <CardWrapper title={Url} bordered={false}>
                     <div>
                       <p
                         style={{
@@ -123,20 +129,20 @@ const Main = () => {
                       </ButtonWrapper> */}
                       <img src="../../static/QRCodeImg_153.jpg" />
                     </div>
-                  </Card>
+                  </CardWrapper>
                 </div>
               </Col>
-            </Row>
+            </RowWrapper>
           ) : (
             <div></div>
           )}
 
-          <Row justify="center" style={{ marginTop: "4vh" }}>
+          <RowWrapper justify="center">
             <p>URL이 너무 길다구요? 'CUT'하면 짧아지는 마술~</p>
-          </Row>
+          </RowWrapper>
         </FormWrapper>
 
-        <Row justify="center" style={{ marginTop: "6vh" }}>
+        <RowWrapper justify="center">
           <div className="main-image-container">
             <div className="main-image-list">
               <div className="main-image-item main-image-margin">
@@ -150,7 +156,7 @@ const Main = () => {
               </div>
             </div>
           </div>
-        </Row>
+        </RowWrapper>
       </div>
     </Layout>
   );

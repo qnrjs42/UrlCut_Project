@@ -1,11 +1,20 @@
 import React, { useCallback, useState } from "react";
 import { Row, Col, Button, Layout } from "antd";
 import { WechatOutlined, PushpinFilled, TeamOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+
+const RowWrapper = styled(Row)`
+  padding-top: 3vh;
+`;
+
+const ColWrapper = styled(Col)`
+  margin-right: 3vw;
+`;
 
 const SubLayout = () => {
   const [ImgName, setImgName] = useState("Chat");
 
-  const onButtonClick = useCallback(async (e) => {
+  const onButtonClick = useCallback((e) => {
     setImgName(e);
   });
 
@@ -21,8 +30,8 @@ const SubLayout = () => {
         </p>
         <br />
       </Row>
-      <Row justify="center" style={{ paddingTop: "3vh" }}>
-        <Col style={{ marginRight: "3vw" }}>
+      <RowWrapper justify="center">
+        <ColWrapper>
           <Button
             type="dashed"
             icon={<WechatOutlined />}
@@ -32,9 +41,9 @@ const SubLayout = () => {
           >
             채팅 상담
           </Button>
-        </Col>
+        </ColWrapper>
 
-        <Col style={{ marginRight: "3vw" }}>
+        <ColWrapper>
           <Button
             type="dashed"
             icon={<PushpinFilled />}
@@ -44,7 +53,7 @@ const SubLayout = () => {
           >
             마케팅
           </Button>
-        </Col>
+        </ColWrapper>
 
         <Col>
           <Button
@@ -57,16 +66,13 @@ const SubLayout = () => {
             팀 메신저
           </Button>
         </Col>
-      </Row>
+      </RowWrapper>
 
-      <Row justify="center" style={{ paddingTop: "3vh" }}>
+      <RowWrapper justify="center">
         <div className="sub-layout-one-image">
-          <img
-            src={`/static/${ImgName}.jpg`}
-            style={{ minWidth: "900px", width: "1200px", height: "700px" }}
-          />
+          <img src={`/static/${ImgName}.jpg`} />
         </div>
-      </Row>
+      </RowWrapper>
     </Layout>
   );
 };

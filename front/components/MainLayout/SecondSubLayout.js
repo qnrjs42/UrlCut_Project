@@ -43,7 +43,7 @@ const SecondSubLayout = () => {
           offset={1}
           xs={{ order: 1, offset: 0 }}
           sm={{ order: 1, offset: 0 }}
-          md={{ order: 2 }}
+          md={{ order: 2, offset: 1 }}
           lg={{ order: 2 }}
           xl={{ order: 2 }}
           style={{ textAlign: "center" }}

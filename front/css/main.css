@@ -136,10 +136,20 @@ h3 {
 
 .sub-layout-one-image {
   display: flex;
-  width: 1200px;
-  height: 700px;
+  /* width: 1200px;
+  height: 700px; */
+  width: auto;
+  height: auto;
   overflow-x: auto;
   justify-content: center;
+  padding: 20px 100px;
+}
+
+.sub-layout-one-image > img {
+  min-width: 500px;
+  min-height: 600px;
+  width: 1200px;
+  height: 700px;
 }
 
 /*
@@ -173,6 +183,16 @@ h3 {
   서브 레이아웃 2 끝
 */
 
+@media screen and (max-width: 500px) {
+  .sub-layout-one-image > img {
+    min-width: 340px;
+    min-height: 400px;
+    width: 340px;
+    height: 400px;
+    padding: 10px;
+  }
+}
+
 /* width가 900이하일 때 */
 @media screen and (max-width: 900px) {
   h1 {
@@ -193,10 +213,10 @@ h3 {
     font-size: 0.8rem;
   }
 
-  .sub-layout-one-image {
-    width: 700px;
-    height: 500px;
-  }
+  /* .sub-layout-one-image {
+    width: 600px;
+    height: 700px;
+  } */
 
   .sub-layout-two-image {
     width: 300px;
