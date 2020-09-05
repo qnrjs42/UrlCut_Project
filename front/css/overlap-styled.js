@@ -71,11 +71,20 @@ export const ButtonPurpleWrapper = styled(Button)`
     border-color: rgba(113, 117, 216, 0.7);
   }
 
+  // 버튼안에 텍스트
   span {
     color: #f6f6f6;
+
+    // 버튼안에 아이콘
+    svg {
+      path {
+        color: #f6f6f6;
+      }
+    }
   }
 `;
 
+// Green이 배경색일 때 #f6f6f6 는 회색처럼 보인다
 export const ButtonGreenWrapper = styled(Button)`
   border-radius: 5px;
   color: #fff;
@@ -93,9 +102,20 @@ export const ButtonGreenWrapper = styled(Button)`
     border-color: rgba(94, 203, 161, 0.7);
     color: #fff;
   }
+
+  span {
+    color: #fff;
+  }
 `;
 
 export const ButtonBorderWrapper = styled(Button)`
+  border-radius: 5px;
+  span {
+    color: #f6f6f6;
+  }
+`;
+
+export const ButtonDefaultBorderWrapper = styled(Button)`
   border-radius: 5px;
 `;
 

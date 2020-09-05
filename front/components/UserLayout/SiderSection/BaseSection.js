@@ -94,12 +94,12 @@ const BaseSection = () => {
       className="user-sider"
     >
       <div className="user_logo">
-        <Link href="/">
+        <Link href={`${userList[0].url}/index`}>
           {/* 새로고침한다고 보면 됨 */}
           <a className="user-sider-header-menu-item">{Title}</a>
         </Link>
       </div>
-      <Menu theme="dark" mode="inline" selectedKeys={`${onChangeKey()}`}>
+      <Menu mode="inline" selectedKeys={`${onChangeKey()}`}>
         <span className={SiderHeader}>DASHBOARD</span>
         <Menu.Item key="dashboard_main" icon={<AppstoreOutlined />}>
           <Link href="/user/[userPages]" as={`${userList[0].url}/index`}>
@@ -117,7 +117,6 @@ const BaseSection = () => {
             </a>
           </Link>
         </Menu.Item>
-        <Menu.Divider />
 
         <span className={SiderHeader}>MANAGEMENT</span>
         <Menu.Item key="management_link_storage" icon={<FolderOutlined />}>
@@ -134,7 +133,6 @@ const BaseSection = () => {
             </a>
           </Link>
         </Menu.Item>
-        <Menu.Divider />
 
         <span className={SiderHeader}>LINK OPTION</span>
         <Menu.Item key="link_option_multi_links" icon={<CarryOutOutlined />}>
@@ -144,7 +142,6 @@ const BaseSection = () => {
             </a>
           </Link>
         </Menu.Item>
-        <Menu.Divider />
 
         <span className={SiderHeader}>TOOLS</span>
         <Menu.Item key="tools_create_quick_link" icon={<FileAddOutlined />}>
@@ -165,7 +162,6 @@ const BaseSection = () => {
             </a>
           </Link>
         </Menu.Item>
-        <Menu.Divider />
 
         <span className={SiderHeader}>PRIVACY</span>
         <Menu.Item key="privacy_profile" icon={<TeamOutlined />}>

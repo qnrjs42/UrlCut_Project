@@ -92,7 +92,7 @@ const DrawerSection = () => {
           visible={Visible}
           getContainer={false}
         >
-          <Menu theme="dark" mode="inline" selectedKeys={`${onChangeKey()}`}>
+          <Menu mode="inline" selectedKeys={`${onChangeKey()}`}>
             <span className="user-sider-header-open">DASHBOARD</span>
             <Menu.Item
               key="dashboard_main"
@@ -120,7 +120,6 @@ const DrawerSection = () => {
                 </a>
               </Link>
             </Menu.Item>
-            <Menu.Divider />
 
             <span className="user-sider-header-open">MANAGEMENT</span>
             <Menu.Item
@@ -149,7 +148,6 @@ const DrawerSection = () => {
                 </a>
               </Link>
             </Menu.Item>
-            <Menu.Divider />
 
             <span className="user-sider-header-open">LINK OPTION</span>
             <Menu.Item
@@ -163,7 +161,6 @@ const DrawerSection = () => {
                 </a>
               </Link>
             </Menu.Item>
-            <Menu.Divider />
 
             <span className="user-sider-header-open">TOOLS</span>
             <Menu.Item
@@ -192,7 +189,6 @@ const DrawerSection = () => {
                 </a>
               </Link>
             </Menu.Item>
-            <Menu.Divider />
 
             <span className="user-sider-header-open">PRIVACY</span>
             <Menu.Item
