@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { Form, Checkbox, Row } from "antd";
-import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 import useInput from "../hooks/useInput";
@@ -19,13 +18,12 @@ import {
 } from "../css/overlap-styled";
 
 const logIn = () => {
-  const [form] = Form.useForm();
+  const uRouter = useRouter();
   const dispatch = useDispatch();
+  const { logInLoading } = useSelector((state) => state.user);
+
   const [Email, onChangeEmail, setEmail] = useInput("");
   const [Password, onChangePassword, setPassword] = useInput("");
-
-  const uRouter = useRouter();
-  const { register, handleSubmit } = useForm();
 
   const onLogInSubmit = useCallback(() => {
     console.log(Email, Password);
@@ -33,7 +31,6 @@ const logIn = () => {
     dispatch(loginRequestAction(Email, Password));
 
     // 폼, 인풋 초기화
-    form.resetFields();
     setEmail(null);
     setPassword(null);
 
@@ -48,7 +45,6 @@ const logIn = () => {
           <div className="app">
             <MainTitleWrapper level={2}>로그인</MainTitleWrapper>
             <FormWrapper
-              form={form}
               // onFinish={handleSubmit(onLogInSubmit)}
               onFinish={onLogInSubmit}
             >
@@ -96,6 +92,7 @@ const logIn = () => {
                     htmlType="submit"
                     className="login-form-button"
                     size="large"
+                    loading={logInLoading}
                     onSubmit={onLogInSubmit}
                   >
                     로그인

@@ -24,7 +24,7 @@ const dummyUser = (data) => ({
 
 function* logIn(action) {
   try {
-    yield delay(1000); // 가짜 데이터
+    yield delay(10000); // 가짜 데이터인척하고 시간 지연
     // const result = yield call(loginAPI, action.data); // 아직 서버가 없어서 요청을 못 보냄
     console.log("saga의 action", action);
 
@@ -65,12 +65,12 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
-  return axios.post("/api/logout", data);
+  return axios.post("/api/signUp", data);
 }
 
 function* signUp(action) {
   try {
-    yield delay(1000); // 가짜 데이터
+    yield delay(3000); // 가짜 데이터
     // const result = yield call(signUpAPI, action.data);
 
     console.log("saga의 signUp Action", action);

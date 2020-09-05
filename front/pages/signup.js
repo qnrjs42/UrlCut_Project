@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
 import { Form, Input, Button, Checkbox, Typography, Layout, Row } from "antd";
 import { UserOutlined, LockOutlined, EditOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 import useInput from "../hooks/useInput";
 import { signupRequestAction } from "../reducers/reducer_user";
@@ -43,14 +43,14 @@ const tailFormItemLayout = {
 };
 
 const signUp = () => {
-  const [form] = Form.useForm();
+  const uRouter = useRouter();
   const dispatch = useDispatch();
-  const [formErrorMessage, setFormErrorMessage] = useState("");
+  const { signUpLoading } = useSelector((state) => state.user);
 
   const [Email, onChangeEmail, setEmail] = useInput("");
   const [NickName, onChangeNickName, setNickName] = useInput("");
-
   const [Password, onChangePassword, setPassword] = useInput("");
+
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
@@ -81,7 +81,7 @@ const signUp = () => {
 
     dispatch(signupRequestAction({ Email, NickName, Password }));
 
-    // Router.push("/");
+    uRouter.push("/");
   }, [Email, NickName, Password, term]);
 
   return (
@@ -95,7 +95,7 @@ const signUp = () => {
         >
           <div className="app">
             <MainTitleWrapper level={2}>회원가입</MainTitleWrapper>
-            <FormWrapper form={form} onFinish={onSignUpSubmit}>
+            <FormWrapper onFinish={onSignUpSubmit}>
               <Form.Item
                 name="email"
                 rules={[
@@ -223,6 +223,7 @@ const signUp = () => {
                     htmlType="submit"
                     className="login-form-button"
                     size="large"
+                    loading={signUpLoading}
                     onSubmit={onSignUpSubmit}
                   >
                     회원가입하기

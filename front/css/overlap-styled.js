@@ -41,8 +41,13 @@ export const MainButtonWrapper = styled(Button)`
     border-color: rgba(113, 117, 216, 0.3);
   }
 
+  &:focus {
+    background-color: rgba(113, 117, 216, 0.8);
+    border-color: rgba(113, 117, 216, 0.8);
+  }
+
   span {
-    color: #fff;
+    color: #f6f6f6;
   }
 `;
 
