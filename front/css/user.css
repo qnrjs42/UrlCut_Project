@@ -77,38 +77,6 @@
   overflow-x: auto;
 }
 
-/* antd 오버라이딩 시작 */
-.ant-menu-item a {
-  color: #050c42;
-}
-.ant-layout-content {
-  flex: auto;
-  margin: 20px 16px;
-  min-height: 0;
-}
-
-/* antd drawer custom 종료 */
-
-/* > 모든 테이블  */
-.ant-table-thead > tr > th {
-  font-size: 1rem;
-  font-weight: 700;
-}
-/* 스위치 버튼 선택 됐을 때 색상 */
-.ant-switch-checked {
-  background-color: rgba(94, 203, 161, 0.9);
-}
-
-/* > BaseSection - Selected */
-.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: rgba(113, 117, 216, 0.9);
-}
-/* DrawerSection - Selected */
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: rgba(113, 117, 216, 0.9);
-}
-/* antd 오버라이딩 끝 */
-
 /*  */
 
 @media all and (max-width: 650px) {
@@ -132,15 +100,4 @@
     font-size: 0.75rem !important;
     margin-bottom: 5px;
   }
-
-  /* antd 오버라이딩 시작 */
-  .ant-table-thead > tr > th {
-    font-size: 0.9375rem;
-    font-weight: 600;
-  }
-
-  .ant-table-tbody > tr > td {
-    font-size: 0.875rem;
-  }
-  /* antd 오버라이딩 끝 */
 }
