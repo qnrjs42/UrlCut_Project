@@ -24,6 +24,7 @@ import styled from "styled-components";
 import {
   ButtonGreenWrapper,
   ButtonBorderWrapper,
+  ButtonDefaultBorderWrapper,
 } from "../../../../css/overlap-styled";
 
 const DragHandle = sortableHandle(() => (
@@ -173,7 +174,7 @@ export const OptionOnLayout = () => {
         <Col>
           <Space>
             <ButtonGreenWrapper type="primary">설정</ButtonGreenWrapper>
-            <ButtonBorderWrapper>링크 목록</ButtonBorderWrapper>
+            <ButtonDefaultBorderWrapper>링크 목록</ButtonDefaultBorderWrapper>
           </Space>
         </Col>
         <Col>

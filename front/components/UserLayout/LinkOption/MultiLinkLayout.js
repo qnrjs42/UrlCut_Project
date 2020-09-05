@@ -29,6 +29,7 @@ import { OptionOnLayout } from "./Sections/OptionOnLayout";
 import {
   ButtonPurpleWrapper,
   ButtonBorderWrapper,
+  ButtonDefaultBorderWrapper,
 } from "../../../css/overlap-styled";
 
 const { Content } = Layout;
@@ -104,9 +105,12 @@ const MultiLinkLayout = () => {
           onOk={onMultiLinkCreateOk}
           onCancel={onMultiLinkCreateCancel}
           footer={[
-            <ButtonBorderWrapper key="back" onClick={onMultiLinkCreateCancel}>
+            <ButtonDefaultBorderWrapper
+              key="back"
+              onClick={onMultiLinkCreateCancel}
+            >
               Return
-            </ButtonBorderWrapper>,
+            </ButtonDefaultBorderWrapper>,
             <ButtonPurpleWrapper
               key="submit"
               type="primary"
