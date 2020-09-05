@@ -1,1 +1,8 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+## 20-09-05 지금이라도 쓰는 개발 일기
+
+[20-09-05] 클리어
+
+1. 모바일 메인화면 디자인 수정
+
+- 중심 잡기
+- URL INPUT 중심 크기로 설정
