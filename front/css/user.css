@@ -77,8 +77,12 @@
   min-height: 250px;
 }
 
+/* 프로필 설정, 결제 정보 테이블 */
 .latest_link_table {
   overflow-x: auto;
+}
+.latest_link_table > div > div > div > div > div > table {
+  min-width: 480px;
 }
 
 /*  */

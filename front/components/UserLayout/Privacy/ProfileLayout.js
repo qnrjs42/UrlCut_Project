@@ -198,7 +198,10 @@ const ProfileLayout = () => {
               <Row>
                 <ColProfileGatewayWrapper xs={24}>
                   <Row justify="space-between" align="middle">
-                    <ColPaddingBottomWrapper span={20}>
+                    <ColPaddingBottomWrapper
+                      xs={{ span: 24 }}
+                      md={{ span: 20 }}
+                    >
                       프로필 공개
                       <br />
                       <Text type="secondary">
@@ -217,7 +220,10 @@ const ProfileLayout = () => {
                 </ColProfileGatewayWrapper>
                 <ColProfileGatewayWrapper xs={24}>
                   <Row justify="space-between" align="middle">
-                    <ColPaddingBottomWrapper span={20}>
+                    <ColPaddingBottomWrapper
+                      xs={{ span: 24 }}
+                      md={{ span: 20 }}
+                    >
                       미디어 게이트웨이
                       <br />
                       <Text type="secondary">
