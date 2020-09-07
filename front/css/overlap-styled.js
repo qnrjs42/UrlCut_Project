@@ -14,7 +14,7 @@ export const MainLayoutWrapper = styled(Layout)`
 `;
 
 export const MainRowPaddingWrapper = styled(Row)`
-  padding-top: 25%;
+  padding-top: 25vh;
 `;
 
 export const MainTitleWrapper = styled(Title)`
