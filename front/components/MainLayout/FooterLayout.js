@@ -22,18 +22,23 @@ const ColSubWrapper = styled(Col)`
 const FooterLayout = () => {
   return (
     <FooterWrapper>
-      <Row justify="center">
-        <ColMainWrapper span={8} order={1}>
+      <Row>
+        <ColMainWrapper
+          order={1}
+          md={{ span: 24 }}
+          lg={{ span: 24 }}
+          xl={{ span: 8 }}
+        >
           <Row>
-            <Col xs={{ offset: 5 }} md={{ offset: 0 }}>
-              <div className="menu__logo">
+            <Col md={{ offset: 0 }} lg={{ offset: 2 }} xl={{ offset: 6 }}>
+              <div className="menu__logo_footer">
                 <a href="/">Link_Project</a>
               </div>
             </Col>
           </Row>
           <br />
           <Row>
-            <Col xs={{ offset: 5 }} md={{ offset: 2 }}>
+            <Col md={{ offset: 0 }} lg={{ offset: 2 }} xl={{ offset: 6 }}>
               <p>
                 대표자명: sistinafibel
                 <br />
@@ -43,7 +48,7 @@ const FooterLayout = () => {
           </Row>
         </ColMainWrapper>
 
-        <ColSubWrapper span={4} order={2}>
+        <ColSubWrapper span={4} order={2} lg={{ offset: 2 }} xl={{ offset: 3 }}>
           <h3>INFORMATION</h3>
           <a>서비스 소개</a>
           <br />

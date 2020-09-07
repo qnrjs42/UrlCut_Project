@@ -18,6 +18,13 @@
   padding: 10px 10px 0px 15px;
 }
 
+.menu__logo_footer a {
+  display: inline-block;
+  font-size: 20px;
+  color: #050c42;
+  padding: 10px 10px 0px 0px;
+}
+
 .menu_left {
   margin-left: 70px;
 }
