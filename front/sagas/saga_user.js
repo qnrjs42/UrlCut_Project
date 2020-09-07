@@ -48,10 +48,11 @@ function logOutAPI() {
 
 function* logOut() {
   try {
-    yield delay(3000); // 가짜 데이터
     // const result = yield call(logOutAPI);
 
     localStorage.removeItem("me");
+
+    // yield delay(2000); // 가짜 데이터
 
     yield put({
       type: LOG_OUT_SUCCESS,
