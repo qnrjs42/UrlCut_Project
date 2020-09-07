@@ -10,6 +10,7 @@
 
 > #### 2. 유저화면 수정
 >
+> - Sider trigger tooltip background-color 수정
 > - 모바일 - Drawer 버튼 간격 조정
 > - 모바일 - 프로필 설정 - 프로필 공개, 미디어 게이트웨이 Col 간격 넓히기
 > - 모바일 - 프로필 설정, 결제 정보 - 테이블 조정
