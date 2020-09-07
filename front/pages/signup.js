@@ -88,11 +88,7 @@ const signUp = () => {
     <>
       <NavBar />
       <MainLayoutWrapper className="layout">
-        <MainRowPaddingWrapper
-          justify="space-around"
-          align="middle"
-          style={{ padding: "15% 0" }}
-        >
+        <MainRowPaddingWrapper justify="space-around" align="middle">
           <div className="app">
             <MainTitleWrapper level={2}>회원가입</MainTitleWrapper>
             <FormWrapper onFinish={onSignUpSubmit}>
