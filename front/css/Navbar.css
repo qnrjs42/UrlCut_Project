@@ -57,8 +57,8 @@
 
 .menu__mobile-button {
   float: right;
-  font-size: 24px;
-  padding: 11px 6px 6px 6px;
+  font-size: 25px;
+  padding: 9px 6px 6px 6px;
   margin-top: 8px;
   display: none !important; /* use of important to overwrite ant-btn */
 }

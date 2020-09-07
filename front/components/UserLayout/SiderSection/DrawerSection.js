@@ -10,7 +10,7 @@ import {
   GoldOutlined,
   TeamOutlined,
   CreditCardOutlined,
-  UnorderedListOutlined,
+  MenuOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter, withRouter } from "next/router";
@@ -82,7 +82,7 @@ const DrawerSection = () => {
   return (
     <>
       <div className="mobile-sider-on-off">
-        <UnorderedListOutlined onClick={showDrawer} />
+        <MenuOutlined onClick={showDrawer} />
 
         <Drawer
           title="Link_Project"

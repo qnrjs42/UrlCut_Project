@@ -56,7 +56,7 @@ const HeaderLayout = () => {
 
   return (
     <HeaderWrapper>
-      <RowPaddingTopWrapper>
+      <RowPaddingTopWrapper align="middle">
         <DrawerSection />
 
         <Col xs={14}>

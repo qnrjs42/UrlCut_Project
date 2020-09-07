@@ -60,7 +60,6 @@
 
 .mobile-sider-on-off > span > svg {
   font-size: 25px !important;
-  margin: 10px 0 10px 10px;
 }
 
 .fontMedium {
@@ -95,7 +94,7 @@
 
   .mobile-sider-on-off {
     display: flex;
-    padding: 0px 15px 0px 5px;
+    padding-right: 20px;
     /* background-color: white;
         height: 64px; */
   }
