@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Menu, Button, Drawer, Row, Col } from "antd";
-import { UnorderedListOutlined } from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutRequestAction } from "../../reducers/reducer_user";
 import LeftMenu from "./Sections/LeftMenu";
@@ -35,13 +35,7 @@ const NavBar = () => {
           <div className="menu_rigth">
             <RightMenu mode="horizontal" />
           </div>
-          <Button
-            className="menu__mobile-button"
-            type="primary"
-            onClick={showDrawer}
-          >
-            <UnorderedListOutlined />
-          </Button>
+          <MenuOutlined className="menu__mobile-button" onClick={showDrawer} />
           <Drawer
             title="&nbsp; Link_Project"
             placement="right"

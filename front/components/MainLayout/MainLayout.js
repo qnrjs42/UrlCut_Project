@@ -55,7 +55,6 @@ const Main = () => {
   const { urlCutLoading, urlCutDone, shortenUrl } = useSelector(
     (state) => state.url
   );
-  // const { me } = useSelector((state) => state.user);
 
   const [OriginalUrl, setOriginalUrl] = useState("");
   const [ChangeUrl, setChangeUrl] = useState("");

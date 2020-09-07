@@ -5,17 +5,17 @@ import Link from "next/link";
 function LeftMenu(props) {
   return (
     <Menu mode={props.mode}>
-      <Menu.Item key="1" className="main-nav-home">
+      <Menu.Item key="home" className="main-nav-home">
         <Link href="/">
           <a>Home</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="2">
+      <Menu.Item key="url_check">
         <Link href="/">
           <a>URL 안전검사</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="3">
+      <Menu.Item key="service">
         <Link href="/">
           <a>부가 서비스</a>
         </Link>
