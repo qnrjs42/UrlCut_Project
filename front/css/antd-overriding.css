@@ -70,6 +70,11 @@
   min-height: 0;
 }
 
+/* sider trigger menu tooltip color */
+.ant-tooltip-inner {
+  background-color: rgba(94, 203, 161, 0.9);
+}
+
 /* 스위치 버튼 선택 됐을 때 색상 */
 .ant-switch-checked {
   background-color: rgba(94, 203, 161, 0.9);
