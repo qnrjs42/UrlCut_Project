@@ -20,20 +20,18 @@ const SubLayout = () => {
 
   return (
     <Layout className="layout sub-layout-one">
-      <Row justify="center">
-        <Row justify="center">
-          <Col xs={{ span: 22 }} md={{ span: 24 }}>
-            <h1>링크는 CUT으로 간단하게, 그것뿐이니까</h1>
-          </Col>
-        </Row>
-        <Row justify="center">
-          <Col xs={{ span: 21 }} md={{ span: 24 }}>
-            <p className="sub-layout-font-medium">
-              고객을 놓치지 않고 매출로 연결하며, 떠나간 고객도 메시지를 보내
-              돌아오게 합니다. 꼭 필요한 팀 메신저도 무료로 제공됩니다.
-            </p>
-          </Col>
-        </Row>
+      <Row justify="center" style={{ textAlign: "center" }}>
+        <Col xs={{ span: 22 }} md={{ span: 24 }}>
+          <h1>링크는 CUT으로 간단하게, 그것뿐이니까</h1>
+        </Col>
+      </Row>
+      <Row justify="center" style={{ textAlign: "center" }}>
+        <Col xs={{ span: 21 }} md={{ span: 24 }}>
+          <p className="sub-layout-font-medium">
+            고객을 놓치지 않고 매출로 연결하며, 떠나간 고객도 메시지를 보내
+            돌아오게 합니다. 꼭 필요한 팀 메신저도 무료로 제공됩니다.
+          </p>
+        </Col>
       </Row>
       <br />
       <RowWrapper justify="center">

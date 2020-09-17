@@ -1,5 +1,11 @@
 import React from "react";
 import { Row, Col, Button, Layout, Badge, Card } from "antd";
+import styled from "styled-components";
+
+const ColWrapper = styled(Col)`
+  text-align: center;
+  max-width: 500px;
+`;
 
 const SecondSubLayout = () => {
   return (
@@ -22,7 +28,7 @@ const SecondSubLayout = () => {
       </Row>
 
       <Row justify="center">
-        <p className="sub-layout-font-medium">
+        <p className="sub-layout-font-medium" style={{ textAlign: "center" }}>
           사용자 니즈에 맞춰 기능을 개선하고, 연구 개발하고 있습니다.
           <br />
           차별화된 서비스를 통해 성공적인 마케팅을 시작하세요.
@@ -39,14 +45,11 @@ const SecondSubLayout = () => {
         >
           <img className="sub-layout-two-image" src={`../static/IU4.jpg`} />
         </Col>
-        <Col
+        <ColWrapper
           offset={1}
           xs={{ order: 1, offset: 0, span: 21 }}
           sm={{ order: 1, offset: 0, span: 8 }}
           md={{ order: 2, offset: 1, span: 10 }}
-          lg={{ order: 2 }}
-          xl={{ order: 2 }}
-          style={{ textAlign: "center" }}
         >
           <br />
           <h2>
@@ -55,16 +58,17 @@ const SecondSubLayout = () => {
           </h2>
           <br />
           <p className="sub-layout-font-medium">
-            VOLA의 도메인을 사용하지 않고 회원이 보유하고 있는 도메인으로 사용할
-            수 있습니다. 단독으로 사용할 수 있어 브랜딩에 효과적입니다.
+            Link_Project의 도메인을 사용하지 않고 회원이 보유하고 있는
+            도메인으로 사용할 수 있습니다. 단독으로 사용할 수 있어 브랜딩에
+            효과적입니다.
           </p>
-        </Col>
+        </ColWrapper>
       </Row>
       <br />
       <br />
 
       <Row justify="center">
-        <Col xs={{ span: 22 }} sm={{ span: 8 }} md={{ span: 10 }}>
+        <ColWrapper xs={{ span: 22 }} sm={{ span: 8 }} md={{ span: 10 }}>
           <br />
           <h2>
             엑셀파일로 단축링크를 쉽고 빠르게!
@@ -76,8 +80,8 @@ const SecondSubLayout = () => {
             매우 빠르게 대량변환이 가능한 프로그램이 유용하게 사용될 수
             있습니다.
           </p>
-        </Col>
-        <Col offset={1}>
+        </ColWrapper>
+        <Col xs={{ offset: 0 }} sm={{ offset: 1 }}>
           <img className="sub-layout-two-image" src={`../static/IU5.jpg`} />
         </Col>
       </Row>
