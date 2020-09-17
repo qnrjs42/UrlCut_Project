@@ -93,7 +93,9 @@ const reducer = (state = initialState, action) =>
       case LOG_IN_SUCCESS:
         draft.logInLoading = false;
         draft.logInDone = true;
-        draft.me = action.data; // 더미 데이터
+        draft.me = action.data;
+
+        draft.logOutDone = false;
         break;
 
       case LOG_IN_FAILURE:
@@ -112,6 +114,8 @@ const reducer = (state = initialState, action) =>
         draft.logOutLoading = false;
         draft.logOutDone = true;
         draft.me = null;
+
+        draft.logInDone = false;
         break;
 
       case LOG_OUT_FAILURE:

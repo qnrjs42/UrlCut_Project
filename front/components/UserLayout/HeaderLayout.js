@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Layout, Menu, Row, Col, Input, Avatar, Dropdown, Spin } from "antd";
 import { UserOutlined, LoadingOutlined } from "@ant-design/icons";
 import styled from "styled-components";
@@ -33,11 +33,18 @@ const AvatarWrapper = styled(Avatar)`
 
 const HeaderLayout = () => {
   const dispatch = useDispatch();
-  const { logOutLoading } = useSelector((state) => state.user);
+  const { logOutLoading, logOutDone, logInDone } = useSelector(
+    (state) => state.user
+  );
+
+  useEffect(() => {
+    if (logOutDone && !logInDone) {
+      Router.push("/");
+    }
+  }, [logOutDone]);
 
   const onLogout = useCallback(() => {
     dispatch(logoutRequestAction());
-    setTimeout(() => Router.push("/"), 1000);
   });
 
   const menu = (
