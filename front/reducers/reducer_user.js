@@ -52,12 +52,6 @@ export const UNFOLLOW_FAILURE = "UNFOLLOW_FAILURE";
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
-const dummyUser = (data) => ({
-  email: data,
-  nickname: "제로초",
-  id: 1,
-});
-
 const dummySignUpUser = (data) => ({
   email: data,
   nickname: "제로초",
@@ -99,7 +93,7 @@ const reducer = (state = initialState, action) =>
       case LOG_IN_SUCCESS:
         draft.logInLoading = false;
         draft.logInDone = true;
-        draft.me = dummyUser(action.data); // 더미 데이터
+        draft.me = action.data; // 더미 데이터
         break;
 
       case LOG_IN_FAILURE:
@@ -135,7 +129,6 @@ const reducer = (state = initialState, action) =>
       case SIGN_UP_SUCCESS:
         draft.signUpLoading = false;
         draft.signUpDone = true;
-
         break;
 
       case SIGN_UP_FAILURE:

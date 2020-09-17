@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Form, Input, Button, Checkbox, Typography, Layout, Row } from "antd";
 import { UserOutlined, LockOutlined, EditOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,7 +45,7 @@ const tailFormItemLayout = {
 const signUp = () => {
   const uRouter = useRouter();
   const dispatch = useDispatch();
-  const { signUpLoading } = useSelector((state) => state.user);
+  const { signUpLoading, signUpDone } = useSelector((state) => state.user);
 
   const [Email, onChangeEmail, setEmail] = useInput("");
   const [NickName, onChangeNickName, setNickName] = useInput("");
@@ -56,6 +56,17 @@ const signUp = () => {
 
   const [term, setTerm] = useState("");
   const [termError, setTermError] = useState(false);
+
+  useEffect(() => {
+    if (signUpDone) {
+      setEmail(null);
+      setNickName(null);
+      setPassword(null);
+      setPasswordCheck(null);
+      setTerm(false);
+      uRouter.push("/");
+    }
+  }, [signUpDone]);
 
   const onChangeTerm = useCallback((e) => {
     setTerm(e.target.checked);
@@ -80,8 +91,6 @@ const signUp = () => {
     }
 
     dispatch(signupRequestAction({ Email, NickName, Password }));
-
-    uRouter.push("/");
   }, [Email, NickName, Password, term]);
 
   return (

@@ -4,7 +4,7 @@ import { LinkOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { urlCutRequestAction } from "../../reducers/reducer_url";
+import { URL_CUT_REQUEST } from "../../reducers/reducer_url";
 
 /* Did't use css/overlap-styled */
 const FormWrapper = styled(Form)`
@@ -66,7 +66,9 @@ const Main = () => {
   const onSubmitForm = useCallback(() => {
     setOriginalUrl(ChangeUrl);
 
-    dispatch(urlCutRequestAction());
+    dispatch({
+      type: URL_CUT_REQUEST,
+    });
   }, [ChangeUrl]);
 
   return (

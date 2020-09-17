@@ -15,7 +15,7 @@ function* urlCut() {
   try {
     // const result = yield call(urlCutAPI); // axios 이용할 때
     const result = "Saga를 이용한 단축된 URL";
-    yield delay(3000);
+    yield delay(2000);
     yield put({
       type: URL_CUT_SUCCESS,
       //   data: result.data, // axios 이용할 때
