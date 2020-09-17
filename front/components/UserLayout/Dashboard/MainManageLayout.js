@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Layout, Row, Col, Card, Progress, Table } from "antd";
-import { LinkOutlined } from "@ant-design/icons";
+import {} from "@ant-design/icons";
 import { Line } from "react-chartjs-2";
 import Link from "next/link";
 import styled from "styled-components";
 
 import {
+  ButtonDefaultBorderWrapper,
   ButtonPurpleWrapper,
   ButtonGreenWrapper,
   RowWrapper,
 } from "../../../css/overlap-styled";
+import ShortenUrlButton from "../ShortenUrlButton";
 
 const { Content } = Layout;
 
@@ -153,13 +155,7 @@ const MainManageLayout = () => {
   return (
     <Content>
       <Row justify="end">
-        <ButtonPurpleWrapper
-          type="primary"
-          icon={<LinkOutlined className="user-button-icon" />}
-          size="large"
-        >
-          단축 URL 추가
-        </ButtonPurpleWrapper>
+        <ShortenUrlButton />
       </Row>
 
       <RowWrapper gutter={[16, 16]} justify="center">

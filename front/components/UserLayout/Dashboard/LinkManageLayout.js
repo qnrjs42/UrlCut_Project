@@ -1,13 +1,13 @@
 import React from "react";
 import { Layout, Row, Col, Card, Table } from "antd";
-import { LinkOutlined } from "@ant-design/icons";
 
 import {
-  ButtonPurpleWrapper,
   ButtonGreenWrapper,
   ButtonBorderWrapper,
   ColWrapper,
 } from "../../../css/overlap-styled";
+
+import ShortenUrlButton from "../ShortenUrlButton";
 
 const { Content } = Layout;
 
@@ -115,13 +115,7 @@ const LinkManageLayout = () => {
             <h3>단축 URL 관리</h3>
           </ColWrapper>
           <Col>
-            <ButtonPurpleWrapper
-              type="primary"
-              icon={<LinkOutlined />}
-              size="large"
-            >
-              단축 URL 추가
-            </ButtonPurpleWrapper>
+            <ShortenUrlButton />
           </Col>
         </Row>
 
@@ -135,11 +129,6 @@ const LinkManageLayout = () => {
             <Col>
               <ButtonGreenWrapper type="primary" size="large">
                 보관함 이동
-              </ButtonGreenWrapper>
-            </Col>
-            <Col>
-              <ButtonGreenWrapper type="primary" size="large">
-                패키지 추가
               </ButtonGreenWrapper>
             </Col>
           </Row>

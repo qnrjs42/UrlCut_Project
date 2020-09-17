@@ -19,8 +19,6 @@ export const initialState = {
   changeNicknameError: null,
 
   me: null,
-  signUpdata: {},
-  loginData: {},
 };
 
 // type을 문자열로 정하면 오타에 취약 그래서 변수로 빼두는게 좋다
@@ -40,14 +38,6 @@ export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 export const CHANGE_NICKNAME_REQUEST = "CHANGE_NICKNAME_REQUEST";
 export const CHANGE_NICKNAME_SUCCESS = "CHANGE_NICKNAME_SUCCESS";
 export const CHANGE_NICKNAME_FAILURE = "CHANGE_NICKNAME_FAILURE";
-
-export const FOLLOW_REQUEST = "FOLLOW_REQUEST";
-export const FOLLOW_SUCCESS = "FOLLOW_SUCCESS";
-export const FOLLOW_FAILURE = "FOLLOW_FAILURE";
-
-export const UNFOLLOW_REQUEST = "UNFOLLOW_REQUEST";
-export const UNFOLLOW_SUCCESS = "UNFOLLOW_SUCCESS";
-export const UNFOLLOW_FAILURE = "UNFOLLOW_FAILURE";
 
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";

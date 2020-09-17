@@ -9,6 +9,8 @@ import {
   ColWrapper,
 } from "../../../css/overlap-styled";
 
+import ShortenUrlButton from "../ShortenUrlButton";
+
 const { Content } = Layout;
 
 // table data
@@ -115,13 +117,7 @@ const LinkStorageLayout = () => {
             <h3>보관된 URL</h3>
           </ColWrapper>
           <Col>
-            <ButtonPurpleWrapper
-              type="primary"
-              icon={<LinkOutlined />}
-              size="large"
-            >
-              단축 URL 추가
-            </ButtonPurpleWrapper>
+            <ShortenUrlButton />
           </Col>
         </Row>
 
@@ -135,11 +131,6 @@ const LinkStorageLayout = () => {
             <Col>
               <ButtonGreenWrapper type="primary" size="large">
                 보관함 이동
-              </ButtonGreenWrapper>
-            </Col>
-            <Col>
-              <ButtonGreenWrapper type="primary" size="large">
-                패키지 추가
               </ButtonGreenWrapper>
             </Col>
           </Row>
