@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Form, Checkbox, Row } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -20,21 +20,23 @@ import {
 const logIn = () => {
   const uRouter = useRouter();
   const dispatch = useDispatch();
-  const { logInLoading } = useSelector((state) => state.user);
+  const { logInLoading, logInDone } = useSelector((state) => state.user);
 
   const [Email, onChangeEmail, setEmail] = useInput("");
   const [Password, onChangePassword, setPassword] = useInput("");
 
-  const onLogInSubmit = useCallback(() => {
-    console.log(Email, Password);
-
-    dispatch(loginRequestAction(Email, Password));
-
+  useEffect(() => {
     // 폼, 인풋 초기화
-    setEmail(null);
-    setPassword(null);
+    if (logInDone) {
+      setEmail(null);
+      setPassword(null);
 
-    uRouter.push("/user");
+      uRouter.push("/user");
+    }
+  }, [logInDone]);
+
+  const onLogInSubmit = useCallback(() => {
+    dispatch(loginRequestAction(Email, Password));
   }, [Email, Password]);
 
   return (
@@ -77,7 +79,6 @@ const logIn = () => {
               </Form.Item>
 
               <Form.Item valuePropName="checked">
-                <Checkbox id="rememberMe">Remember me</Checkbox>
                 <a
                   className="login-form-forgot"
                   href="/reset_user"

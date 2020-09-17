@@ -20,12 +20,6 @@ export const URL_CUT_REQUEST = "URL_CUT_REQUEST";
 export const URL_CUT_SUCCESS = "URL_CUT_SUCCESS";
 export const URL_CUT_FAILURE = "URL_CUT_FAILURE";
 
-export const urlCutRequestAction = () => {
-  return {
-    type: URL_CUT_REQUEST,
-  };
-};
-
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
