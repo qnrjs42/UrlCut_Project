@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import loadable from "@loadable/component";
-import { Layout, Menu, Button } from "antd";
 
 import UserLayout from "../../../components/UserLayout";
+
+import { RESET_URLS_INFO_REQUEST } from "../../../reducers/reducer_url";
+import { LOAD_MY_INFO_REQUEST } from "../../../reducers/reducer_user";
 
 // 초기 /user 진입했을 때 | null로 하면 에러 발생
 let UserComponent = loadable(() =>
@@ -11,10 +14,31 @@ let UserComponent = loadable(() =>
 );
 
 const StaticToDynamic = () => {
-    const router = useRouter();
-    
+  const dispatch = useDispatch();
+  const uRouter = useRouter();
+  const { me } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (!(me && me.id)) {
+      console.log("3. pages/user/[userPages]/index moved");
+      uRouter.push("/");
+    }
+  }, [me && me.id]);
+
+  // SSR 적용 필요
+  useEffect(() => {
+    if (uRouter.asPath !== "/user/[userPages]") {
+      dispatch({
+        type: RESET_URLS_INFO_REQUEST,
+      });
+      dispatch({
+        type: LOAD_MY_INFO_REQUEST,
+      });
+    }
+  }, [uRouter]);
+
   // 컴포넌트에서 넘겨준 값 비교해서 알맞는 컴포넌트 할당
-  switch (router.query.userPages) {
+  switch (uRouter.query.userPages) {
     case "index":
       UserComponent = loadable(() =>
         import("../../../components/UserLayout/Dashboard/MainManageLayout")
@@ -60,26 +84,30 @@ const StaticToDynamic = () => {
         import("../../../components/UserLayout/Privacy/PaymentLayout")
       );
       break;
-      default: // 올바르지 않은 페이지 접근 시 User 메인 화면으로 이동 ( 404 페이지 만들어야 함)
-        UserComponent = loadable(() =>
-          import("../../../components/UserLayout/Dashboard/MainManageLayout")
-        );
+    default:
+      // 올바르지 않은 페이지 접근 시 User 메인 화면으로 이동 ( 404 페이지 만들어야 함)
+      UserComponent = loadable(() =>
+        import("../../../components/UserLayout/Dashboard/MainManageLayout")
+      );
       break;
   }
 
   // const buttonClick = () => {
   //   console.log('router:', router);
   // }
-    
-    return (
-      <>
-        <UserLayout>
-          {/* <Button onClick={buttonClick}>Test</Button> */}
-          <UserComponent />
-        </UserLayout>
-      </>
-    );
-}
+
+  return (
+    <>
+      {me ? (
+        <>
+          <UserLayout>
+            <UserComponent />
+          </UserLayout>
+        </>
+      ) : null}
+    </>
+  );
+};
 
 /*
 // const componentLayout = {
@@ -103,4 +131,4 @@ const StaticToDynamic = () => {
  {router && <UserComponent url={router.query.url} />}
 */
 
-export default StaticToDynamic
+export default StaticToDynamic;

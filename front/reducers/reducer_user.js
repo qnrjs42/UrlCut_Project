@@ -18,6 +18,10 @@ export const initialState = {
   changeNicknameDone: false,
   changeNicknameError: null,
 
+  loadMyInfoLoading: false, // 내 정보 로드 시도 중
+  loadMyInfoDone: false,
+  loadMyInfoError: null,
+
   me: null,
 };
 
@@ -39,14 +43,12 @@ export const CHANGE_NICKNAME_REQUEST = "CHANGE_NICKNAME_REQUEST";
 export const CHANGE_NICKNAME_SUCCESS = "CHANGE_NICKNAME_SUCCESS";
 export const CHANGE_NICKNAME_FAILURE = "CHANGE_NICKNAME_FAILURE";
 
+export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
+export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
+export const LOAD_MY_INFO_FAILURE = "LOAD_MY_INFO_FAILURE";
+
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
-
-const dummySignUpUser = (data) => ({
-  email: data,
-  nickname: "제로초",
-  id: 2,
-});
 
 export const loginRequestAction = (data) => ({
   type: LOG_IN_REQUEST,
@@ -71,9 +73,6 @@ export const logoutRequestAction = () => ({
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
-      default:
-        break;
-
       case LOG_IN_REQUEST:
         // 로딩할 때는 에러 없애준다
         draft.logInLoading = true;
@@ -87,19 +86,16 @@ const reducer = (state = initialState, action) =>
 
         draft.logOutDone = false;
         break;
-
       case LOG_IN_FAILURE:
         draft.logInLoading = false;
         draft.logInError = action.error;
         break;
-      // ***** END LOG_IN *****
 
       case LOG_OUT_REQUEST:
         draft.logOutLoading = true;
         draft.logOutError = null;
         draft.logOutDone = false;
         break;
-
       case LOG_OUT_SUCCESS:
         draft.logOutLoading = false;
         draft.logOutDone = true;
@@ -107,53 +103,66 @@ const reducer = (state = initialState, action) =>
 
         draft.logInDone = false;
         break;
-
       case LOG_OUT_FAILURE:
         draft.logOutLoading = false;
         draft.logOutError = action.error;
         break;
-      // ***** END LOG_OUT *****
 
       case SIGN_UP_REQUEST:
         draft.signUpLoading = true;
         draft.signUpError = null;
         draft.signUpDone = false;
         break;
-
       case SIGN_UP_SUCCESS:
         draft.signUpLoading = false;
         draft.signUpDone = true;
         break;
-
       case SIGN_UP_FAILURE:
         draft.signUpLoading = false;
         draft.signUpError = action.error;
         break;
-      // ***** END SIGN_UP *****
 
       case CHANGE_NICKNAME_REQUEST:
         draft.changeNicknameLoading = true;
         draft.changeNicknameError = null;
         draft.changeNicknameDone = false;
         break;
-
       case CHANGE_NICKNAME_SUCCESS:
         draft.changeNicknameLoading = false;
         draft.changeNicknameDone = true;
         break;
-
       case CHANGE_NICKNAME_FAILURE:
         draft.changeNicknameLoading = false;
         draft.changeNicknameError = action.error;
         break;
-      // ***** END CHANGE_NICKNAME *****
+
+      case LOAD_MY_INFO_REQUEST:
+        draft.loadMyInfoLoading = true;
+        draft.loadMyInfoError = null;
+        draft.loadMyInfoDone = false;
+        break;
+      case LOAD_MY_INFO_SUCCESS:
+        draft.loadMyInfoLoading = false;
+        draft.me = action.data;
+        draft.loadMyInfoDone = true;
+
+        draft.logInDone = false;
+        draft.logOutDone = false;
+        break;
+      case LOAD_MY_INFO_FAILURE:
+        draft.loadMyInfoLoading = false;
+        draft.loadMyInfoError = action.error;
+        break;
 
       case ADD_POST_TO_ME:
-        draft.me.Posts.unshift({ id: action.data });
+        // draft.me.urlInfo.unshift({ id: action.data });
         break;
 
       case REMOVE_POST_OF_ME:
-        draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
+        // draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
+        break;
+
+      default:
         break;
     }
   });

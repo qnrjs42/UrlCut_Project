@@ -210,6 +210,7 @@ const MainManageLayout = () => {
             </Row>
             <Row justify="center">
               <Progress
+                id="mainProgress"
                 type="circle"
                 strokeColor={{
                   "0%": "#5cc49f",

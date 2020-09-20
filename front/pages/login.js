@@ -16,14 +16,29 @@ import {
   MainLockOutlinedWrapper,
   FormWrapper,
 } from "../css/overlap-styled";
+import { LOAD_MY_INFO_REQUEST } from "../reducers/reducer_user";
 
 const logIn = () => {
   const uRouter = useRouter();
   const dispatch = useDispatch();
-  const { logInLoading, logInDone } = useSelector((state) => state.user);
+  const { me, logInLoading, logInDone } = useSelector((state) => state.user);
 
   const [Email, onChangeEmail, setEmail] = useInput("");
   const [Password, onChangePassword, setPassword] = useInput("");
+
+  useEffect(() => {
+    // 로그인 한 채로 로그인 페이지 갔을 때 뒤로가기
+    console.log("hello");
+    if (me && me.id) {
+      uRouter.push("/user");
+    }
+  }, [me && me.id]);
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_MY_INFO_REQUEST,
+    });
+  }, []);
 
   useEffect(() => {
     // 폼, 인풋 초기화
@@ -41,70 +56,74 @@ const logIn = () => {
 
   return (
     <>
-      <NavBar />
-      <MainLayoutWrapper className="layout">
-        <MainRowPaddingWrapper justify="space-around" align="middle">
-          <div className="app">
-            <MainTitleWrapper level={2}>로그인</MainTitleWrapper>
-            <FormWrapper
-              // onFinish={handleSubmit(onLogInSubmit)}
-              onFinish={onLogInSubmit}
-            >
-              <Form.Item required>
-                <MainInputWrapper
-                  name="email"
-                  id="email"
-                  size="large"
-                  prefix={<MainUserOutlinedWrapper />}
-                  placeholder="이메일"
-                  type="id"
-                  value={Email}
-                  onChange={onChangeEmail}
-                  // ref={register({ required: true })}
-                />
-              </Form.Item>
-
-              <Form.Item required>
-                <MainInputWrapper
-                  name="password"
-                  id="password"
-                  size="large"
-                  prefix={<MainLockOutlinedWrapper />}
-                  placeholder="패스워드"
-                  type="password"
-                  value={Password}
-                  onChange={onChangePassword}
-                  // ref={register({ required: true })}
-                />
-              </Form.Item>
-
-              <Form.Item valuePropName="checked">
-                <a
-                  className="login-form-forgot"
-                  href="/reset_user"
-                  style={{ float: "right" }}
+      {!me ? (
+        <>
+          <NavBar />
+          <MainLayoutWrapper className="layout">
+            <MainRowPaddingWrapper justify="space-around" align="middle">
+              <div className="app">
+                <MainTitleWrapper level={2}>로그인</MainTitleWrapper>
+                <FormWrapper
+                  // onFinish={handleSubmit(onLogInSubmit)}
+                  onFinish={onLogInSubmit}
                 >
-                  forgot password
-                </a>
-                <div>
-                  <br />
-                  <MainButtonWrapper
-                    type="primary"
-                    htmlType="submit"
-                    className="login-form-button"
-                    size="large"
-                    loading={logInLoading}
-                    onSubmit={onLogInSubmit}
-                  >
-                    로그인
-                  </MainButtonWrapper>
-                </div>
-                {/* Or <a href="/register">register now!</a> */}
-              </Form.Item>
-            </FormWrapper>
-          </div>
-        </MainRowPaddingWrapper>
-      </MainLayoutWrapper>
+                  <Form.Item required>
+                    <MainInputWrapper
+                      name="email"
+                      id="email"
+                      size="large"
+                      prefix={<MainUserOutlinedWrapper />}
+                      placeholder="이메일"
+                      type="id"
+                      value={Email}
+                      onChange={onChangeEmail}
+                      // ref={register({ required: true })}
+                    />
+                  </Form.Item>
+
+                  <Form.Item required>
+                    <MainInputWrapper
+                      name="password"
+                      id="password"
+                      size="large"
+                      prefix={<MainLockOutlinedWrapper />}
+                      placeholder="패스워드"
+                      type="password"
+                      value={Password}
+                      onChange={onChangePassword}
+                      // ref={register({ required: true })}
+                    />
+                  </Form.Item>
+
+                  <Form.Item valuePropName="checked">
+                    <a
+                      className="login-form-forgot"
+                      href="/reset_user"
+                      style={{ float: "right" }}
+                    >
+                      forgot password
+                    </a>
+                    <div>
+                      <br />
+                      <MainButtonWrapper
+                        type="primary"
+                        htmlType="submit"
+                        className="login-form-button"
+                        size="large"
+                        loading={logInLoading}
+                        onSubmit={onLogInSubmit}
+                      >
+                        로그인
+                      </MainButtonWrapper>
+                    </div>
+                    {/* Or <a href="/register">register now!</a> */}
+                  </Form.Item>
+                </FormWrapper>
+              </div>
+            </MainRowPaddingWrapper>
+          </MainLayoutWrapper>
+        </>
+      ) : null}
     </>
   );
 };

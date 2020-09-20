@@ -35,6 +35,9 @@ import {
   MOVEMENT_URLS_REQUEST,
   MOVEMENT_URLS_SUCCESS,
   MOVEMENT_URLS_FAILURE,
+  RESET_URLS_INFO_REQUEST,
+  RESET_URLS_INFO_SUCCESS,
+  RESET_URLS_INFO_FAILURE,
 } from "../reducers/reducer_url";
 
 import {
@@ -242,6 +245,24 @@ function* moveMentUrls(action) {
   }
 }
 
+function resetUrlsInfoAPI(data) {
+  return axios.post("/url/storageMoveUrls");
+}
+
+function* resetUrlsInfo(action) {
+  try {
+    yield put({
+      type: RESET_URLS_INFO_SUCCESS,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: RESET_URLS_INFO_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchTablePagination() {
   yield takeLatest(TABLE_PAGINATION_REQUEST, tablePagination);
 }
@@ -266,8 +287,12 @@ function* watchRemoveUrls() {
   yield takeLatest(REMOVE_URLS_REQUEST, removeUrls);
 }
 
-function* watchmoveMentUrls() {
+function* watchMoveMentUrls() {
   yield takeLatest(MOVEMENT_URLS_REQUEST, moveMentUrls);
+}
+
+function* watchResetUrlsInfo() {
+  yield takeLatest(RESET_URLS_INFO_REQUEST, resetUrlsInfo);
 }
 
 export default function* urlSaga() {
@@ -278,6 +303,7 @@ export default function* urlSaga() {
     fork(watchLoadExpiredUrlsInfo),
     fork(watchUrlCut),
     fork(watchRemoveUrls),
-    fork(watchmoveMentUrls),
+    fork(watchMoveMentUrls),
+    fork(watchResetUrlsInfo),
   ]);
 }

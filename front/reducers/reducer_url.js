@@ -39,6 +39,10 @@ export const initialState = {
   tablePaginationLoading: false, // 테이블 페이징 시도
   tablePaginationDone: false,
   tablePaginationError: null,
+
+  resetUrlsInfoLoading: false, // urls info 초기화 시도
+  resetUrlsInfoDone: false,
+  resetUrlsInfoError: null,
 };
 
 export const URL_CUT_REQUEST = "URL_CUT_REQUEST";
@@ -68,6 +72,10 @@ export const MOVEMENT_URLS_FAILURE = "MOVEMENT_URLS_FAILURE";
 export const TABLE_PAGINATION_REQUEST = "TABLE_PAGINATION_REQUEST";
 export const TABLE_PAGINATION_SUCCESS = "TABLE_PAGINATION_SUCCESS";
 export const TABLE_PAGINATION_FAILURE = "TABLE_PAGINATION_FAILURE";
+
+export const RESET_URLS_INFO_REQUEST = "RESET_URLS_INFO_REQUEST"; // 페이지 이동 시 url들 info 초기화 하고 현재 페이지 urlInfo만 리로드하여 성능 개선
+export const RESET_URLS_INFO_SUCCESS = "RESET_URLS_INFO_SUCCESS";
+export const RESET_URLS_INFO_FAILURE = "RESET_URLS_INFO_FAILURE";
 
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {
@@ -242,6 +250,22 @@ const reducer = (state = initialState, action) =>
       case MOVEMENT_URLS_FAILURE:
         draft.moveMentUrlsLoading = false;
         draft.moveMentUrlsError = action.error;
+        break;
+
+      case RESET_URLS_INFO_REQUEST:
+        draft.resetUrlsInfoLoading = true;
+        draft.resetUrlsInfoDone = false;
+        draft.resetUrlsInfoError = null;
+        break;
+      case RESET_URLS_INFO_SUCCESS:
+        draft.resetUrlsInfoLoading = false;
+        draft.urlInfo = [];
+        draft.storageUrlInfo = [];
+        draft.expiredUrlInfo = [];
+        draft.resetUrlsInfoDone = true;
+      case RESET_URLS_INFO_FAILURE:
+        draft.resetUrlsInfoLoading = false;
+        draft.resetUrlsInfoError = action.error;
         break;
 
       default:
