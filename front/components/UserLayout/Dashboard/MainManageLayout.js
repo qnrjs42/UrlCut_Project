@@ -1,17 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { Layout, Row, Col, Card, Progress, Table } from "antd";
 import {} from "@ant-design/icons";
 import { Line } from "react-chartjs-2";
 import Link from "next/link";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import {
-  ButtonDefaultBorderWrapper,
-  ButtonPurpleWrapper,
-  ButtonGreenWrapper,
-  RowWrapper,
-} from "../../../css/overlap-styled";
+import { ButtonGreenWrapper, RowWrapper } from "../../../css/overlap-styled";
+import { LOAD_USER_URLS_REQUEST } from "../../../reducers/reducer_url";
 import ShortenUrlButton from "../ShortenUrlButton";
+import LinkTable from "../LinkTable";
 
 const { Content } = Layout;
 
@@ -152,6 +150,34 @@ const CardWrapper = styled(Card)`
 `;
 
 const MainManageLayout = () => {
+  const dispatch = useDispatch();
+  const { urlInfo, loadUserUrlsDone, urlCutDone } = useSelector(
+    (state) => state.url
+  );
+  const childRef = useRef();
+
+  // table
+  const [DataSource, setDataSource] = useState([]);
+
+  useEffect(() => {
+    // 맨 처음 전체 링크 관리 페이지 들어왔을 때 1번부터 5번까지 데이터만 로드
+    dispatch({
+      type: LOAD_USER_URLS_REQUEST,
+      data: {
+        page: 1,
+        limit: 5,
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    // console.log(loadUserUrlsDone, urlCutDone);
+    if (loadUserUrlsDone || urlCutDone) {
+      // console.log(urlInfo);
+      setDataSource(urlInfo);
+    }
+  }, [urlInfo]);
+
   return (
     <Content>
       <Row justify="end">
@@ -237,12 +263,7 @@ const MainManageLayout = () => {
             <br />
             <br />
 
-            <Table
-              className="latest_link_table"
-              dataSource={dataSource}
-              columns={columns}
-              pagination={false}
-            />
+            <LinkTable layout={"main"} DataSource={DataSource} />
           </Card>
         </Col>
       </RowWrapper>

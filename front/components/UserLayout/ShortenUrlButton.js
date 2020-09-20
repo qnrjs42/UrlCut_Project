@@ -8,9 +8,13 @@ import useInput from "../../hooks/useInput";
 import { ButtonPurpleWrapper } from "../../css/overlap-styled";
 import { useDispatch, useSelector } from "react-redux";
 
+// Dashboard - MainManageLayout, LinkManageLayout
+// Management - LinkStorageLayout, ExpiredLayout
 const ShortenUrlButton = () => {
   const dispatch = useDispatch();
-  const { urlCutDone, shortenUrl } = useSelector((state) => state.url);
+  const { urlCutLoading, urlCutDone, shortenUrl } = useSelector(
+    (state) => state.url
+  );
   const [CreateModal, setCreateModal] = useState(false);
   const [CreateUrl, onChangeUrl, setCreateUrl] = useInput(null);
 
@@ -56,8 +60,9 @@ const ShortenUrlButton = () => {
             key="submit"
             type="primary"
             onClick={onMultiLinkCreateOk}
+            loading={urlCutLoading}
           >
-            Submit
+            URL 단축
           </ButtonPurpleWrapper>,
         ]}
       >
