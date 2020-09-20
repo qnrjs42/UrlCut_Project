@@ -59,7 +59,18 @@ export const dummyUrlInfoIds = () => {
 };
 export const dummyStorageUrlInfoIds = () => {
   let ids = [];
-  for (let item = 0; item < 30; item++) {
+  for (let item = 0; item < 47; item++) {
+    ids.push({
+      id: shortid.generate(),
+    });
+  }
+
+  return ids;
+};
+
+export const dummyExpiredUrlInfoIds = () => {
+  let ids = [];
+  for (let item = 0; item < 21; item++) {
     ids.push({
       id: shortid.generate(),
     });

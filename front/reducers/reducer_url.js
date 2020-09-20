@@ -1,5 +1,4 @@
 import produce from "immer";
-import next from "next";
 
 export const initialState = {
   shortenUrl: null,
@@ -9,6 +8,9 @@ export const initialState = {
 
   storageUrlInfo: [], // 링크 보관함 URL
   storageUrlInfoIds: 0, // 링크 보관함 URL 개수
+
+  expiredUrlInfo: [], // 설정기간 만료 URL
+  expiredUrlInfoIds: 0, // 설정기간 만료 URL 개수
 
   urlCutLoading: false, // URL 단축 시도
   urlCutDone: false,
@@ -22,17 +24,17 @@ export const initialState = {
   loadStorageUrlsDone: false,
   loadStorageUrlsError: null,
 
+  loadExpiredUrlsLoading: false, // 설정기간 만료 로드 시도
+  loadExpiredUrlsDone: false,
+  loadExpiredUrlsError: null,
+
   removeUrlsLoading: false, // URL 삭제 시도
   removeUrlsDone: false,
   removeUrlsError: null,
 
-  manageMoveUrlsLoading: false, // 전체 링크관리 이동 시도
-  manageMoveUrlsDone: false,
-  manageMoveUrlsError: null,
-
-  storageMoveUrlsLoading: false, // 링크 보관함 이동 시도
-  storageMoveUrlsDone: false,
-  storageMoveUrlsError: null,
+  moveMentUrlsLoading: false, // 보관함 이동, 해제 시도
+  moveMentUrlsDone: false,
+  moveMentUrlsError: null,
 
   tablePaginationLoading: false, // 테이블 페이징 시도
   tablePaginationDone: false,
@@ -51,17 +53,17 @@ export const LOAD_STORAGE_URLS_REQUEST = "LOAD_STORAGE_URLS_REQUEST";
 export const LOAD_STORAGE_URLS_SUCCESS = "LOAD_STORAGE_URLS_SUCCESS";
 export const LOAD_STORAGE_URLS_FAILURE = "LOAD_STORAGE_URLS_FAILURE";
 
+export const LOAD_EXPIRED_URLS_REQUEST = "LOAD_EXPIRED_URLS_REQUEST";
+export const LOAD_EXPIRED_URLS_SUCCESS = "LOAD_EXPIRED_URLS_SUCCESS";
+export const LOAD_EXPIRED_URLS_FAILURE = "LOAD_EXPIRED_URLS_FAILURE";
+
 export const REMOVE_URLS_REQUEST = "REMOVE_URLS_REQUEST";
 export const REMOVE_URLS_SUCCESS = "REMOVE_URLS_SUCCESS";
 export const REMOVE_URLS_FAILURE = "REMOVE_URLS_FAILURE";
 
-export const MANAGE_MOVE_URLS_REQUEST = "MANAGE_MOVE_URLS_REQUEST";
-export const MANAGE_MOVE_URLS_SUCCESS = "MANAGE_MOVE_URLS_SUCCESS";
-export const MANAGE_MOVE_URLS_FAILURE = "MANAGE_MOVE_URLS_FAILURE";
-
-export const STORAGE_MOVE_URLS_REQUEST = "STORAGE_MOVE_URLS_REQUEST";
-export const STORAGE_MOVE_URLS_SUCCESS = "STORAGE_MOVE_URLS_SUCCESS";
-export const STORAGE_MOVE_URLS_FAILURE = "STORAGE_MOVE_URLS_FAILURE";
+export const MOVEMENT_URLS_REQUEST = "MOVEMENT_URLS_REQUEST";
+export const MOVEMENT_URLS_SUCCESS = "MOVEMENT_URLS_SUCCESS";
+export const MOVEMENT_URLS_FAILURE = "MOVEMENT_URLS_FAILURE";
 
 export const TABLE_PAGINATION_REQUEST = "TABLE_PAGINATION_REQUEST";
 export const TABLE_PAGINATION_SUCCESS = "TABLE_PAGINATION_SUCCESS";
@@ -76,10 +78,16 @@ const reducer = (state = initialState, action) =>
         draft.tablePaginationError = null;
         break;
       case TABLE_PAGINATION_SUCCESS: {
-        console.log(action.data);
         draft.tablePaginationLoading = false;
         draft.tablePaginationDone = true;
-        draft.urlInfo = action.data;
+
+        if (action.sender === "linkManage") {
+          draft.urlInfo = action.data;
+        } else if (action.sender === "linkStorage") {
+          draft.storageUrlInfo = action.data;
+        } else if (action.sender === "linkExpired") {
+          draft.expiredUrlInfo = action.data;
+        }
 
         draft.urlCutDone = false;
         draft.loadUserUrlsDone = false;
@@ -123,6 +131,7 @@ const reducer = (state = initialState, action) =>
         draft.urlInfo = action.data;
         draft.urlInfoIds = action.urlInfoIds;
         draft.storageUrlInfoIds = action.storageUrlInfoIds;
+        draft.expiredUrlInfoIds = action.expiredUrlInfoIds;
         break;
       case LOAD_USER_URLS_FAILURE:
         draft.loadUserUrlsLoading = false;
@@ -140,10 +149,29 @@ const reducer = (state = initialState, action) =>
         draft.storageUrlInfo = action.data;
         draft.urlInfoIds = action.urlInfoIds;
         draft.storageUrlInfoIds = action.storageUrlInfoIds;
+        draft.expiredUrlInfoIds = action.expiredUrlInfoIds;
         break;
       case LOAD_STORAGE_URLS_FAILURE:
         draft.loadStorageUrlsLoading = false;
         draft.loadStorageUrlsError = action.error;
+        break;
+
+      case LOAD_EXPIRED_URLS_REQUEST:
+        draft.loadExpiredUrlsLoading = true;
+        draft.loadExpiredUrlsDone = false;
+        draft.loadExpiredUrlsError = null;
+        break;
+      case LOAD_EXPIRED_URLS_SUCCESS:
+        draft.loadExpiredUrlsLoading = false;
+        draft.loadExpiredUrlsDone = true;
+        draft.expiredUrlInfo = action.data;
+        draft.urlInfoIds = action.urlInfoIds;
+        draft.storageUrlInfoIds = action.storageUrlInfoIds;
+        draft.expiredUrlInfoIds = action.expiredUrlInfoIds;
+        break;
+      case LOAD_EXPIRED_URLS_FAILURE:
+        draft.loadExpiredUrlsLoading = false;
+        draft.loadExpiredUrlsError = action.error;
         break;
 
       case REMOVE_URLS_REQUEST:
@@ -155,7 +183,7 @@ const reducer = (state = initialState, action) =>
         draft.removeUrlsLoading = false;
         draft.removeUrlsDone = true;
         // draft.urlInfo = draft.urlInfo.filter((v) => v.id !== action.data.id); // 1 개씩 지울 때
-        console.log(action.data);
+
         if (action.data.sender === "linkManage") {
           console.log("linkManage");
           draft.urlInfo = draft.urlInfo.filter(
@@ -165,11 +193,17 @@ const reducer = (state = initialState, action) =>
           console.log("linkStorage");
           draft.storageUrlInfo = draft.storageUrlInfo.filter(
             (listItem) => !action.data.removeIds.includes(listItem.id)
-          ); // 여러 개 지울 때
+          );
+        } else if (action.data.sender === "linkStorage") {
+          console.log("linkExpired");
+          draft.expiredUrlInfo = draft.expiredUrlInfo.filter(
+            (listItem) => !action.data.removeIds.includes(listItem.id)
+          );
         }
 
         draft.urlCutDone = false;
         draft.loadUserUrlsDone = false;
+        draft.moveMentUrlsDone = false;
         break;
       }
       case REMOVE_URLS_FAILURE:
@@ -177,64 +211,37 @@ const reducer = (state = initialState, action) =>
         draft.removeUrlsError = action.error;
         break;
 
-      case STORAGE_MOVE_URLS_REQUEST:
-        draft.storageMoveUrlsLoading = true;
-        draft.storageMoveUrlsDone = false;
-        draft.storageMoveUrlsError = null;
+      case MOVEMENT_URLS_REQUEST:
+        draft.moveMentUrlsLoading = true;
+        draft.moveMentUrlsDone = false;
+        draft.moveMentUrlsError = null;
         break;
-      case STORAGE_MOVE_URLS_SUCCESS: {
-        draft.storageMoveUrlsLoading = false;
-        draft.storageMoveUrlsDone = true;
+      case MOVEMENT_URLS_SUCCESS: {
+        draft.moveMentUrlsLoading = false;
+        draft.moveMentUrlsDone = true;
 
-        // draft.storageUrlInfo.unshift(
-        //   ...draft.urlInfo.filter((listItem) =>
-        //     action.data.includes(listItem.id)
-        //   )
-        // ); // 여러 개  이동
-
-        draft.urlInfo = draft.urlInfo.filter(
-          (listItem) => !action.data.includes(listItem.id)
-        ); // 여러 개 지울 때
+        if (action.data.sender === "linkManage") {
+          draft.urlInfo = draft.urlInfo.filter(
+            (listItem) => !action.data.moveMentIds.includes(listItem.id)
+          ); // 여러 개 지울 때
+        } else if (action.data.sender === "linkStorage") {
+          draft.storageUrlInfo = draft.storageUrlInfo.filter(
+            (listItem) => !action.data.moveMentIds.includes(listItem.id)
+          );
+        } else if (action.data.sender === "linkExpired") {
+          draft.expiredUrlInfo = draft.expiredUrlInfo.filter(
+            (listItem) => !action.data.moveMentIds.includes(listItem.id)
+          );
+        }
 
         draft.urlCutDone = false;
         draft.loadUserUrlsDone = false;
-        draft.manageMoveUrlsDone = false;
         draft.removeUrlDone = false;
         break;
       }
-      case STORAGE_MOVE_URLS_FAILURE:
-        draft.storageMoveUrlsLoading = false;
-        draft.storageMoveUrlsError = action.error;
-        break;
-
-      case MANAGE_MOVE_URLS_REQUEST:
-        draft.manageMoveUrlsLoading = true;
-        draft.manageMoveUrlsDone = false;
-        draft.manageMoveUrlsError = null;
-        break;
-      case MANAGE_MOVE_URLS_SUCCESS: {
-        draft.manageMoveUrlsLoading = false;
-        draft.manageMoveUrlsDone = true;
-
-        // draft.manageUrlInfo.unshift(
-        //   ...draft.urlInfo.filter((listItem) =>
-        //     action.data.includes(listItem.id)
-        //   )
-        // ); // 여러 개  이동
-
-        draft.storageUrlInfo = draft.storageUrlInfo.filter(
-          (listItem) => !action.data.includes(listItem.id)
-        ); // 여러 개 지울 때
-
-        draft.urlCutDone = false;
-        draft.loadUserUrlsDone = false;
-        draft.storageMoveUrlsDone = false;
-        draft.removeUrlDone = false;
-        break;
-      }
-      case MANAGE_MOVE_URLS_FAILURE:
-        draft.manageMoveUrlsLoading = false;
-        draft.manageMoveUrlsError = action.error;
+      case MOVEMENT_URLS_FAILURE:
+        draft.moveMentUrlsLoading = false;
+        draft.moveMentUrlsError = action.error;
         break;
 
       default:

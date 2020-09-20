@@ -1,112 +1,114 @@
-import React from "react";
-import { Layout, Row, Col, Card, Table } from "antd";
+import React, { useCallback, useEffect, useState, useRef } from "react";
+import { Layout, Row, Col, Card } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 
+import {
+  LOAD_EXPIRED_URLS_REQUEST,
+  REMOVE_URLS_REQUEST,
+  MOVEMENT_URLS_REQUEST,
+  TABLE_PAGINATION_REQUEST,
+} from "../../../reducers/reducer_url";
 import {
   ButtonGreenWrapper,
   ButtonBorderWrapper,
   ColWrapper,
 } from "../../../css/overlap-styled";
-
 import ShortenUrlButton from "../ShortenUrlButton";
+import LinkTable from "../LinkTable";
 
 const { Content } = Layout;
 
-// table data
-const dataSource = [
-  {
-    key: "url1",
-    url: "kasd",
-    link_option: 32,
-    created: `${20} 초 이전`,
-    click_count: 0,
-  },
-  {
-    key: "url2",
-    url: "kasd",
-    link_option: 32,
-    created: `${50} 초 이전`,
-    click_count: 100,
-  },
-  {
-    key: "url3",
-    url: "kasd",
-    link_option: 32,
-    created: `${120} 초 이전`,
-    click_count: 30,
-  },
-  {
-    key: "url4",
-    url: "kasd",
-    link_option: 32,
-    created: `${0} 초 이전`,
-    click_count: 9,
-  },
-  {
-    key: "url5",
-    url: "kasd",
-    link_option: 32,
-    created: `${300} 초 이전`,
-    click_count: 7,
-  },
-];
-
-// tables setting
-const columns = [
-  {
-    title: "단축 URL",
-    dataIndex: "url",
-    key: "url",
-    width: "30%",
-  },
-  {
-    title: "링크 설정옵션",
-    dataIndex: "link_option",
-    key: "link_option",
-    width: "10%",
-    responsive: ["lg"],
-  },
-  {
-    title: "생성일",
-    dataIndex: "created",
-    key: "created",
-    sorter: {
-      compare: (a, b) => a.created - b.created,
-      multiple: 2,
-    },
-    width: "10%",
-    responsive: ["lg"],
-  },
-  {
-    title: "클릭 수",
-    dataIndex: "click_count",
-    key: "click_count",
-    sorter: {
-      compare: (a, b) => a.click_count - b.click_count,
-      multiple: 1,
-    },
-    width: "10%",
-  },
-];
-
-// 테이블 check/checked/checkedAll And changeRow
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      "selectedRows: ",
-      selectedRows
-    );
-  },
-  onSelect: (record, selected, selectedRows) => {
-    console.log(record, selected, selectedRows);
-  },
-  onSelectAll: (selected, selectedRows, changeRows) => {
-    console.log(selected, selectedRows, changeRows);
-  },
-  columnWidth: "5%",
-};
-
 const ExpiredLayout = () => {
+  const dispatch = useDispatch();
+  const {
+    expiredUrlInfo,
+    expiredUrlInfoIds,
+    loadExpiredUrlsDone,
+    urlCutDone,
+    removeUrlsDone,
+    moveMentUrlsDone,
+    tablePaginationDone,
+  } = useSelector((state) => state.url);
+  const childRef = useRef();
+
+  // table - urlInfo
+  const [DataSource, setDataSource] = useState([]);
+
+  useEffect(() => {
+    // 맨 처음 전체 링크 관리 페이지 들어왔을 때 1번부터 15번까지 데이터만 로드
+    dispatch({
+      type: LOAD_EXPIRED_URLS_REQUEST,
+      data: {
+        page: 1,
+        limit: 15,
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (
+      loadExpiredUrlsDone ||
+      urlCutDone ||
+      removeUrlsDone ||
+      moveMentUrlsDone ||
+      tablePaginationDone
+    ) {
+      // console.log(urlInfo);
+      setDataSource(expiredUrlInfo);
+    }
+  }, [expiredUrlInfo]);
+
+  const changePagination = useCallback((e) => {
+    console.log("expiredUrlInfoIds.length", expiredUrlInfoIds.length);
+
+    dispatch({
+      type: TABLE_PAGINATION_REQUEST,
+      data: {
+        sender: "linkExpired",
+        page: e.page,
+        limit: e.limit,
+        urlInfoIdsLength: expiredUrlInfoIds.length,
+        // lastId: urlInfo[urlInfo.length - 1].id,
+      },
+    });
+  });
+
+  const getTableRowIds = () => {
+    const selectedRowIds = [...childRef.current.selectedRowId()];
+
+    return selectedRowIds.map((rowData) => {
+      return rowData.id;
+    });
+  };
+
+  const removeUrl = useCallback(() => {
+    const removeIds = getTableRowIds();
+
+    console.log(removeIds);
+
+    dispatch({
+      type: REMOVE_URLS_REQUEST,
+      data: {
+        sender: "linkExpired",
+        removeIds,
+      },
+    });
+  });
+
+  const moveMentUrl = useCallback(() => {
+    const moveMentIds = getTableRowIds();
+
+    console.log(moveMentIds);
+
+    dispatch({
+      type: MOVEMENT_URLS_REQUEST,
+      data: {
+        sender: "linkExpired",
+        moveMentIds,
+      },
+    });
+  });
+
   return (
     <>
       <Content>
@@ -122,23 +124,31 @@ const ExpiredLayout = () => {
         <Card>
           <Row gutter={[16, 16]}>
             <Col>
-              <ButtonBorderWrapper type="primary" size="large" danger>
+              <ButtonBorderWrapper
+                type="primary"
+                size="large"
+                danger
+                onClick={removeUrl}
+              >
                 선택 삭제
               </ButtonBorderWrapper>
             </Col>
             <Col>
-              <ButtonGreenWrapper type="primary" size="large">
+              <ButtonGreenWrapper
+                type="primary"
+                size="large"
+                onClick={moveMentUrl}
+              >
                 보관함 이동
               </ButtonGreenWrapper>
             </Col>
           </Row>
 
-          <Table
-            className="latest_link_table"
-            dataSource={dataSource}
-            columns={columns}
-            rowSelection={{ ...rowSelection }}
-            pagination={false}
+          <LinkTable
+            DataSource={DataSource}
+            urlInfoIds={expiredUrlInfoIds}
+            changePagination={changePagination}
+            ref={childRef}
           />
         </Card>
       </Content>

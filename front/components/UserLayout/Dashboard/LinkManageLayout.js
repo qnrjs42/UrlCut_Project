@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   LOAD_USER_URLS_REQUEST,
   REMOVE_URLS_REQUEST,
-  STORAGE_MOVE_URLS_REQUEST,
+  MOVEMENT_URLS_REQUEST,
   TABLE_PAGINATION_REQUEST,
 } from "../../../reducers/reducer_url";
 import {
@@ -26,7 +26,7 @@ const LinkManageLayout = () => {
     loadUserUrlsDone,
     urlCutDone,
     removeUrlsDone,
-    storageMoveUrlsDone,
+    moveMentUrlsDone,
     tablePaginationDone,
   } = useSelector((state) => state.url);
   const childRef = useRef();
@@ -50,7 +50,7 @@ const LinkManageLayout = () => {
       loadUserUrlsDone ||
       urlCutDone ||
       removeUrlsDone ||
-      storageMoveUrlsDone ||
+      moveMentUrlsDone ||
       tablePaginationDone
     ) {
       // console.log(urlInfo);
@@ -95,14 +95,17 @@ const LinkManageLayout = () => {
     });
   });
 
-  const storageMoveUrl = useCallback(() => {
-    const storageMoveIds = getTableRowIds();
+  const moveMentUrl = useCallback(() => {
+    const moveMentIds = getTableRowIds();
 
-    console.log(storageMoveIds);
+    console.log(moveMentIds);
 
     dispatch({
-      type: STORAGE_MOVE_URLS_REQUEST,
-      data: storageMoveIds,
+      type: MOVEMENT_URLS_REQUEST,
+      data: {
+        sender: "linkManage",
+        moveMentIds,
+      },
     });
   });
 
@@ -134,7 +137,7 @@ const LinkManageLayout = () => {
               <ButtonGreenWrapper
                 type="primary"
                 size="large"
-                onClick={storageMoveUrl}
+                onClick={moveMentUrl}
               >
                 보관함 이동
               </ButtonGreenWrapper>

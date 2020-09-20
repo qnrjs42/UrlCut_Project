@@ -23,21 +23,26 @@ import {
   REMOVE_URLS_REQUEST,
   REMOVE_URLS_SUCCESS,
   REMOVE_URLS_FAILURE,
-  STORAGE_MOVE_URLS_REQUEST,
-  STORAGE_MOVE_URLS_SUCCESS,
-  STORAGE_MOVE_URLS_FAILURE,
   TABLE_PAGINATION_REQUEST,
   TABLE_PAGINATION_SUCCESS,
   TABLE_PAGINATION_FAILURE,
   LOAD_STORAGE_URLS_REQUEST,
   LOAD_STORAGE_URLS_SUCCESS,
   LOAD_STORAGE_URLS_FAILURE,
-  MANAGE_MOVE_URLS_REQUEST,
-  MANAGE_MOVE_URLS_SUCCESS,
-  MANAGE_MOVE_URLS_FAILURE,
+  LOAD_EXPIRED_URLS_REQUEST,
+  LOAD_EXPIRED_URLS_SUCCESS,
+  LOAD_EXPIRED_URLS_FAILURE,
+  MOVEMENT_URLS_REQUEST,
+  MOVEMENT_URLS_SUCCESS,
+  MOVEMENT_URLS_FAILURE,
 } from "../reducers/reducer_url";
 
-import { dummyUrl, dummyUrlInfoIds, dummyStorageUrlInfoIds } from "./dummyUrl";
+import {
+  dummyUrl,
+  dummyUrlInfoIds,
+  dummyStorageUrlInfoIds,
+  dummyExpiredUrlInfoIds,
+} from "./dummyUrl";
 
 function tablePaginationAPI() {
   return axios.post("/url");
@@ -47,13 +52,13 @@ function* tablePagination(action) {
   try {
     // const result = yield call(urlCutAPI); // axios 이용할 때
     // yield delay(1000);
-    // console.log(action.data);
-    // console.log(action.data);
+
     const result = dummyUrl(action.data);
     yield put({
       type: TABLE_PAGINATION_SUCCESS,
       //   data: result.data, // axios 이용할 때
       data: result,
+      sender: action.data.sender,
     });
   } catch (err) {
     console.error(err);
@@ -81,6 +86,7 @@ function* loadUrlsInfo(action) {
       data: result,
       urlInfoIds: dummyUrlInfoIds(),
       storageUrlInfoIds: dummyStorageUrlInfoIds(),
+      expiredUrlInfoIds: dummyExpiredUrlInfoIds(),
     });
   } catch (err) {
     console.error(err);
@@ -108,11 +114,40 @@ function* loadStorageUrlsInfo(action) {
       data: result,
       urlInfoIds: dummyUrlInfoIds(),
       storageUrlInfoIds: dummyStorageUrlInfoIds(),
+      expiredUrlInfoIds: dummyExpiredUrlInfoIds(),
     });
   } catch (err) {
     console.error(err);
     yield put({
       type: LOAD_STORAGE_URLS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadExpiredUrlsInfoAPI() {
+  return axios.post("/url");
+}
+
+function* loadExpiredUrlsInfo(action) {
+  try {
+    // const result = yield call(urlCutAPI); // axios 이용할 때
+    // yield delay(1000);
+
+    const result = dummyUrl(action.data);
+
+    yield put({
+      type: LOAD_EXPIRED_URLS_SUCCESS,
+      //   data: result.data, // axios 이용할 때
+      data: result,
+      urlInfoIds: dummyUrlInfoIds(),
+      storageUrlInfoIds: dummyStorageUrlInfoIds(),
+      expiredUrlInfoIds: dummyExpiredUrlInfoIds(),
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_EXPIRED_URLS_FAILURE,
       error: err.response.data,
     });
   }
@@ -166,7 +201,10 @@ function* removeUrls(action) {
     yield put({
       type: REMOVE_URLS_SUCCESS,
       //   data: result.data, // axios 이용할 때
-      data: action.data,
+      data: {
+        removeIds: action.data.removeIds,
+        sender: action.data.sender,
+      },
     });
   } catch (err) {
     console.error(err);
@@ -177,47 +215,28 @@ function* removeUrls(action) {
   }
 }
 
-function manageMoveUrlsAPI(data) {
-  return axios.post("/url/manageMoveUrls");
-}
-
-function* manageMoveUrls(action) {
-  try {
-    // const result = yield call(storageMoveUrlAPI, action.data); // axios 이용할 때
-    // const result = "Saga를 이용한 단축된 URL";
-    // yield delay(1000);
-    yield put({
-      type: MANAGE_MOVE_URLS_SUCCESS,
-      //   data: result.data, // axios 이용할 때
-      data: action.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: MANAGE_MOVE_URLS_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-function storageMoveUrlsAPI(data) {
+function moveMentUrlsAPI(data) {
   return axios.post("/url/storageMoveUrls");
 }
 
-function* storageMoveUrls(action) {
+function* moveMentUrls(action) {
   try {
     // const result = yield call(storageMoveUrlAPI, action.data); // axios 이용할 때
     // const result = "Saga를 이용한 단축된 URL";
     // yield delay(1000);
+
     yield put({
-      type: STORAGE_MOVE_URLS_SUCCESS,
+      type: MOVEMENT_URLS_SUCCESS,
       //   data: result.data, // axios 이용할 때
-      data: action.data,
+      data: {
+        moveMentIds: action.data.moveMentIds,
+        sender: action.data.sender,
+      },
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: STORAGE_MOVE_URLS_FAILURE,
+      type: MOVEMENT_URLS_FAILURE,
       error: err.response.data,
     });
   }
@@ -235,6 +254,10 @@ function* watchLoadStorageUrlsInfo() {
   yield takeLatest(LOAD_STORAGE_URLS_REQUEST, loadStorageUrlsInfo);
 }
 
+function* watchLoadExpiredUrlsInfo() {
+  yield takeLatest(LOAD_EXPIRED_URLS_REQUEST, loadExpiredUrlsInfo);
+}
+
 function* watchUrlCut() {
   yield takeLatest(URL_CUT_REQUEST, urlCut);
 }
@@ -243,12 +266,8 @@ function* watchRemoveUrls() {
   yield takeLatest(REMOVE_URLS_REQUEST, removeUrls);
 }
 
-function* watchManageMoveUrls() {
-  yield takeLatest(MANAGE_MOVE_URLS_REQUEST, manageMoveUrls);
-}
-
-function* watchStorageMoveUrls() {
-  yield takeLatest(STORAGE_MOVE_URLS_REQUEST, storageMoveUrls);
+function* watchmoveMentUrls() {
+  yield takeLatest(MOVEMENT_URLS_REQUEST, moveMentUrls);
 }
 
 export default function* urlSaga() {
@@ -256,9 +275,9 @@ export default function* urlSaga() {
     fork(watchTablePagination),
     fork(watchLoadUrlsInfo),
     fork(watchLoadStorageUrlsInfo),
+    fork(watchLoadExpiredUrlsInfo),
     fork(watchUrlCut),
     fork(watchRemoveUrls),
-    fork(watchManageMoveUrls),
-    fork(watchStorageMoveUrls),
+    fork(watchmoveMentUrls),
   ]);
 }
