@@ -79,7 +79,11 @@ const BaseSection = () => {
   const onChangeKey = useCallback(() => {
     for (const list of userList) {
       // 현재페이지가 정의된 페이지면 정의된 key 반환
-      if (router.asPath === list.url || router.asPath === "/user/index") {
+      if (
+        router.asPath === list.url ||
+        router.asPath === "/" ||
+        router.asPath === "/user/index"
+      ) {
         return list.key;
       }
     }

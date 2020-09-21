@@ -60,8 +60,6 @@ const MainChart = ({ clickCount }) => {
   const date = new Date(Date.now());
   let dateData = [];
 
-  console.log("clickCount", clickCount);
-
   // clickCount 있는거 만큼 반복
   for (let dayCount in clickCount) {
     // data 삽입
@@ -75,17 +73,6 @@ const MainChart = ({ clickCount }) => {
     x: new Date("2020", date.getMonth(), date.getDate() + 1),
     y: 0,
   });
-
-  // dateData.push(
-  //   { x: new Date("2020", date.getMonth(), date.getDate() - 12), y: 2 },
-  //   { x: new Date("2020", date.getMonth(), date.getDate() - 9), y: 40 },
-  //   { x: new Date("2020", date.getMonth(), date.getDate() - 6), y: 20 },
-  //   { x: new Date("2020", date.getMonth(), date.getDate() - 3), y: 50 },
-  //   { x: new Date("2020", date.getMonth(), date.getDate()), y: 30 },
-  //   { x: new Date("2020", date.getMonth(), date.getDate() + 1), y: 0 }
-  // );
-
-  console.log(dateData);
 
   // charts data
   const data = {
