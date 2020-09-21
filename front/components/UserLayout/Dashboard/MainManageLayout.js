@@ -154,6 +154,7 @@ const MainManageLayout = () => {
   const { urlInfo, loadUserUrlsDone, urlCutDone } = useSelector(
     (state) => state.url
   );
+  const { me } = useSelector((state) => state.user);
   const childRef = useRef();
 
   // table
@@ -209,6 +210,7 @@ const MainManageLayout = () => {
               <p className="fontSmall">무료 회원</p>
             </Row>
             <Row justify="center">
+              {console.log("me: ", me)}
               <Progress
                 id="mainProgress"
                 type="circle"
@@ -216,8 +218,16 @@ const MainManageLayout = () => {
                   "0%": "#5cc49f",
                   "100%": "#fa6a69",
                 }}
-                percent={80}
                 width={150}
+                percent={(me.service.usedUrl / 500) * 100}
+                format={() => {
+                  return (
+                    <>
+                      사용 건수 <br />
+                      {me.service.usedUrl} 건
+                    </>
+                  );
+                }}
               />
             </Row>
             <br />

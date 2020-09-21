@@ -70,6 +70,12 @@
   min-height: 0;
 }
 
+/* progress text */
+.ant-progress-circle .ant-progress-text {
+  font-size: 0.97rem;
+  line-height: 1.2;
+}
+
 /* sider trigger menu tooltip color */
 .ant-tooltip-inner {
   background-color: rgba(94, 203, 161, 0.9);

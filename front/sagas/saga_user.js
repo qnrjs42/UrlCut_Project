@@ -19,9 +19,22 @@ import {
 } from "../reducers/reducer_user";
 
 const dummyUser = (data) => ({
-  email: data,
-  nickname: "제로초",
   id: 1,
+  email: data,
+  nickname: "테스터1",
+  service: {
+    usedUrl: 10,
+    membership: "free",
+  },
+  clickCount: {
+    1: 5,
+    5: 17,
+    17: 30,
+    18: 1,
+    25: 122,
+    28: 3,
+    30: 10,
+  },
 });
 
 function loginAPI(data) {

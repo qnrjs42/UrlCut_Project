@@ -152,10 +152,6 @@ const LinkTable = forwardRef((props, ref) => {
     };
   };
 
-  const onChangeTest = (data) => {
-    console.log("test", data);
-  };
-
   return (
     <>
       <LinkDrawer RowClickData={RowClickData} ref={childRef} />
