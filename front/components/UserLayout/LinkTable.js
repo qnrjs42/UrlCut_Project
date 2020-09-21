@@ -4,7 +4,7 @@ import React, {
   useState,
   useImperativeHandle,
 } from "react";
-import { Typography, Table, Button } from "antd";
+import { Typography, Table } from "antd";
 import PropTypes from "prop-types";
 import { LinkOutlined } from "@ant-design/icons";
 import LinkDrawer from "./LinkDrawer";
@@ -155,16 +155,6 @@ const LinkTable = forwardRef((props, ref) => {
   return (
     <>
       <LinkDrawer RowClickData={RowClickData} ref={childRef} />
-
-      <button
-        onClick={() => {
-          console.log("현재 상태: ", CurrentPage, CurrentLimit);
-          console.log("total", props.urlInfoIds.length);
-          console.log("datasource", props.DataSource.length);
-        }}
-      >
-        Click
-      </button>
       {/* MainManageLayout일 때 rowSelection 없음 */}
       {props.layout === "main" ? (
         <>
@@ -193,22 +183,11 @@ const LinkTable = forwardRef((props, ref) => {
               position: ["topLeft", "bottomRight"],
               onChange: (page, pageSize) => {
                 setCurrentPage(page);
-                // console.log("onChange", page, pageSize);
                 props.changePagination({
                   page,
                   limit: pageSize,
                 });
               },
-              // onShowSizeChange: (_, limit) => {
-              //   setCurrentLimit(limit);
-              //   if (CurrentLimit !== limit) {
-              //     props.changePagination({
-              //       event: "limitEvent",
-              //       page: 1,
-              //       limit,
-              //     });
-              //   }
-              // },
             }}
             onRow={onRow}
           />
