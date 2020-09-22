@@ -19,6 +19,92 @@ dayjs.extend(relativeTime);
 const dateDayjs = dayjs();
 const { Text } = Typography;
 
+// tables setting
+const columns = [
+  {
+    title: "단축 URL",
+    dataIndex: "shortenUrl",
+    key: "shortenUrl",
+    width: "30%",
+    ellipsis: true,
+    render: (urlColData, row, index) => {
+      // console.log(urlColData, row, index);
+      return (
+        <>
+          <a>
+            <Text>{urlColData}</Text>
+            <br />
+
+            <Text type="secondary">
+              <LinkOutlined />
+              &nbsp;
+              {row.urlTitle}
+            </Text>
+          </a>
+        </>
+      );
+    },
+  },
+  {
+    title: "링크 설정옵션",
+    dataIndex: "linkOption",
+    key: "linkOption",
+    width: "10%",
+    responsive: ["lg"],
+    align: "center",
+    render: (linkOptionData, row, index) => {
+      let newData = "-";
+      if (linkOptionData[0] === "lock") {
+        newData = "비밀번호 설정";
+        return <>{newData}</>;
+      }
+      return <>{newData}</>;
+    },
+    filters: [
+      {
+        text: "비밀번호 설정",
+        value: "lock",
+      },
+      {
+        text: "설정 없음",
+        value: "none",
+      },
+    ],
+    // filterMultiple: false,
+    onFilter: (value, record) => record.linkOption[0] === value,
+    // sorter: (a, b) => a.linkOption.length - b.linkOption.length,
+    // sortDirections: ["descend", "ascend"],
+  },
+  {
+    title: "생성일",
+    dataIndex: "createdAt",
+    key: "createdAt",
+    sorter: {
+      compare: (a, b) => {
+        return a.createdAt - b.createdAt;
+      },
+      multiple: 2,
+    },
+    width: "10%",
+    responsive: ["lg"],
+    align: "center",
+    render: (dateData, row, index) => {
+      return <>{dateDayjs.to(dateData)}</>;
+    },
+  },
+  {
+    title: "클릭 수",
+    dataIndex: "clickCount",
+    key: "clickCount",
+    width: "10%",
+    align: "center",
+    sorter: {
+      compare: (a, b) => a.clickCount - b.clickCount,
+      multiple: 1,
+    },
+  },
+];
+
 // Dashboard - LinkManageLayout
 // Management - LinkStorageLayout, ExpiredLayout
 const LinkTable = forwardRef((props, ref) => {
@@ -33,7 +119,7 @@ const LinkTable = forwardRef((props, ref) => {
   }));
 
   // 테이블 check/checked/checkedAll And changeRow
-  const rowSelection = useState({
+  const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(
         `selectedRowKeys: ${selectedRowKeys}`,
@@ -49,7 +135,7 @@ const LinkTable = forwardRef((props, ref) => {
     //   console.log("onSelectAll", selected, selectedRows, changeRows);
     // },
     columnWidth: "5%",
-  });
+  };
 
   // Table Row 선택되었을 때 Drawer 열기, 날짜 포맷 설정
   const onRow = useCallback((record, rowIndex) => {
@@ -64,92 +150,6 @@ const LinkTable = forwardRef((props, ref) => {
       },
     };
   });
-
-  // tables setting
-  const columns = [
-    {
-      title: "단축 URL",
-      dataIndex: "shortenUrl",
-      key: "shortenUrl",
-      width: "30%",
-      ellipsis: true,
-      render: (urlColData, row, index) => {
-        // console.log(urlColData, row, index);
-        return (
-          <>
-            <a>
-              <Text>{urlColData}</Text>
-              <br />
-
-              <Text type="secondary">
-                <LinkOutlined />
-                &nbsp;
-                {row.urlTitle}
-              </Text>
-            </a>
-          </>
-        );
-      },
-    },
-    {
-      title: "링크 설정옵션",
-      dataIndex: "linkOption",
-      key: "linkOption",
-      width: "10%",
-      responsive: ["lg"],
-      align: "center",
-      render: (linkOptionData, row, index) => {
-        let newData = "-";
-        if (linkOptionData[0] === "lock") {
-          newData = "비밀번호 설정";
-          return <>{newData}</>;
-        }
-        return <>{newData}</>;
-      },
-      filters: [
-        {
-          text: "비밀번호 설정",
-          value: "lock",
-        },
-        {
-          text: "설정 없음",
-          value: "none",
-        },
-      ],
-      // filterMultiple: false,
-      onFilter: (value, record) => record.linkOption[0] === value,
-      // sorter: (a, b) => a.linkOption.length - b.linkOption.length,
-      // sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: "생성일",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      sorter: {
-        compare: (a, b) => {
-          return a.createdAt - b.createdAt;
-        },
-        multiple: 2,
-      },
-      width: "10%",
-      responsive: ["lg"],
-      align: "center",
-      render: (dateData, row, index) => {
-        return <>{dateDayjs.to(dateData)}</>;
-      },
-    },
-    {
-      title: "클릭 수",
-      dataIndex: "clickCount",
-      key: "clickCount",
-      width: "10%",
-      align: "center",
-      sorter: {
-        compare: (a, b) => a.clickCount - b.clickCount,
-        multiple: 1,
-      },
-    },
-  ];
 
   return (
     <>

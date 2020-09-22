@@ -55,7 +55,6 @@ const LinkStorageLayout = () => {
       moveMentUrlsDone ||
       tablePaginationDone
     ) {
-      console.log(storageUrlInfo);
       setDataSource(storageUrlInfo);
     }
   }, [storageUrlInfo]);

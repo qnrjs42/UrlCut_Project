@@ -94,7 +94,6 @@ function* signUp(action) {
     // const result = yield call(signUpAPI, action.data);
 
     yield delay(1000); // 가짜 데이터
-    console.log("saga의 signUp Action", action);
 
     yield put({
       type: SIGN_UP_SUCCESS,
@@ -117,7 +116,6 @@ function* loadMyInfo() {
     // const result = yield call(loadMyInfoAPI, action.data);
 
     const result = window.localStorage.getItem("me");
-    console.log("saga의 loadMyInfo result", result);
 
     yield put({
       type: LOAD_MY_INFO_SUCCESS,

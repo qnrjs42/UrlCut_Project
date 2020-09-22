@@ -130,7 +130,7 @@ const MainManageLayout = () => {
               </Col>
               <Col>
                 <ButtonGreenWrapper>
-                  <Link href="/user/[userPages]" as={`/user/manage_url`}>
+                  <Link href={"/user/[userPages]"} as={`/user/manage_url`}>
                     <a>전체 리스트</a>
                   </Link>
                 </ButtonGreenWrapper>
