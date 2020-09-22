@@ -13,7 +13,7 @@ import {
 import {
   ButtonPurpleWrapper,
   ButtonGreenWrapper,
-} from "../../css/overlap-styled";
+} from "../../../css/overlap-styled";
 
 const { Option } = Mentions;
 const { Text, Link } = Typography;
