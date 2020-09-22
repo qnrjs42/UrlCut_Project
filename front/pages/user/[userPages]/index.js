@@ -18,13 +18,6 @@ const StaticToDynamic = () => {
   const uRouter = useRouter();
   const { me } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    if (!(me && me.id)) {
-      console.log("3. pages/user/[userPages]/index moved");
-      uRouter.push("/");
-    }
-  }, [me && me.id]);
-
   // SSR 적용 필요
   useEffect(() => {
     if (uRouter.asPath !== "/user/[userPages]") {
@@ -36,6 +29,13 @@ const StaticToDynamic = () => {
       });
     }
   }, [uRouter]);
+
+  // useEffect(() => {
+  //   if (!(me && me.id)) {
+  //     console.log("3. pages/user/[userPages]/index moved");
+  //     uRouter.push("/");
+  //   }
+  // }, [me && me.id]);
 
   // 컴포넌트에서 넘겨준 값 비교해서 알맞는 컴포넌트 할당
   switch (uRouter.query.userPages) {
@@ -104,7 +104,9 @@ const StaticToDynamic = () => {
             <UserComponent />
           </UserLayout>
         </>
-      ) : null}
+      ) : (
+        <h1>로그인 안 했어!!!!</h1>
+      )}
     </>
   );
 };

@@ -11,13 +11,6 @@ const UserIndex = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    if (!(me && me.id)) {
-      console.log("2. pages/user/index moved");
-      Router.push("/");
-    }
-  }, [me && me.id]);
-
   // SSR 적용 필요
   useEffect(() => {
     console.log("pages/user");
@@ -25,6 +18,13 @@ const UserIndex = () => {
       type: LOAD_MY_INFO_REQUEST,
     });
   }, []);
+
+  // useEffect(() => {
+  //   if (!(me && me.id)) {
+  //     console.log("2. pages/user/index moved");
+  //     Router.push("/");
+  //   }
+  // }, [me && me.id]);
 
   // useEffect(() => {
   //   if (!(me && me.id)) {
@@ -51,7 +51,9 @@ const UserIndex = () => {
             <MainManageLayout />
           </UserLayout>
         </>
-      ) : null}
+      ) : (
+        <h1>로그인 안 했어!!</h1>
+      )}
     </>
   );
 };
