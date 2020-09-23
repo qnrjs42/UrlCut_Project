@@ -38,6 +38,12 @@ import {
   RESET_URLS_INFO_REQUEST,
   RESET_URLS_INFO_SUCCESS,
   RESET_URLS_INFO_FAILURE,
+  SEARCH_URLS_REQUEST,
+  SEARCH_URLS_SUCCESS,
+  SEARCH_URLS_FAILURE,
+  RESET_SEARCH_URLS_REQUEST,
+  RESET_SEARCH_URLS_SUCCESS,
+  RESET_SEARCH_URLS_FAILURE,
 } from "../reducers/reducer_url";
 
 import {
@@ -245,9 +251,9 @@ function* moveMentUrls(action) {
   }
 }
 
-function resetUrlsInfoAPI(data) {
-  return axios.post("/url/storageMoveUrls");
-}
+// function resetUrlsInfoAPI(data) {
+//   return axios.post("/url/storageMoveUrls");
+// }
 
 function* resetUrlsInfo(action) {
   try {
@@ -258,6 +264,49 @@ function* resetUrlsInfo(action) {
     console.error(err);
     yield put({
       type: RESET_URLS_INFO_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function searchUrlsAPI(data) {
+  return axios.post("/url/storageMoveUrls");
+}
+
+function* searchUrls(action) {
+  try {
+    const data = {
+      page: 1,
+      limit: 20,
+    };
+    const result = dummyUrl(data);
+
+    yield put({
+      type: SEARCH_URLS_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: SEARCH_URLS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// function resetSearchUrlsAPI(data) {
+//   return axios.post("/url/storageMoveUrls");
+// }
+
+function* resetSearchUrls(action) {
+  try {
+    yield put({
+      type: RESET_SEARCH_URLS_SUCCESS,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: RESET_SEARCH_URLS_FAILURE,
       error: err.response.data,
     });
   }
@@ -295,6 +344,14 @@ function* watchResetUrlsInfo() {
   yield takeLatest(RESET_URLS_INFO_REQUEST, resetUrlsInfo);
 }
 
+function* watchSearchUrls() {
+  yield takeLatest(SEARCH_URLS_REQUEST, searchUrls);
+}
+
+function* watchResetSearchUrls() {
+  yield takeLatest(RESET_SEARCH_URLS_REQUEST, resetSearchUrls);
+}
+
 export default function* urlSaga() {
   yield all([
     fork(watchTablePagination),
@@ -305,5 +362,7 @@ export default function* urlSaga() {
     fork(watchRemoveUrls),
     fork(watchMoveMentUrls),
     fork(watchResetUrlsInfo),
+    fork(watchSearchUrls),
+    fork(watchResetSearchUrls),
   ]);
 }

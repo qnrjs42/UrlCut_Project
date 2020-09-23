@@ -17,7 +17,6 @@ const StaticToDynamic = () => {
   const dispatch = useDispatch();
   const uRouter = useRouter();
   const { me } = useSelector((state) => state.user);
-
   // SSR 적용 필요
   useEffect(() => {
     if (uRouter.asPath !== "/user/[userPages]") {

@@ -12,6 +12,8 @@ export const initialState = {
   expiredUrlInfo: [], // 설정기간 만료 URL
   expiredUrlInfoIds: 0, // 설정기간 만료 URL 개수
 
+  searchUrlInfo: [],
+
   urlCutLoading: false, // URL 단축 시도
   urlCutDone: false,
   urlCutError: null,
@@ -43,39 +45,55 @@ export const initialState = {
   resetUrlsInfoLoading: false, // urls info 초기화 시도
   resetUrlsInfoDone: false,
   resetUrlsInfoError: null,
+
+  searchUrlsLoading: false, // urls 검색 시도
+  searchUrlsDone: false,
+  searchUrlsError: null,
+
+  resetSearchUrlsLoading: false, // urls 검색 초기화 시도
+  resetSearchUrlsDone: false,
+  resetSearchUrlsError: null,
 };
 
-export const URL_CUT_REQUEST = "URL_CUT_REQUEST";
+export const URL_CUT_REQUEST = "URL_CUT_REQUEST"; // URL 단축했을 때
 export const URL_CUT_SUCCESS = "URL_CUT_SUCCESS";
 export const URL_CUT_FAILURE = "URL_CUT_FAILURE";
 
-export const LOAD_USER_URLS_REQUEST = "LOAD_USER_URLS_REQUEST";
+export const LOAD_USER_URLS_REQUEST = "LOAD_USER_URLS_REQUEST"; // 전체 링크관리 로드 했을 때
 export const LOAD_USER_URLS_SUCCESS = "LOAD_USER_URLS_SUCCESS";
 export const LOAD_USER_URLS_FAILURE = "LOAD_USER_URLS_FAILURE";
 
-export const LOAD_STORAGE_URLS_REQUEST = "LOAD_STORAGE_URLS_REQUEST";
+export const LOAD_STORAGE_URLS_REQUEST = "LOAD_STORAGE_URLS_REQUEST"; // 링크 보관함 로드했을 때
 export const LOAD_STORAGE_URLS_SUCCESS = "LOAD_STORAGE_URLS_SUCCESS";
 export const LOAD_STORAGE_URLS_FAILURE = "LOAD_STORAGE_URLS_FAILURE";
 
-export const LOAD_EXPIRED_URLS_REQUEST = "LOAD_EXPIRED_URLS_REQUEST";
+export const LOAD_EXPIRED_URLS_REQUEST = "LOAD_EXPIRED_URLS_REQUEST"; // 설정기간 만료 로드했을 때
 export const LOAD_EXPIRED_URLS_SUCCESS = "LOAD_EXPIRED_URLS_SUCCESS";
 export const LOAD_EXPIRED_URLS_FAILURE = "LOAD_EXPIRED_URLS_FAILURE";
 
-export const REMOVE_URLS_REQUEST = "REMOVE_URLS_REQUEST";
+export const REMOVE_URLS_REQUEST = "REMOVE_URLS_REQUEST"; // 선택된 URL 삭제했을 때
 export const REMOVE_URLS_SUCCESS = "REMOVE_URLS_SUCCESS";
 export const REMOVE_URLS_FAILURE = "REMOVE_URLS_FAILURE";
 
-export const MOVEMENT_URLS_REQUEST = "MOVEMENT_URLS_REQUEST";
+export const MOVEMENT_URLS_REQUEST = "MOVEMENT_URLS_REQUEST"; // 선택된 URL 보관함 이동, 해제했을 때
 export const MOVEMENT_URLS_SUCCESS = "MOVEMENT_URLS_SUCCESS";
 export const MOVEMENT_URLS_FAILURE = "MOVEMENT_URLS_FAILURE";
 
-export const TABLE_PAGINATION_REQUEST = "TABLE_PAGINATION_REQUEST";
+export const TABLE_PAGINATION_REQUEST = "TABLE_PAGINATION_REQUEST"; // 테이블 페이지네이션했을 때
 export const TABLE_PAGINATION_SUCCESS = "TABLE_PAGINATION_SUCCESS";
 export const TABLE_PAGINATION_FAILURE = "TABLE_PAGINATION_FAILURE";
 
 export const RESET_URLS_INFO_REQUEST = "RESET_URLS_INFO_REQUEST"; // 페이지 이동 시 url들 info 초기화 하고 현재 페이지 urlInfo만 리로드하여 성능 개선
 export const RESET_URLS_INFO_SUCCESS = "RESET_URLS_INFO_SUCCESS";
 export const RESET_URLS_INFO_FAILURE = "RESET_URLS_INFO_FAILURE";
+
+export const SEARCH_URLS_REQUEST = "SEARCH_URLS_REQUEST"; // seach 했을 때
+export const SEARCH_URLS_SUCCESS = "SEARCH_URLS_SUCCESS";
+export const SEARCH_URLS_FAILURE = "SEARCH_URLS_FAILURE";
+
+export const RESET_SEARCH_URLS_REQUEST = "RESET_SEARCH_URLS_REQUEST"; // 검색 지우기 버튼 눌렀을 때
+export const RESET_SEARCH_URLS_SUCCESS = "RESET_SEARCH_URLS_SUCCESS";
+export const RESET_SEARCH_URLS_FAILURE = "REST_SEARCH_URLS_FAILURE";
 
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {
@@ -87,7 +105,6 @@ const reducer = (state = initialState, action) =>
         break;
       case TABLE_PAGINATION_SUCCESS: {
         draft.tablePaginationLoading = false;
-        draft.tablePaginationDone = true;
 
         if (action.sender === "linkManage") {
           draft.urlInfo = action.data;
@@ -97,6 +114,7 @@ const reducer = (state = initialState, action) =>
           draft.expiredUrlInfo = action.data;
         }
 
+        draft.tablePaginationDone = true;
         draft.urlCutDone = false;
         draft.loadUserUrlsDone = false;
         draft.removeUrlDone = false;
@@ -116,11 +134,12 @@ const reducer = (state = initialState, action) =>
         console.log("state", state);
         console.log("action", action.data);
         draft.urlCutLoading = false;
-        draft.urlCutDone = true;
+
         draft.shortenUrl = action.data.shortenUrl;
         draft.urlInfo.pop(); // 배열 마지막 요소 제거하고
         draft.urlInfo.unshift(action.data); // 배열 맨 앞에 실제 데이터 추가
 
+        draft.urlCutDone = true;
         draft.loadUserUrlsDone = false;
         break;
       case URL_CUT_FAILURE:
@@ -135,11 +154,15 @@ const reducer = (state = initialState, action) =>
         break;
       case LOAD_USER_URLS_SUCCESS:
         draft.loadUserUrlsLoading = false;
-        draft.loadUserUrlsDone = true;
         draft.urlInfo = action.data;
         draft.urlInfoIds = action.urlInfoIds;
         draft.storageUrlInfoIds = action.storageUrlInfoIds;
         draft.expiredUrlInfoIds = action.expiredUrlInfoIds;
+
+        draft.loadUserUrlsDone = true;
+        draft.loadStorageUrlsDone = false;
+        draft.loadExpiredUrlsDone = false;
+        draft.searchUrlsDone = false;
         break;
       case LOAD_USER_URLS_FAILURE:
         draft.loadUserUrlsLoading = false;
@@ -153,11 +176,15 @@ const reducer = (state = initialState, action) =>
         break;
       case LOAD_STORAGE_URLS_SUCCESS:
         draft.loadStorageUrlsLoading = false;
-        draft.loadStorageUrlsDone = true;
         draft.storageUrlInfo = action.data;
         draft.urlInfoIds = action.urlInfoIds;
         draft.storageUrlInfoIds = action.storageUrlInfoIds;
         draft.expiredUrlInfoIds = action.expiredUrlInfoIds;
+
+        draft.loadStorageUrlsDone = true;
+        draft.loadExpiredUrlsDone = false;
+        draft.loadUserUrlsDone = false;
+        draft.searchUrlsDone = false;
         break;
       case LOAD_STORAGE_URLS_FAILURE:
         draft.loadStorageUrlsLoading = false;
@@ -171,11 +198,15 @@ const reducer = (state = initialState, action) =>
         break;
       case LOAD_EXPIRED_URLS_SUCCESS:
         draft.loadExpiredUrlsLoading = false;
-        draft.loadExpiredUrlsDone = true;
         draft.expiredUrlInfo = action.data;
         draft.urlInfoIds = action.urlInfoIds;
         draft.storageUrlInfoIds = action.storageUrlInfoIds;
         draft.expiredUrlInfoIds = action.expiredUrlInfoIds;
+
+        draft.loadExpiredUrlsDone = true;
+        draft.loadUserUrlsDone = false;
+        draft.loadStorageUrlsDone = false;
+        draft.searchUrlsDone = false;
         break;
       case LOAD_EXPIRED_URLS_FAILURE:
         draft.loadExpiredUrlsLoading = false;
@@ -189,9 +220,8 @@ const reducer = (state = initialState, action) =>
         break;
       case REMOVE_URLS_SUCCESS: {
         draft.removeUrlsLoading = false;
-        draft.removeUrlsDone = true;
-        // draft.urlInfo = draft.urlInfo.filter((v) => v.id !== action.data.id); // 1 개씩 지울 때
 
+        // draft.urlInfo = draft.urlInfo.filter((v) => v.id !== action.data.id); // 1 개씩 지울 때
         if (action.data.sender === "linkManage") {
           console.log("linkManage");
           draft.urlInfo = draft.urlInfo.filter(
@@ -202,13 +232,19 @@ const reducer = (state = initialState, action) =>
           draft.storageUrlInfo = draft.storageUrlInfo.filter(
             (listItem) => !action.data.removeIds.includes(listItem.id)
           );
-        } else if (action.data.sender === "linkStorage") {
+        } else if (action.data.sender === "linkExpired") {
           console.log("linkExpired");
           draft.expiredUrlInfo = draft.expiredUrlInfo.filter(
             (listItem) => !action.data.removeIds.includes(listItem.id)
           );
+        } else if (action.data.sender === "search") {
+          console.log("search");
+          draft.searchUrlInfo = draft.searchUrlInfo.filter(
+            (listItem) => !action.data.removeIds.includes(listItem.id)
+          );
         }
 
+        draft.removeUrlsDone = true;
         draft.urlCutDone = false;
         draft.loadUserUrlsDone = false;
         draft.moveMentUrlsDone = false;
@@ -226,7 +262,6 @@ const reducer = (state = initialState, action) =>
         break;
       case MOVEMENT_URLS_SUCCESS: {
         draft.moveMentUrlsLoading = false;
-        draft.moveMentUrlsDone = true;
 
         if (action.data.sender === "linkManage") {
           draft.urlInfo = draft.urlInfo.filter(
@@ -240,8 +275,13 @@ const reducer = (state = initialState, action) =>
           draft.expiredUrlInfo = draft.expiredUrlInfo.filter(
             (listItem) => !action.data.moveMentIds.includes(listItem.id)
           );
+        } else if (action.data.sender === "search") {
+          draft.searchUrlInfo = draft.searchUrlInfo.filter(
+            (listItem) => !action.data.moveMentIds.includes(listItem.id)
+          );
         }
 
+        draft.moveMentUrlsDone = true;
         draft.urlCutDone = false;
         draft.loadUserUrlsDone = false;
         draft.removeUrlDone = false;
@@ -262,10 +302,46 @@ const reducer = (state = initialState, action) =>
         draft.urlInfo = [];
         draft.storageUrlInfo = [];
         draft.expiredUrlInfo = [];
+        if (draft.searchUrlsDone === false) {
+          draft.searchUrlInfo = [];
+        }
         draft.resetUrlsInfoDone = true;
+        break;
       case RESET_URLS_INFO_FAILURE:
         draft.resetUrlsInfoLoading = false;
         draft.resetUrlsInfoError = action.error;
+        break;
+
+      case SEARCH_URLS_REQUEST:
+        draft.searchUrlsLoading = true;
+        draft.searchUrlsDone = false;
+        draft.searchUrlsError = null;
+        break;
+      case SEARCH_URLS_SUCCESS:
+        draft.searchUrlsLoading = false;
+        draft.searchUrlInfo = action.data;
+        draft.searchUrlsDone = true;
+        break;
+      case SEARCH_URLS_FAILURE:
+        draft.searchUrlsLoading = false;
+        draft.searchUrlsError = action.error;
+        break;
+
+      case RESET_SEARCH_URLS_REQUEST:
+        draft.resetSearchUrlsLoading = true;
+        draft.resetSearchUrlsDone = false;
+        draft.resetSearchUrlsError = null;
+        break;
+      case RESET_SEARCH_URLS_SUCCESS:
+        draft.resetSearchUrlsLoading = false;
+        draft.searchUrlInfo = [];
+        draft.resetSearchUrlsDone = true;
+
+        draft.searchUrlsDone = false;
+        break;
+      case RESET_SEARCH_URLS_FAILURE:
+        draft.resetSearchUrlsLoading = false;
+        draft.resetSearchUrlsError = action.error;
         break;
 
       default:
