@@ -3,15 +3,20 @@ import {
   delay,
   fork,
   put,
-  takeLatest,
   call,
   throttle,
   takeLeading,
 } from "redux-saga/effects";
+import * as Effects from "redux-saga/effects";
 import axios from "axios";
 import shortid from "shortid";
 import faker from "faker";
 faker.locale = "ko";
+
+import { tablePaginationSagaTypes } from "../interface";
+
+const takeLatest: any = Effects.takeLatest;
+// const takeLatest = <T, K>(_x: T, y: K): K => y;
 
 import {
   URL_CUT_REQUEST,
@@ -44,7 +49,7 @@ import {
   RESET_SEARCH_URLS_REQUEST,
   RESET_SEARCH_URLS_SUCCESS,
   RESET_SEARCH_URLS_FAILURE,
-} from "../reducers/reducer_url";
+} from "../actions/action_url";
 
 import {
   dummyUrl,
@@ -57,18 +62,20 @@ function tablePaginationAPI() {
   return axios.post("/url");
 }
 
-function* tablePagination(action) {
+function* tablePagination(action: tablePaginationSagaTypes) {
   try {
     // const result = yield call(urlCutAPI); // axios 이용할 때
     // yield delay(1000);
 
-    const result = dummyUrl(action.data);
-    yield put({
-      type: TABLE_PAGINATION_SUCCESS,
-      //   data: result.data, // axios 이용할 때
-      data: result,
-      sender: action.data.sender,
-    });
+    console.log(action);
+
+    // const result = dummyUrl(action.data);
+    // yield put({
+    //   type: TABLE_PAGINATION_SUCCESS,
+    //   //   data: result.data, // axios 이용할 때
+    //   data: result,
+    //   sender: action.data.sender,
+    // });
   } catch (err) {
     console.error(err);
     yield put({
@@ -82,7 +89,14 @@ function loadUrlsInfoAPI() {
   return axios.post("/url");
 }
 
-function* loadUrlsInfo(action) {
+interface loadUrlInfoTypes {
+  data: {
+    page: number;
+    limit: number;
+  };
+}
+
+function* loadUrlsInfo(action: loadUrlInfoTypes) {
   try {
     // const result = yield call(urlCutAPI); // axios 이용할 때
     // yield delay(1000);
@@ -110,7 +124,7 @@ function loadStorageUrlsInfoAPI() {
   return axios.post("/url");
 }
 
-function* loadStorageUrlsInfo(action) {
+function* loadStorageUrlsInfo(action: loadUrlInfoTypes) {
   try {
     // const result = yield call(urlCutAPI); // axios 이용할 때
     // yield delay(1000);
@@ -138,7 +152,7 @@ function loadExpiredUrlsInfoAPI() {
   return axios.post("/url");
 }
 
-function* loadExpiredUrlsInfo(action) {
+function* loadExpiredUrlsInfo(action: loadUrlInfoTypes) {
   try {
     // const result = yield call(urlCutAPI); // axios 이용할 때
     // yield delay(1000);
@@ -162,11 +176,14 @@ function* loadExpiredUrlsInfo(action) {
   }
 }
 
-function urlCutAPI(data) {
+function urlCutAPI() {
   return axios.post("/url/urlCut");
 }
+interface urlCutTypes {
+  data: string;
+}
 
-function* urlCut(action) {
+function* urlCut(action: urlCutTypes) {
   try {
     // const result = yield call(urlCutAPI, action.data); // axios 이용할 때
     // const result = "Saga를 이용한 단축된 URL";
@@ -198,11 +215,18 @@ function* urlCut(action) {
   }
 }
 
-function removeUrlsAPI(data) {
+function removeUrlsAPI() {
   return axios.post("/url/removeUrl");
 }
 
-function* removeUrls(action) {
+interface removeUrlsTypes {
+  data: {
+    sender: string;
+    removeIds: string[];
+  };
+}
+
+function* removeUrls(action: removeUrlsTypes) {
   try {
     // const result = yield call(removeUrlAPI, action.data); // axios 이용할 때
     // const result = "Saga를 이용한 단축된 URL";
@@ -224,11 +248,18 @@ function* removeUrls(action) {
   }
 }
 
-function moveMentUrlsAPI(data) {
+function moveMentUrlsAPI() {
   return axios.post("/url/storageMoveUrls");
 }
 
-function* moveMentUrls(action) {
+interface moveMentUrlsTypes {
+  data: {
+    sender: string;
+    moveMentIds: string[];
+  };
+}
+
+function* moveMentUrls(action: moveMentUrlsTypes) {
   try {
     // const result = yield call(storageMoveUrlAPI, action.data); // axios 이용할 때
     // const result = "Saga를 이용한 단축된 URL";
@@ -255,7 +286,7 @@ function* moveMentUrls(action) {
 //   return axios.post("/url/storageMoveUrls");
 // }
 
-function* resetUrlsInfo(action) {
+function* resetUrlsInfo() {
   try {
     yield put({
       type: RESET_URLS_INFO_SUCCESS,
@@ -269,11 +300,11 @@ function* resetUrlsInfo(action) {
   }
 }
 
-function searchUrlsAPI(data) {
+function searchUrlsAPI() {
   return axios.post("/url/storageMoveUrls");
 }
 
-function* searchUrls(action) {
+function* searchUrls() {
   try {
     const data = {
       page: 1,
@@ -298,7 +329,7 @@ function* searchUrls(action) {
 //   return axios.post("/url/storageMoveUrls");
 // }
 
-function* resetSearchUrls(action) {
+function* resetSearchUrls() {
   try {
     yield put({
       type: RESET_SEARCH_URLS_SUCCESS,

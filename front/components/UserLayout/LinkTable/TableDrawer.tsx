@@ -1,25 +1,21 @@
 import React, { forwardRef, useState, useImperativeHandle } from "react";
-import {
-  Typography,
-  Row,
-  Col,
-  Drawer,
-  Button,
-  Space,
-  Divider,
-  Mentions,
-} from "antd";
+import { Typography, Row, Drawer, Space, Divider, Mentions } from "antd";
 
 import {
   ButtonPurpleWrapper,
   ButtonGreenWrapper,
 } from "../../../css/overlap-styled";
+import { TurlInfo } from "../../../interface";
 
 const { Option } = Mentions;
 const { Text, Link } = Typography;
 
+type LinkDrawerProps = {
+  RowClickData: TurlInfo | null;
+};
+
 // UserLayout - LinkTable
-const LinkDrawer = forwardRef((props, ref) => {
+const LinkDrawer = forwardRef((props: LinkDrawerProps, ref) => {
   const [Visible, setVisible] = useState(false);
 
   useImperativeHandle(ref, () => ({
@@ -42,10 +38,12 @@ const LinkDrawer = forwardRef((props, ref) => {
         onClose={onClose}
         visible={Visible}
       >
-        {/* {console.log(props.RowClickData)} */}
         <div>
           <Row justify="start">
-            <Link target="_blank">{props.RowClickData.shortenUrl}</Link>
+            {props.RowClickData !== null ? (
+              <Link target="_blank">{props.RowClickData.shortenUrl}</Link>
+            ) : null}
+            {/*  */}
           </Row>
           <Row justify="end">
             <Space>
@@ -60,7 +58,11 @@ const LinkDrawer = forwardRef((props, ref) => {
         <div>
           <Mentions
             style={{ width: "100%", height: "120px" }}
-            placeholder={props.RowClickData.originalUrl}
+            placeholder={
+              props.RowClickData !== null
+                ? props.RowClickData.originalUrl
+                : undefined
+            }
             readOnly
           >
             <Option value="afc163">afc163</Option>
@@ -68,7 +70,10 @@ const LinkDrawer = forwardRef((props, ref) => {
             <Option value="yesmeck">yesmeck</Option>
           </Mentions>
           <Row justify="space-between" style={{ paddingTop: "8px" }}>
-            <p>생성일: {props.RowClickData.createdAt}</p>
+            {props.RowClickData !== null ? (
+              <p>생성일: {props.RowClickData.createdAt}</p>
+            ) : null}
+
             <a>
               <Text type="danger">삭제</Text>
             </a>
@@ -79,7 +84,10 @@ const LinkDrawer = forwardRef((props, ref) => {
 
         <div>
           <Row justify="space-between">
-            <p>클릭 수: {props.RowClickData.clickCount} 클릭</p>
+            {props.RowClickData !== null ? (
+              <p>클릭 수: {props.RowClickData.clickCount} 클릭</p>
+            ) : null}
+
             <a>통계페이지 이동</a>
           </Row>
 

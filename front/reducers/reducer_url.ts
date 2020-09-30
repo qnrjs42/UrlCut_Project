@@ -1,18 +1,53 @@
 import produce from "immer";
+import { AnyAction } from "redux";
+import {
+  URL_CUT_REQUEST,
+  URL_CUT_SUCCESS,
+  URL_CUT_FAILURE,
+  LOAD_USER_URLS_REQUEST,
+  LOAD_USER_URLS_SUCCESS,
+  LOAD_USER_URLS_FAILURE,
+  REMOVE_URLS_REQUEST,
+  REMOVE_URLS_SUCCESS,
+  REMOVE_URLS_FAILURE,
+  TABLE_PAGINATION_REQUEST,
+  TABLE_PAGINATION_SUCCESS,
+  TABLE_PAGINATION_FAILURE,
+  LOAD_STORAGE_URLS_REQUEST,
+  LOAD_STORAGE_URLS_SUCCESS,
+  LOAD_STORAGE_URLS_FAILURE,
+  LOAD_EXPIRED_URLS_REQUEST,
+  LOAD_EXPIRED_URLS_SUCCESS,
+  LOAD_EXPIRED_URLS_FAILURE,
+  MOVEMENT_URLS_REQUEST,
+  MOVEMENT_URLS_SUCCESS,
+  MOVEMENT_URLS_FAILURE,
+  RESET_URLS_INFO_REQUEST,
+  RESET_URLS_INFO_SUCCESS,
+  RESET_URLS_INFO_FAILURE,
+  SEARCH_URLS_REQUEST,
+  SEARCH_URLS_SUCCESS,
+  SEARCH_URLS_FAILURE,
+  RESET_SEARCH_URLS_REQUEST,
+  RESET_SEARCH_URLS_SUCCESS,
+  RESET_SEARCH_URLS_FAILURE,
+} from "../actions/action_url";
 
-export const initialState = {
+import { urlInitialStateTypes } from "../interface";
+
+export const urlInitialState: urlInitialStateTypes = {
   shortenUrl: null,
 
   urlInfo: [], // 전체 링크 관리 URL
-  urlInfoIds: 0, // 전체 링크 관리 URL 개수
+  urlInfoIds: [], // 전체 링크 관리 URL 개수
 
   storageUrlInfo: [], // 링크 보관함 URL
-  storageUrlInfoIds: 0, // 링크 보관함 URL 개수
+  storageUrlInfoIds: [], // 링크 보관함 URL 개수
 
   expiredUrlInfo: [], // 설정기간 만료 URL
-  expiredUrlInfoIds: 0, // 설정기간 만료 URL 개수
+  expiredUrlInfoIds: [], // 설정기간 만료 URL 개수
 
-  searchUrlInfo: [],
+  searchUrlInfo: [], // 검색한 URL
 
   urlCutLoading: false, // URL 단축 시도
   urlCutDone: false,
@@ -55,47 +90,9 @@ export const initialState = {
   resetSearchUrlsError: null,
 };
 
-export const URL_CUT_REQUEST = "URL_CUT_REQUEST"; // URL 단축했을 때
-export const URL_CUT_SUCCESS = "URL_CUT_SUCCESS";
-export const URL_CUT_FAILURE = "URL_CUT_FAILURE";
+export type IUrlReducerState = typeof urlInitialState;
 
-export const LOAD_USER_URLS_REQUEST = "LOAD_USER_URLS_REQUEST"; // 전체 링크관리 로드 했을 때
-export const LOAD_USER_URLS_SUCCESS = "LOAD_USER_URLS_SUCCESS";
-export const LOAD_USER_URLS_FAILURE = "LOAD_USER_URLS_FAILURE";
-
-export const LOAD_STORAGE_URLS_REQUEST = "LOAD_STORAGE_URLS_REQUEST"; // 링크 보관함 로드했을 때
-export const LOAD_STORAGE_URLS_SUCCESS = "LOAD_STORAGE_URLS_SUCCESS";
-export const LOAD_STORAGE_URLS_FAILURE = "LOAD_STORAGE_URLS_FAILURE";
-
-export const LOAD_EXPIRED_URLS_REQUEST = "LOAD_EXPIRED_URLS_REQUEST"; // 설정기간 만료 로드했을 때
-export const LOAD_EXPIRED_URLS_SUCCESS = "LOAD_EXPIRED_URLS_SUCCESS";
-export const LOAD_EXPIRED_URLS_FAILURE = "LOAD_EXPIRED_URLS_FAILURE";
-
-export const REMOVE_URLS_REQUEST = "REMOVE_URLS_REQUEST"; // 선택된 URL 삭제했을 때
-export const REMOVE_URLS_SUCCESS = "REMOVE_URLS_SUCCESS";
-export const REMOVE_URLS_FAILURE = "REMOVE_URLS_FAILURE";
-
-export const MOVEMENT_URLS_REQUEST = "MOVEMENT_URLS_REQUEST"; // 선택된 URL 보관함 이동, 해제했을 때
-export const MOVEMENT_URLS_SUCCESS = "MOVEMENT_URLS_SUCCESS";
-export const MOVEMENT_URLS_FAILURE = "MOVEMENT_URLS_FAILURE";
-
-export const TABLE_PAGINATION_REQUEST = "TABLE_PAGINATION_REQUEST"; // 테이블 페이지네이션했을 때
-export const TABLE_PAGINATION_SUCCESS = "TABLE_PAGINATION_SUCCESS";
-export const TABLE_PAGINATION_FAILURE = "TABLE_PAGINATION_FAILURE";
-
-export const RESET_URLS_INFO_REQUEST = "RESET_URLS_INFO_REQUEST"; // 페이지 이동 시 url들 info 초기화 하고 현재 페이지 urlInfo만 리로드하여 성능 개선
-export const RESET_URLS_INFO_SUCCESS = "RESET_URLS_INFO_SUCCESS";
-export const RESET_URLS_INFO_FAILURE = "RESET_URLS_INFO_FAILURE";
-
-export const SEARCH_URLS_REQUEST = "SEARCH_URLS_REQUEST"; // seach 했을 때
-export const SEARCH_URLS_SUCCESS = "SEARCH_URLS_SUCCESS";
-export const SEARCH_URLS_FAILURE = "SEARCH_URLS_FAILURE";
-
-export const RESET_SEARCH_URLS_REQUEST = "RESET_SEARCH_URLS_REQUEST"; // 검색 지우기 버튼 눌렀을 때
-export const RESET_SEARCH_URLS_SUCCESS = "RESET_SEARCH_URLS_SUCCESS";
-export const RESET_SEARCH_URLS_FAILURE = "REST_SEARCH_URLS_FAILURE";
-
-const reducer = (state = initialState, action) =>
+const reducer = (state = urlInitialState, action: AnyAction) =>
   produce(state, (draft) => {
     switch (action.type) {
       case TABLE_PAGINATION_REQUEST:
@@ -117,7 +114,7 @@ const reducer = (state = initialState, action) =>
         draft.tablePaginationDone = true;
         draft.urlCutDone = false;
         draft.loadUserUrlsDone = false;
-        draft.removeUrlDone = false;
+        draft.removeUrlsDone = false;
         break;
       }
       case TABLE_PAGINATION_FAILURE:
@@ -284,7 +281,7 @@ const reducer = (state = initialState, action) =>
         draft.moveMentUrlsDone = true;
         draft.urlCutDone = false;
         draft.loadUserUrlsDone = false;
-        draft.removeUrlDone = false;
+        draft.removeUrlsDone = false;
         break;
       }
       case MOVEMENT_URLS_FAILURE:
@@ -349,4 +346,5 @@ const reducer = (state = initialState, action) =>
     }
   });
 
+export type UrlState = ReturnType<typeof reducer>;
 export default reducer;

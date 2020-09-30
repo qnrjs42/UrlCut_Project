@@ -11,14 +11,16 @@ import {
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
   LOAD_MY_INFO_REQUEST,
-  CHANGE_NICKNAME_REQUEST,
   LOAD_MY_INFO_SUCCESS,
   LOAD_MY_INFO_FAILURE,
+  CHANGE_NICKNAME_REQUEST,
   CHANGE_NICKNAME_SUCCESS,
   CHANGE_NICKNAME_FAILURE,
-} from "../reducers/reducer_user";
+} from "../actions/action_user";
 
-const dummyUser = (data) => ({
+import { dummyUserTypes, signUpSagaType, logInSagaType } from "../interface";
+
+const dummyUser = (data: string) => ({
   id: 1,
   email: data,
   nickname: "테스터1",
@@ -37,20 +39,19 @@ const dummyUser = (data) => ({
   },
 });
 
-function loginAPI(data) {
+function loginAPI(data: string): dummyUserTypes {
   // return axios.post("/api/login", data);
   localStorage.setItem("me", JSON.stringify(dummyUser(data))); // Object Object 뜨면 서버 재시작
   return dummyUser(data);
 }
 
-function* logIn(action) {
+function* logIn(action: logInSagaType) {
   try {
-    const result = yield call(loginAPI, action.data);
+    const result: dummyUserTypes = yield call(loginAPI, action.data.Email);
     yield delay(1000); // 가짜 데이터인척하고 시간 지연
-    // const result = yield call(loginAPI, action.data); // 아직 서버가 없어서 요청을 못 보냄
     yield put({
       type: LOG_IN_SUCCESS,
-      data: result.data,
+      data: result,
     });
   } catch (err) {
     console.error(err);
@@ -85,11 +86,12 @@ function* logOut() {
   }
 }
 
-function signUpAPI(data) {
-  return axios.post("/api/signUp", data);
-}
+// function signUpAPI() {
+//   // return axios.post("/api/signUp", data);
+// }
 
-function* signUp(action) {
+// action: signUpSagaType
+function* signUp() {
   try {
     // const result = yield call(signUpAPI, action.data);
 
@@ -107,19 +109,20 @@ function* signUp(action) {
   }
 }
 
-function loadMyInfoAPI(data) {
-  return axios.post("/api/loadMyInfo", data);
-}
+// function loadMyInfoAPI(data) {
+//   return axios.post("/api/loadMyInfo", data);
+// }
 
 function* loadMyInfo() {
   try {
     // const result = yield call(loadMyInfoAPI, action.data);
-
     const result = window.localStorage.getItem("me");
-
+    let jsonResult: string | null = null;
+    if (typeof result === "string") jsonResult = JSON.parse(result);
+    else jsonResult = null;
     yield put({
       type: LOAD_MY_INFO_SUCCESS,
-      data: JSON.parse(result),
+      data: jsonResult,
     });
   } catch (err) {
     console.error(err);
@@ -130,15 +133,15 @@ function* loadMyInfo() {
   }
 }
 
-function changeNicknameAPI(data) {
-  return axios.post("/api/changeNickname", data);
-}
+// function changeNicknameAPI() {
+//   return axios.post("/api/changeNickname", data);
+// }
 
-function* changeNickname(action) {
+function* changeNickname() {
   try {
     // const result = yield call(changeNicknameAPI, action.data);
 
-    console.log("saga의 changeNickname Action", action);
+    console.log("saga의 changeNickname Action");
 
     yield put({
       type: CHANGE_NICKNAME_SUCCESS,

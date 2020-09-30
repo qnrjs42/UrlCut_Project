@@ -5,8 +5,8 @@ import loadable from "@loadable/component";
 
 import UserLayout from "../../../components/UserLayout";
 
-import { RESET_URLS_INFO_REQUEST } from "../../../reducers/reducer_url";
-import { LOAD_MY_INFO_REQUEST } from "../../../reducers/reducer_user";
+import { RESET_URLS_INFO_REQUEST } from "../../../actions/action_url";
+import { LOAD_MY_INFO_REQUEST } from "../../../actions/action_user";
 
 // 초기 /user 진입했을 때 | null로 하면 에러 발생
 let UserComponent = loadable(() =>

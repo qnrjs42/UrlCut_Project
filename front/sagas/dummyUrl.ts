@@ -2,16 +2,20 @@ import shortid from "shortid";
 import faker from "faker";
 faker.locale = "ko";
 
-export const dummyUrl = (data) => {
+import { tablePaginationTypes } from "../interface";
+
+export const dummyUrl = (data: tablePaginationTypes) => {
   let createDummyUrl = [];
-  //   console.log("dummy", data);
 
   let lastIndex = data.page * data.limit;
   const firstIndex = lastIndex - data.limit;
 
   try {
-    if (lastIndex > data.urlInfoIdsLength) {
-      lastIndex = data.urlInfoIdsLength;
+    // urlInfoIdsLength가 있고 lastIndex보다 작을 때
+    if (data.urlInfoIdsLength !== undefined) {
+      if (lastIndex > data.urlInfoIdsLength) {
+        lastIndex = data.urlInfoIdsLength;
+      }
     }
   } catch (err) {}
 

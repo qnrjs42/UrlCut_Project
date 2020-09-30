@@ -1,7 +1,52 @@
-/* eslint-disable indent */
 import produce from "immer";
+import { AnyAction } from "redux";
+import {
+  ADD_POST_TO_ME,
+  CHANGE_NICKNAME_FAILURE,
+  CHANGE_NICKNAME_REQUEST,
+  CHANGE_NICKNAME_SUCCESS,
+  LOAD_MY_INFO_FAILURE,
+  LOAD_MY_INFO_REQUEST,
+  LOAD_MY_INFO_SUCCESS,
+  LOG_IN_FAILURE,
+  LOG_IN_REQUEST,
+  LOG_IN_SUCCESS,
+  LOG_OUT_FAILURE,
+  LOG_OUT_REQUEST,
+  LOG_OUT_SUCCESS,
+  REMOVE_POST_OF_ME,
+  SIGN_UP_FAILURE,
+  SIGN_UP_REQUEST,
+  SIGN_UP_SUCCESS,
+} from "../actions/action_user";
 
-export const initialState = {
+import { dummyUserTypes } from "../interface";
+
+export type userInitialStateType = {
+  logInLoading: boolean;
+  logInDone: boolean;
+  logInError: string | null;
+
+  logOutLoading: boolean;
+  logOutDone: boolean;
+  logOutError: string | null;
+
+  signUpLoading: boolean;
+  signUpDone: boolean;
+  signUpError: string | null;
+
+  changeNicknameLoading: boolean;
+  changeNicknameDone: boolean;
+  changeNicknameError: string | null;
+
+  loadMyInfoLoading: boolean;
+  loadMyInfoDone: boolean;
+  loadMyInfoError: string | null;
+
+  me: dummyUserTypes | null;
+};
+
+export const userInitialState: userInitialStateType = {
   logInLoading: false, // 로그인 시도 중    // Logging이면 로딩화면을 띄워주기위한 역할
   logInDone: false,
   logInError: null,
@@ -25,52 +70,9 @@ export const initialState = {
   me: null,
 };
 
-// type을 문자열로 정하면 오타에 취약 그래서 변수로 빼두는게 좋다
+export type IUserReducerState = typeof userInitialState;
 
-export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
-export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
-export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
-
-export const LOG_OUT_REQUEST = "LOG_OUT_REQUEST";
-export const LOG_OUT_SUCCESS = "LOG_OUT_SUCCESS";
-export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
-
-export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
-export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
-export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
-
-export const CHANGE_NICKNAME_REQUEST = "CHANGE_NICKNAME_REQUEST";
-export const CHANGE_NICKNAME_SUCCESS = "CHANGE_NICKNAME_SUCCESS";
-export const CHANGE_NICKNAME_FAILURE = "CHANGE_NICKNAME_FAILURE";
-
-export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
-export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
-export const LOAD_MY_INFO_FAILURE = "LOAD_MY_INFO_FAILURE";
-
-export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
-export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
-
-export const loginRequestAction = (data) => ({
-  type: LOG_IN_REQUEST,
-  data,
-});
-
-export const signupRequestAction = (data) => ({
-  type: SIGN_UP_REQUEST,
-  data,
-});
-
-// END LOG_IN
-// ///////////////////////////////////////////////////
-
-export const logoutRequestAction = () => ({
-  type: LOG_OUT_REQUEST,
-});
-
-// END LOG_OUT
-// ///////////////////////////////////////////////////
-
-const reducer = (state = initialState, action) =>
+const reducer = (state = userInitialState, action: AnyAction) =>
   produce(state, (draft) => {
     switch (action.type) {
       case LOG_IN_REQUEST:
@@ -166,5 +168,5 @@ const reducer = (state = initialState, action) =>
         break;
     }
   });
-
+export type UserState = ReturnType<typeof reducer>;
 export default reducer;
