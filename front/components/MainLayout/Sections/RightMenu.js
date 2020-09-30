@@ -3,7 +3,7 @@ import { Menu } from "antd";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 
-import { logoutRequestAction } from "../../../reducers/reducer_user";
+import { logoutRequestAction } from "../../../actions/action_user";
 
 function RightMenu(props) {
   const dispatch = useDispatch();

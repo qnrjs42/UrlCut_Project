@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 
 import useInput from "../hooks/useInput";
-import { signupRequestAction } from "../reducers/reducer_user";
 import NavBar from "../components/MainLayout/NavBar";
 import {
   MainLayoutWrapper,
@@ -18,7 +17,10 @@ import {
   MainLockOutlinedWrapper,
   FormWrapper,
 } from "../css/overlap-styled";
-import { LOAD_MY_INFO_REQUEST } from "../reducers/reducer_user";
+import {
+  LOAD_MY_INFO_REQUEST,
+  signupRequestAction,
+} from "../actions/action_user";
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -93,8 +95,8 @@ const signUp = () => {
     if (!term) {
       return setTermError(true);
     }
-
-    dispatch(signupRequestAction({ Email, NickName, Password }));
+    // console.log({ data: { Email, Password, NickName } });
+    dispatch(signupRequestAction({Email, Password, NickName}));
   }, [Email, NickName, Password, term]);
 
   return (

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 import useInput from "../hooks/useInput";
-import { loginRequestAction } from "../reducers/reducer_user";
 import NavBar from "../components/MainLayout/NavBar";
 import {
   MainLayoutWrapper,
@@ -16,7 +15,10 @@ import {
   MainLockOutlinedWrapper,
   FormWrapper,
 } from "../css/overlap-styled";
-import { LOAD_MY_INFO_REQUEST } from "../reducers/reducer_user";
+import {
+  LOAD_MY_INFO_REQUEST,
+  loginRequestAction,
+} from "../actions/action_user";
 
 const logIn = () => {
   const uRouter = useRouter();
@@ -51,7 +53,8 @@ const logIn = () => {
   }, [logInDone]);
 
   const onLogInSubmit = useCallback(() => {
-    dispatch(loginRequestAction(Email, Password));
+    // console.log({data: {Email, Password}});
+    dispatch(loginRequestAction({ Email, Password } ));
   }, [Email, Password]);
 
   return (

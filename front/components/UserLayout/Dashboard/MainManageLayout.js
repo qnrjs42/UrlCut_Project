@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ButtonGreenWrapper, RowWrapper } from "../../../css/overlap-styled";
-import { LOAD_USER_URLS_REQUEST } from "../../../reducers/reducer_url";
+import { LOAD_USER_URLS_REQUEST } from "../../../actions/action_url";
 import ShortenUrlButton from "../ShortenUrlButton";
 import MainChart from "./MainSection/MainChart";
 import LinkTable from "../LinkTable";

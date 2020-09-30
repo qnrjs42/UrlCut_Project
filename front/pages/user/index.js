@@ -5,7 +5,7 @@ import Router from "next/router";
 import UserLayout from "../../components/UserLayout";
 import MainManageLayout from "../../components/UserLayout/Dashboard/MainManageLayout";
 
-import { LOAD_MY_INFO_REQUEST } from "../../reducers/reducer_user";
+import { LOAD_MY_INFO_REQUEST } from "../../actions/action_user";
 
 const UserIndex = () => {
   const dispatch = useDispatch();

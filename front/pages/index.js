@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Router from "next/router";
+import { END } from "redux-saga";
+import wrapper from "../store";
+import axios from "axios";
 
 import AppLayout from "../components/AppLayout";
 import UserLayout from "../components/UserLayout";
 
 import MainManageLayout from "../components/UserLayout/Dashboard/MainManageLayout";
-import { LOAD_MY_INFO_REQUEST } from "../reducers/reducer_user";
+import { RootState } from "../reducers";
+import { LOAD_MY_INFO_REQUEST } from "../actions/action_user";
+import { UserState } from "../reducers/reducer_user";
 
 const Home = () => {
   const dispatch = useDispatch();
+  // const { me } = useSelector<RootState, UserState>((state) => state.user);
   const { me } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -19,52 +24,8 @@ const Home = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (me && me.id && Router.pathname === "/") {
-  //     console.log("pages/index moved /user");
-  //     Router.push("/user");
-  //   } else {
-  //     console.log("pages/index moved /");
-  //     Router.push("/");
-  //   }
-  // }, [me && me.id]);
-
-  // const [value, setValue] = useState(() => {
-  //   if (typeof window !== "undefined") {
-  //     const stickyValue = window.localStorage.getItem("me");
-  //     return stickyValue !== null ? JSON.parse(stickyValue) : null;
-  //   }
-  // });
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     window.localStorage.setItem("me", c);
-  //   }
-
-  //   if (value) {
-  //     // me 정보가 있는 상태에서 루트로 이동 시 /user로 리다이렉션
-  //     if (Router.pathname === "/") {
-  //       Router.push("/user");
-  //     }
-  //   }
-
-  //   // if (me) {
-  //   //   // me 정보가 있는 상태에서 루트로 이동 시 /user로 리다이렉션
-  //   //   if (Router.pathname === "/") {
-  //   //     Router.push("/user");
-  //   //   }
-  //   // }
-  // }, [value]);
   return (
     <>
-      {/* {!me ? (
-        <AppLayout />
-      ) : (
-        <UserLayout>
-          <MainManageLayout />
-        </UserLayout>
-      )} */}
-
       {me ? (
         <>
           <UserLayout>
@@ -77,5 +38,26 @@ const Home = () => {
     </>
   );
 };
+
+// getServerSideProps는 서버가 있어야 한다
+// getServerSideProps가 Home보다 먼저 실행된다
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   async (context) => {
+//     // const cookie = context.req ? context.req.headers.cookie : "";
+//     // axios.defaults.headers.Cookie = "";
+//     // // 쿠키 공유 방지
+//     // if (context.req && cookie) {
+//     //   axios.defaults.headers.Cookie = cookie;
+//     // }
+
+//     // context.store.dispatch({
+//     //   type: LOAD_MY_INFO_REQUEST,
+//     // });
+
+//     // REQUEST가 SUCCESS가 될 때까지 기다려줌
+//     // context.store.dispatch(END);
+//     // await context.store.sagaTask.toPromise(); // 해당 코드는 store/configureStore - store.sagaTask = sagaMiddleware.run(rootSaga);
+//   }
+// );
 
 export default Home;

@@ -4,7 +4,7 @@ import { LinkOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { URL_CUT_REQUEST } from "../../reducers/reducer_url";
+import { URL_CUT_REQUEST } from "../../actions/action_url";
 
 /* Did't use css/overlap-styled */
 const FormWrapper = styled(Form)`

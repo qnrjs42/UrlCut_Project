@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Modal, Input } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
-import { URL_CUT_REQUEST } from "../../reducers/reducer_url";
+import { URL_CUT_REQUEST } from "../../actions/action_url";
 
 import useInput from "../../hooks/useInput";
 

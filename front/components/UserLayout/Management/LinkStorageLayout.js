@@ -7,7 +7,7 @@ import {
   REMOVE_URLS_REQUEST,
   MOVEMENT_URLS_REQUEST,
   TABLE_PAGINATION_REQUEST,
-} from "../../../reducers/reducer_url";
+} from "../../../actions/action_url";
 import {
   ButtonPurpleWrapper,
   ButtonGreenWrapper,

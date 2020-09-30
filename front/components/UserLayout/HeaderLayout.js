@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { logoutRequestAction } from "../../reducers/reducer_user";
+import { logoutRequestAction} from '../../actions/action_user'
 import {
   SEARCH_URLS_REQUEST,
   RESET_SEARCH_URLS_REQUEST,
-} from "../../reducers/reducer_url";
+} from "../../actions/action_url";
 import DrawerSection from "./SiderSection/DrawerSection";
 import useInput from "../../hooks/useInput";
 
