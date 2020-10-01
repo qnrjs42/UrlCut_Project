@@ -10,6 +10,10 @@ import { LOAD_USER_URLS_REQUEST } from "../../../actions/action_url";
 import ShortenUrlButton from "../ShortenUrlButton";
 import MainChart from "./MainSection/MainChart";
 import LinkTable from "../LinkTable";
+import { RootState } from '../../../reducers';
+import { IUrlReducerState } from "../../../reducers/reducer_url";
+import { IUserReducerState } from "../../../reducers/reducer_user";
+import { TurlInfo } from "../../../interface";
 
 const { Content } = Layout;
 
@@ -19,14 +23,13 @@ const CardWrapper = styled(Card)`
 
 const MainManageLayout = () => {
   const dispatch = useDispatch();
-  const { urlInfo, loadUserUrlsDone, urlCutDone } = useSelector(
+  const { urlInfo, loadUserUrlsDone, urlCutDone } = useSelector<RootState, IUrlReducerState>(
     (state) => state.url
   );
-  const { me } = useSelector((state) => state.user);
-  const childRef = useRef();
+  const { me } = useSelector<RootState, IUserReducerState>((state) => state.user);
 
   // table
-  const [DataSource, setDataSource] = useState([]);
+  const [DataSource, setDataSource] = useState<TurlInfo[]>([]);
 
   useEffect(() => {
     // 맨 처음 전체 링크 관리 페이지 들어왔을 때 1번부터 5번까지 데이터만 로드
@@ -42,7 +45,6 @@ const MainManageLayout = () => {
   useEffect(() => {
     // console.log(loadUserUrlsDone, urlCutDone);
     if (loadUserUrlsDone || urlCutDone) {
-      // console.log(urlInfo);
       setDataSource(urlInfo);
     }
   }, [urlInfo]);
@@ -79,19 +81,18 @@ const MainManageLayout = () => {
             </Row>
             <Row justify="center">
               <Progress
-                id="mainProgress"
                 type="circle"
                 strokeColor={{
                   "0%": "#5cc49f",
                   "100%": "#fa6a69",
                 }}
                 width={150}
-                percent={(me.service.usedUrl / 500) * 100}
+                percent={ me ? ((me.service.usedUrl / 500) * 100) : 0}
                 format={() => {
                   return (
                     <>
                       사용 건수 <br />
-                      {me.service.usedUrl} 건
+                      {me ? (me.service.usedUrl) : null} 건
                     </>
                   );
                 }}
@@ -115,7 +116,7 @@ const MainManageLayout = () => {
           lg={{ span: 16 }}
         >
           <CardWrapper>
-            <MainChart clickCount={me.clickCount} />
+            <MainChart clickCount={ me ?  (me.clickCount) : null} />
           </CardWrapper>
         </Col>
       </RowWrapper>
@@ -139,7 +140,7 @@ const MainManageLayout = () => {
             <br />
             <br />
 
-            <LinkTable layout={"main"} DataSource={DataSource} />
+            <LinkTable layout={"main"} dataSource={DataSource} />
           </Card>
         </Col>
       </RowWrapper>

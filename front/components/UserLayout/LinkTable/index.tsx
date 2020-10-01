@@ -112,11 +112,10 @@ const columns: ColumnsType<IColumns> = [
 
 type LinkTableProps = {
   layout?: string;
-  getTableSelectedRows(e: TurlInfo[]): void;
+  getTableSelectedRows?(e: TurlInfo[]): void;
   dataSource: TurlInfo[];
-  urlInfoIds: number; // object면 아무것도 없음
-  changePagination(e: { page: number; limit: number | undefined }): void;
-  // ref: undefined; // default value = undefined
+  urlInfoIds?: number; // object면 아무것도 없음
+  changePagination?(e: { page: number; limit: number | undefined }): void;
 };
 
 // Dashboard - LinkManageLayout
@@ -136,7 +135,7 @@ const LinkTable = (props: LinkTableProps) => {
         "selectedRows: ",
         selectedRows
       );
-      props.getTableSelectedRows(selectedRows);
+      props.getTableSelectedRows ? (props.getTableSelectedRows(selectedRows)) : (null);
     },
     // onSelect: (record, selected, selectedRows) => {
     //   console.log("onSelect", record, selected, selectedRows);
@@ -193,10 +192,11 @@ const LinkTable = (props: LinkTableProps) => {
               pageSizeOptions: ["15", "30", "50", "100"],
               position: ["topLeft", "bottomRight"],
               onChange: (page, pageSize) => {
+                props.changePagination ? (
                 props.changePagination({
                   page,
                   limit: pageSize,
-                });
+                })) : null
               },
             }}
             onRow={onRow}
