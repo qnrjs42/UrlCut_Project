@@ -67,15 +67,13 @@ function* tablePagination(action: tablePaginationSagaTypes) {
     // const result = yield call(urlCutAPI); // axios 이용할 때
     // yield delay(1000);
 
-    console.log(action);
-
-    // const result = dummyUrl(action.data);
-    // yield put({
-    //   type: TABLE_PAGINATION_SUCCESS,
-    //   //   data: result.data, // axios 이용할 때
-    //   data: result,
-    //   sender: action.data.sender,
-    // });
+    const result = dummyUrl(action.data);
+    yield put({
+      type: TABLE_PAGINATION_SUCCESS,
+      //   data: result.data, // axios 이용할 때
+      data: result,
+      sender: action.data.sender,
+    });
   } catch (err) {
     console.error(err);
     yield put({

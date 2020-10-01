@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useImperativeHandle } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Row, Drawer, Space, Divider, Mentions } from "antd";
 
 import {
@@ -15,14 +15,15 @@ type LinkDrawerProps = {
 };
 
 // UserLayout - LinkTable
-const LinkDrawer = forwardRef((props: LinkDrawerProps, ref) => {
+const LinkDrawer = (props: LinkDrawerProps) => {
   const [Visible, setVisible] = useState(false);
 
-  useImperativeHandle(ref, () => ({
-    showDrawer() {
+  useEffect(() => {
+    // table row를 클릭한 데이터가 있으면 drawer open
+    if (props.RowClickData !== null) {
       setVisible(true);
-    },
-  }));
+    }
+  }, [props.RowClickData]);
 
   const onClose = () => {
     setVisible(false);
@@ -113,6 +114,6 @@ const LinkDrawer = forwardRef((props: LinkDrawerProps, ref) => {
       </Drawer>
     </>
   );
-});
+};
 
 export default LinkDrawer;

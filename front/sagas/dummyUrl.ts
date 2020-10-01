@@ -54,9 +54,7 @@ export const dummyUrl = (data: tablePaginationTypes) => {
 export const dummyUrlInfoIds = () => {
   let ids = [];
   for (let item = 0; item < 66; item++) {
-    ids.push({
-      id: shortid.generate(),
-    });
+    ids.push(shortid.generate());
   }
 
   return ids;
@@ -64,9 +62,7 @@ export const dummyUrlInfoIds = () => {
 export const dummyStorageUrlInfoIds = () => {
   let ids = [];
   for (let item = 0; item < 47; item++) {
-    ids.push({
-      id: shortid.generate(),
-    });
+    ids.push(shortid.generate());
   }
 
   return ids;
@@ -75,9 +71,7 @@ export const dummyStorageUrlInfoIds = () => {
 export const dummyExpiredUrlInfoIds = () => {
   let ids = [];
   for (let item = 0; item < 21; item++) {
-    ids.push({
-      id: shortid.generate(),
-    });
+    ids.push(shortid.generate());
   }
 
   return ids;

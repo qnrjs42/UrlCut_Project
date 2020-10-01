@@ -59,11 +59,11 @@ export interface TurlInfo {
 export type urlInitialStateTypes = {
   shortenUrl: string | null;
   urlInfo: TurlInfo[];
-  urlInfoIds: Array<number>;
+  urlInfoIds: Array<string>;
   storageUrlInfo: TurlInfo[];
-  storageUrlInfoIds: Array<number>;
+  storageUrlInfoIds: Array<string>;
   expiredUrlInfo: TurlInfo[];
-  expiredUrlInfoIds: Array<number>;
+  expiredUrlInfoIds: Array<string>;
 
   searchUrlInfo: TurlInfo[];
 
@@ -125,10 +125,4 @@ export interface tablePaginationSagaTypes {
     limit: number;
     urlInfoIdsLength?: number;
   };
-}
-
-// LinkTable - forwardRef<>, useRef()
-export interface RefType {
-  selectedRowId?: TurlInfo;
-  showDrawer?(): object;
 }

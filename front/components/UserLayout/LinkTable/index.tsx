@@ -1,33 +1,34 @@
-import React, {
-  useCallback,
-  useRef,
-  forwardRef,
-  useState,
-  useImperativeHandle,
-} from "react";
+import React, { useCallback, useState } from "react";
 import { Typography, Table } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
-import PropTypes from "prop-types";
+import { ColumnsType } from "antd/es/table";
 
 import TableDrawer from "./TableDrawer";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
+import { TurlInfo } from "../../../interface";
 
 dayjs.locale("ko");
 dayjs.extend(relativeTime);
 const dateDayjs = dayjs();
 const { Text } = Typography;
 
+interface IColumns extends TurlInfo {
+  title?: string;
+  dataIndex?: string;
+  key: string;
+}
+
 // tables setting
-const columns = [
+const columns: ColumnsType<IColumns> = [
   {
     title: "단축 URL",
     dataIndex: "shortenUrl",
     key: "shortenUrl",
     width: "30%",
     ellipsis: true,
-    render: (urlColData, row, index) => {
+    render: (urlColData: string, row: TurlInfo, index: number) => {
       // console.log(urlColData, row, index);
       return (
         <>
@@ -52,7 +53,7 @@ const columns = [
     width: "10%",
     responsive: ["lg"],
     align: "center",
-    render: (linkOptionData, row, index) => {
+    render: (linkOptionData: Array<string>, row: TurlInfo, index: number) => {
       let newData = "-";
       if (linkOptionData[0] === "lock") {
         newData = "비밀번호 설정";
@@ -71,7 +72,8 @@ const columns = [
       },
     ],
     // filterMultiple: false,
-    onFilter: (value, record) => record.linkOption[0] === value,
+    onFilter: (value: string | number | boolean, record: TurlInfo) =>
+      record.linkOption[0] === value,
     // sorter: (a, b) => a.linkOption.length - b.linkOption.length,
     // sortDirections: ["descend", "ascend"],
   },
@@ -80,15 +82,18 @@ const columns = [
     dataIndex: "createdAt",
     key: "createdAt",
     sorter: {
-      compare: (a, b) => {
-        return a.createdAt - b.createdAt;
+      compare: (a: TurlInfo, b: TurlInfo) => {
+        // 이 부분을 어떻게 any를 대체해야할지 모르겠음
+        const left = dayjs(a.createdAt);
+        const right = dayjs(b.createdAt);
+        return left.diff(right);
       },
       multiple: 2,
     },
     width: "10%",
     responsive: ["lg"],
     align: "center",
-    render: (dateData, row, index) => {
+    render: (dateData: Date, row: TurlInfo, index: number) => {
       return <>{dateDayjs.to(dateData)}</>;
     },
   },
@@ -99,34 +104,39 @@ const columns = [
     width: "10%",
     align: "center",
     sorter: {
-      compare: (a, b) => a.clickCount - b.clickCount,
+      compare: (a: TurlInfo, b: TurlInfo) => a.clickCount - b.clickCount,
       multiple: 1,
     },
   },
 ];
 
+type LinkTableProps = {
+  layout?: string;
+  getTableSelectedRows(e: TurlInfo[]): void;
+  dataSource: TurlInfo[];
+  urlInfoIds: number; // object면 아무것도 없음
+  changePagination(e: { page: number; limit: number | undefined }): void;
+  // ref: undefined; // default value = undefined
+};
+
 // Dashboard - LinkManageLayout
 // Management - LinkStorageLayout, ExpiredLayout
-const LinkTable = forwardRef((props, ref) => {
-  const childRef = useRef(); // TableDrawer에게 선택된 Row 전달
+const LinkTable = (props: LinkTableProps) => {
   // table
-  const [RowClickData, setRowClickData] = useState({});
-  const [RowId, setRowId] = useState({});
-
-  // 선택된 URL을 부모 컴포넌트가 삭제 및 보관함 이동
-  useImperativeHandle(ref, () => ({
-    selectedRowId: () => RowId,
-  }));
+  const [RowClickData, setRowClickData] = useState<TurlInfo | null>(null);
 
   // 테이블 check/checked/checkedAll And changeRow
   const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
+    onChange: (
+      selectedRowKeys: (string | number)[],
+      selectedRows: TurlInfo[]
+    ) => {
       console.log(
         `selectedRowKeys: ${selectedRowKeys}`,
         "selectedRows: ",
         selectedRows
       );
-      setRowId(selectedRows);
+      props.getTableSelectedRows(selectedRows);
     },
     // onSelect: (record, selected, selectedRows) => {
     //   console.log("onSelect", record, selected, selectedRows);
@@ -138,22 +148,24 @@ const LinkTable = forwardRef((props, ref) => {
   };
 
   // Table Row 선택되었을 때 Drawer 열기, 날짜 포맷 설정
-  const onRow = useCallback((record, rowIndex) => {
-    return {
-      onClick: () => {
-        const newRecord = { ...record };
-        newRecord.createdAt = dayjs(newRecord.createdAt).format(
-          "YYYY년 MM월 DD일"
-        );
-        setRowClickData(newRecord);
-        childRef.current.showDrawer();
-      },
-    };
-  });
+  const onRow = useCallback(
+    (record: TurlInfo, rowIndex: number | undefined) => {
+      return {
+        onClick: () => {
+          const newRecord = { ...record };
+          newRecord.createdAt = dayjs(newRecord.createdAt).format(
+            "YYYY년 MM월 DD일"
+          );
+          setRowClickData(newRecord);
+        },
+      };
+    },
+    []
+  );
 
   return (
     <>
-      <TableDrawer RowClickData={RowClickData} ref={childRef} />
+      <TableDrawer RowClickData={RowClickData} />
       {/* MainManageLayout일 때 rowSelection 없음 */}
       {props.layout === "main" ? (
         <>
@@ -161,7 +173,7 @@ const LinkTable = forwardRef((props, ref) => {
             style={{ whiteSpace: "pre" }}
             className="latest_link_table"
             columns={columns}
-            dataSource={props.DataSource}
+            dataSource={props.dataSource}
             onRow={onRow}
             pagination={{ total: 5, pageSize: 5, hideOnSinglePage: true }}
           />
@@ -172,10 +184,10 @@ const LinkTable = forwardRef((props, ref) => {
             style={{ whiteSpace: "pre" }}
             className="latest_link_table"
             columns={columns}
-            dataSource={props.DataSource}
+            dataSource={props.dataSource}
             rowSelection={{ ...rowSelection }}
             pagination={{
-              total: props.urlInfoIds.length,
+              total: props.urlInfoIds,
               defaultPageSize: 15,
               showSizeChanger: true,
               pageSizeOptions: ["15", "30", "50", "100"],
@@ -193,24 +205,6 @@ const LinkTable = forwardRef((props, ref) => {
       )}
     </>
   );
-});
-
-LinkTable.propTypes = {
-  props: PropTypes.shape({
-    DataSource: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        key: PropTypes.string,
-        url: PropTypes.string,
-        originalUrl: PropTypes.string,
-        urlTitle: PropTypes.string,
-        linkOption: PropTypes.array,
-        createdAt: PropTypes.any,
-        clickCount: PropTypes.number,
-        urlPassword: PropTypes.string,
-      }).isRequired
-    ),
-  }),
 };
 
 export default LinkTable;
