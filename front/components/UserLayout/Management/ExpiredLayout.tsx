@@ -16,6 +16,12 @@ import {
 import ShortenUrlButton from "../ShortenUrlButton";
 import LinkTable from "../LinkTable";
 
+import useRemoveUrl from "../../../hooks/useRemoveUrl";
+import useMovementUrl from "../../../hooks/useMovementUrl";
+import { RootState } from "../../../reducers";
+import { IUrlReducerState } from "../../../reducers/reducer_url";
+import { TurlInfo } from "../../../interface";
+
 const { Content } = Layout;
 
 const ExpiredLayout = () => {
@@ -28,11 +34,11 @@ const ExpiredLayout = () => {
     removeUrlsDone,
     moveMentUrlsDone,
     tablePaginationDone,
-  } = useSelector((state) => state.url);
-  const childRef = useRef();
+  } = useSelector<RootState, IUrlReducerState>((state) => state.url);
 
   // table - urlInfo
-  const [DataSource, setDataSource] = useState([]);
+  const [DataSource, setDataSource] = useState<TurlInfo[]>([]);
+  const [SelectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
   useEffect(() => {
     // 맨 처음 전체 링크 관리 페이지 들어왔을 때 1번부터 15번까지 데이터만 로드
@@ -55,59 +61,24 @@ const ExpiredLayout = () => {
     ) {
       // console.log(urlInfo);
       setDataSource(expiredUrlInfo);
+      setSelectedRowIds([]);
     }
   }, [expiredUrlInfo]);
 
-  const changePagination = useCallback((e) => {
-    console.log("expiredUrlInfoIds.length", expiredUrlInfoIds.length);
+  const getTableSelectedRows = useCallback((rowsData) => {
+    setSelectedRowIds(rowsData);
+  }, []);
 
-    dispatch({
-      type: TABLE_PAGINATION_REQUEST,
-      data: {
-        sender: "linkExpired",
-        page: e.page,
-        limit: e.limit,
-        urlInfoIdsLength: expiredUrlInfoIds.length,
-        // lastId: urlInfo[urlInfo.length - 1].id,
-      },
-    });
+  const removeUrl = useRemoveUrl({
+    sender: "linkExpired",
+    removeIds: SelectedRowIds,
   });
 
-  const getTableRowIds = () => {
-    const selectedRowIds = [...childRef.current.selectedRowId()];
-
-    return selectedRowIds.map((rowData) => {
-      return rowData.id;
-    });
-  };
-
-  const removeUrl = useCallback(() => {
-    const removeIds = getTableRowIds();
-
-    console.log(removeIds);
-
-    dispatch({
-      type: REMOVE_URLS_REQUEST,
-      data: {
-        sender: "linkExpired",
-        removeIds,
-      },
-    });
+  const moveMentUrl = useMovementUrl({
+    sender: "linkExpired",
+    moveMentIds: SelectedRowIds,
   });
 
-  const moveMentUrl = useCallback(() => {
-    const moveMentIds = getTableRowIds();
-
-    console.log(moveMentIds);
-
-    dispatch({
-      type: MOVEMENT_URLS_REQUEST,
-      data: {
-        sender: "linkExpired",
-        moveMentIds,
-      },
-    });
-  });
 
   return (
     <>
@@ -145,10 +116,10 @@ const ExpiredLayout = () => {
           </Row>
 
           <LinkTable
-            DataSource={DataSource}
-            urlInfoIds={expiredUrlInfoIds}
-            changePagination={changePagination}
-            ref={childRef}
+            sender="linkExpired"
+            getTableSelectedRows={getTableSelectedRows}
+            dataSource={DataSource}
+            urlInfoIds={expiredUrlInfoIds.length}
           />
         </Card>
       </Content>

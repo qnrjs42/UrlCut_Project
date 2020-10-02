@@ -105,7 +105,7 @@ const LinkManageLayout = () => {
     searchUrlsDone,
   });
 
-  const moveMnetUrl = useMovementUrl({
+  const moveMentUrl = useMovementUrl({
     sender: "linkManage",
     moveMentIds: SelectedRowIds,
     searchUrlInfo,
@@ -168,7 +168,7 @@ const LinkManageLayout = () => {
               <ButtonGreenWrapper
                 type="primary"
                 size="large"
-                onClick={moveMnetUrl}
+                onClick={moveMentUrl}
               >
                 보관함 이동
               </ButtonGreenWrapper>
