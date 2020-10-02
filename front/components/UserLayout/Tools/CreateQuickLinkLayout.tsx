@@ -1,5 +1,5 @@
-import React from "react";
-import { Layout, Row, Col, Card } from "antd";
+
+import { Layout, Col, Card } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { RowWrapper, CodeBox } from "../../../css/overlap-styled";
 

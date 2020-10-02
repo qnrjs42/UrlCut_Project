@@ -1,11 +1,10 @@
-import React from "react";
-import { Layout, Row, Col, Card } from "antd";
+import { Layout, Col, Card } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { RowWrapper, CodeBox } from "../../../css/overlap-styled";
 
 const { Content } = Layout;
 
-const script1 = `
+const script1: string = `
 <script type="text/javascript">var key = "RyazHlyM5103";</script>
 <script
   type="text/javascript"
@@ -13,7 +12,7 @@ const script1 = `
   </script>
 `;
 
-const script2 = `
+const script2: string = `
 <script type="text/javascript">
 var key = "RyazHlyM5103";
 var selector = ".mylink, .content > a, .comments a";
@@ -21,7 +20,7 @@ var selector = ".mylink, .content > a, .comments a";
 <script type="text/javascript" src="https://link_project/jShortener"></script>
 `;
 
-const script3 = `
+const script3: string = `
 <script type="text/javascript">
 var key = "RyazHlyM5103";
 var exclude = ["google.com","naver.com"];
