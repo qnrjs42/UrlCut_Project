@@ -1,4 +1,3 @@
-import React from "react";
 import { Bar } from "react-chartjs-2";
 
 // charts options
@@ -29,7 +28,7 @@ const options = {
           fontSize: 13,
         },
         // x축 최대값 보다 공간 확보
-        afterDataLimits(scale) {
+        afterDataLimits(scale: { max: number; min: number; }) {
           scale.max += 1;
           scale.min -= 1;
         },
@@ -46,7 +45,7 @@ const options = {
           fontSize: 13,
         },
         // y축 최대값 보다 공간 확보
-        afterDataLimits(scale) {
+        afterDataLimits(scale: { max: number; }) {
           scale.max += 1;
           //   scale.min -= 1;
         },
@@ -55,7 +54,13 @@ const options = {
   },
 };
 
-const MainChart = ({ clickCount }) => {
+interface MainChartProps {
+  clickCount: {
+    [key: number]: number;
+  } | null;
+}
+
+const MainChart = ({ clickCount }: MainChartProps) => {
   //charts
   const date = new Date(Date.now());
   let dateData = [];
@@ -63,14 +68,15 @@ const MainChart = ({ clickCount }) => {
   // clickCount 있는거 만큼 반복
   for (let dayCount in clickCount) {
     // data 삽입
+    const intDayCount = parseInt(dayCount, 10)
     dateData.push({
-      x: new Date("2020", date.getMonth(), dayCount),
-      y: clickCount[dayCount],
+      x: new Date(2020, date.getMonth(), intDayCount),
+      y: clickCount[intDayCount],
     });
   }
   // 마지막에 하루 추가해서 여백 차지
   dateData.push({
-    x: new Date("2020", date.getMonth(), date.getDate() + 1),
+    x: new Date(2020, date.getMonth(), date.getDate() + 1),
     y: 0,
   });
 
