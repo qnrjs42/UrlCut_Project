@@ -1,0 +1,39 @@
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { MOVEMENT_URLS_REQUEST } from "../actions/action_url";
+import { tableRemoveAndMovementTypes } from "../interface";
+
+
+
+const useMovement = (data: tableRemoveAndMovementTypes) => {
+    const dispatch = useDispatch();
+
+    const moveMentUrl = useCallback(() => {
+        if(!(data.searchUrlInfo && data.searchUrlsDone)) {
+            dispatch({
+                type: MOVEMENT_URLS_REQUEST,
+                data: {
+                    sender: data.sender,
+                    moveMentIds: data.moveMentIds
+                }
+            })
+        } else {
+            // 검색한 rows
+            dispatch({
+                type: MOVEMENT_URLS_REQUEST,
+                data: {
+                    sender: 'search',
+                    moveMentIds: data.moveMentIds
+                }
+            })
+        }
+
+        
+    }, [data.moveMentIds]);
+
+    return () => {
+        moveMentUrl();
+    }
+};
+
+export default useMovement;

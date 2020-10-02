@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 import { TurlInfo } from "../../../interface";
+import useChangePagination from '../../../hooks/useChangePagination';
 
 dayjs.locale("ko");
 dayjs.extend(relativeTime);
@@ -111,11 +112,11 @@ const columns: ColumnsType<IColumns> = [
 ];
 
 type LinkTableProps = {
-  layout?: string;
+  sender: string;
   getTableSelectedRows?(e: TurlInfo[]): void;
   dataSource: TurlInfo[];
   urlInfoIds?: number; // object면 아무것도 없음
-  changePagination?(e: { page: number; limit: number | undefined }): void;
+  // changePagination?(e: { page: number; limit: number | undefined }): void;
 };
 
 // Dashboard - LinkManageLayout
@@ -162,11 +163,20 @@ const LinkTable = (props: LinkTableProps) => {
     []
   );
 
+  // const testChangePagination = useChangePagination({
+  //   sender: props.sender,
+  //   page, 
+  //   limit: pageSize,
+  //   urlInfoIdsLength: props.urlInfoIds
+  // });
+
+  const testChangePagination = useChangePagination();
+
   return (
     <>
       <TableDrawer RowClickData={RowClickData} />
       {/* MainManageLayout일 때 rowSelection 없음 */}
-      {props.layout === "main" ? (
+      {props.sender === "main" ? (
         <>
           <Table
             style={{ whiteSpace: "pre" }}
@@ -192,11 +202,18 @@ const LinkTable = (props: LinkTableProps) => {
               pageSizeOptions: ["15", "30", "50", "100"],
               position: ["topLeft", "bottomRight"],
               onChange: (page, pageSize) => {
-                props.changePagination ? (
-                props.changePagination({
+                
+                testChangePagination({
+                  sender: props.sender,
                   page,
                   limit: pageSize,
-                })) : null
+                  urlInfoIdsLength: props.urlInfoIds
+                });
+                // props.changePagination ? (
+                // props.changePagination({
+                //   page,
+                //   limit: pageSize,
+                // })) : null
               },
             }}
             onRow={onRow}

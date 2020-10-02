@@ -1,5 +1,24 @@
-## 20-09-05 부터 쓰는 개발 일기
+## 20-09-05 부터 쓰는 개발 노트
 
+[20-10-02] 진행 중
+
+> #### 1. 메인화면 수정
+>
+> - 타입스크립트 적용
+
+> #### 2. 유저화면 수정
+>
+> - 타입스크립트 적용
+
+[20-10-02] 클리어
+
+> #### 1. 유저화면 수정
+>
+> - MainManageLayout 타입스크립트 적용
+> - MainManageLayout - MainChart 타입스크립트 적용
+> - Table - removeUrl custom hook 적용
+> - Table - moveMentUrl custom hook 적용
+> - Table - changePagination custom hook 적용
 [20-10-01] 진행 중
 
 > #### 1. 메인화면 수정

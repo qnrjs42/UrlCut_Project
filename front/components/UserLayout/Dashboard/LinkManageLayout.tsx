@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   LOAD_USER_URLS_REQUEST,
-  REMOVE_URLS_REQUEST,
-  MOVEMENT_URLS_REQUEST,
   TABLE_PAGINATION_REQUEST,
   RESET_SEARCH_URLS_REQUEST,
 } from "../../../actions/action_url";
@@ -17,9 +15,12 @@ import {
 } from "../../../css/overlap-styled";
 import ShortenUrlButton from "../ShortenUrlButton";
 import LinkTable from "../LinkTable";
+import useRemoveUrl from '../../../hooks/useRemoveUrl';
+import useMovementUrl from '../../../hooks/useMovementUrl';
 import { RootState } from "../../../reducers";
 import { IUrlReducerState } from "../../../reducers/reducer_url";
 import { TurlInfo } from "../../../interface";
+import useChangePagination from "../../../hooks/useChangePagination";
 
 const { Content } = Layout;
 const { Text } = Typography;
@@ -79,61 +80,21 @@ const LinkManageLayout = () => {
     }
   }, [urlInfo]);
 
-  const changePagination = useCallback(
-    (e) => {
-      dispatch({
-        type: TABLE_PAGINATION_REQUEST,
-        data: {
-          sender: "linkManage",
-          page: e.page,
-          limit: e.limit,
-          urlInfoIdsLength: urlInfoIds.length,
-          // lastId: urlInfo[urlInfo.length - 1].id,
-        },
-      });
-    },
-    [urlInfoIds]
-  );
-
-  const removeUrl = useCallback(() => {
-    if (!(searchUrlInfo && searchUrlsDone)) {
-      dispatch({
-        type: REMOVE_URLS_REQUEST,
-        data: {
-          sender: "linkManage",
-          removeIds: SelectedRowIds,
-        },
-      });
-    } else {
-      dispatch({
-        type: REMOVE_URLS_REQUEST,
-        data: {
-          sender: "search",
-          removeIds: SelectedRowIds,
-        },
-      });
-    }
-  }, [SelectedRowIds, searchUrlInfo, searchUrlsDone]);
-
-  const moveMentUrl = useCallback(() => {
-    if (!(searchUrlInfo && searchUrlsDone)) {
-      dispatch({
-        type: MOVEMENT_URLS_REQUEST,
-        data: {
-          sender: "linkManage",
-          moveMentIds: SelectedRowIds,
-        },
-      });
-    } else {
-      dispatch({
-        type: MOVEMENT_URLS_REQUEST,
-        data: {
-          sender: "search",
-          moveMentIds: SelectedRowIds,
-        },
-      });
-    }
-  }, [SelectedRowIds, searchUrlInfo, searchUrlsDone]);
+  // const changePagination = useCallback(
+  //   (e) => {
+  //     dispatch({
+  //       type: TABLE_PAGINATION_REQUEST,
+  //       data: {
+  //         sender: "linkManage",
+  //         page: e.page,
+  //         limit: e.limit,
+  //         urlInfoIdsLength: urlInfoIds.length,
+  //         // lastId: urlInfo[urlInfo.length - 1].id,
+  //       },
+  //     });
+  //   },
+  //   [urlInfoIds]
+  // );
 
   const resetSearch = useCallback(() => {
     dispatch({
@@ -158,6 +119,20 @@ const LinkManageLayout = () => {
     setSelectedRowIds(ids);
   }, []);
 
+  const removeUrl = useRemoveUrl({
+    sender: 'linkManage', 
+    removeIds: SelectedRowIds,
+    searchUrlInfo,
+    searchUrlsDone
+  });
+
+  const moveMnetUrl = useMovementUrl({
+    sender: 'linkManage',
+    moveMentIds: SelectedRowIds,
+    searchUrlInfo,
+    searchUrlsDone
+  });
+
   return (
     <>
       <Content>
@@ -180,11 +155,6 @@ const LinkManageLayout = () => {
         <Card>
           <Row gutter={[16, 16]}>
             <Col>
-              <Button onClick={() => console.log(urlInfoIds)}>
-                urlInfoIds 확인
-              </Button>
-            </Col>
-            <Col>
               <ButtonBorderWrapper
                 type="primary"
                 size="large"
@@ -193,9 +163,8 @@ const LinkManageLayout = () => {
               >
                 선택 삭제
               </ButtonBorderWrapper>
-            </Col>
+              </Col>
             {searchUrlsDone ? (
-              <>
                 <Col>
                   <ButtonPurpleWrapper
                     type="primary"
@@ -205,13 +174,12 @@ const LinkManageLayout = () => {
                     검색 지우기
                   </ButtonPurpleWrapper>
                 </Col>
-              </>
             ) : null}
             <Col>
               <ButtonGreenWrapper
                 type="primary"
                 size="large"
-                onClick={moveMentUrl}
+                onClick={moveMnetUrl}
               >
                 보관함 이동
               </ButtonGreenWrapper>
@@ -219,12 +187,13 @@ const LinkManageLayout = () => {
           </Row>
 
           <LinkTable
+          sender="linkManage"
             getTableSelectedRows={(rows: TurlInfo[]) =>
               getTableSelectedRows(rows)
             }
             dataSource={DataSource}
-            urlInfoIds={urlInfoIds.length}
-            changePagination={changePagination}
+            urlInfoIds={!searchUrlsDone ? urlInfoIds.length : searchUrlInfo.length}
+            // changePagination={changePagination}
           />
         </Card>
       </Content>

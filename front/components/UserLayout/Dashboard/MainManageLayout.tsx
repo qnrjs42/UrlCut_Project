@@ -140,7 +140,7 @@ const MainManageLayout = () => {
             <br />
             <br />
 
-            <LinkTable layout={"main"} dataSource={DataSource} />
+            <LinkTable sender="main" dataSource={DataSource} />
           </Card>
         </Col>
       </RowWrapper>
