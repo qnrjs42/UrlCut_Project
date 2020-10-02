@@ -19,15 +19,7 @@
 > - Table - removeUrl custom hook 적용
 > - Table - moveMentUrl custom hook 적용
 > - Table - changePagination custom hook 적용
-[20-10-01] 진행 중
-
-> #### 1. 메인화면 수정
->
-> - 타입스크립트 적용
-
-> #### 2. 유저화면 수정
->
-> - 타입스크립트 적용
+> - Table - getSelectedRowsIds 로직 변경
 
 [20-10-01] 클리어
 

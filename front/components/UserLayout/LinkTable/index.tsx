@@ -7,8 +7,10 @@ import TableDrawer from "./TableDrawer";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
+
 import { TurlInfo } from "../../../interface";
-import useChangePagination from '../../../hooks/useChangePagination';
+// hooks
+import useChangePagination from "../../../hooks/useChangePagination";
 
 dayjs.locale("ko");
 dayjs.extend(relativeTime);
@@ -111,19 +113,19 @@ const columns: ColumnsType<IColumns> = [
   },
 ];
 
-type LinkTableProps = {
+type LinkTableTypes = {
   sender: string;
-  getTableSelectedRows?(e: TurlInfo[]): void;
+  getTableSelectedRows?(ids: string[]): void;
   dataSource: TurlInfo[];
   urlInfoIds?: number; // object면 아무것도 없음
-  // changePagination?(e: { page: number; limit: number | undefined }): void;
 };
 
 // Dashboard - LinkManageLayout
 // Management - LinkStorageLayout, ExpiredLayout
-const LinkTable = (props: LinkTableProps) => {
+const LinkTable = (props: LinkTableTypes) => {
   // table
   const [RowClickData, setRowClickData] = useState<TurlInfo | null>(null);
+  const changePagination = useChangePagination();
 
   // 테이블 check/checked/checkedAll And changeRow
   const rowSelection = {
@@ -136,7 +138,9 @@ const LinkTable = (props: LinkTableProps) => {
         "selectedRows: ",
         selectedRows
       );
-      props.getTableSelectedRows ? (props.getTableSelectedRows(selectedRows)) : (null);
+      // 선택한 row의 id 추출
+      const ids: string[] = selectedRows.map((row: TurlInfo) => row.id);
+      props.getTableSelectedRows ? props.getTableSelectedRows(ids) : null;
     },
     // onSelect: (record, selected, selectedRows) => {
     //   console.log("onSelect", record, selected, selectedRows);
@@ -162,15 +166,6 @@ const LinkTable = (props: LinkTableProps) => {
     },
     []
   );
-
-  // const testChangePagination = useChangePagination({
-  //   sender: props.sender,
-  //   page, 
-  //   limit: pageSize,
-  //   urlInfoIdsLength: props.urlInfoIds
-  // });
-
-  const testChangePagination = useChangePagination();
 
   return (
     <>
@@ -202,18 +197,12 @@ const LinkTable = (props: LinkTableProps) => {
               pageSizeOptions: ["15", "30", "50", "100"],
               position: ["topLeft", "bottomRight"],
               onChange: (page, pageSize) => {
-                
-                testChangePagination({
+                changePagination({
                   sender: props.sender,
                   page,
                   limit: pageSize,
-                  urlInfoIdsLength: props.urlInfoIds
+                  urlInfoIdsLength: props.urlInfoIds,
                 });
-                // props.changePagination ? (
-                // props.changePagination({
-                //   page,
-                //   limit: pageSize,
-                // })) : null
               },
             }}
             onRow={onRow}

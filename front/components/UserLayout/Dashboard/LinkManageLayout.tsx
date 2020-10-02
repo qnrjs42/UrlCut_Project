@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   LOAD_USER_URLS_REQUEST,
-  TABLE_PAGINATION_REQUEST,
   RESET_SEARCH_URLS_REQUEST,
 } from "../../../actions/action_url";
 import {
@@ -15,12 +14,11 @@ import {
 } from "../../../css/overlap-styled";
 import ShortenUrlButton from "../ShortenUrlButton";
 import LinkTable from "../LinkTable";
-import useRemoveUrl from '../../../hooks/useRemoveUrl';
-import useMovementUrl from '../../../hooks/useMovementUrl';
+import useRemoveUrl from "../../../hooks/useRemoveUrl";
+import useMovementUrl from "../../../hooks/useMovementUrl";
 import { RootState } from "../../../reducers";
 import { IUrlReducerState } from "../../../reducers/reducer_url";
 import { TurlInfo } from "../../../interface";
-import useChangePagination from "../../../hooks/useChangePagination";
 
 const { Content } = Layout;
 const { Text } = Typography;
@@ -80,22 +78,6 @@ const LinkManageLayout = () => {
     }
   }, [urlInfo]);
 
-  // const changePagination = useCallback(
-  //   (e) => {
-  //     dispatch({
-  //       type: TABLE_PAGINATION_REQUEST,
-  //       data: {
-  //         sender: "linkManage",
-  //         page: e.page,
-  //         limit: e.limit,
-  //         urlInfoIdsLength: urlInfoIds.length,
-  //         // lastId: urlInfo[urlInfo.length - 1].id,
-  //       },
-  //     });
-  //   },
-  //   [urlInfoIds]
-  // );
-
   const resetSearch = useCallback(() => {
     dispatch({
       type: RESET_SEARCH_URLS_REQUEST,
@@ -111,26 +93,21 @@ const LinkManageLayout = () => {
   }, []);
 
   const getTableSelectedRows = useCallback((rowsData) => {
-    console.log(rowsData);
-    const ids: string[] = rowsData.map((row: TurlInfo) => {
-      if (row !== undefined) return row.id;
-    });
-    console.log(ids);
-    setSelectedRowIds(ids);
+    setSelectedRowIds(rowsData);
   }, []);
 
   const removeUrl = useRemoveUrl({
-    sender: 'linkManage', 
+    sender: "linkManage",
     removeIds: SelectedRowIds,
     searchUrlInfo,
-    searchUrlsDone
+    searchUrlsDone,
   });
 
   const moveMnetUrl = useMovementUrl({
-    sender: 'linkManage',
+    sender: "linkManage",
     moveMentIds: SelectedRowIds,
     searchUrlInfo,
-    searchUrlsDone
+    searchUrlsDone,
   });
 
   return (
@@ -163,17 +140,17 @@ const LinkManageLayout = () => {
               >
                 선택 삭제
               </ButtonBorderWrapper>
-              </Col>
+            </Col>
             {searchUrlsDone ? (
-                <Col>
-                  <ButtonPurpleWrapper
-                    type="primary"
-                    size="large"
-                    onClick={resetSearch}
-                  >
-                    검색 지우기
-                  </ButtonPurpleWrapper>
-                </Col>
+              <Col>
+                <ButtonPurpleWrapper
+                  type="primary"
+                  size="large"
+                  onClick={resetSearch}
+                >
+                  검색 지우기
+                </ButtonPurpleWrapper>
+              </Col>
             ) : null}
             <Col>
               <ButtonGreenWrapper
@@ -187,13 +164,12 @@ const LinkManageLayout = () => {
           </Row>
 
           <LinkTable
-          sender="linkManage"
-            getTableSelectedRows={(rows: TurlInfo[]) =>
-              getTableSelectedRows(rows)
-            }
+            sender="linkManage"
+            getTableSelectedRows={getTableSelectedRows}
             dataSource={DataSource}
-            urlInfoIds={!searchUrlsDone ? urlInfoIds.length : searchUrlInfo.length}
-            // changePagination={changePagination}
+            urlInfoIds={
+              !searchUrlsDone ? urlInfoIds.length : searchUrlInfo.length
+            }
           />
         </Card>
       </Content>
