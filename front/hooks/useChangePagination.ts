@@ -11,7 +11,6 @@ interface changePaginationTypes {
 
 const useChangePagination = () => {
   const dispatch = useDispatch();
-
   const changePagination = useCallback((data: changePaginationTypes) => {
     dispatch({
       type: TABLE_PAGINATION_REQUEST,

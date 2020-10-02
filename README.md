@@ -16,6 +16,7 @@
 >
 > - MainManageLayout 타입스크립트 적용
 > - MainManageLayout - MainChart 타입스크립트 적용
+> - LinkStorageLayout - 타입스크립트 적용
 > - Table - removeUrl custom hook 적용
 > - Table - moveMentUrl custom hook 적용
 > - Table - changePagination custom hook 적용

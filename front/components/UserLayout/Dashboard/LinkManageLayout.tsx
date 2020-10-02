@@ -60,6 +60,7 @@ const LinkManageLayout = () => {
     if (searchUrlsDone) {
       // if (removeUrlsDone || moveMentUrlsDone || tablePaginationDone) {
       setDataSource(searchUrlInfo);
+      setSelectedRowIds([]);
       // }
     }
   }, [searchUrlInfo]);
@@ -75,6 +76,7 @@ const LinkManageLayout = () => {
       !searchUrlsDone
     ) {
       setDataSource(urlInfo);
+      setSelectedRowIds([]);
     }
   }, [urlInfo]);
 
@@ -131,6 +133,16 @@ const LinkManageLayout = () => {
 
         <Card>
           <Row gutter={[16, 16]}>
+            {/* <Col>
+              <ButtonBorderWrapper
+                type="primary"
+                size="large"
+                onClick={() => console.log(SelectedRowIds)}
+                danger
+              >
+                선택 삭제 테스트용
+              </ButtonBorderWrapper>
+            </Col> */}
             <Col>
               <ButtonBorderWrapper
                 type="primary"

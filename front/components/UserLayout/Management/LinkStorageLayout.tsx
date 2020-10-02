@@ -1,15 +1,9 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
-import { Layout, Row, Col, Card } from "antd";
+import { useCallback, useEffect, useState } from "react";
+import { Layout, Row, Col, Card, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
+import { LOAD_STORAGE_URLS_REQUEST } from "../../../actions/action_url";
 import {
-  LOAD_STORAGE_URLS_REQUEST,
-  REMOVE_URLS_REQUEST,
-  MOVEMENT_URLS_REQUEST,
-  TABLE_PAGINATION_REQUEST,
-} from "../../../actions/action_url";
-import {
-  ButtonPurpleWrapper,
   ButtonGreenWrapper,
   ButtonBorderWrapper,
   ColWrapper,
@@ -17,6 +11,11 @@ import {
 
 import ShortenUrlButton from "../ShortenUrlButton";
 import LinkTable from "../LinkTable";
+import { RootState } from "../../../reducers";
+import { IUrlReducerState } from "../../../reducers/reducer_url";
+import { TurlInfo } from "../../../interface";
+import useRemoveUrl from "../../../hooks/useRemoveUrl";
+import useMovementUrl from "../../../hooks/useMovementUrl";
 
 const { Content } = Layout;
 
@@ -30,11 +29,11 @@ const LinkStorageLayout = () => {
     removeUrlsDone,
     moveMentUrlsDone,
     tablePaginationDone,
-  } = useSelector((state) => state.url);
-  const childRef = useRef();
+  } = useSelector<RootState, IUrlReducerState>((state) => state.url);
 
   // table - urlInfo
-  const [DataSource, setDataSource] = useState([]);
+  const [DataSource, setDataSource] = useState<TurlInfo[]>([]);
+  const [SelectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
   useEffect(() => {
     // 맨 처음 전체 링크 관리 페이지 들어왔을 때 1번부터 15번까지 데이터만 로드
@@ -56,58 +55,22 @@ const LinkStorageLayout = () => {
       tablePaginationDone
     ) {
       setDataSource(storageUrlInfo);
+      setSelectedRowIds([]);
     }
   }, [storageUrlInfo]);
 
-  const changePagination = useCallback((e) => {
-    console.log(storageUrlInfoIds.length);
+  const getTableSelectedRows = useCallback((rowsData) => {
+    setSelectedRowIds(rowsData);
+  }, []);
 
-    dispatch({
-      type: TABLE_PAGINATION_REQUEST,
-      data: {
-        sender: "linkStorage",
-        page: e.page,
-        limit: e.limit,
-        urlInfoIdsLength: storageUrlInfoIds.length,
-        // lastId: urlInfo[urlInfo.length - 1].id,
-      },
-    });
+  const removeUrl = useRemoveUrl({
+    sender: "linkStorage",
+    removeIds: SelectedRowIds,
   });
 
-  const getTableRowIds = () => {
-    const selectedRowIds = [...childRef.current.selectedRowId()];
-
-    return selectedRowIds.map((rowData) => {
-      return rowData.id;
-    });
-  };
-
-  const removeUrl = useCallback(() => {
-    const removeIds = getTableRowIds();
-
-    console.log(removeIds);
-
-    dispatch({
-      type: REMOVE_URLS_REQUEST,
-      data: {
-        sender: "linkStorage",
-        removeIds,
-      },
-    });
-  });
-
-  const moveMentUrl = useCallback(() => {
-    const moveMentIds = getTableRowIds();
-
-    console.log(moveMentIds);
-
-    dispatch({
-      type: MOVEMENT_URLS_REQUEST,
-      data: {
-        sender: "linkStorage",
-        moveMentIds,
-      },
-    });
+  const moveMentUrl = useMovementUrl({
+    sender: "linkStorage",
+    moveMentIds: SelectedRowIds,
   });
 
   return (
@@ -124,6 +87,9 @@ const LinkStorageLayout = () => {
 
         <Card>
           <Row gutter={[16, 16]}>
+            {/* <Col>
+              <Button onClick={testCallback}>테스트용</Button>
+            </Col> */}
             <Col>
               <ButtonBorderWrapper
                 type="primary"
@@ -146,10 +112,10 @@ const LinkStorageLayout = () => {
           </Row>
 
           <LinkTable
-            DataSource={DataSource}
-            urlInfoIds={storageUrlInfoIds}
-            changePagination={changePagination}
-            ref={childRef}
+            sender="linkStorage"
+            getTableSelectedRows={getTableSelectedRows}
+            dataSource={DataSource}
+            urlInfoIds={storageUrlInfoIds.length}
           />
         </Card>
       </Content>
