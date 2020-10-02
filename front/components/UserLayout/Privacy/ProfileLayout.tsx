@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Layout,
   Typography,
@@ -20,6 +20,11 @@ import {
   ButtonBorderWrapper,
   RowWrapper,
 } from "../../../css/overlap-styled";
+import { IUserReducerState } from "../../../reducers/reducer_user";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
+import useInput from "../../../hooks/useInput";
+import { CHANGE_NICKNAME_REQUEST } from "../../../actions/action_user";
 
 const { Content } = Layout;
 const { Text } = Typography;
@@ -92,6 +97,39 @@ const ColPaddingBottomWrapper = styled(Col)`
 `;
 
 const ProfileLayout = () => {
+  const dispatch = useDispatch();
+  const {me} = useSelector<RootState, IUserReducerState>(state => state.user);
+  const [Nickname, setNickname] = useState<string>();
+  const [Email, setEmail] = useState<string>();
+
+  useEffect(() => {
+    if(me) {
+      setNickname(me.nickname);
+      setEmail(me.email);
+    }
+  }, [me])
+
+  const onChangeNickname = useCallback((e) => {
+    setNickname(e.target.value);
+  }, [])
+
+  const onChangeEmail = useCallback((e) => {
+    setEmail(e.target.value);
+  }, [])
+
+  const onClickUpdate = useCallback(() => {
+    if(me) {
+      if(me.nickname !== Nickname) {
+        dispatch({
+          type: CHANGE_NICKNAME_REQUEST,
+          data: {
+            nickname: Nickname
+          }
+        })
+      }
+    }
+  }, [Nickname])
+  
   return (
     <Content>
       <RowWrapper gutter={[16, 16]} justify="center">
@@ -114,8 +152,7 @@ const ProfileLayout = () => {
                   />
                 </Col>
                 <Col offset={1}>
-                  <p>닉네임</p>
-                  <a>아바타 바꾸기</a>
+                  <Input value={Nickname} onChange={onChangeNickname} bordered={false} />
                 </Col>
               </Row>
               <Divider />
@@ -129,8 +166,9 @@ const ProfileLayout = () => {
                   <Row justify="start">
                     <Input
                       placeholder="Borderless"
+                      value={Email}
+                      onChange={onChangeEmail}
                       bordered={false}
-                      value="link_project@link.com"
                     />
                   </Row>
 
@@ -247,7 +285,7 @@ const ProfileLayout = () => {
             <br />
             <br />
             <Row justify="center">
-              <ButtonPurpleWrapper type="primary" size="large">
+              <ButtonPurpleWrapper type="primary" size="large" onClick={onClickUpdate}>
                 업데이트
               </ButtonPurpleWrapper>
             </Row>

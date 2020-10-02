@@ -1,12 +1,9 @@
-import React from "react";
 import { Layout, Typography, Row, Col, Button, Card, Table } from "antd";
 import { WarningOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
-import styled from "styled-components";
 
 import {
   ButtonPurpleWrapper,
   ButtonGreenWrapper,
-  ButtonBorderWrapper,
   RowWrapper,
 } from "../../../css/overlap-styled";
 

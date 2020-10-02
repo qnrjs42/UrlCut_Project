@@ -1,6 +1,6 @@
 import produce from "immer";
 import { AnyAction } from "redux";
-import {
+  import {
   ADD_POST_TO_ME,
   CHANGE_NICKNAME_FAILURE,
   CHANGE_NICKNAME_REQUEST,
@@ -132,6 +132,7 @@ const reducer = (state = userInitialState, action: AnyAction) =>
       case CHANGE_NICKNAME_SUCCESS:
         draft.changeNicknameLoading = false;
         draft.changeNicknameDone = true;
+        draft.me ? draft.me.nickname = action.data.nickname : null;
         break;
       case CHANGE_NICKNAME_FAILURE:
         draft.changeNicknameLoading = false;

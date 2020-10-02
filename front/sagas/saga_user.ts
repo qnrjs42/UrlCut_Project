@@ -18,9 +18,10 @@ import {
   CHANGE_NICKNAME_FAILURE,
 } from "../actions/action_user";
 
-import { dummyUserTypes, signUpSagaType, logInSagaType } from "../interface";
+import { dummyUserTypes, signUpSagaType, logInSagaType, changeNicknameTypes } from "../interface";
 
-const dummyUser = (data: string) => ({
+const dummyUser = (data: string) => {
+  return {
   id: 1,
   email: data,
   nickname: "테스터1",
@@ -37,12 +38,13 @@ const dummyUser = (data: string) => ({
     18: 3,
     21: 10,
   },
-});
+}};
 
 function loginAPI(data: string): dummyUserTypes {
   // return axios.post("/api/login", data);
-  localStorage.setItem("me", JSON.stringify(dummyUser(data))); // Object Object 뜨면 서버 재시작
-  return dummyUser(data);
+  const dummy = dummyUser(data);
+  localStorage.setItem("me", JSON.stringify(dummy)); // Object Object 뜨면 서버 재시작
+  return dummy;
 }
 
 function* logIn(action: logInSagaType) {
@@ -116,7 +118,7 @@ function* signUp() {
 function* loadMyInfo() {
   try {
     // const result = yield call(loadMyInfoAPI, action.data);
-    const result = window.localStorage.getItem("me");
+    const result = localStorage.getItem("me");
     let jsonResult: string | null = null;
     if (typeof result === "string") jsonResult = JSON.parse(result);
     else jsonResult = null;
@@ -133,18 +135,58 @@ function* loadMyInfo() {
   }
 }
 
-// function changeNicknameAPI() {
-//   return axios.post("/api/changeNickname", data);
-// }
 
-function* changeNickname() {
+interface copyObjTypes {
+  [key: string]: string | object;
+}
+
+const deepCopy = (obj: object) => {
+  const newObj: copyObjTypes = {};
+    for ( const list of Object.entries(obj)) {
+      newObj[list[0]] = list[1];
+    }
+  return newObj;
+}
+
+function changeNicknameAPI(nickname: string) {
+  // return axios.post("/api/changeNickname", data);
+
+  // 1. localStorage의 get me data
+  const getMe = localStorage.getItem("me");
+
+  let jsonMe: object | null = null;
+
+  // 2. getMe <- JSON으로 변환
+  if (typeof getMe === "string") jsonMe = JSON.parse(getMe);
+  else jsonMe = null;
+
+  let newMe: copyObjTypes = {};
+  if(jsonMe !== null) {
+    // 3. JSON -> object 변환
+    newMe = deepCopy(jsonMe);
+    // 4. 변환한 object의 nickname 변경
+    newMe.nickname = nickname;
+  }
+
+  // 5. 기존의 me data 제거
+  localStorage.removeItem("me");
+  // 6. 수정한 닉네임으로 변경된 오브젝트 localStorage에 저장
+  localStorage.setItem("me", JSON.stringify(newMe)); 
+
+  return newMe;
+}
+
+function* changeNickname(action: changeNicknameTypes) {
   try {
-    // const result = yield call(changeNicknameAPI, action.data);
+    const result = yield call(changeNicknameAPI, action.data.nickname);
 
-    console.log("saga의 changeNickname Action");
-
+    console.log('result', result)
+      
     yield put({
       type: CHANGE_NICKNAME_SUCCESS,
+      data: {
+        nickname: action.data.nickname
+      }
     });
   } catch (err) {
     console.error(err);

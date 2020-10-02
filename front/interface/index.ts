@@ -1,4 +1,4 @@
-import { LOG_IN_REQUEST, SIGN_UP_REQUEST } from "../actions/action_user";
+import { CHANGE_NICKNAME_REQUEST, LOG_IN_REQUEST, SIGN_UP_REQUEST } from "../actions/action_user";
 
 import { MOVEMENT_URLS_REQUEST, REMOVE_URLS_REQUEST, TABLE_PAGINATION_REQUEST } from "../actions/action_url";
 
@@ -38,6 +38,14 @@ export interface signUpType extends baseTypes {}
 // saga_user - signUp
 export interface signUpSagaType {
   type: typeof SIGN_UP_REQUEST;
+}
+
+export interface changeNicknameTypes {
+  type: typeof CHANGE_NICKNAME_REQUEST;
+  data: {
+    nickname: string;
+  }
+
 }
 // End User
 /*----------------------------------*/
