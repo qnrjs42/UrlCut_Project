@@ -1,6 +1,5 @@
 import {
-  CHANGE_NICKNAME_REQUEST,
-  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PROFILE_REQUEST,
   LOG_IN_REQUEST,
   SIGN_UP_REQUEST,
 } from "../actions/action_user";
@@ -14,7 +13,7 @@ import {
 // reducer_user - me
 // saga_user - loginAPI
 export interface IdummyUser {
-  id: number;
+  readonly id: number;
   email: string;
   password: string;
   nickname: string;
@@ -29,6 +28,7 @@ export interface IdummyUser {
   };
 }
 
+// reducer_user - userInitialState
 export interface IuserInitialState {
   logInLoading: boolean;
   logInDone: boolean;
@@ -42,21 +42,9 @@ export interface IuserInitialState {
   signUpDone: boolean;
   signUpError: string | null;
 
-  changeNicknameLoading: boolean;
-  changeNicknameDone: boolean;
-  changeNicknameError: string | null;
-
-  changePasswordLoading: boolean;
-  changePasswordDone: boolean;
-  changePasswordError: string | null;
-
-  changePublicProfileLoading: boolean;
-  changePublicProfileDone: boolean;
-  changePublicProfileError: string | null;
-
-  changeMediaGatewayLoading: boolean;
-  changeMediaGatewayDone: boolean;
-  changeMediaGatewayError: string | null;
+  changeProfileLoading: boolean;
+  changeProfileDone: boolean;
+  changeProfileError: string | null;
 
   loadMyInfoLoading: boolean;
   loadMyInfoDone: boolean;
@@ -65,6 +53,7 @@ export interface IuserInitialState {
   me: IdummyUser | null;
 }
 
+// Ilogin, IsignUp
 interface baseTypes {
   type?: typeof LOG_IN_REQUEST;
   data: {
@@ -88,17 +77,11 @@ export interface IsignUpSaga {
   type: typeof SIGN_UP_REQUEST;
 }
 
-export interface IchangeNickname {
-  type: typeof CHANGE_NICKNAME_REQUEST;
+// saga_user - changeProfile
+export interface IchangeProfileSaga {
+  type: typeof CHANGE_PROFILE_REQUEST;
   data: {
-    nickname: string;
-  };
-}
-
-export interface IchangePassword {
-  type: typeof CHANGE_PASSWORD_REQUEST;
-  data: {
-    password: string;
+    [key: string]: string | boolean;
   };
 }
 // End User

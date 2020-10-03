@@ -50,6 +50,9 @@
 .ant-message-custom-content.ant-message-success > span > svg > path {
   color: #52c41a !important;
 }
+.ant-message-custom-content.ant-message-error > span > svg > path {
+  color: #f5222d !important;
+}
 /* Input Password Error Color */
 .ant-form-item-has-error.ant-form-item-has-feedback
   .ant-form-item-children-icon

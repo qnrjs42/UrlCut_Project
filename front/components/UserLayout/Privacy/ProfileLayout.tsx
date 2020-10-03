@@ -29,10 +29,7 @@ import {
 import { IUserReducerState } from "../../../reducers/reducer_user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import {
-  CHANGE_NICKNAME_REQUEST,
-  CHANGE_PASSWORD_REQUEST,
-} from "../../../actions/action_user";
+import { CHANGE_PROFILE_REQUEST } from "../../../actions/action_user";
 
 const { Content } = Layout;
 const { Text } = Typography;
@@ -106,7 +103,7 @@ const ColPaddingBottomWrapper = styled(Col)`
 
 const ProfileLayout = () => {
   const dispatch = useDispatch();
-  const { me, changeNicknameDone, changePasswordDone } = useSelector<
+  const { me, changeProfileDone } = useSelector<
     RootState,
     IUserReducerState
   >((state) => state.user);
@@ -115,51 +112,74 @@ const ProfileLayout = () => {
   const [Email, setEmail] = useState<string>();
   const [Password, setPassword] = useState<string>();
   const [PasswordCheck, setPasswordCheck] = useState<string>();
+  const [PublicProfile, setPublicProfile] = useState<boolean>(false);
+  const [MediaGateway, setMediaGateway] = useState<boolean>(false);
 
   useEffect(() => {
     if (me) {
       setNickname(me.nickname);
       setEmail(me.email);
+      setPublicProfile(me.publicProfile);
+      setMediaGateway(me.mediaGateway);
     }
-    if (changeNicknameDone || changePasswordDone) {
+    if (changeProfileDone) {
       message.success("프로필이 정상적으로 업데이트 되었습니다.");
     }
   }, [me]);
 
   const onChangeNickname = useCallback((e) => {
     setNickname(e.target.value);
-  }, []);
+  }, [Nickname]);
 
   const onChangePassword = useCallback((e) => {
     setPassword(e.target.value);
-  }, []);
+  }, [Password]);
 
   const onChangePasswordCheck = useCallback((e) => {
     setPasswordCheck(e.target.value);
-  }, []);
+  }, [PasswordCheck]);
+
+  const onChangePublicProfile = useCallback(() => {
+    setPublicProfile((prev) => !prev);
+  }, [PublicProfile]);
+
+  const onChangeMediaGateway = useCallback(() => {
+    setMediaGateway((prev) => !prev);
+  }, [MediaGateway]);
+
+  interface IupdateList {
+    [key: string]: string | boolean;
+  }
 
   const onClickUpdate = useCallback(() => {
     if (me) {
-      if (me.nickname !== Nickname) {
-        dispatch({
-          type: CHANGE_NICKNAME_REQUEST,
-          data: {
-            nickname: Nickname,
-          },
-        });
-      }
+      const updateList: IupdateList = {};
       if (Password === PasswordCheck) {
-        dispatch({
-          type: CHANGE_PASSWORD_REQUEST,
-          data: {
-            password: Password,
-          },
-        });
+        Password ? updateList.password = Password : null;
       } else if (Password !== PasswordCheck) {
         message.error("패스워드가 서로 일치하지 않습니다.");
+        return;
+      }
+
+      if (me.nickname !== Nickname) {
+        Nickname ? updateList.nickname = Nickname : null;
+      }
+      
+      if(me.publicProfile !== PublicProfile) {
+        updateList.publicProfile = PublicProfile;
+      }
+      if(me.mediaGateway !== MediaGateway) {
+        updateList.mediaGateway = MediaGateway;
+      }
+      // 업데이트한 내용이 있다면
+      if(Object.keys(updateList).length !== 0) {
+        dispatch({
+          type: CHANGE_PROFILE_REQUEST,
+          data: updateList
+        })
       }
     }
-  }, [Nickname, Password, PasswordCheck]);
+  }, [Nickname, Password, PasswordCheck, PublicProfile, MediaGateway]);
 
   return (
     <Content>
@@ -174,7 +194,7 @@ const ProfileLayout = () => {
             <h3>프로필 설정</h3>
             {/* 아바타, 이메일, 아이디 */}
             <Card>
-              <Row>
+              <Row align="middle">
                 <Col>
                   <AvatarWrapper
                     className="user-header-button-icon"
@@ -182,7 +202,7 @@ const ProfileLayout = () => {
                     icon={<UserOutlined />}
                   />
                 </Col>
-                <Col offset={1}>
+                <Col offset={1} flex="auto">
                   <Input
                     value={Nickname}
                     onChange={onChangeNickname}
@@ -294,9 +314,10 @@ const ProfileLayout = () => {
                     </ColPaddingBottomWrapper>
                     <Col>
                       <Switch
+                        checked={PublicProfile}
                         checkedChildren="공개"
                         unCheckedChildren="비공개"
-                        defaultChecked
+                        onChange={onChangePublicProfile}
                       />
                     </Col>
                   </Row>
@@ -318,9 +339,10 @@ const ProfileLayout = () => {
                     </ColPaddingBottomWrapper>
                     <Col>
                       <Switch
+                        checked={MediaGateway}
                         checkedChildren="사용"
                         unCheckedChildren="미사용"
-                        defaultChecked
+                        onChange={onChangeMediaGateway}
                       />
                     </Col>
                   </Row>

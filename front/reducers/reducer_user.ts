@@ -2,18 +2,9 @@ import produce from "immer";
 import { AnyAction } from "redux";
 import {
   ADD_POST_TO_ME,
-  CHANGE_MEDIA_GATEWAY_FAILURE,
-  CHANGE_MEDIA_GATEWAY_REQUEST,
-  CHANGE_MEDIA_GATEWAY_SUCCESS,
-  CHANGE_NICKNAME_FAILURE,
-  CHANGE_NICKNAME_REQUEST,
-  CHANGE_NICKNAME_SUCCESS,
-  CHANGE_PASSWORD_FAILURE,
-  CHANGE_PASSWORD_REQUEST,
-  CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PUBLIC_PROFILE_FAILURE,
-  CHANGE_PUBLIC_PROFILE_REQUEST,
-  CHANGE_PUBLIC_PROFILE_SUCCESS,
+  CHANGE_PROFILE_FAILURE,
+  CHANGE_PROFILE_REQUEST,
+  CHANGE_PROFILE_SUCCESS,
   LOAD_MY_INFO_FAILURE,
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
@@ -44,21 +35,9 @@ export const userInitialState: IuserInitialState = {
   signUpDone: false,
   signUpError: null,
 
-  changeNicknameLoading: false, // 닉네임 변경 시도 중
-  changeNicknameDone: false,
-  changeNicknameError: null,
-
-  changePasswordLoading: false, // 패스워드 변경 시도 중
-  changePasswordDone: false,
-  changePasswordError: null,
-
-  changePublicProfileLoading: false, // 프로필 공개 변경 시도 중
-  changePublicProfileDone: false,
-  changePublicProfileError: null,
-
-  changeMediaGatewayLoading: false, // 미디어 게이트웨이 변경 시도 중
-  changeMediaGatewayDone: false,
-  changeMediaGatewayError: null,
+  changeProfileLoading: false, // 회원정보 변경 시도 중
+  changeProfileDone: false,
+  changeProfileError: null,
 
   loadMyInfoLoading: false, // 내 정보 로드 시도 중
   loadMyInfoDone: false,
@@ -116,73 +95,26 @@ const reducer = (state = userInitialState, action: AnyAction) =>
         draft.signUpLoading = false;
         draft.signUpDone = true;
 
-        draft.changeNicknameDone = false;
+        draft.changeProfileDone = false;
         break;
       case SIGN_UP_FAILURE:
         draft.signUpLoading = false;
         draft.signUpError = action.error;
         break;
 
-      case CHANGE_NICKNAME_REQUEST:
-        draft.changeNicknameLoading = true;
-        draft.changeNicknameError = null;
-        draft.changeNicknameDone = false;
+      case CHANGE_PROFILE_REQUEST:
+        draft.changeProfileLoading = true;
+        draft.changeProfileError = null;
+        draft.changeProfileDone = false;
         break;
-      case CHANGE_NICKNAME_SUCCESS:
-        draft.changeNicknameLoading = false;
-        draft.changeNicknameDone = true;
-        if (draft.me?.nickname) draft.me.nickname = action.data.nickname;
+      case CHANGE_PROFILE_SUCCESS:
+        draft.changeProfileLoading = false;
+        draft.changeProfileDone = true;
+        draft.me = action.data;
         break;
-      case CHANGE_NICKNAME_FAILURE:
-        draft.changeNicknameLoading = false;
-        draft.changeNicknameError = action.error;
-        break;
-
-      case CHANGE_PASSWORD_REQUEST:
-        draft.changePasswordLoading = true;
-        draft.changePasswordError = null;
-        draft.changePasswordDone = false;
-        break;
-      case CHANGE_PASSWORD_SUCCESS:
-        draft.changePasswordLoading = false;
-        draft.changePasswordDone = true;
-        if (draft.me?.password) draft.me.password = action.data.password;
-        break;
-      case CHANGE_PASSWORD_FAILURE:
-        draft.changePasswordLoading = false;
-        draft.changePasswordError = action.error;
-        break;
-
-      case CHANGE_PUBLIC_PROFILE_REQUEST:
-        draft.changePublicProfileLoading = true;
-        draft.changePublicProfileError = null;
-        draft.changePublicProfileDone = false;
-        break;
-      case CHANGE_PUBLIC_PROFILE_SUCCESS:
-        draft.changePublicProfileLoading = false;
-        draft.changePublicProfileDone = true;
-        if (draft.me?.publicProfile)
-          draft.me.publicProfile = action.data.publicProfile;
-        break;
-      case CHANGE_PUBLIC_PROFILE_FAILURE:
-        draft.changePublicProfileLoading = false;
-        draft.changePublicProfileError = action.error;
-        break;
-
-      case CHANGE_MEDIA_GATEWAY_REQUEST:
-        draft.changeMediaGatewayLoading = true;
-        draft.changeMediaGatewayError = null;
-        draft.changeMediaGatewayDone = false;
-        break;
-      case CHANGE_MEDIA_GATEWAY_SUCCESS:
-        draft.changeMediaGatewayLoading = false;
-        draft.changeMediaGatewayDone = true;
-        if (draft.me?.mediaGateway)
-          draft.me.mediaGateway = action.data.mediaGateway;
-        break;
-      case CHANGE_MEDIA_GATEWAY_FAILURE:
-        draft.changeMediaGatewayLoading = false;
-        draft.changeMediaGatewayError = action.error;
+      case CHANGE_PROFILE_FAILURE:
+        draft.changeProfileLoading = false;
+        draft.changeProfileError = action.error;
         break;
 
       case LOAD_MY_INFO_REQUEST:
@@ -197,7 +129,7 @@ const reducer = (state = userInitialState, action: AnyAction) =>
 
         draft.logInDone = false;
         draft.logOutDone = false;
-        draft.changeNicknameDone = false;
+        draft.changeProfileDone = false;
         break;
       case LOAD_MY_INFO_FAILURE:
         draft.loadMyInfoLoading = false;

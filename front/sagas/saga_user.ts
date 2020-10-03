@@ -12,21 +12,15 @@ import {
   SIGN_UP_FAILURE,
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
-  LOAD_MY_INFO_FAILURE,
-  CHANGE_NICKNAME_REQUEST,
-  CHANGE_NICKNAME_SUCCESS,
-  CHANGE_NICKNAME_FAILURE,
-  CHANGE_PASSWORD_REQUEST,
-  CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAILURE,
+  LOAD_MY_INFO_FAILURE, 
+  CHANGE_PROFILE_REQUEST, CHANGE_PROFILE_SUCCESS, CHANGE_PROFILE_FAILURE
 } from "../actions/action_user";
 
 import {
   IdummyUser,
   IsignUpSaga,
   IlogInSaga,
-  IchangeNickname,
-  IchangePassword,
+  IchangeProfileSaga
 } from "../interface";
 
 interface IloginAPI {
@@ -154,109 +148,74 @@ function* loadMyInfo() {
 }
 
 interface IcopyObj {
-  [key: string]: string | object;
+  [key: string]: string | boolean;
 }
 
 const deepCopy = (obj: object) => {
   const newObj: IcopyObj = {};
   for (const [key, value] of Object.entries(obj)) {
-    // console.log(key, value);
     newObj[key] = value;
   }
+
   return newObj;
 };
 
-function changeNicknameAPI(nickname: string) {
-  // return axios.post("/api/changeNickname", data);
+const convertNewProfile = (obj: IcopyObj, changeProfileData: IcopyObj) => {
+  // 객체 프로퍼티 접근을 위해 깊은 복사
+  const newObj = deepCopy(obj);
 
-  // 1. localStorage의 get me data
+  // 새로운 데이터로 교체
+  for (const [key, value] of Object.entries(changeProfileData)) {
+    newObj[key] = value;
+  }
+
+  return newObj;
+};
+
+function changeProfileAPI(changeProfileData: IcopyObj) {
+  // return axios.post("/api/changeProfile", data);
+
+  // 1. localStorage의 me 정보 가져오기
   const getMe = localStorage.getItem("me");
 
   let jsonMe: object | null = null;
 
-  // 2. getMe <- JSON으로 변환
+  // 2. 가져온 me 정보 JSON으로 변환
   if (typeof getMe === "string") jsonMe = JSON.parse(getMe);
   else jsonMe = null;
 
+  let copyMe: IcopyObj = {};
   let newMe: IcopyObj = {};
   if (jsonMe !== null) {
+    // console.log(jsonMe as IdummyUser);
     // 3. JSON -> object 변환
-    newMe = deepCopy(jsonMe);
-    // 4. 변환한 object의 nickname 변경
-    newMe.nickname = nickname;
+    copyMe = deepCopy(jsonMe);
+    // 4. object로 변환된 me를 새로운 데이터로 대체
+    newMe = convertNewProfile(copyMe, changeProfileData);
   }
 
-  // 5. 기존의 me data 제거
+  // // 5. 기존의 me data 제거
   localStorage.removeItem("me");
-  // 6. 수정한 닉네임으로 변경된 오브젝트 localStorage에 저장
+  // // 6. 수정한 닉네임으로 변경된 오브젝트 localStorage에 저장
   localStorage.setItem("me", JSON.stringify(newMe));
 
   return newMe;
 }
 
-function* changeNickname(action: IchangeNickname) {
+function* changeProfile(action: IchangeProfileSaga) {
   try {
-    const result = yield call(changeNicknameAPI, action.data.nickname);
+    const result: IcopyObj = yield call(changeProfileAPI, action.data);
 
     console.log("result", result);
 
     yield put({
-      type: CHANGE_NICKNAME_SUCCESS,
-      data: {
-        nickname: action.data.nickname,
-      },
+      type: CHANGE_PROFILE_SUCCESS,
+      data: result
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: CHANGE_NICKNAME_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-function changePasswordAPI(password: string) {
-  // return axios.post("/api/changepassword", data);
-
-  // 1. localStorage의 get me data
-  const getMe = localStorage.getItem("me");
-
-  let jsonMe: object | null = null;
-
-  // 2. getMe <- JSON으로 변환
-  if (typeof getMe === "string") jsonMe = JSON.parse(getMe);
-  else jsonMe = null;
-
-  let newMe: IcopyObj = {};
-  if (jsonMe !== null) {
-    // 3. JSON -> object 변환
-    newMe = deepCopy(jsonMe);
-    // 4. 변환한 object의 password 변경
-    newMe.password = password;
-  }
-
-  // 5. 기존의 me data 제거
-  localStorage.removeItem("me");
-  // 6. 수정한 패스워드 변경된 오브젝트 localStorage에 저장
-  localStorage.setItem("me", JSON.stringify(newMe));
-
-  return newMe;
-}
-
-function* changePassword(action: IchangePassword) {
-  try {
-    const result = yield call(changePasswordAPI, action.data.password);
-
-    yield put({
-      type: CHANGE_PASSWORD_SUCCESS,
-      data: {
-        password: action.data.password,
-      },
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: CHANGE_PASSWORD_FAILURE,
+      type: CHANGE_PROFILE_FAILURE,
       error: err.response.data,
     });
   }
@@ -278,12 +237,8 @@ function* watchLoadMyInfo() {
   yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);
 }
 
-function* watchChangeNikname() {
-  yield takeLatest(CHANGE_NICKNAME_REQUEST, changeNickname);
-}
-
-function* watchChangePassword() {
-  yield takeLatest(CHANGE_PASSWORD_REQUEST, changePassword);
+function* watchChangeProfile() {
+  yield takeLatest(CHANGE_PROFILE_REQUEST, changeProfile);
 }
 
 export default function* userSaga() {
@@ -292,7 +247,6 @@ export default function* userSaga() {
     fork(watchLogOut),
     fork(watchSignUp),
     fork(watchLoadMyInfo),
-    fork(watchChangeNikname),
-    fork(watchChangePassword),
+    fork(watchChangeProfile),
   ]);
 }
