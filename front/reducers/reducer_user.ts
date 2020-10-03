@@ -2,9 +2,18 @@ import produce from "immer";
 import { AnyAction } from "redux";
 import {
   ADD_POST_TO_ME,
+  CHANGE_MEDIA_GATEWAY_FAILURE,
+  CHANGE_MEDIA_GATEWAY_REQUEST,
+  CHANGE_MEDIA_GATEWAY_SUCCESS,
   CHANGE_NICKNAME_FAILURE,
   CHANGE_NICKNAME_REQUEST,
   CHANGE_NICKNAME_SUCCESS,
+  CHANGE_PASSWORD_FAILURE,
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PUBLIC_PROFILE_FAILURE,
+  CHANGE_PUBLIC_PROFILE_REQUEST,
+  CHANGE_PUBLIC_PROFILE_SUCCESS,
   LOAD_MY_INFO_FAILURE,
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
@@ -20,33 +29,9 @@ import {
   SIGN_UP_SUCCESS,
 } from "../actions/action_user";
 
-import { dummyUserTypes } from "../interface";
+import { IuserInitialState } from "../interface";
 
-export type userInitialStateType = {
-  logInLoading: boolean;
-  logInDone: boolean;
-  logInError: string | null;
-
-  logOutLoading: boolean;
-  logOutDone: boolean;
-  logOutError: string | null;
-
-  signUpLoading: boolean;
-  signUpDone: boolean;
-  signUpError: string | null;
-
-  changeNicknameLoading: boolean;
-  changeNicknameDone: boolean;
-  changeNicknameError: string | null;
-
-  loadMyInfoLoading: boolean;
-  loadMyInfoDone: boolean;
-  loadMyInfoError: string | null;
-
-  me: dummyUserTypes | null;
-};
-
-export const userInitialState: userInitialStateType = {
+export const userInitialState: IuserInitialState = {
   logInLoading: false, // 로그인 시도 중    // Logging이면 로딩화면을 띄워주기위한 역할
   logInDone: false,
   logInError: null,
@@ -62,6 +47,18 @@ export const userInitialState: userInitialStateType = {
   changeNicknameLoading: false, // 닉네임 변경 시도 중
   changeNicknameDone: false,
   changeNicknameError: null,
+
+  changePasswordLoading: false, // 패스워드 변경 시도 중
+  changePasswordDone: false,
+  changePasswordError: null,
+
+  changePublicProfileLoading: false, // 프로필 공개 변경 시도 중
+  changePublicProfileDone: false,
+  changePublicProfileError: null,
+
+  changeMediaGatewayLoading: false, // 미디어 게이트웨이 변경 시도 중
+  changeMediaGatewayDone: false,
+  changeMediaGatewayError: null,
 
   loadMyInfoLoading: false, // 내 정보 로드 시도 중
   loadMyInfoDone: false,
@@ -139,6 +136,53 @@ const reducer = (state = userInitialState, action: AnyAction) =>
       case CHANGE_NICKNAME_FAILURE:
         draft.changeNicknameLoading = false;
         draft.changeNicknameError = action.error;
+        break;
+
+      case CHANGE_PASSWORD_REQUEST:
+        draft.changePasswordLoading = true;
+        draft.changePasswordError = null;
+        draft.changePasswordDone = false;
+        break;
+      case CHANGE_PASSWORD_SUCCESS:
+        draft.changePasswordLoading = false;
+        draft.changePasswordDone = true;
+        if (draft.me?.password) draft.me.password = action.data.password;
+        break;
+      case CHANGE_PASSWORD_FAILURE:
+        draft.changePasswordLoading = false;
+        draft.changePasswordError = action.error;
+        break;
+
+      case CHANGE_PUBLIC_PROFILE_REQUEST:
+        draft.changePublicProfileLoading = true;
+        draft.changePublicProfileError = null;
+        draft.changePublicProfileDone = false;
+        break;
+      case CHANGE_PUBLIC_PROFILE_SUCCESS:
+        draft.changePublicProfileLoading = false;
+        draft.changePublicProfileDone = true;
+        if (draft.me?.publicProfile)
+          draft.me.publicProfile = action.data.publicProfile;
+        break;
+      case CHANGE_PUBLIC_PROFILE_FAILURE:
+        draft.changePublicProfileLoading = false;
+        draft.changePublicProfileError = action.error;
+        break;
+
+      case CHANGE_MEDIA_GATEWAY_REQUEST:
+        draft.changeMediaGatewayLoading = true;
+        draft.changeMediaGatewayError = null;
+        draft.changeMediaGatewayDone = false;
+        break;
+      case CHANGE_MEDIA_GATEWAY_SUCCESS:
+        draft.changeMediaGatewayLoading = false;
+        draft.changeMediaGatewayDone = true;
+        if (draft.me?.mediaGateway)
+          draft.me.mediaGateway = action.data.mediaGateway;
+        break;
+      case CHANGE_MEDIA_GATEWAY_FAILURE:
+        draft.changeMediaGatewayLoading = false;
+        draft.changeMediaGatewayError = action.error;
         break;
 
       case LOAD_MY_INFO_REQUEST:

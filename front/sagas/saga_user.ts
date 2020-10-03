@@ -16,22 +16,34 @@ import {
   CHANGE_NICKNAME_REQUEST,
   CHANGE_NICKNAME_SUCCESS,
   CHANGE_NICKNAME_FAILURE,
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILURE,
 } from "../actions/action_user";
 
 import {
-  dummyUserTypes,
-  signUpSagaType,
-  logInSagaType,
-  changeNicknameTypes,
+  IdummyUser,
+  IsignUpSaga,
+  IlogInSaga,
+  IchangeNickname,
+  IchangePassword,
 } from "../interface";
 
-const dummyUser = (data: string) => {
+interface IloginAPI {
+  Email: string;
+  Password: string;
+}
+
+const dummyUser = (data: IloginAPI) => {
   return {
     id: 1,
-    email: data,
+    email: data.Email,
+    password: data.Password,
     nickname: "테스터1",
+    publicProfile: true,
+    mediaGateway: true,
     service: {
-      usedUrl: 10,
+      usedUrl: 259,
       membership: "free",
     },
     clickCount: {
@@ -46,16 +58,16 @@ const dummyUser = (data: string) => {
   };
 };
 
-function loginAPI(data: string): dummyUserTypes {
+function loginAPI(data: IloginAPI): IdummyUser {
   // return axios.post("/api/login", data);
   const dummy = dummyUser(data);
-  localStorage.setItem("me", JSON.stringify(dummy)); // Object Object 뜨면 서버 재시작
+  localStorage.setItem("me", JSON.stringify(dummy));
   return dummy;
 }
 
-function* logIn(action: logInSagaType) {
+function* logIn(action: IlogInSaga) {
   try {
-    const result: dummyUserTypes = yield call(loginAPI, action.data.Email);
+    const result: IdummyUser = yield call(loginAPI, action.data);
     yield delay(1000); // 가짜 데이터인척하고 시간 지연
     yield put({
       type: LOG_IN_SUCCESS,
@@ -98,7 +110,7 @@ function* logOut() {
 //   // return axios.post("/api/signUp", data);
 // }
 
-// action: signUpSagaType
+// action: IsignUpSaga
 function* signUp() {
   try {
     // const result = yield call(signUpAPI, action.data);
@@ -141,12 +153,12 @@ function* loadMyInfo() {
   }
 }
 
-interface copyObjTypes {
+interface IcopyObj {
   [key: string]: string | object;
 }
 
 const deepCopy = (obj: object) => {
-  const newObj: copyObjTypes = {};
+  const newObj: IcopyObj = {};
   for (const [key, value] of Object.entries(obj)) {
     // console.log(key, value);
     newObj[key] = value;
@@ -166,7 +178,7 @@ function changeNicknameAPI(nickname: string) {
   if (typeof getMe === "string") jsonMe = JSON.parse(getMe);
   else jsonMe = null;
 
-  let newMe: copyObjTypes = {};
+  let newMe: IcopyObj = {};
   if (jsonMe !== null) {
     // 3. JSON -> object 변환
     newMe = deepCopy(jsonMe);
@@ -182,7 +194,7 @@ function changeNicknameAPI(nickname: string) {
   return newMe;
 }
 
-function* changeNickname(action: changeNicknameTypes) {
+function* changeNickname(action: IchangeNickname) {
   try {
     const result = yield call(changeNicknameAPI, action.data.nickname);
 
@@ -198,6 +210,53 @@ function* changeNickname(action: changeNicknameTypes) {
     console.error(err);
     yield put({
       type: CHANGE_NICKNAME_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function changePasswordAPI(password: string) {
+  // return axios.post("/api/changepassword", data);
+
+  // 1. localStorage의 get me data
+  const getMe = localStorage.getItem("me");
+
+  let jsonMe: object | null = null;
+
+  // 2. getMe <- JSON으로 변환
+  if (typeof getMe === "string") jsonMe = JSON.parse(getMe);
+  else jsonMe = null;
+
+  let newMe: IcopyObj = {};
+  if (jsonMe !== null) {
+    // 3. JSON -> object 변환
+    newMe = deepCopy(jsonMe);
+    // 4. 변환한 object의 password 변경
+    newMe.password = password;
+  }
+
+  // 5. 기존의 me data 제거
+  localStorage.removeItem("me");
+  // 6. 수정한 패스워드 변경된 오브젝트 localStorage에 저장
+  localStorage.setItem("me", JSON.stringify(newMe));
+
+  return newMe;
+}
+
+function* changePassword(action: IchangePassword) {
+  try {
+    const result = yield call(changePasswordAPI, action.data.password);
+
+    yield put({
+      type: CHANGE_PASSWORD_SUCCESS,
+      data: {
+        password: action.data.password,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: CHANGE_PASSWORD_FAILURE,
       error: err.response.data,
     });
   }
@@ -223,6 +282,10 @@ function* watchChangeNikname() {
   yield takeLatest(CHANGE_NICKNAME_REQUEST, changeNickname);
 }
 
+function* watchChangePassword() {
+  yield takeLatest(CHANGE_PASSWORD_REQUEST, changePassword);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogin),
@@ -230,5 +293,6 @@ export default function* userSaga() {
     fork(watchSignUp),
     fork(watchLoadMyInfo),
     fork(watchChangeNikname),
+    fork(watchChangePassword),
   ]);
 }

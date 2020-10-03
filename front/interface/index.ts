@@ -1,5 +1,6 @@
 import {
   CHANGE_NICKNAME_REQUEST,
+  CHANGE_PASSWORD_REQUEST,
   LOG_IN_REQUEST,
   SIGN_UP_REQUEST,
 } from "../actions/action_user";
@@ -17,6 +18,8 @@ export interface IdummyUser {
   email: string;
   password: string;
   nickname: string;
+  publicProfile: boolean;
+  mediaGateway: boolean;
   service: {
     usedUrl: number;
     membership: string;
@@ -46,6 +49,14 @@ export interface IuserInitialState {
   changePasswordLoading: boolean;
   changePasswordDone: boolean;
   changePasswordError: string | null;
+
+  changePublicProfileLoading: boolean;
+  changePublicProfileDone: boolean;
+  changePublicProfileError: string | null;
+
+  changeMediaGatewayLoading: boolean;
+  changeMediaGatewayDone: boolean;
+  changeMediaGatewayError: string | null;
 
   loadMyInfoLoading: boolean;
   loadMyInfoDone: boolean;
@@ -81,6 +92,13 @@ export interface IchangeNickname {
   type: typeof CHANGE_NICKNAME_REQUEST;
   data: {
     nickname: string;
+  };
+}
+
+export interface IchangePassword {
+  type: typeof CHANGE_PASSWORD_REQUEST;
+  data: {
+    password: string;
   };
 }
 // End User

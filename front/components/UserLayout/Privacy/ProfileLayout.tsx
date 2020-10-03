@@ -29,7 +29,10 @@ import {
 import { IUserReducerState } from "../../../reducers/reducer_user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { CHANGE_NICKNAME_REQUEST } from "../../../actions/action_user";
+import {
+  CHANGE_NICKNAME_REQUEST,
+  CHANGE_PASSWORD_REQUEST,
+} from "../../../actions/action_user";
 
 const { Content } = Layout;
 const { Text } = Typography;
@@ -103,25 +106,36 @@ const ColPaddingBottomWrapper = styled(Col)`
 
 const ProfileLayout = () => {
   const dispatch = useDispatch();
-  const { me, changeNicknameDone } = useSelector<RootState, IUserReducerState>(
-    (state) => state.user
-  );
+  const { me, changeNicknameDone, changePasswordDone } = useSelector<
+    RootState,
+    IUserReducerState
+  >((state) => state.user);
 
   const [Nickname, setNickname] = useState<string>();
   const [Email, setEmail] = useState<string>();
+  const [Password, setPassword] = useState<string>();
+  const [PasswordCheck, setPasswordCheck] = useState<string>();
 
   useEffect(() => {
     if (me) {
       setNickname(me.nickname);
       setEmail(me.email);
     }
-    if (changeNicknameDone) {
+    if (changeNicknameDone || changePasswordDone) {
       message.success("프로필이 정상적으로 업데이트 되었습니다.");
     }
   }, [me]);
 
   const onChangeNickname = useCallback((e) => {
     setNickname(e.target.value);
+  }, []);
+
+  const onChangePassword = useCallback((e) => {
+    setPassword(e.target.value);
+  }, []);
+
+  const onChangePasswordCheck = useCallback((e) => {
+    setPasswordCheck(e.target.value);
   }, []);
 
   const onClickUpdate = useCallback(() => {
@@ -134,8 +148,18 @@ const ProfileLayout = () => {
           },
         });
       }
+      if (Password === PasswordCheck) {
+        dispatch({
+          type: CHANGE_PASSWORD_REQUEST,
+          data: {
+            password: Password,
+          },
+        });
+      } else if (Password !== PasswordCheck) {
+        message.error("패스워드가 서로 일치하지 않습니다.");
+      }
     }
-  }, [Nickname]);
+  }, [Nickname, Password, PasswordCheck]);
 
   return (
     <Content>
@@ -222,7 +246,11 @@ const ProfileLayout = () => {
                   </Row>
 
                   <Row justify="start">
-                    <Input.Password placeholder="Blank" bordered={false} />
+                    <Input.Password
+                      placeholder="Blank"
+                      bordered={false}
+                      onChange={onChangePassword}
+                    />
                   </Row>
 
                   <br />
@@ -235,6 +263,7 @@ const ProfileLayout = () => {
                     <Input.Password
                       placeholder="Blank"
                       bordered={false}
+                      onChange={onChangePasswordCheck}
                       iconRender={(visible) =>
                         visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                       }
