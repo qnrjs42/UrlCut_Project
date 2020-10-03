@@ -11,8 +11,14 @@ import {
   Input,
   Switch,
   Table,
+  message,
 } from "antd";
-import { WarningOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  WarningOutlined,
+  UserOutlined,
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+} from "@ant-design/icons";
 import styled from "styled-components";
 
 import {
@@ -23,7 +29,6 @@ import {
 import { IUserReducerState } from "../../../reducers/reducer_user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import useInput from "../../../hooks/useInput";
 import { CHANGE_NICKNAME_REQUEST } from "../../../actions/action_user";
 
 const { Content } = Layout;
@@ -98,38 +103,40 @@ const ColPaddingBottomWrapper = styled(Col)`
 
 const ProfileLayout = () => {
   const dispatch = useDispatch();
-  const {me} = useSelector<RootState, IUserReducerState>(state => state.user);
+  const { me, changeNicknameDone } = useSelector<RootState, IUserReducerState>(
+    (state) => state.user
+  );
+
   const [Nickname, setNickname] = useState<string>();
   const [Email, setEmail] = useState<string>();
 
   useEffect(() => {
-    if(me) {
+    if (me) {
       setNickname(me.nickname);
       setEmail(me.email);
     }
-  }, [me])
+    if (changeNicknameDone) {
+      message.success("프로필이 정상적으로 업데이트 되었습니다.");
+    }
+  }, [me]);
 
   const onChangeNickname = useCallback((e) => {
     setNickname(e.target.value);
-  }, [])
-
-  const onChangeEmail = useCallback((e) => {
-    setEmail(e.target.value);
-  }, [])
+  }, []);
 
   const onClickUpdate = useCallback(() => {
-    if(me) {
-      if(me.nickname !== Nickname) {
+    if (me) {
+      if (me.nickname !== Nickname) {
         dispatch({
           type: CHANGE_NICKNAME_REQUEST,
           data: {
-            nickname: Nickname
-          }
-        })
+            nickname: Nickname,
+          },
+        });
       }
     }
-  }, [Nickname])
-  
+  }, [Nickname]);
+
   return (
     <Content>
       <RowWrapper gutter={[16, 16]} justify="center">
@@ -152,7 +159,11 @@ const ProfileLayout = () => {
                   />
                 </Col>
                 <Col offset={1}>
-                  <Input value={Nickname} onChange={onChangeNickname} bordered={false} />
+                  <Input
+                    value={Nickname}
+                    onChange={onChangeNickname}
+                    bordered={false}
+                  />
                 </Col>
               </Row>
               <Divider />
@@ -167,7 +178,6 @@ const ProfileLayout = () => {
                     <Input
                       placeholder="Borderless"
                       value={Email}
-                      onChange={onChangeEmail}
                       bordered={false}
                     />
                   </Row>
@@ -212,7 +222,7 @@ const ProfileLayout = () => {
                   </Row>
 
                   <Row justify="start">
-                    <Input placeholder="Blank" bordered={false} />
+                    <Input.Password placeholder="Blank" bordered={false} />
                   </Row>
 
                   <br />
@@ -222,7 +232,13 @@ const ProfileLayout = () => {
                 <Col xs={{ span: 24, order: 2 }} md={{ span: 12, order: 2 }}>
                   비밀번호 확인
                   <Row justify="start">
-                    <Input placeholder="Blank" bordered={false} />
+                    <Input.Password
+                      placeholder="Blank"
+                      bordered={false}
+                      iconRender={(visible) =>
+                        visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                      }
+                    />
                   </Row>
                   <br />
                   <Text type="secondary">유지하려면 비워 두세요.</Text>
@@ -285,7 +301,11 @@ const ProfileLayout = () => {
             <br />
             <br />
             <Row justify="center">
-              <ButtonPurpleWrapper type="primary" size="large" onClick={onClickUpdate}>
+              <ButtonPurpleWrapper
+                type="primary"
+                size="large"
+                onClick={onClickUpdate}
+              >
                 업데이트
               </ButtonPurpleWrapper>
             </Row>

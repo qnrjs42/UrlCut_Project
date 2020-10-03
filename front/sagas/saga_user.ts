@@ -18,27 +18,33 @@ import {
   CHANGE_NICKNAME_FAILURE,
 } from "../actions/action_user";
 
-import { dummyUserTypes, signUpSagaType, logInSagaType, changeNicknameTypes } from "../interface";
+import {
+  dummyUserTypes,
+  signUpSagaType,
+  logInSagaType,
+  changeNicknameTypes,
+} from "../interface";
 
 const dummyUser = (data: string) => {
   return {
-  id: 1,
-  email: data,
-  nickname: "테스터1",
-  service: {
-    usedUrl: 10,
-    membership: "free",
-  },
-  clickCount: {
-    1: 5,
-    5: 17,
-    10: 30,
-    11: 1,
-    14: 122,
-    18: 3,
-    21: 10,
-  },
-}};
+    id: 1,
+    email: data,
+    nickname: "테스터1",
+    service: {
+      usedUrl: 10,
+      membership: "free",
+    },
+    clickCount: {
+      1: 5,
+      5: 17,
+      10: 30,
+      11: 1,
+      14: 122,
+      18: 3,
+      21: 10,
+    },
+  };
+};
 
 function loginAPI(data: string): dummyUserTypes {
   // return axios.post("/api/login", data);
@@ -135,18 +141,18 @@ function* loadMyInfo() {
   }
 }
 
-
 interface copyObjTypes {
   [key: string]: string | object;
 }
 
 const deepCopy = (obj: object) => {
   const newObj: copyObjTypes = {};
-    for ( const list of Object.entries(obj)) {
-      newObj[list[0]] = list[1];
-    }
+  for (const [key, value] of Object.entries(obj)) {
+    // console.log(key, value);
+    newObj[key] = value;
+  }
   return newObj;
-}
+};
 
 function changeNicknameAPI(nickname: string) {
   // return axios.post("/api/changeNickname", data);
@@ -161,7 +167,7 @@ function changeNicknameAPI(nickname: string) {
   else jsonMe = null;
 
   let newMe: copyObjTypes = {};
-  if(jsonMe !== null) {
+  if (jsonMe !== null) {
     // 3. JSON -> object 변환
     newMe = deepCopy(jsonMe);
     // 4. 변환한 object의 nickname 변경
@@ -171,7 +177,7 @@ function changeNicknameAPI(nickname: string) {
   // 5. 기존의 me data 제거
   localStorage.removeItem("me");
   // 6. 수정한 닉네임으로 변경된 오브젝트 localStorage에 저장
-  localStorage.setItem("me", JSON.stringify(newMe)); 
+  localStorage.setItem("me", JSON.stringify(newMe));
 
   return newMe;
 }
@@ -180,13 +186,13 @@ function* changeNickname(action: changeNicknameTypes) {
   try {
     const result = yield call(changeNicknameAPI, action.data.nickname);
 
-    console.log('result', result)
-      
+    console.log("result", result);
+
     yield put({
       type: CHANGE_NICKNAME_SUCCESS,
       data: {
-        nickname: action.data.nickname
-      }
+        nickname: action.data.nickname,
+      },
     });
   } catch (err) {
     console.error(err);
