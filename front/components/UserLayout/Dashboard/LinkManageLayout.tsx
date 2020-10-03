@@ -18,7 +18,7 @@ import useRemoveUrl from "../../../hooks/useRemoveUrl";
 import useMovementUrl from "../../../hooks/useMovementUrl";
 import { RootState } from "../../../reducers";
 import { IUrlReducerState } from "../../../reducers/reducer_url";
-import { TurlInfo } from "../../../interface";
+import { IurlInfo } from "../../../interface";
 
 const { Content } = Layout;
 const { Text } = Typography;
@@ -38,7 +38,7 @@ const LinkManageLayout = () => {
   } = useSelector<RootState, IUrlReducerState>((state) => state.url);
 
   // table - urlInfo
-  const [DataSource, setDataSource] = useState<TurlInfo[]>([]);
+  const [DataSource, setDataSource] = useState<IurlInfo[]>([]);
   const [SelectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
   useEffect(() => {

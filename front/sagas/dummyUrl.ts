@@ -2,9 +2,9 @@ import shortid from "shortid";
 import faker from "faker";
 faker.locale = "ko";
 
-import { tablePaginationTypes } from "../interface";
+import { ItablePagination } from "../interface";
 
-export const dummyUrl = (data: tablePaginationTypes) => {
+export const dummyUrl = (data: ItablePagination) => {
   let createDummyUrl = [];
 
   let lastIndex = data.page * data.limit;

@@ -13,7 +13,11 @@ import shortid from "shortid";
 import faker from "faker";
 faker.locale = "ko";
 
-import { tableMovementSagaTypes, tablePaginationSagaTypes, tableRemoveAndMovementTypes, tableRemoveSagaTypes, TurlInfo } from "../interface";
+import {
+  ItableMovementSaga,
+  ItablePaginationSaga,
+  ItableRemoveSaga,
+} from "../interface";
 
 const takeLatest: any = Effects.takeLatest;
 // const takeLatest = <T, K>(_x: T, y: K): K => y;
@@ -62,7 +66,7 @@ function tablePaginationAPI() {
   return axios.post("/url");
 }
 
-function* tablePagination(action: tablePaginationSagaTypes) {
+function* tablePagination(action: ItablePaginationSaga) {
   try {
     // const result = yield call(urlCutAPI); // axios 이용할 때
     // yield delay(1000);
@@ -217,12 +221,12 @@ function removeUrlsAPI() {
   return axios.post("/url/removeUrl");
 }
 
-function* removeUrls(action: tableRemoveSagaTypes) {
+function* removeUrls(action: ItableRemoveSaga) {
   try {
     // const result = yield call(removeUrlAPI, action.data); // axios 이용할 때
     // const result = "Saga를 이용한 단축된 URL";
     // yield delay(1000);
-    console.log('sage remove action', action);
+    console.log("sage remove action", action);
     yield put({
       type: REMOVE_URLS_SUCCESS,
       //   data: result.data, // axios 이용할 때
@@ -244,13 +248,12 @@ function moveMentUrlsAPI() {
   return axios.post("/url/storageMoveUrls");
 }
 
-
-function* moveMentUrls(action: tableMovementSagaTypes) {
+function* moveMentUrls(action: ItableMovementSaga) {
   try {
     // const result = yield call(storageMoveUrlAPI, action.data); // axios 이용할 때
     // const result = "Saga를 이용한 단축된 URL";
     // yield delay(1000);
-    console.log('saga moveMent action', action);
+    console.log("saga moveMent action", action);
     yield put({
       type: MOVEMENT_URLS_SUCCESS,
       //   data: result.data, // axios 이용할 때

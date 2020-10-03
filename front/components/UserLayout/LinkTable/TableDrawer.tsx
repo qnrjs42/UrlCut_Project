@@ -5,13 +5,13 @@ import {
   ButtonPurpleWrapper,
   ButtonGreenWrapper,
 } from "../../../css/overlap-styled";
-import { TurlInfo } from "../../../interface";
+import { IurlInfo } from "../../../interface";
 
 const { Option } = Mentions;
 const { Text, Link } = Typography;
 
 type LinkDrawerProps = {
-  RowClickData: TurlInfo | null;
+  RowClickData: IurlInfo | null;
 };
 
 // UserLayout - LinkTable

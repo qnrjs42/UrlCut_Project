@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 
-import { TurlInfo } from "../../../interface";
+import { IurlInfo } from "../../../interface";
 // hooks
 import useChangePagination from "../../../hooks/useChangePagination";
 
@@ -17,7 +17,7 @@ dayjs.extend(relativeTime);
 const dateDayjs = dayjs();
 const { Text } = Typography;
 
-interface IColumns extends TurlInfo {
+interface IColumns extends IurlInfo {
   title?: string;
   dataIndex?: string;
   key: string;
@@ -31,7 +31,7 @@ const columns: ColumnsType<IColumns> = [
     key: "shortenUrl",
     width: "30%",
     ellipsis: true,
-    render: (urlColData: string, row: TurlInfo, index: number) => {
+    render: (urlColData: string, row: IurlInfo, index: number) => {
       // console.log(urlColData, row, index);
       return (
         <>
@@ -56,7 +56,7 @@ const columns: ColumnsType<IColumns> = [
     width: "10%",
     responsive: ["lg"],
     align: "center",
-    render: (linkOptionData: Array<string>, row: TurlInfo, index: number) => {
+    render: (linkOptionData: Array<string>, row: IurlInfo, index: number) => {
       let newData = "-";
       if (linkOptionData[0] === "lock") {
         newData = "비밀번호 설정";
@@ -75,7 +75,7 @@ const columns: ColumnsType<IColumns> = [
       },
     ],
     // filterMultiple: false,
-    onFilter: (value: string | number | boolean, record: TurlInfo) =>
+    onFilter: (value: string | number | boolean, record: IurlInfo) =>
       record.linkOption[0] === value,
     // sorter: (a, b) => a.linkOption.length - b.linkOption.length,
     // sortDirections: ["descend", "ascend"],
@@ -85,7 +85,7 @@ const columns: ColumnsType<IColumns> = [
     dataIndex: "createdAt",
     key: "createdAt",
     sorter: {
-      compare: (a: TurlInfo, b: TurlInfo) => {
+      compare: (a: IurlInfo, b: IurlInfo) => {
         // 이 부분을 어떻게 any를 대체해야할지 모르겠음
         const left = dayjs(a.createdAt);
         const right = dayjs(b.createdAt);
@@ -96,7 +96,7 @@ const columns: ColumnsType<IColumns> = [
     width: "10%",
     responsive: ["lg"],
     align: "center",
-    render: (dateData: Date, row: TurlInfo, index: number) => {
+    render: (dateData: Date, row: IurlInfo, index: number) => {
       return <>{dateDayjs.to(dateData)}</>;
     },
   },
@@ -107,7 +107,7 @@ const columns: ColumnsType<IColumns> = [
     width: "10%",
     align: "center",
     sorter: {
-      compare: (a: TurlInfo, b: TurlInfo) => a.clickCount - b.clickCount,
+      compare: (a: IurlInfo, b: IurlInfo) => a.clickCount - b.clickCount,
       multiple: 1,
     },
   },
@@ -116,7 +116,7 @@ const columns: ColumnsType<IColumns> = [
 type LinkTableTypes = {
   sender: string;
   getTableSelectedRows?(ids: string[]): void;
-  dataSource: TurlInfo[];
+  dataSource: IurlInfo[];
   urlInfoIds?: number; // object면 아무것도 없음
 };
 
@@ -124,14 +124,14 @@ type LinkTableTypes = {
 // Management - LinkStorageLayout, ExpiredLayout
 const LinkTable = (props: LinkTableTypes) => {
   // table
-  const [RowClickData, setRowClickData] = useState<TurlInfo | null>(null);
+  const [RowClickData, setRowClickData] = useState<IurlInfo | null>(null);
   const changePagination = useChangePagination();
 
   // 테이블 check/checked/checkedAll And changeRow
   const rowSelection = {
     onChange: (
       selectedRowKeys: (string | number)[],
-      selectedRows: TurlInfo[]
+      selectedRows: IurlInfo[]
     ) => {
       console.log(
         `selectedRowKeys: ${selectedRowKeys}`,
@@ -139,7 +139,7 @@ const LinkTable = (props: LinkTableTypes) => {
         selectedRows
       );
       // 선택한 row의 id 추출
-      const ids: string[] = selectedRows.map((row: TurlInfo) => row.id);
+      const ids: string[] = selectedRows.map((row: IurlInfo) => row.id);
       props.getTableSelectedRows ? props.getTableSelectedRows(ids) : null;
     },
     // onSelect: (record, selected, selectedRows) => {
@@ -153,7 +153,7 @@ const LinkTable = (props: LinkTableTypes) => {
 
   // Table Row 선택되었을 때 Drawer 열기, 날짜 포맷 설정
   const onRow = useCallback(
-    (record: TurlInfo, rowIndex: number | undefined) => {
+    (record: IurlInfo, rowIndex: number | undefined) => {
       return {
         onClick: () => {
           const newRecord = { ...record };

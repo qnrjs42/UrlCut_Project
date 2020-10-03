@@ -33,9 +33,9 @@ import {
   RESET_SEARCH_URLS_FAILURE,
 } from "../actions/action_url";
 
-import { urlInitialStateTypes } from "../interface";
+import { IurlInitialState } from "../interface";
 
-export const urlInitialState: urlInitialStateTypes = {
+export const urlInitialState: IurlInitialState = {
   shortenUrl: null,
 
   urlInfo: [], // 전체 링크 관리 URL

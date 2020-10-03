@@ -13,7 +13,7 @@ import ShortenUrlButton from "../ShortenUrlButton";
 import LinkTable from "../LinkTable";
 import { RootState } from "../../../reducers";
 import { IUrlReducerState } from "../../../reducers/reducer_url";
-import { TurlInfo } from "../../../interface";
+import { IurlInfo } from "../../../interface";
 import useRemoveUrl from "../../../hooks/useRemoveUrl";
 import useMovementUrl from "../../../hooks/useMovementUrl";
 
@@ -32,7 +32,7 @@ const LinkStorageLayout = () => {
   } = useSelector<RootState, IUrlReducerState>((state) => state.url);
 
   // table - urlInfo
-  const [DataSource, setDataSource] = useState<TurlInfo[]>([]);
+  const [DataSource, setDataSource] = useState<IurlInfo[]>([]);
   const [SelectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
   useEffect(() => {

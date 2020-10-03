@@ -10,10 +10,10 @@ import { LOAD_USER_URLS_REQUEST } from "../../../actions/action_url";
 import ShortenUrlButton from "../ShortenUrlButton";
 import MainChart from "./MainSection/MainChart";
 import LinkTable from "../LinkTable";
-import { RootState } from '../../../reducers';
+import { RootState } from "../../../reducers";
 import { IUrlReducerState } from "../../../reducers/reducer_url";
 import { IUserReducerState } from "../../../reducers/reducer_user";
-import { TurlInfo } from "../../../interface";
+import { IurlInfo } from "../../../interface";
 
 const { Content } = Layout;
 
@@ -23,13 +23,16 @@ const CardWrapper = styled(Card)`
 
 const MainManageLayout = () => {
   const dispatch = useDispatch();
-  const { urlInfo, loadUserUrlsDone, urlCutDone } = useSelector<RootState, IUrlReducerState>(
-    (state) => state.url
+  const { urlInfo, loadUserUrlsDone, urlCutDone } = useSelector<
+    RootState,
+    IUrlReducerState
+  >((state) => state.url);
+  const { me } = useSelector<RootState, IUserReducerState>(
+    (state) => state.user
   );
-  const { me } = useSelector<RootState, IUserReducerState>((state) => state.user);
 
   // table
-  const [DataSource, setDataSource] = useState<TurlInfo[]>([]);
+  const [DataSource, setDataSource] = useState<IurlInfo[]>([]);
 
   useEffect(() => {
     // 맨 처음 전체 링크 관리 페이지 들어왔을 때 1번부터 5번까지 데이터만 로드
@@ -87,12 +90,12 @@ const MainManageLayout = () => {
                   "100%": "#fa6a69",
                 }}
                 width={150}
-                percent={ me ? ((me.service.usedUrl / 500) * 100) : 0}
+                percent={me ? (me.service.usedUrl / 500) * 100 : 0}
                 format={() => {
                   return (
                     <>
                       사용 건수 <br />
-                      {me ? (me.service.usedUrl) : null} 건
+                      {me ? me.service.usedUrl : null} 건
                     </>
                   );
                 }}
@@ -116,7 +119,7 @@ const MainManageLayout = () => {
           lg={{ span: 16 }}
         >
           <CardWrapper>
-            <MainChart clickCount={ me ?  (me.clickCount) : null} />
+            <MainChart clickCount={me ? me.clickCount : null} />
           </CardWrapper>
         </Col>
       </RowWrapper>

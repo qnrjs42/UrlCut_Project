@@ -1,12 +1,21 @@
-import { CHANGE_NICKNAME_REQUEST, LOG_IN_REQUEST, SIGN_UP_REQUEST } from "../actions/action_user";
+import {
+  CHANGE_NICKNAME_REQUEST,
+  LOG_IN_REQUEST,
+  SIGN_UP_REQUEST,
+} from "../actions/action_user";
 
-import { MOVEMENT_URLS_REQUEST, REMOVE_URLS_REQUEST, TABLE_PAGINATION_REQUEST } from "../actions/action_url";
+import {
+  MOVEMENT_URLS_REQUEST,
+  REMOVE_URLS_REQUEST,
+  TABLE_PAGINATION_REQUEST,
+} from "../actions/action_url";
 
 // reducer_user - me
 // saga_user - loginAPI
-export interface dummyUserTypes {
+export interface IdummyUser {
   id: number;
   email: string;
+  password: string;
   nickname: string;
   service: {
     usedUrl: number;
@@ -15,6 +24,34 @@ export interface dummyUserTypes {
   clickCount: {
     [key: number]: number;
   };
+}
+
+export interface IuserInitialState {
+  logInLoading: boolean;
+  logInDone: boolean;
+  logInError: string | null;
+
+  logOutLoading: boolean;
+  logOutDone: boolean;
+  logOutError: string | null;
+
+  signUpLoading: boolean;
+  signUpDone: boolean;
+  signUpError: string | null;
+
+  changeNicknameLoading: boolean;
+  changeNicknameDone: boolean;
+  changeNicknameError: string | null;
+
+  changePasswordLoading: boolean;
+  changePasswordDone: boolean;
+  changePasswordError: string | null;
+
+  loadMyInfoLoading: boolean;
+  loadMyInfoDone: boolean;
+  loadMyInfoError: string | null;
+
+  me: IdummyUser | null;
 }
 
 interface baseTypes {
@@ -27,31 +64,30 @@ interface baseTypes {
 }
 
 // action_user - loginRequestAction
-export interface logInType extends baseTypes {}
+export interface IlogIn extends baseTypes {}
 // saga_user - logIn
-export interface logInSagaType extends baseTypes {
+export interface IlogInSaga extends baseTypes {
   type: typeof LOG_IN_REQUEST;
 }
 
 // action_user - signupRequestAction
-export interface signUpType extends baseTypes {}
+export interface IsignUp extends baseTypes {}
 // saga_user - signUp
-export interface signUpSagaType {
+export interface IsignUpSaga {
   type: typeof SIGN_UP_REQUEST;
 }
 
-export interface changeNicknameTypes {
+export interface IchangeNickname {
   type: typeof CHANGE_NICKNAME_REQUEST;
   data: {
     nickname: string;
-  }
-
+  };
 }
 // End User
 /*----------------------------------*/
 
 // a lot of
-export interface TurlInfo {
+export interface IurlInfo {
   id: string;
   key: string;
   shortenUrl: string;
@@ -63,16 +99,16 @@ export interface TurlInfo {
   urlPassword: string | null;
 }
 // reducer_url - urlInitialState
-export type urlInitialStateTypes = {
+export interface IurlInitialState {
   shortenUrl: string | null;
-  urlInfo: TurlInfo[];
+  urlInfo: IurlInfo[];
   urlInfoIds: Array<string>;
-  storageUrlInfo: TurlInfo[];
+  storageUrlInfo: IurlInfo[];
   storageUrlInfoIds: Array<string>;
-  expiredUrlInfo: TurlInfo[];
+  expiredUrlInfo: IurlInfo[];
   expiredUrlInfoIds: Array<string>;
 
-  searchUrlInfo: TurlInfo[];
+  searchUrlInfo: IurlInfo[];
 
   urlCutLoading: boolean;
   urlCutDone: boolean;
@@ -113,17 +149,17 @@ export type urlInitialStateTypes = {
   resetSearchUrlsLoading: boolean;
   resetSearchUrlsDone: boolean;
   resetSearchUrlsError: string | null;
-};
+}
 
 // sagas - dummyUrl
-export interface tablePaginationTypes {
+export interface ItablePagination {
   sender?: string;
   page: number;
   limit: number;
   urlInfoIdsLength?: number;
 }
 // saga_url - tablePagination
-export interface tablePaginationSagaTypes {
+export interface ItablePaginationSaga {
   type: typeof TABLE_PAGINATION_REQUEST;
   data: {
     sender?: string;
@@ -134,32 +170,32 @@ export interface tablePaginationSagaTypes {
 }
 
 // hooks - useRemoveUrl, useMovementUrl
-export interface tableRemoveAndMovementTypes {
+export interface ItableRemoveAndMovement {
   sender: string;
   moveMentIds?: string[];
   removeIds?: string[];
-  searchUrlInfo?: TurlInfo[];
+  searchUrlInfo?: IurlInfo[];
   searchUrlsDone?: boolean;
 }
 // saga_url - removeUrls
-export interface tableRemoveSagaTypes {
+export interface ItableRemoveSaga {
   type: typeof REMOVE_URLS_REQUEST;
   data: {
     sender: string;
     moveMentIds?: string[];
     removeIds?: string[];
-    searchUrlInfo?: TurlInfo[];
+    searchUrlInfo?: IurlInfo[];
     searchUrlsDone?: boolean;
-  }
+  };
 }
 // saga_url - moveMentUrls
-export interface tableMovementSagaTypes {
+export interface ItableMovementSaga {
   type: typeof MOVEMENT_URLS_REQUEST;
   data: {
     sender: string;
     moveMentIds?: string[];
     removeIds?: string[];
-    searchUrlInfo?: TurlInfo[];
+    searchUrlInfo?: IurlInfo[];
     searchUrlsDone?: boolean;
-  }
+  };
 }
