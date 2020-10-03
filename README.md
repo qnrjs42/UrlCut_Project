@@ -1,10 +1,32 @@
 ## 20-09-05 부터 쓰는 개발 노트
 
-[20-10-03] 진행 중
+[20-10-04] 진행 중
 
-> #### 2. 유저화면 수정
+> #### 1. 메인화면
 >
 > - 타입스크립트 적용
+>   + 모두
+
+> #### 2. 유저화면
+>
+> - 타입스크립트 적용
+>   + LinkOption - MultiLinkLayout
+>   + SiderSection
+>   + HeaderLayout, FooterLayout, ShortenUrlButton
+> - redux-saga의 getServerSideProps 타입스크립트 적용 필요(store.js pages/*.js)
+> - styled-components 타입스크립트 적용 필요(overlap-styled.js)
+
+[20-10-04] 클리어
+
+> #### 1. 유저화면 수정
+>
+> - ProfileLayout 타입스크립트 적용 및 데이터 변경할 수 있도록 기능 구현
+
+[20-10-02] 클리어
+
+> #### 1. 유저화면 수정
+>
+> - MainManageLayout 타입스크립트 적용
 
 [20-10-03] 클리어
 
