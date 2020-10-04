@@ -1,7 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/urlCut", (req, res) => {
+router.post("/loadMyInfo", (req, res) => {
+  try {
+    if (req) {
+      return res
+        .status(200)
+        .json({ success: true, me: req.body });
+    }
+    return res.status(400).json({ success: false });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+router.post("/urlcut", (req, res) => {
     if(req) {
         return res.status(200).json({ success: true, newUrl: 'Axios를 이용한 단축된 URL' });
     }
@@ -32,5 +46,7 @@ router.post("/signUp", (req, res) => {
   }
   return res.status(400).json({ success: false });
 });
+
+
 
 module.exports = router;

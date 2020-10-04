@@ -4,12 +4,12 @@ import { AnyAction, combineReducers } from "redux";
 import url, { IUrlReducerState } from "./reducer_url";
 import user, { IUserReducerState } from "./reducer_user";
 
-export type State = {
+export interface State {
   url: IUrlReducerState;
   user: IUserReducerState;
-};
+}
 
-const rootReducer = (state: State, action: AnyAction) => {
+const rootReducer = (state: State | undefined, action: AnyAction) => {
   switch (action.type) {
     case HYDRATE:
       return action.payload;

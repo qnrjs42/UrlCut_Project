@@ -179,7 +179,7 @@ function* loadExpiredUrlsInfo(action: loadUrlInfoTypes) {
 }
 
 function urlCutAPI() {
-  return axios.post("/url/urlCut");
+  return axios.post("http://localhost:5000/api/urlcut");
 }
 interface urlCutTypes {
   data: string;
@@ -187,9 +187,9 @@ interface urlCutTypes {
 
 function* urlCut(action: urlCutTypes) {
   try {
-    // const result = yield call(urlCutAPI, action.data); // axios 이용할 때
+    const result = yield call(urlCutAPI); // axios 이용할 때
     // const result = "Saga를 이용한 단축된 URL";
-
+    console.log("server result", result);
     const dummyDataSource = {
       id: shortid.generate(),
       key: "url" + shortid.generate(),

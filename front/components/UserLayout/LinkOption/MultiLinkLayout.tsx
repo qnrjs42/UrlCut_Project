@@ -45,30 +45,30 @@ const MultiLinkLayout = () => {
   const [MultiLinkCreateOnOff, setMultiLinkCreateOnOff] = useState(false); // 멀티링크 생성 유무
   const [OptionOnOff, setOptionOnOff] = useState(false); // 멀티링크 - 옵션 클릭 유무
   const [CreateModal, setCreateModal] = useState(false); // 멀티링크 생성 버튼 모달
-  const [RadioPublicPrivate, onRadioChange, setRadioPublicPrivate] = useInput(
-    1
-  ); // 모달 - 라디오 버튼
+  // const [RadioPublicPrivate, onRadioChange, setRadioPublicPrivate] = useInput(
+  //   1
+  // ); // 모달 - 라디오 버튼
 
   const onSwitchChange = useCallback(() => {
     setMultiLinkCreateOnOff(!MultiLinkCreateOnOff);
-  });
+  }, []);
 
   const onOptionChange = useCallback(() => {
     setOptionOnOff(!OptionOnOff);
-  });
+  }, []);
 
   const onModalDisplay = useCallback(() => {
     setCreateModal(true);
-  });
+  }, []);
 
   const onMultiLinkCreateOk = useCallback(() => {
     setCreateModal(false);
-  });
+  }, []);
 
   // 모달 밖, 화면을 클릭해도 Cancel
   const onMultiLinkCreateCancel = useCallback(() => {
     setCreateModal(false);
-  });
+  }, []);
 
   // 멀티링크 없을 때
   let SwitchOptionLeftLayout = (
@@ -129,10 +129,10 @@ const MultiLinkLayout = () => {
           <Title level={5}>
             아래 옵션이 비공개로 설정된 경우 멀티링크가 비활성화됩니다.
           </Title>
-          <Radio.Group onChange={onRadioChange} value={RadioPublicPrivate}>
+          {/* <Radio.Group onChange={onRadioChange} value={RadioPublicPrivate}>
             <Radio value={1}>공개</Radio>
             <Radio value={2}>비공개</Radio>
-          </Radio.Group>
+          </Radio.Group> */}
         </Modal>
 
         <Row justify="space-between">

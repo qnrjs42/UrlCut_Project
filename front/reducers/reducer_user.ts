@@ -124,6 +124,7 @@ const reducer = (state = userInitialState, action: AnyAction) =>
         break;
       case LOAD_MY_INFO_SUCCESS:
         draft.loadMyInfoLoading = false;
+        console.log(action.data);
         draft.me = action.data;
         draft.loadMyInfoDone = true;
 
@@ -148,5 +149,5 @@ const reducer = (state = userInitialState, action: AnyAction) =>
         break;
     }
   });
-export type UserState = ReturnType<typeof reducer>;
+export type UserState = typeof reducer;
 export default reducer;
