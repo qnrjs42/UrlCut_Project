@@ -31,7 +31,7 @@ const columns: ColumnsType<IColumns> = [
     key: "shortenUrl",
     width: "30%",
     ellipsis: true,
-    render: (urlColData: string, row: IurlInfo, index: number) => {
+    render: (urlColData: string, row: IurlInfo) => {
       // console.log(urlColData, row, index);
       return (
         <>
@@ -56,7 +56,7 @@ const columns: ColumnsType<IColumns> = [
     width: "10%",
     responsive: ["lg"],
     align: "center",
-    render: (linkOptionData: Array<string>, row: IurlInfo, index: number) => {
+    render: (linkOptionData: Array<string>) => {
       let newData = "-";
       if (linkOptionData[0] === "lock") {
         newData = "비밀번호 설정";
@@ -96,7 +96,7 @@ const columns: ColumnsType<IColumns> = [
     width: "10%",
     responsive: ["lg"],
     align: "center",
-    render: (dateData: Date, row: IurlInfo, index: number) => {
+    render: (dateData: Date) => {
       return <>{dateDayjs.to(dateData)}</>;
     },
   },
@@ -152,20 +152,17 @@ const LinkTable = (props: LinkTableTypes) => {
   };
 
   // Table Row 선택되었을 때 Drawer 열기, 날짜 포맷 설정
-  const onRow = useCallback(
-    (record: IurlInfo, rowIndex: number | undefined) => {
-      return {
-        onClick: () => {
-          const newRecord = { ...record };
-          newRecord.createdAt = dayjs(newRecord.createdAt).format(
-            "YYYY년 MM월 DD일"
-          );
-          setRowClickData(newRecord);
-        },
-      };
-    },
-    []
-  );
+  const onRow = useCallback((record: IurlInfo) => {
+    return {
+      onClick: () => {
+        const newRecord = { ...record };
+        newRecord.createdAt = dayjs(newRecord.createdAt).format(
+          "YYYY년 MM월 DD일"
+        );
+        setRowClickData(newRecord);
+      },
+    };
+  }, []);
 
   return (
     <>

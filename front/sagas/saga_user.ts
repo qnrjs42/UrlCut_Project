@@ -1,5 +1,5 @@
 import { all, fork, takeLatest, put, delay, call } from "redux-saga/effects";
-import axios from "axios";
+// import axios from "axios";
 
 import {
   LOG_IN_REQUEST,
@@ -19,12 +19,7 @@ import {
   CHANGE_PROFILE_FAILURE,
 } from "../actions/action_user";
 
-import {
-  IdummyUser,
-  IsignUpSaga,
-  IlogInSaga,
-  IchangeProfileSaga,
-} from "../interface";
+import { IdummyUser, IlogInSaga, IchangeProfileSaga } from "../interface";
 
 interface IloginAPI {
   Email: string;
@@ -185,8 +180,6 @@ function* changeProfile(action: IchangeProfileSaga) {
   try {
     const result: IcopyObj = yield call(changeProfileAPI, action.data);
 
-    console.log("result", result);
-
     yield put({
       type: CHANGE_PROFILE_SUCCESS,
       data: result,
@@ -201,41 +194,41 @@ function* changeProfile(action: IchangeProfileSaga) {
 }
 
 async function loadMyInfoAPI() {
-  // let jsonMe: string | null = null;
+  let jsonMe: string | null = null;
 
-  // if (typeof window !== "undefined") {
-  //   const getMe = localStorage.getItem("me");
-  //   if (typeof getMe === "string") jsonMe = await JSON.parse(getMe);
-  //   else jsonMe = null;
-  // }
+  if (typeof window !== "undefined") {
+    const getMe = localStorage.getItem("me");
+    if (typeof getMe === "string") jsonMe = await JSON.parse(getMe);
+    else jsonMe = null;
+  }
   // console.log()
   // console.log("jsonMe", jsonMe);
-  const me = {
-    id: 1,
-    email: "aa",
-    password: "123",
-    nickname: "테스터1",
-    publicProfile: true,
-    mediaGateway: true,
-    service: { usedUrl: 259, membership: "free" },
-    clickCount: {
-      "1": 5,
-      "5": 17,
-      "10": 30,
-      "11": 1,
-      "14": 122,
-      "18": 3,
-      "21": 10,
-    },
-  };
-  if (me !== null) {
-    const result = await axios.post("http://localhost:5000/api/loadMyInfo", me);
+  // const me = {
+  //   id: 1,
+  //   email: "aa",
+  //   password: "123",
+  //   nickname: "테스터1",
+  //   publicProfile: true,
+  //   mediaGateway: true,
+  //   service: { usedUrl: 259, membership: "free" },
+  //   clickCount: {
+  //     "1": 5,
+  //     "5": 17,
+  //     "10": 30,
+  //     "11": 1,
+  //     "14": 122,
+  //     "18": 3,
+  //     "21": 10,
+  //   },
+  // };
+  // if (me !== null) {
+  //   const result = await axios.post("http://localhost:5000/api/loadMyInfo", me);
 
-    if (result.data.success) {
-      return result.data.me;
-    }
-    return null;
-  }
+  //   if (result.data.success) {
+  //     return result.data.me;
+  //   }
+  //   return null;
+  // }
 
   // await axios
   //   .post("http://localhost:5000/api/loadMyInfo", jsonMe)
@@ -247,15 +240,13 @@ async function loadMyInfoAPI() {
   //       return null;
   //     }
   //   });
-  return null;
+  return jsonMe;
 }
 
 function* loadMyInfo() {
   try {
     // const result = yield call(loadMyInfoAPI, action.data);
     const result: IdummyUser | null = yield call(loadMyInfoAPI);
-
-    console.log("result", result);
 
     yield put({
       type: LOAD_MY_INFO_SUCCESS,

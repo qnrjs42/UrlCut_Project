@@ -1,14 +1,5 @@
-import {
-  all,
-  delay,
-  fork,
-  put,
-  call,
-  throttle,
-  takeLeading,
-} from "redux-saga/effects";
+import { all, delay, fork, put } from "redux-saga/effects";
 import * as Effects from "redux-saga/effects";
-import axios from "axios";
 import shortid from "shortid";
 import faker from "faker";
 faker.locale = "ko";
@@ -62,9 +53,9 @@ import {
   dummyExpiredUrlInfoIds,
 } from "./dummyUrl";
 
-function tablePaginationAPI() {
-  return axios.post("/url");
-}
+// function tablePaginationAPI() {
+//   return axios.post("/url");
+// }
 
 function* tablePagination(action: ItablePaginationSaga) {
   try {
@@ -87,9 +78,9 @@ function* tablePagination(action: ItablePaginationSaga) {
   }
 }
 
-function loadUrlsInfoAPI() {
-  return axios.post("/url");
-}
+// function loadUrlsInfoAPI() {
+//   return axios.post("/url");
+// }
 
 interface loadUrlInfoTypes {
   data: {
@@ -122,9 +113,9 @@ function* loadUrlsInfo(action: loadUrlInfoTypes) {
   }
 }
 
-function loadStorageUrlsInfoAPI() {
-  return axios.post("/url");
-}
+// function loadStorageUrlsInfoAPI() {
+//   return axios.post("/url");
+// }
 
 function* loadStorageUrlsInfo(action: loadUrlInfoTypes) {
   try {
@@ -150,9 +141,9 @@ function* loadStorageUrlsInfo(action: loadUrlInfoTypes) {
   }
 }
 
-function loadExpiredUrlsInfoAPI() {
-  return axios.post("/url");
-}
+// function loadExpiredUrlsInfoAPI() {
+//   return axios.post("/url");
+// }
 
 function* loadExpiredUrlsInfo(action: loadUrlInfoTypes) {
   try {
@@ -178,18 +169,18 @@ function* loadExpiredUrlsInfo(action: loadUrlInfoTypes) {
   }
 }
 
-function urlCutAPI() {
-  return axios.post("http://localhost:5000/api/urlcut");
-}
+// function urlCutAPI() {
+//   return axios.post("http://localhost:5000/api/urlcut");
+// }
 interface urlCutTypes {
   data: string;
 }
 
 function* urlCut(action: urlCutTypes) {
   try {
-    const result = yield call(urlCutAPI); // axios 이용할 때
+    // const result = yield call(urlCutAPI); // axios 이용할 때
     // const result = "Saga를 이용한 단축된 URL";
-    console.log("server result", result);
+    // console.log("server result", result);
     const dummyDataSource = {
       id: shortid.generate(),
       key: "url" + shortid.generate(),
@@ -217,9 +208,9 @@ function* urlCut(action: urlCutTypes) {
   }
 }
 
-function removeUrlsAPI() {
-  return axios.post("/url/removeUrl");
-}
+// function removeUrlsAPI() {
+//   return axios.post("/url/removeUrl");
+// }
 
 function* removeUrls(action: ItableRemoveSaga) {
   try {
@@ -244,9 +235,9 @@ function* removeUrls(action: ItableRemoveSaga) {
   }
 }
 
-function moveMentUrlsAPI() {
-  return axios.post("/url/storageMoveUrls");
-}
+// function moveMentUrlsAPI() {
+//   return axios.post("/url/storageMoveUrls");
+// }
 
 function* moveMentUrls(action: ItableMovementSaga) {
   try {
@@ -289,9 +280,9 @@ function* resetUrlsInfo() {
   }
 }
 
-function searchUrlsAPI() {
-  return axios.post("/url/storageMoveUrls");
-}
+// function searchUrlsAPI() {
+//   return axios.post("/url/storageMoveUrls");
+// }
 
 function* searchUrls() {
   try {

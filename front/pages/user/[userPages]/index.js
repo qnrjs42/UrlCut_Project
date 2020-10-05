@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { END } from "redux-saga";
+// import { END } from "redux-saga";
+// import axios from "axios";
 import loadable from "@loadable/component";
-import axios from "axios";
 
 import wrapper, { SagaStore } from "../../../store";
 
@@ -22,20 +22,26 @@ let UserComponent = loadable(
 const StaticToDynamic = () => {
   const dispatch = useDispatch();
   const uRouter = useRouter();
-  const { me } = useSelector<RootState, IUserReducerState>(
+  const { me } = useSelector(
     (state) => state.user
   );
   // SSR 적용 필요
-  // useEffect(() => {
-  //   if (uRouter.asPath !== "/user/[userPages]") {
-  //     dispatch({
-  //       type: RESET_URLS_INFO_REQUEST,
-  //     });
-  //     dispatch({
-  //       type: LOAD_MY_INFO_REQUEST,
-  //     });
-  //   }
-  // }, [uRouter]);
+  useEffect(() => {
+    if (uRouter.asPath !== "/user/[userPages]") {
+      dispatch({
+        type: RESET_URLS_INFO_REQUEST,
+      });
+      dispatch({
+        type: LOAD_MY_INFO_REQUEST,
+      });
+    }
+  }, [uRouter]);
+
+  useEffect(() => {
+    if (!(me && me.id)) {
+      uRouter.push("/");
+    }
+  }, [me && me.id]);
 
   // 컴포넌트에서 넘겨준 값 비교해서 알맞는 컴포넌트 할당
   switch (uRouter.query.userPages) {
@@ -62,12 +68,12 @@ const StaticToDynamic = () => {
         () => import("../../../components/UserLayout/Management/ExpiredLayout")
       );
       break;
-    // case "multi_links":
-    //   UserComponent = loadable(
-    //     () =>
-    //       import("../../../components/UserLayout/LinkOption/MultiLinkLayout")
-    //   );
-    //   break;
+    case "multi_links":
+      UserComponent = loadable(
+        () =>
+          import("../../../components/UserLayout/LinkOption/MultiLinkLayout")
+      );
+      break;
     case "create_quick_link":
       UserComponent = loadable(
         () =>
@@ -107,9 +113,7 @@ const StaticToDynamic = () => {
             <UserComponent />
           </UserLayout>
         </>
-      ) : (
-        <h1>로그인 안 했어!!!!</h1>
-      )}
+      ) : null}
     </>
   );
 };
@@ -135,27 +139,5 @@ const StaticToDynamic = () => {
 
  {router && <UserComponent url={router.query.url} />}
 */
-
-export const getServerSideProps = wrapper.getServerSideProps(
-  async (context) => {
-    const cookie = context.req ? context.req.headers.cookie : "";
-    axios.defaults.headers.Cookie = "";
-    // 쿠키 공유 방지
-    if (context.req && cookie) {
-      axios.defaults.headers.Cookie = cookie;
-    }
-
-    // context.store.dispatch({
-    //   type: RESET_URLS_INFO_REQUEST,
-    // });
-    context.store.dispatch({
-      type: LOAD_MY_INFO_REQUEST,
-    });
-
-    // REQUEST가 SUCCESS가 될 때까지 기다려줌
-    context.store.dispatch(END);
-    await (context.store as SagaStore).sagaTask.toPromise(); // 해당 코드는 store/configureStore - store.sagaTask = sagaMiddleware.run(rootSaga);
-  }
-);
 
 export default StaticToDynamic;
