@@ -3,36 +3,41 @@ import { Modal, Input } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
 import { URL_CUT_REQUEST } from "../../actions/action_url";
 
-import useInput from "../../hooks/useInput";
-
 import { ButtonPurpleWrapper } from "../../css/overlap-styled";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../reducers";
+import { IUrlReducerState } from "../../reducers/reducer_url";
 
 // Dashboard - MainManageLayout, LinkManageLayout
 // Management - LinkStorageLayout, ExpiredLayout
 const ShortenUrlButton = () => {
   const dispatch = useDispatch();
-  const { urlCutLoading, urlCutDone, shortenUrl } = useSelector(
-    (state) => state.url
-  );
+  const { urlCutLoading, urlCutDone, shortenUrl } = useSelector<
+    RootState,
+    IUrlReducerState
+  >((state) => state.url);
   const [CreateModal, setCreateModal] = useState(false);
-  const [CreateUrl, onChangeUrl, setCreateUrl] = useInput(null);
+  const [CreateUrl, setCreateUrl] = useState<string>("");
 
   useEffect(() => {
     if (!CreateModal) {
-      setCreateUrl(null);
+      setCreateUrl("");
     }
   }, [CreateModal]);
 
   useEffect(() => {
-    if (urlCutDone) {
+    if (urlCutDone && typeof shortenUrl === "string") {
       setCreateUrl(shortenUrl);
     }
   }, [urlCutDone]);
 
   const onModalDisplay = useCallback(() => {
     setCreateModal(true);
-  });
+  }, []);
+
+  const onChangeUrl = useCallback((e) => {
+    setCreateUrl(e.target.value);
+  }, []);
 
   const onMultiLinkCreateOk = useCallback(() => {
     // setCreateModal(false);
@@ -41,12 +46,13 @@ const ShortenUrlButton = () => {
       type: URL_CUT_REQUEST,
       data: CreateUrl,
     });
-  });
+  }, []);
 
   // 모달 밖, 화면을 클릭해도 Cancel
   const onMultiLinkCreateCancel = useCallback(() => {
     setCreateModal(false);
-  });
+  }, []);
+
   return (
     <>
       <Modal

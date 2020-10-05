@@ -1,7 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Head from "next/head";
-
 import wrapper from "../store";
 
 import "antd/dist/antd.css";
@@ -9,8 +6,9 @@ import "../css/antd-overriding.css";
 import "../css/main.css";
 import "../css/user.css";
 import "../css/Navbar.css";
+import { AppProps } from "next/app";
 
-const App = ({ Component }) => {
+const App = ({ Component }: AppProps) => {
   return (
     <>
       <Head>
@@ -24,10 +22,6 @@ const App = ({ Component }) => {
       <Component />
     </>
   );
-};
-
-App.propTypes = {
-  Component: PropTypes.elementType.isRequired,
 };
 
 export default wrapper.withRedux(App);

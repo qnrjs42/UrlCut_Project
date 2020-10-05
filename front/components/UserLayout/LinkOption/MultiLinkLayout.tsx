@@ -4,7 +4,6 @@ import {
   Typography,
   Row,
   Col,
-  Button,
   Card,
   Switch,
   Modal,
@@ -15,7 +14,6 @@ import { SubnodeOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import useInput from "../../../hooks/useInput";
 import {
   SwitchOffLeftLayout,
   SwitchOffRightLayout,
@@ -28,7 +26,6 @@ import { OptionOnLayout } from "./Sections/OptionOnLayout";
 
 import {
   ButtonPurpleWrapper,
-  ButtonBorderWrapper,
   ButtonDefaultBorderWrapper,
 } from "../../../css/overlap-styled";
 
@@ -45,37 +42,36 @@ const MultiLinkLayout = () => {
   const [MultiLinkCreateOnOff, setMultiLinkCreateOnOff] = useState(false); // 멀티링크 생성 유무
   const [OptionOnOff, setOptionOnOff] = useState(false); // 멀티링크 - 옵션 클릭 유무
   const [CreateModal, setCreateModal] = useState(false); // 멀티링크 생성 버튼 모달
-  const [RadioPublicPrivate, onRadioChange, setRadioPublicPrivate] = useInput(
-    1
-  ); // 모달 - 라디오 버튼
+  const [RadioPublicPrivate, setRadioPublicPrivate] = useState(1); // 모달 - 라디오 버튼
 
   const onSwitchChange = useCallback(() => {
     setMultiLinkCreateOnOff(!MultiLinkCreateOnOff);
-  });
+  }, []);
 
   const onOptionChange = useCallback(() => {
     setOptionOnOff(!OptionOnOff);
-  });
+  }, []);
 
   const onModalDisplay = useCallback(() => {
     setCreateModal(true);
-  });
+  }, []);
 
   const onMultiLinkCreateOk = useCallback(() => {
     setCreateModal(false);
-  });
+  }, []);
 
   // 모달 밖, 화면을 클릭해도 Cancel
   const onMultiLinkCreateCancel = useCallback(() => {
     setCreateModal(false);
-  });
+  }, []);
+
+  const onRadioChange = useCallback((e) => {
+    setRadioPublicPrivate(e.target.value);
+  }, []);
 
   // 멀티링크 없을 때
   let SwitchOptionLeftLayout = (
-    <SwitchOffLeftLayout
-      onModalDisplay={onModalDisplay}
-      ButtonPurpleWrapper={ButtonPurpleWrapper}
-    />
+    <SwitchOffLeftLayout onModalDisplay={onModalDisplay} />
   );
 
   // 멀티링크는 생겨났지만 옵션은 클릭 안 했을 때
@@ -89,10 +85,7 @@ const MultiLinkLayout = () => {
     // 멀티링크 없을 때
   } else {
     SwitchOptionLeftLayout = (
-      <SwitchOffLeftLayout
-        onModalDisplay={onModalDisplay}
-        ButtonPurpleWrapper={ButtonPurpleWrapper}
-      />
+      <SwitchOffLeftLayout onModalDisplay={onModalDisplay} />
     );
   }
 

@@ -5,6 +5,7 @@ import {
   PlusOutlined,
   InfoCircleTwoTone,
 } from "@ant-design/icons";
+import { ButtonPurpleWrapper } from "../../../../css/overlap-styled";
 import styled from "styled-components";
 
 const SubnodeOutlinedWrapper = styled(SubnodeOutlined)`
@@ -15,10 +16,13 @@ const InfoCircleTwoToneWrapper = styled(InfoCircleTwoTone)`
   font-size: 60px;
 `;
 
+interface ISwitchOffLeftLayout {
+  onModalDisplay(): void;
+}
+
 export const SwitchOffLeftLayout = ({
   onModalDisplay,
-  ButtonPurpleWrapper,
-}) => {
+}: ISwitchOffLeftLayout) => {
   return (
     <>
       <Row gutter={[16, 16]} justify="center">

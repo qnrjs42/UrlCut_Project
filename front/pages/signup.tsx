@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
-import useInput from "../hooks/useInput";
 import NavBar from "../components/MainLayout/NavBar";
 import {
   MainLayoutWrapper,
@@ -21,6 +20,8 @@ import {
   LOAD_MY_INFO_REQUEST,
   signupRequestAction,
 } from "../actions/action_user";
+import { IUserReducerState } from "../reducers/reducer_user";
+import { RootState } from "../reducers";
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -38,11 +39,14 @@ const tailFormItemLayout = {
 const signUp = () => {
   const uRouter = useRouter();
   const dispatch = useDispatch();
-  const { me, signUpLoading, signUpDone } = useSelector((state) => state.user);
+  const { me, signUpLoading, signUpDone } = useSelector<
+    RootState,
+    IUserReducerState
+  >((state) => state.user);
 
-  const [Email, onChangeEmail, setEmail] = useInput("");
-  const [NickName, onChangeNickName, setNickName] = useInput("");
-  const [Password, onChangePassword, setPassword] = useInput("");
+  const [Email, setEmail] = useState("");
+  const [NickName, setNickName] = useState("");
+  const [Password, setPassword] = useState("");
 
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
@@ -65,11 +69,11 @@ const signUp = () => {
 
   useEffect(() => {
     if (signUpDone) {
-      setEmail(null);
-      setNickName(null);
-      setPassword(null);
-      setPasswordCheck(null);
-      setTerm(false);
+      setEmail("");
+      setNickName("");
+      setPassword("");
+      setPasswordCheck("");
+      setTerm("");
       uRouter.push("/");
     }
   }, [signUpDone]);
@@ -77,6 +81,18 @@ const signUp = () => {
   const onChangeTerm = useCallback((e) => {
     setTerm(e.target.checked);
     setTermError(false);
+  }, []);
+
+  const onChangeEmail = useCallback((e) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const onChangeNickName = useCallback((e) => {
+    setNickName(e.target.value);
+  }, []);
+
+  const onChangePassword = useCallback((e) => {
+    setPassword(e.target.value);
   }, []);
 
   const onChangePasswordCheck = useCallback(
@@ -96,7 +112,7 @@ const signUp = () => {
       return setTermError(true);
     }
     // console.log({ data: { Email, Password, NickName } });
-    dispatch(signupRequestAction({Email, Password, NickName}));
+    dispatch(signupRequestAction({ data: { Email, Password, NickName } }));
   }, [Email, NickName, Password, term]);
 
   return (
@@ -224,7 +240,7 @@ const signUp = () => {
                   >
                     <Checkbox
                       name="user-term"
-                      checked={term}
+                      checked={termError}
                       onChange={onChangeTerm}
                     >
                       약관에 동의합니다. <a href="">(이용약관)</a>

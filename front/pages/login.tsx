@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect } from "react";
-import { Form, Checkbox, Row } from "antd";
+import React, { useCallback, useEffect, useState } from "react";
+import { Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
-import useInput from "../hooks/useInput";
 import NavBar from "../components/MainLayout/NavBar";
 import {
   MainLayoutWrapper,
@@ -19,14 +18,19 @@ import {
   LOAD_MY_INFO_REQUEST,
   loginRequestAction,
 } from "../actions/action_user";
+import { RootState } from "../reducers";
+import { IUserReducerState } from "../reducers/reducer_user";
 
 const logIn = () => {
   const uRouter = useRouter();
   const dispatch = useDispatch();
-  const { me, logInLoading, logInDone } = useSelector((state) => state.user);
+  const { me, logInLoading, logInDone } = useSelector<
+    RootState,
+    IUserReducerState
+  >((state) => state.user);
 
-  const [Email, onChangeEmail, setEmail] = useInput("");
-  const [Password, onChangePassword, setPassword] = useInput("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
 
   useEffect(() => {
     // 로그인 한 채로 로그인 페이지 갔을 때 뒤로가기
@@ -45,8 +49,8 @@ const logIn = () => {
   useEffect(() => {
     // 폼, 인풋 초기화
     if (logInDone) {
-      setEmail(null);
-      setPassword(null);
+      setEmail("");
+      setPassword("");
 
       uRouter.push("/user");
     }
@@ -54,8 +58,16 @@ const logIn = () => {
 
   const onLogInSubmit = useCallback(() => {
     // console.log({data: {Email, Password}});
-    dispatch(loginRequestAction({ Email, Password } ));
+    dispatch(loginRequestAction({ data: { Email, Password } }));
   }, [Email, Password]);
+
+  const onChangeEmail = useCallback((e) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const onChangePassword = useCallback((e) => {
+    setEmail(e.target.value);
+  }, []);
 
   return (
     <>

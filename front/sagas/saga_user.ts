@@ -12,15 +12,17 @@ import {
   SIGN_UP_FAILURE,
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
-  LOAD_MY_INFO_FAILURE, 
-  CHANGE_PROFILE_REQUEST, CHANGE_PROFILE_SUCCESS, CHANGE_PROFILE_FAILURE
+  LOAD_MY_INFO_FAILURE,
+  CHANGE_PROFILE_REQUEST,
+  CHANGE_PROFILE_SUCCESS,
+  CHANGE_PROFILE_FAILURE,
 } from "../actions/action_user";
 
 import {
   IdummyUser,
   IsignUpSaga,
   IlogInSaga,
-  IchangeProfileSaga
+  IchangeProfileSaga,
 } from "../interface";
 
 interface IloginAPI {
@@ -187,7 +189,6 @@ function changeProfileAPI(changeProfileData: IcopyObj) {
   let copyMe: IcopyObj = {};
   let newMe: IcopyObj = {};
   if (jsonMe !== null) {
-    // console.log(jsonMe as IdummyUser);
     // 3. JSON -> object 변환
     copyMe = deepCopy(jsonMe);
     // 4. object로 변환된 me를 새로운 데이터로 대체
@@ -206,11 +207,9 @@ function* changeProfile(action: IchangeProfileSaga) {
   try {
     const result: IcopyObj = yield call(changeProfileAPI, action.data);
 
-    console.log("result", result);
-
     yield put({
       type: CHANGE_PROFILE_SUCCESS,
-      data: result
+      data: result,
     });
   } catch (err) {
     console.error(err);

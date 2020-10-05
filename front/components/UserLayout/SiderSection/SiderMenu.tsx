@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Layout, Menu, Button } from "antd";
+import { Layout, Menu } from "antd";
 import {
   AppstoreOutlined,
   ApartmentOutlined,
@@ -57,7 +57,7 @@ const userList = [
   },
 ];
 
-const BaseSection = () => {
+const SiderMenu = () => {
   const router = useRouter();
   const [Cllapsed, setCllapsed] = useState(false);
   const [Title, setTitle] = useState("Link_Project");
@@ -76,7 +76,7 @@ const BaseSection = () => {
   }, [Cllapsed]);
 
   // 페이지가 새고로침 되어도 메뉴가 선택 됨
-  const onChangeKey = useCallback(() => {
+  const onChangeKey = useCallback((): string[] => {
     for (const list of userList) {
       // 현재페이지가 정의된 페이지면 정의된 key 반환
       if (
@@ -84,11 +84,11 @@ const BaseSection = () => {
         router.asPath === "/" ||
         router.asPath === "/user/index"
       ) {
-        return list.key;
+        return [list.key];
       }
     }
-    return "1";
-  });
+    return ["1"];
+  }, []);
 
   return (
     <Sider
@@ -103,7 +103,7 @@ const BaseSection = () => {
           <a>{Title}</a>
         </Link>
       </div>
-      <Menu mode="inline" selectedKeys={`${onChangeKey()}`}>
+      <Menu mode="inline" selectedKeys={{ ...onChangeKey() }}>
         <span className={SiderHeader}>DASHBOARD</span>
         <Menu.Item key="dashboard_main" icon={<AppstoreOutlined />}>
           <Link href={"/user/[userPages]"} as={`${userList[0].url}/index`}>
@@ -181,4 +181,4 @@ const BaseSection = () => {
   );
 };
 
-export default withRouter(BaseSection);
+export default withRouter(SiderMenu);

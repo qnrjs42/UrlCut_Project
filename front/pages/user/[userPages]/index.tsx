@@ -7,16 +7,20 @@ import UserLayout from "../../../components/UserLayout";
 
 import { RESET_URLS_INFO_REQUEST } from "../../../actions/action_url";
 import { LOAD_MY_INFO_REQUEST } from "../../../actions/action_user";
+import { RootState } from "../../../reducers";
+import { IUserReducerState } from "../../../reducers/reducer_user";
 
 // 초기 /user 진입했을 때 | null로 하면 에러 발생
-let UserComponent = loadable(() =>
-  import("../../../components/UserLayout/Dashboard/MainManageLayout")
+let UserComponent = loadable(
+  () => import("../../../components/UserLayout/Dashboard/MainManageLayout")
 );
 
 const StaticToDynamic = () => {
   const dispatch = useDispatch();
   const uRouter = useRouter();
-  const { me } = useSelector((state) => state.user);
+  const { me } = useSelector<RootState, IUserReducerState>(
+    (state) => state.user
+  );
   // SSR 적용 필요
   useEffect(() => {
     if (uRouter.asPath !== "/user/[userPages]") {
@@ -29,64 +33,71 @@ const StaticToDynamic = () => {
     }
   }, [uRouter]);
 
-  // useEffect(() => {
-  //   if (!(me && me.id)) {
-  //     console.log("3. pages/user/[userPages]/index moved");
-  //     uRouter.push("/");
-  //   }
-  // }, [me && me.id]);
+  useEffect(() => {
+    if (!(me && me.id)) {
+      console.log("3. pages/user/[userPages]/index moved");
+      uRouter.push("/");
+    }
+  }, [me && me.id]);
 
   // 컴포넌트에서 넘겨준 값 비교해서 알맞는 컴포넌트 할당
   switch (uRouter.query.userPages) {
     case "index":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Dashboard/MainManageLayout")
+      UserComponent = loadable(
+        () =>
+          import("../../../components/UserLayout/Dashboard/MainManageLayout")
       );
       break;
     case "manage_url":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Dashboard/LinkManageLayout")
+      UserComponent = loadable(
+        () =>
+          import("../../../components/UserLayout/Dashboard/LinkManageLayout")
       );
       break;
     case "link_storage":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Management/LinkStorageLayout")
+      UserComponent = loadable(
+        () =>
+          import("../../../components/UserLayout/Management/LinkStorageLayout")
       );
       break;
     case "expired":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Management/ExpiredLayout")
+      UserComponent = loadable(
+        () => import("../../../components/UserLayout/Management/ExpiredLayout")
       );
       break;
     case "multi_links":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/LinkOption/MultiLinkLayout")
+      UserComponent = loadable(
+        (props) =>
+          import("../../../components/UserLayout/LinkOption/MultiLinkLayout")
       );
       break;
     case "create_quick_link":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Tools/CreateQuickLinkLayout")
+      UserComponent = loadable(
+        () =>
+          import("../../../components/UserLayout/Tools/CreateQuickLinkLayout")
       );
       break;
     case "full_page_script":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Tools/FullPageScriptLayout")
+      UserComponent = loadable(
+        () =>
+          import("../../../components/UserLayout/Tools/FullPageScriptLayout")
       );
       break;
     case "profile":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Privacy/ProfileLayout")
+      UserComponent = loadable(
+        () => import("../../../components/UserLayout/Privacy/ProfileLayout")
       );
       break;
     case "payment":
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Privacy/PaymentLayout")
+      UserComponent = loadable(
+        () => import("../../../components/UserLayout/Privacy/PaymentLayout")
       );
       break;
     default:
       // 올바르지 않은 페이지 접근 시 User 메인 화면으로 이동 ( 404 페이지 만들어야 함)
-      UserComponent = loadable(() =>
-        import("../../../components/UserLayout/Dashboard/MainManageLayout")
+      UserComponent = loadable(
+        () =>
+          import("../../../components/UserLayout/Dashboard/MainManageLayout")
       );
       break;
   }
@@ -103,9 +114,7 @@ const StaticToDynamic = () => {
             <UserComponent />
           </UserLayout>
         </>
-      ) : (
-        <h1>로그인 안 했어!!!!</h1>
-      )}
+      ) : null}
     </>
   );
 };

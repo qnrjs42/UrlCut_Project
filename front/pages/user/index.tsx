@@ -6,10 +6,14 @@ import UserLayout from "../../components/UserLayout";
 import MainManageLayout from "../../components/UserLayout/Dashboard/MainManageLayout";
 
 import { LOAD_MY_INFO_REQUEST } from "../../actions/action_user";
+import { RootState } from "../../reducers";
+import { IUserReducerState } from "../../reducers/reducer_user";
 
 const UserIndex = () => {
   const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
+  const { me } = useSelector<RootState, IUserReducerState>(
+    (state) => state.user
+  );
 
   // SSR 적용 필요
   useEffect(() => {
@@ -19,12 +23,12 @@ const UserIndex = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (!(me && me.id)) {
-  //     console.log("2. pages/user/index moved");
-  //     Router.push("/");
-  //   }
-  // }, [me && me.id]);
+  useEffect(() => {
+    if (!(me && me.id)) {
+      console.log("2. pages/user/index moved");
+      Router.push("/");
+    }
+  }, [me && me.id]);
 
   // useEffect(() => {
   //   if (!(me && me.id)) {
@@ -51,9 +55,7 @@ const UserIndex = () => {
             <MainManageLayout />
           </UserLayout>
         </>
-      ) : (
-        <h1>로그인 안 했어!!</h1>
-      )}
+      ) : null}
     </>
   );
 };
