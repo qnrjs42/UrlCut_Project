@@ -148,5 +148,5 @@ const reducer = (state = userInitialState, action: AnyAction) =>
         break;
     }
   });
-export type UserState = ReturnType<typeof reducer>;
+export type UserState = typeof reducer;
 export default reducer;

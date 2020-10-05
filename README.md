@@ -18,25 +18,13 @@
 > #### 1. 유저화면 수정
 >
 > - 로그아웃 시 리다이렉션 안 되던 버그 수정
-> - ShortenUrlButton 타입스크립트 적용
-> - HeaderLayout 타입스크립트 적용
-> - FooterLayout 타입스크립트 적용
-> - SiderSection 타입스크립트 적용
-> - LinkOption - MultiLinkLayout 타입스크립트 적용
-> - page/* 타입스크립트 적용
-
+> - 빌드 위해 불필요한 코드 제거
 
 [20-10-04] 클리어
 
 > #### 1. 유저화면 수정
 >
 > - ProfileLayout 타입스크립트 적용 및 데이터 변경할 수 있도록 기능 구현
-
-[20-10-02] 클리어
-
-> #### 1. 유저화면 수정
->
-> - MainManageLayout 타입스크립트 적용
 
 [20-10-03] 클리어
 

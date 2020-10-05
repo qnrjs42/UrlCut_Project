@@ -1,4 +1,6 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require('cors');
 const next = require("next");
 
 const dev = process.env.NODE_ENV !== "production";
@@ -7,11 +9,22 @@ const handle = app.getRequestHandler();
 
 const apiRoutes = require("./server/routes");
 
+
 app
   .prepare()
   .then(() => {
     const server = express();
 
+    server.use(
+      cors({
+        origin: "http://localhost:5000",
+        credentials: true,
+      })
+    );
+    server.use(bodyParser.json());
+    server.use(bodyParser.urlencoded({ extended: true }));
+    
+    
     server.get("*", (req, res) => {
       return handle(req, res);
     });

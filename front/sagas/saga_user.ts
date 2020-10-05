@@ -125,30 +125,6 @@ function* signUp() {
   }
 }
 
-// function loadMyInfoAPI(data) {
-//   return axios.post("/api/loadMyInfo", data);
-// }
-
-function* loadMyInfo() {
-  try {
-    // const result = yield call(loadMyInfoAPI, action.data);
-    const result = localStorage.getItem("me");
-    let jsonResult: string | null = null;
-    if (typeof result === "string") jsonResult = JSON.parse(result);
-    else jsonResult = null;
-    yield put({
-      type: LOAD_MY_INFO_SUCCESS,
-      data: jsonResult,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: LOAD_MY_INFO_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
 interface IcopyObj {
   [key: string]: string | boolean;
 }
@@ -215,6 +191,74 @@ function* changeProfile(action: IchangeProfileSaga) {
     console.error(err);
     yield put({
       type: CHANGE_PROFILE_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+async function loadMyInfoAPI() {
+  let jsonMe: string | null = null;
+
+  if (typeof window !== "undefined") {
+    const getMe = localStorage.getItem("me");
+    if (typeof getMe === "string") jsonMe = await JSON.parse(getMe);
+    else jsonMe = null;
+  }
+  // console.log()
+  // console.log("jsonMe", jsonMe);
+  // const me = {
+  //   id: 1,
+  //   email: "aa",
+  //   password: "123",
+  //   nickname: "테스터1",
+  //   publicProfile: true,
+  //   mediaGateway: true,
+  //   service: { usedUrl: 259, membership: "free" },
+  //   clickCount: {
+  //     "1": 5,
+  //     "5": 17,
+  //     "10": 30,
+  //     "11": 1,
+  //     "14": 122,
+  //     "18": 3,
+  //     "21": 10,
+  //   },
+  // };
+  // if (me !== null) {
+  //   const result = await axios.post("http://localhost:5000/api/loadMyInfo", me);
+
+  //   if (result.data.success) {
+  //     return result.data.me;
+  //   }
+  //   return null;
+  // }
+
+  // await axios
+  //   .post("http://localhost:5000/api/loadMyInfo", jsonMe)
+  //   .then((res) => {
+  //     if (res.data.success === true) {
+  //       console.log(JSON.parse(JSON.stringify(res.data.me)));
+  //       return JSON.parse(JSON.stringify(res.data.me));
+  //     } else {
+  //       return null;
+  //     }
+  //   });
+  return jsonMe;
+}
+
+function* loadMyInfo() {
+  try {
+    // const result = yield call(loadMyInfoAPI, action.data);
+    const result: IdummyUser | null = yield call(loadMyInfoAPI);
+
+    yield put({
+      type: LOAD_MY_INFO_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_MY_INFO_FAILURE,
       error: err.response.data,
     });
   }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Row, Col, Card, Progress } from "antd";
 import {} from "@ant-design/icons";
 import Link from "next/link";

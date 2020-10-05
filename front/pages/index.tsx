@@ -20,7 +20,6 @@ const Home = () => {
   );
 
   useEffect(() => {
-    console.log("1. pages/index");
     dispatch({
       type: LOAD_MY_INFO_REQUEST,
     });

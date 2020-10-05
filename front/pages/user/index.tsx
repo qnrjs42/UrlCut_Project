@@ -17,7 +17,6 @@ const UserIndex = () => {
 
   // SSR 적용 필요
   useEffect(() => {
-    console.log("pages/user");
     dispatch({
       type: LOAD_MY_INFO_REQUEST,
     });

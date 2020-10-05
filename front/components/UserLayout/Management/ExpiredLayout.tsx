@@ -1,13 +1,8 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Layout, Row, Col, Card } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  LOAD_EXPIRED_URLS_REQUEST,
-  REMOVE_URLS_REQUEST,
-  MOVEMENT_URLS_REQUEST,
-  TABLE_PAGINATION_REQUEST,
-} from "../../../actions/action_url";
+import { LOAD_EXPIRED_URLS_REQUEST } from "../../../actions/action_url";
 import {
   ButtonGreenWrapper,
   ButtonBorderWrapper,

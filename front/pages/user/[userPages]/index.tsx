@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+// import { END } from "redux-saga";
 import loadable from "@loadable/component";
+// import axios from "axios";
+
+// import wrapper, { SagaStore } from "../../../store";
 
 import UserLayout from "../../../components/UserLayout";
 
@@ -101,10 +105,6 @@ const StaticToDynamic = () => {
       );
       break;
   }
-
-  // const buttonClick = () => {
-  //   console.log('router:', router);
-  // }
 
   return (
     <>

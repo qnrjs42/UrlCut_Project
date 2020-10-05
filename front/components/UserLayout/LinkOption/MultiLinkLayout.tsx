@@ -122,10 +122,10 @@ const MultiLinkLayout = () => {
           <Title level={5}>
             아래 옵션이 비공개로 설정된 경우 멀티링크가 비활성화됩니다.
           </Title>
-          <Radio.Group onChange={onRadioChange} value={RadioPublicPrivate}>
+          {/* <Radio.Group onChange={onRadioChange} value={RadioPublicPrivate}>
             <Radio value={1}>공개</Radio>
             <Radio value={2}>비공개</Radio>
-          </Radio.Group>
+          </Radio.Group> */}
         </Modal>
 
         <Row justify="space-between">

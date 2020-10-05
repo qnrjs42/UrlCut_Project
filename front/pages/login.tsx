@@ -34,7 +34,6 @@ const logIn = () => {
 
   useEffect(() => {
     // 로그인 한 채로 로그인 페이지 갔을 때 뒤로가기
-    console.log("hello");
     if (me && me.id) {
       uRouter.push("/user");
     }
