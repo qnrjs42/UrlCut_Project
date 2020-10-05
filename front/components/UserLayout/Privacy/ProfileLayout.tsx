@@ -4,7 +4,6 @@ import {
   Typography,
   Row,
   Col,
-  Button,
   Card,
   Avatar,
   Divider,
@@ -103,10 +102,9 @@ const ColPaddingBottomWrapper = styled(Col)`
 
 const ProfileLayout = () => {
   const dispatch = useDispatch();
-  const { me, changeProfileDone } = useSelector<
-    RootState,
-    IUserReducerState
-  >((state) => state.user);
+  const { me, changeProfileDone } = useSelector<RootState, IUserReducerState>(
+    (state) => state.user
+  );
 
   const [Nickname, setNickname] = useState<string>();
   const [Email, setEmail] = useState<string>();
@@ -127,17 +125,26 @@ const ProfileLayout = () => {
     }
   }, [me]);
 
-  const onChangeNickname = useCallback((e) => {
-    setNickname(e.target.value);
-  }, [Nickname]);
+  const onChangeNickname = useCallback(
+    (e) => {
+      setNickname(e.target.value);
+    },
+    [Nickname]
+  );
 
-  const onChangePassword = useCallback((e) => {
-    setPassword(e.target.value);
-  }, [Password]);
+  const onChangePassword = useCallback(
+    (e) => {
+      setPassword(e.target.value);
+    },
+    [Password]
+  );
 
-  const onChangePasswordCheck = useCallback((e) => {
-    setPasswordCheck(e.target.value);
-  }, [PasswordCheck]);
+  const onChangePasswordCheck = useCallback(
+    (e) => {
+      setPasswordCheck(e.target.value);
+    },
+    [PasswordCheck]
+  );
 
   const onChangePublicProfile = useCallback(() => {
     setPublicProfile((prev) => !prev);
@@ -155,28 +162,28 @@ const ProfileLayout = () => {
     if (me) {
       const updateList: IupdateList = {};
       if (Password === PasswordCheck) {
-        Password ? updateList.password = Password : null;
+        Password ? (updateList.password = Password) : null;
       } else if (Password !== PasswordCheck) {
         message.error("패스워드가 서로 일치하지 않습니다.");
         return;
       }
 
       if (me.nickname !== Nickname) {
-        Nickname ? updateList.nickname = Nickname : null;
+        Nickname ? (updateList.nickname = Nickname) : null;
       }
-      
-      if(me.publicProfile !== PublicProfile) {
+
+      if (me.publicProfile !== PublicProfile) {
         updateList.publicProfile = PublicProfile;
       }
-      if(me.mediaGateway !== MediaGateway) {
+      if (me.mediaGateway !== MediaGateway) {
         updateList.mediaGateway = MediaGateway;
       }
       // 업데이트한 내용이 있다면
-      if(Object.keys(updateList).length !== 0) {
+      if (Object.keys(updateList).length !== 0) {
         dispatch({
           type: CHANGE_PROFILE_REQUEST,
-          data: updateList
-        })
+          data: updateList,
+        });
       }
     }
   }, [Nickname, Password, PasswordCheck, PublicProfile, MediaGateway]);

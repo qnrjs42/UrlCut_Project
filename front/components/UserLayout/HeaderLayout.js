@@ -39,14 +39,14 @@ const AvatarWrapper = styled(Avatar)`
 const HeaderLayout = () => {
   const dispatch = useDispatch();
   const uRouter = useRouter();
-  const { logOutLoading, logOutDone, logInDone } = useSelector(
+  const { logOutLoading, logOutDone } = useSelector(
     (state) => state.user
   );
   const { resetSearchUrlsDone } = useSelector((state) => state.url);
   const [SearchValue, onSearchValue, setSearchValue] = useInput("");
 
   useEffect(() => {
-    if (logOutDone && !logInDone) {
+    if (logOutDone) {
       uRouter.push("/");
     }
   }, [logOutDone]);

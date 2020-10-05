@@ -1,6 +1,6 @@
 ## 20-09-05 부터 쓰는 개발 노트
 
-[20-10-04] 진행 중
+[20-10-05] 진행 중
 
 > #### 1. 메인화면
 >
@@ -15,6 +15,13 @@
 >   + HeaderLayout, FooterLayout, ShortenUrlButton
 > - redux-saga의 getServerSideProps 타입스크립트 적용 필요(store.js pages/*.js)
 > - styled-components 타입스크립트 적용 필요(overlap-styled.js)
+
+[20-10-05] 클리어
+
+> #### 1. 유저화면 수정
+>
+> - 로그아웃 버그 수정
+> - 빌드 위해 불필요한 코드 제거
 
 [20-10-04] 클리어
 

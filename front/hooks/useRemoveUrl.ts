@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { REMOVE_URLS_REQUEST } from "../actions/action_url";
-import { tableRemoveAndMovementTypes } from "../interface";
+import { ItableRemoveAndMovement } from "../interface";
 
-const useRemoveUrl = (data: tableRemoveAndMovementTypes) => {
+const useRemoveUrl = (data: ItableRemoveAndMovement) => {
   const dispatch = useDispatch();
   const removeUrl = useCallback(() => {
     if (data.removeIds?.length !== 0) {

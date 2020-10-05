@@ -14,11 +14,9 @@ import { UserState } from "../reducers/reducer_user";
 
 const Home = () => {
   const dispatch = useDispatch();
-  // const { me } = useSelector<RootState, UserState>((state) => state.user);
   const { me } = useSelector((state) => state.user);
 
   useEffect(() => {
-    console.log("1. pages/index");
     dispatch({
       type: LOAD_MY_INFO_REQUEST,
     });
