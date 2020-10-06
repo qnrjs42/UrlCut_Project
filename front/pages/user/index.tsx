@@ -17,12 +17,14 @@ const UserIndex = () => {
 
   // SSR 적용 필요
   useEffect(() => {
+    console.log("test");
     dispatch({
       type: LOAD_MY_INFO_REQUEST,
     });
   }, []);
 
   useEffect(() => {
+    console.log(me);
     if (!(me && me.id)) {
       Router.push("/");
     }

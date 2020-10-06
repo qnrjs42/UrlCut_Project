@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Layout, Menu, Button } from "antd";
+import { Layout, Menu } from "antd";
 import {
   AppstoreOutlined,
   ApartmentOutlined,
@@ -12,56 +12,15 @@ import {
   CreditCardOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import { useRouter, withRouter } from "next/router";
+import { userList, useChangeKey } from "./UserList";
 
 const { Sider } = Layout;
 
-const userIndex = "/user";
-
-const userList = [
-  {
-    key: "dashboard_main",
-    url: userIndex,
-  },
-  {
-    key: "dashboard_link",
-    url: `${userIndex}/manage_url`,
-  },
-  {
-    key: "management_link_storage",
-    url: `${userIndex}/link_storage`,
-  },
-  {
-    key: "management_expired",
-    url: `${userIndex}/expired`,
-  },
-  {
-    key: "link_option_multi_links",
-    url: `${userIndex}/multi_links`,
-  },
-  {
-    key: "tools_create_quick_link",
-    url: `${userIndex}/create_quick_link`,
-  },
-  {
-    key: "tools_full_page_script",
-    url: `${userIndex}/full_page_script`,
-  },
-  {
-    key: "privacy_profile",
-    url: `${userIndex}/profile`,
-  },
-  {
-    key: "privacy_payment",
-    url: `${userIndex}/payment`,
-  },
-];
-
-const BaseSection = () => {
-  const router = useRouter();
+const SiderMenu = () => {
   const [Cllapsed, setCllapsed] = useState(false);
   const [Title, setTitle] = useState("Link_Project");
   const [SiderHeader, setSiderHeader] = useState("user-sider-header-open");
+  const currentKey = useChangeKey();
 
   const toggle = useCallback(() => {
     setCllapsed(!Cllapsed);
@@ -74,21 +33,6 @@ const BaseSection = () => {
       setSiderHeader("user-sider-header-open");
     }
   }, [Cllapsed]);
-
-  // 페이지가 새고로침 되어도 메뉴가 선택 됨
-  const onChangeKey = useCallback(() => {
-    for (const list of userList) {
-      // 현재페이지가 정의된 페이지면 정의된 key 반환
-      if (
-        router.asPath === list.url ||
-        router.asPath === "/" ||
-        router.asPath === "/user/index"
-      ) {
-        return list.key;
-      }
-    }
-    return "1";
-  });
 
   return (
     <Sider
@@ -103,7 +47,7 @@ const BaseSection = () => {
           <a>{Title}</a>
         </Link>
       </div>
-      <Menu mode="inline" selectedKeys={`${onChangeKey()}`}>
+      <Menu mode="inline" selectedKeys={currentKey()}>
         <span className={SiderHeader}>DASHBOARD</span>
         <Menu.Item key="dashboard_main" icon={<AppstoreOutlined />}>
           <Link href={"/user/[userPages]"} as={`${userList[0].url}/index`}>
@@ -137,7 +81,7 @@ const BaseSection = () => {
         </Menu.Item>
 
         <span className={SiderHeader}>LINK OPTION</span>
-        <Menu.Item key="link_option_multi_links" icon={<CarryOutOutlined />}>
+        <Menu.Item key="link_option_multi_link" icon={<CarryOutOutlined />}>
           <Link href={"/user/[userPages]"} as={`${userList[4].url}`}>
             <a>
               <span>멀티링크</span>
@@ -181,4 +125,4 @@ const BaseSection = () => {
   );
 };
 
-export default withRouter(BaseSection);
+export default SiderMenu;

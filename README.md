@@ -40,15 +40,22 @@ npm run build & npm run start
 
 ## 20-09-05 부터 쓰는 개발 노트
 
-[20-10-06] 진행 중
+[20-10-07] 진행 중
 
 > #### 2. 유저화면
 >
 > - 타입스크립트 적용
 >   + LinkOption - MultiLinkLayout
->   + SiderSection
 > - redux-saga의 getServerSideProps 타입스크립트 적용 필요(store.js pages/*.js)
 > - styled-components 타입스크립트 적용 필요(overlap-styled.js)
+
+[20-10-07] 클리어
+
+> #### 1. 유저화면 수정
+>
+> - 커스텀 404 페이지 생성
+> - SiderSection 타입스크립트 적용
+>   + 재사용 함수 분리
 
 [20-10-06] 클리어
 

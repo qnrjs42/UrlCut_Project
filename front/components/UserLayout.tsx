@@ -10,14 +10,15 @@ import SiderMenu from "./UserLayout/SiderSection/SiderMenu";
 import HeaderLayout from "./UserLayout/HeaderLayout";
 import FooterLayout from "./UserLayout/FooterLayout";
 
-type childrenType =
+type childrenTypes =
   | ReactChild
   | ReactFragment
   | ReactPortal
   | boolean
   | null
   | undefined;
-const UserLayout: FunctionComponent<childrenType> = ({ children }) => {
+
+const UserLayout: FunctionComponent<childrenTypes> = ({ children }) => {
   return (
     <div className="user">
       <Layout style={{ minHeight: "100vh" }}>

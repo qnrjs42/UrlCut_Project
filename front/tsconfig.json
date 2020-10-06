@@ -11,6 +11,11 @@
             "es2015",
             "es2017"
         ],
+        "plugins": [
+            {
+                "transform": "typescript-loadable-components-plugin"
+            }
+        ],
         "module": "esnext",
         "moduleResolution": "node",
         "noEmit": true,
