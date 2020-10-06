@@ -1,3 +1,43 @@
+# 이용방법 (데이터 제약 조건 없음)
+1. 메인페이지 
+    - 긴 URL를 넣고 버튼 클릭 시 단축된 URL과 QR코드 생성
+    - 로그인 페이지
+    - 회원가입 페이지<br />
+
+2. 유저페이지
+    - URL 단축
+    - 상단 검색
+        + 전체 링크 관리로 이동하여 검색한 URL 노출
+        + 검색 지우기를 통해 초기화
+    - 상단 우측 프로필 모양
+        + 프로필 수정
+        + 로그아웃
+    - 관리페이지
+        + 서비스 현황: 금월 단축한 URL 사용 건수
+        + 일별 클릭통계: 단축한 URL로 클릭한 횟수
+        + 최근 등록된 링크: 최근 단축한 URL 5개
+    - 전체 링크 관리, 링크 보관함, 설정기간 만료
+        + URL 선택, 정렬, 필터, 삭제, 이동, 페이지네이션
+        + URL 상세보기(클릭)
+    - 멀티링크
+        + 멀티링크 생성
+    - 프로필 설정
+        + 닉네임 수정
+        + 비밀번호 수정
+        + 프로필 공개, 미디어 게이트웨이 On/Off
+
+
+# 실행방법
+
+```
+cd front
+npm i
+
+npm run dev 또는
+npm run build & npm run start
+```
+
+
 ## 20-09-05 부터 쓰는 개발 노트
 
 [20-10-05] 진행 중
@@ -10,6 +50,9 @@
 > #### 2. 유저화면
 >
 > - 타입스크립트 적용
+>   + LinkOption - MultiLinkLayout
+>   + SiderSection
+>   + HeaderLayout, FooterLayout, ShortenUrlButton
 > - redux-saga의 getServerSideProps 타입스크립트 적용 필요(store.js pages/*.js)
 > - styled-components 타입스크립트 적용 필요(overlap-styled.js)
 
