@@ -1,15 +1,5 @@
 import React, { useState, useCallback } from "react";
-import {
-  Layout,
-  Typography,
-  Row,
-  Col,
-  Card,
-  Switch,
-  Modal,
-  Input,
-  Radio,
-} from "antd";
+import { Layout, Typography, Row, Col, Card, Switch, Modal, Input } from "antd";
 import { SubnodeOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -42,15 +32,15 @@ const MultiLinkLayout = () => {
   const [MultiLinkCreateOnOff, setMultiLinkCreateOnOff] = useState(false); // 멀티링크 생성 유무
   const [OptionOnOff, setOptionOnOff] = useState(false); // 멀티링크 - 옵션 클릭 유무
   const [CreateModal, setCreateModal] = useState(false); // 멀티링크 생성 버튼 모달
-  const [RadioPublicPrivate, setRadioPublicPrivate] = useState(1); // 모달 - 라디오 버튼
+  // const [RadioPublicPrivate, setRadioPublicPrivate] = useState(1); // 모달 - 라디오 버튼
 
   const onSwitchChange = useCallback(() => {
-    setMultiLinkCreateOnOff(!MultiLinkCreateOnOff);
-  }, []);
+    setMultiLinkCreateOnOff((prev) => !prev);
+  }, [MultiLinkCreateOnOff]);
 
   const onOptionChange = useCallback(() => {
-    setOptionOnOff(!OptionOnOff);
-  }, []);
+    setOptionOnOff((prev) => !prev);
+  }, [OptionOnOff]);
 
   const onModalDisplay = useCallback(() => {
     setCreateModal(true);
@@ -65,9 +55,9 @@ const MultiLinkLayout = () => {
     setCreateModal(false);
   }, []);
 
-  const onRadioChange = useCallback((e) => {
-    setRadioPublicPrivate(e.target.value);
-  }, []);
+  // const onRadioChange = useCallback((e) => {
+  //   setRadioPublicPrivate(e.target.value);
+  // }, []);
 
   // 멀티링크 없을 때
   let SwitchOptionLeftLayout = (

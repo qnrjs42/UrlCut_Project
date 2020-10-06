@@ -2,8 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const next = require("next");
+const dotenv = require("dotenv").config();
 
 const dev = process.env.NODE_ENV !== "production";
+const port = process.env.PORT || 3000;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -17,7 +19,7 @@ app
 
     server.use(
       cors({
-        origin: "http://localhost:5000",
+        origin: `http://localhost:${port}`,
         credentials: true,
       })
     );
@@ -31,9 +33,9 @@ app
 
     server.use("/api", apiRoutes);
 
-    server.listen(5000, (err) => {
+    server.listen(port, (err) => {
       if (err) throw err;
-      console.log("> Ready on Server Port: 5000");
+      console.log(`> Ready on Server Port: ${port}`);
     });
   })
   .catch((ex) => {

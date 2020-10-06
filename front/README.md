@@ -1,63 +1,170 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+## 20-09-05 부터 쓰는 개발 노트
 
-------------------------------------------------------------------------------------------
+[20-10-04] 진행 중
 
-SSR 구현(react-nodebird 6강 참고)
+> #### 1. 메인화면
+>
+> - 타입스크립트 적용
+>   + 모두
 
-pages/_app 또는 index -> 페이지 보여줄 때마다 LOAD USER를 할 텐데 AppLayout 렌더링 전에 데이터가 먼저 채워진 뒤에 렌더링 하는 방법
+> #### 2. 유저화면
+>
+> - 타입스크립트 적용
+>   + LinkOption - MultiLinkLayout
+>   + SiderSection
+>   + HeaderLayout, FooterLayout, ShortenUrlButton
+> - redux-saga의 getServerSideProps 타입스크립트 적용 필요(store.js pages/*.js)
+> - styled-components 타입스크립트 적용 필요(overlap-styled.js)
 
-export default Home; 바로 위에
+[20-10-04] 클리어
 
-export const getServerSideProps = wrapper.getServerSideProps((context) => {
-    console.log(context);
-})
-이러면 Home보다 먼저 실행 된다 그러면 화면 렌더링 전에 서버에서 먼저 데이터를 받는다
+> #### 1. 유저화면 수정
+>
+> - ProfileLayout 타입스크립트 적용 및 데이터 변경할 수 있도록 기능 구현
 
-import { END } from 'redux-saga';
-import wrapper from '../store';
+[20-10-03] 클리어
 
-사용 예)
-import { END } from 'redux-saga';
-import wrapper from '../store';
+> #### 1. 유저화면 수정
+>
+> - ExpiredLayout - 타입스크립트 적용
 
-export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-    context.store.dispatch({
-        type: LOAD_MY_INFO_REQUEST,
-    });
-    context.store.dispatch({
-        type: LOAD_POSTS_REQUEST,
-    });
-    context.store.dispatch(END);
-    await context.store.sagaTask.toPromise();
-});
+[20-10-02] 클리어
 
-export default Home;
+> #### 1. 유저화면 수정
+>
+> - MainManageLayout 타입스크립트 적용
+> - MainManageLayout - MainChart 타입스크립트 적용
+> - LinkStorageLayout - 타입스크립트 적용
+> - Table - removeUrl custom hook 적용
+> - Table - moveMentUrl custom hook 적용
+> - Table - changePagination custom hook 적용
+> - Table - getSelectedRowsIds 로직 변경
 
-HYDRATE : getServerSideProps 실행 되고 나서 위의 코드 디스패치가 실행 된 결과를 HYDRATE로 보내진다.
-reducers/index HYDRATE
+[20-10-01] 클리어
 
-------------------------------------------------------------------------------------------
+> #### 1. 메인화면 수정
+>
+> - action, reducer 분리
 
-SSR시 쿠키 공유
+> #### 2. 유저화면 수정
+>
+> - action, reducer 분리
+> - LinkManageLayout 타입스크립트 적용
+> - LinkTable 타입스크립트 적용
+> - TableDrawer 타입스크립트 적용
 
-기존 : 브라우저 -> 백엔드
-SSR  : 프론트   -> 백엔드
 
-export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-    const cookie = context.req ? context.req.headers.cookie : '';
-    axios.defaults.headers.Cookie = '';
+[20-09-23] 클리어
 
-    // 다른 사람이 내 정보로 로그인 할 수 없도록 함(즉, 내 쿠키로 다른 사람이 로그인하는 걸 방지)
-    if(context.req && cookie) {
-        axios.defaults.headers.Cookie = cookie;
-    }
+> #### 1. 유저화면 수정
+>
+> - 여러 페이지에서 새로고침 시 홈으로가는 버그 수정
+> - LinkTable - 폴더로 이동
+> - 검색 기능 구현
 
-    context.store.dispatch({
-        type: LOAD_MY_INFO_REQUEST,
-    });
-    context.store.dispatch({
-        type: LOAD_POSTS_REQUEST,
-    });
-    context.store.dispatch(END);
-    await context.store.sagaTask.toPromise();
-});
+[20-09-21] 클리어
+
+> #### 1. 메인화면 수정
+>
+> - 페이지별 로그인 On/Off 접근 제한 구현
+
+> #### 2. 유저화면 수정
+>
+> - 페이지별 로그인 On/Off 접근 제한 구현
+> - 관리페이지 - 서비스 현황 progress 기능 구현 (유저 데이터 활용)
+> - 관리페이지 - 차트 기능 구현 (유저 데이터 활용)
+> - '/' 홈으로 갔을 때 Sider 관리페이지 선택 안 되는 버그 수정
+
+[20-09-20] 클리어
+
+> #### 2. 유저화면 수정
+>
+> - 관리페이지 - 테이블 최근 5개 데이터만 노출 버그 수정
+> - 전체 링크 관리 - 테이블 페이지네이션 구현
+> - 링크 보관함 - 전체 링크 관리 테이블 복사
+> - 설정기간 만료 - 전체 링크 관리 테이블 복사
+> - 테이블 - 선택 삭제, 보관함 이동, 해제 redux 공통화
+
+[20-09-19] 클리어
+
+> #### 2. 유저화면 수정
+>
+> - 관리페이지 - 테이블 최근 5개 데이터만 노출
+> - 전체 링크 관리 - 테이블 Row 삭제
+> - 전체 링크 관리 - 테이블 Row 보관함 이동
+> - 전체 링크 관리 - 테이블 링크 설정옵션 필터링
+
+[20-09-18] 클리어
+
+> #### 2. 유저화면 수정
+>
+> - 전체 링크 관리 - 테이블 Row Click했을 때 Drawer 기능 구현
+
+[20-09-17] 클리어
+
+> #### 1. 메인화면 수정
+>
+> - SecondLayout Width 수정
+> - 로그인, 회원가입 loading 버그 수정
+
+> #### 2. 유저화면 수정
+>
+> - Header - 로그아웃 loading 버그 수정
+> - 대시보드, 매니지먼트 - 단축 URL 추가 버튼 분리 및 기능 추가
+> - 전체 링크 관리 - 패키지 추가 버튼 삭제
+> - 전체 링크 관리 - 테이블 생성일 정렬 수정
+> - 전체 링크 관리 - 테이블 단축 URL 아래 사이트 타이틀 추가
+
+---
+
+[20-09-07] 클리어
+
+> #### 1. 메인화면 수정
+>
+> - 서브레이아웃 간격 조정
+> - 로그인 로그아웃 NavBar 간격 조정
+> - 모바일 - footer 정렬
+> - 모바일 - Drawer 버튼 디자인 수정
+
+> #### 2. 유저화면 수정
+>
+> - Sider trigger tooltip background-color 수정
+> - 모바일 - Drawer 버튼 간격 조정
+> - 모바일 - 프로필 설정 - 프로필 공개, 미디어 게이트웨이 Col 간격 넓히기
+> - 모바일 - 프로필 설정, 결제 정보 - 테이블 조정
+
+---
+
+[20-09-06] 클리어
+
+> #### 1. 메인화면 수정
+>
+> - urlCut할 때 spin 기능 구현
+> - 로그인, 회원가입 spin 기능 구현
+> - button focus 오타 수정
+> - 회원가입 폼 password input icon color 수정
+> - reducers에서 url -> shortenUrl로 변경
+> - NavBar 로고 버튼 반만 선택되는 버그 수정
+> - NavBar PC/모바일 레이아웃 HOME 버튼 ON/OFF
+
+> #### 2. 유저화면 수정
+>
+> - Sider, Drawer selected color 수정
+> - Sider - Trigger icon color 수정
+> - 로그아웃 시 Avatar에 spin 기능 구현 및 color 설정
+
+---
+
+[20-09-05] 클리어
+
+> #### 1. 모바일 메인화면 디자인 수정
+>
+> - 레이아웃 중심 잡기<br />
+> - URL INPUT 중심 크기로 설정
+
+> #### 2. 유저 화면 디자인 수정
+>
+> - Sider Layout Diviver 제거<br />
+> - Sider 색상 Dark -> Light로 변경<br />
+> - Sider - Trigger 색상 그린색으로 변경<br />
+> - Footer 색상 화이트로 변경 및 간격 설정<br />

@@ -128,8 +128,6 @@ const reducer = (state = urlInitialState, action: AnyAction) =>
         draft.urlCutError = null;
         break;
       case URL_CUT_SUCCESS:
-        console.log("state", state);
-        console.log("action", action.data);
         draft.urlCutLoading = false;
 
         draft.shortenUrl = action.data.shortenUrl;

@@ -1,4 +1,5 @@
 import { all, fork, takeLatest, put, delay, call } from "redux-saga/effects";
+// import axios from "axios";
 
 import {
   LOG_IN_REQUEST,
@@ -18,12 +19,7 @@ import {
   CHANGE_PROFILE_FAILURE,
 } from "../actions/action_user";
 
-import {
-  IdummyUser,
-  IsignUpSaga,
-  IlogInSaga,
-  IchangeProfileSaga,
-} from "../interface";
+import { IdummyUser, IlogInSaga, IchangeProfileSaga } from "../interface";
 
 interface IloginAPI {
   Email: string;

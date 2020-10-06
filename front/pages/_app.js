@@ -8,7 +8,8 @@ import "../css/user.css";
 import "../css/Navbar.css";
 import { AppProps } from "next/app";
 
-const App = ({ Component }: AppProps) => {
+// const App = ({ Component }: AppProps) => {
+  const App = ({ Component }) => {
   return (
     <>
       <Head>

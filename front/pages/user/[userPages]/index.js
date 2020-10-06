@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 // import { END } from "redux-saga";
-import loadable from "@loadable/component";
 // import axios from "axios";
+import loadable from "@loadable/component";
 
 // import wrapper, { SagaStore } from "../../../store";
 
@@ -22,7 +22,7 @@ let UserComponent = loadable(
 const StaticToDynamic = () => {
   const dispatch = useDispatch();
   const uRouter = useRouter();
-  const { me } = useSelector<RootState, IUserReducerState>(
+  const { me } = useSelector(
     (state) => state.user
   );
   // SSR 적용 필요
@@ -39,7 +39,6 @@ const StaticToDynamic = () => {
 
   useEffect(() => {
     if (!(me && me.id)) {
-      console.log("3. pages/user/[userPages]/index moved");
       uRouter.push("/");
     }
   }, [me && me.id]);
