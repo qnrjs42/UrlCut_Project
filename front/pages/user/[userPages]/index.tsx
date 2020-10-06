@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 // import axios from "axios";
 import loadable from "@loadable/component";
 
-import wrapper, { SagaStore } from "../../../store";
+// import wrapper, { SagaStore } from "../../../store";
 
 import UserLayout from "../../../components/UserLayout";
 
@@ -22,7 +22,7 @@ let UserComponent = loadable(
 const StaticToDynamic = () => {
   const dispatch = useDispatch();
   const uRouter = useRouter();
-  const { me } = useSelector(
+  const { me } = useSelector<RootState, IUserReducerState>(
     (state) => state.user
   );
   // SSR 적용 필요
@@ -70,7 +70,7 @@ const StaticToDynamic = () => {
       break;
     case "multi_links":
       UserComponent = loadable(
-        () =>
+        (_) =>
           import("../../../components/UserLayout/LinkOption/MultiLinkLayout")
       );
       break;

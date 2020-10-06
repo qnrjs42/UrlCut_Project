@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { END } from "redux-saga";
-import wrapper from "../store";
-import axios from "axios";
+// import { END } from "redux-saga";
+// import wrapper from "../store";
+// import axios from "axios";
 
 import AppLayout from "../components/AppLayout";
 import UserLayout from "../components/UserLayout";
@@ -10,11 +10,13 @@ import UserLayout from "../components/UserLayout";
 import MainManageLayout from "../components/UserLayout/Dashboard/MainManageLayout";
 import { RootState } from "../reducers";
 import { LOAD_MY_INFO_REQUEST } from "../actions/action_user";
-import { UserState } from "../reducers/reducer_user";
+import { IUserReducerState } from "../reducers/reducer_user";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
+  const { me } = useSelector<RootState, IUserReducerState>(
+    (state) => state.user
+  );
 
   useEffect(() => {
     dispatch({

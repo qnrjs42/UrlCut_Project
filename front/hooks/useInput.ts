@@ -9,13 +9,4 @@ const useInput = (initValue = "") => {
   return [value, handler, setValue] as [string, onChangeType, typeof setValue];
 };
 
-// const useInput = (initialValue = "") => {
-//   const [value, setValue] = useState(initialValue);
-//   const handler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-//     setValue(e.target.value);
-//   }, []);
-
-//   return [value, handler, setValue];
-// };
-
 export default useInput;

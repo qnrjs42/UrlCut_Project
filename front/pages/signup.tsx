@@ -19,7 +19,7 @@ import {
   LOAD_MY_INFO_REQUEST,
   signupRequestAction,
 } from "../actions/action_user";
-import { RootState } from "../link-project-front/reducers";
+import { RootState } from "../reducers";
 import { IUserReducerState } from "../reducers/reducer_user";
 import useInput from "../hooks/useInput";
 

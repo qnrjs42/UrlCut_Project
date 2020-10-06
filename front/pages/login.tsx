@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -20,6 +20,7 @@ import {
 } from "../actions/action_user";
 import { IUserReducerState } from "../reducers/reducer_user";
 import { RootState } from "../reducers";
+import useInput from "../hooks/useInput";
 
 const logIn = () => {
   const uRouter = useRouter();
@@ -29,8 +30,8 @@ const logIn = () => {
     IUserReducerState
   >((state) => state.user);
 
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
+  const [Email, onChangeEmail, setEmail] = useInput("");
+  const [Password, onChangePassword, setPassword] = useInput("");
 
   useEffect(() => {
     // 로그인 한 채로 로그인 페이지 갔을 때 뒤로가기
@@ -54,19 +55,6 @@ const logIn = () => {
       uRouter.push("/user");
     }
   }, [logInDone]);
-
-  const onChangeEmail = useCallback(
-    (e) => {
-      setEmail(e.target.value);
-    },
-    [Email]
-  );
-  const onChangePassword = useCallback(
-    (e) => {
-      setPassword(e.target.value);
-    },
-    [Password]
-  );
 
   const onLogInSubmit = useCallback(() => {
     // console.log({data: {Email, Password}});

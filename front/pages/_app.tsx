@@ -9,8 +9,9 @@ import "../css/antd-overriding.css";
 import "../css/main.css";
 import "../css/user.css";
 import "../css/Navbar.css";
+import { AppContext } from "next/app";
 
-const App = ({ Component }) => {
+const App = ({ Component }: AppContext) => {
   return (
     <>
       <Head>

@@ -60,7 +60,7 @@ npm run build & npm run start
 
 > #### 1. 유저화면 수정
 >
-> - login, signup 타입스크립트 적용
+> - pages/* 타입스크립트 적용
 > - useInput 타입스크립트 적용
 
 [20-10-05] 클리어
