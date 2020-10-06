@@ -47,7 +47,6 @@ npm run build & npm run start
 > - 타입스크립트 적용
 >   + LinkOption - MultiLinkLayout
 >   + SiderSection
->   + HeaderLayout, FooterLayout, ShortenUrlButton
 > - redux-saga의 getServerSideProps 타입스크립트 적용 필요(store.js pages/*.js)
 > - styled-components 타입스크립트 적용 필요(overlap-styled.js)
 
