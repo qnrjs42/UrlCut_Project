@@ -1,14 +1,10 @@
-import React, { useCallback, useState } from "react";
-import { Menu, Button, Drawer, Row, Col } from "antd";
+import React, { useState } from "react";
+import { Drawer } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import { logoutRequestAction } from "../../reducers/reducer_user";
 import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 
 const NavBar = () => {
-  const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
   const [visible, setVisible] = useState(false);
 
   const showDrawer = () => {

@@ -10,6 +10,17 @@ import {
   TABLE_PAGINATION_REQUEST,
 } from "../actions/action_url";
 
+export interface ImainMenuProps {
+  mode:
+    | "inline"
+    | "horizontal"
+    | "vertical"
+    | "vertical-left"
+    | "vertical-right";
+}
+// End MainLayout
+/*--------------------------------------------------------------------------------------------*/
+
 // reducer_user - me
 // saga_user - loginAPI
 export interface IdummyUser {
@@ -85,7 +96,7 @@ export interface IchangeProfileSaga {
   };
 }
 // End User
-/*----------------------------------*/
+/*--------------------------------------------------------------------------------------------*/
 
 // a lot of
 export interface IurlInfo {

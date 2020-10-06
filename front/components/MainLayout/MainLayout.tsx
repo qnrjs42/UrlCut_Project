@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
 import { URL_CUT_REQUEST } from "../../actions/action_url";
+import { RootState } from "../../reducers";
+import { IUrlReducerState } from "../../reducers/reducer_url";
 
 /* Did't use css/overlap-styled */
 const FormWrapper = styled(Form)`
@@ -52,9 +54,10 @@ const CardWrapper = styled(Card)`
 
 const Main = () => {
   const dispatch = useDispatch();
-  const { urlCutLoading, urlCutDone, shortenUrl } = useSelector(
-    (state) => state.url
-  );
+  const { urlCutLoading, urlCutDone, shortenUrl } = useSelector<
+    RootState,
+    IUrlReducerState
+  >((state) => state.url);
 
   const [OriginalUrl, setOriginalUrl] = useState("");
   const [ChangeUrl, setChangeUrl] = useState("");

@@ -1,17 +1,22 @@
-import React, { useCallback } from "react";
+import React, { FunctionComponent, useCallback } from "react";
 import { Menu } from "antd";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 
 import { logoutRequestAction } from "../../../actions/action_user";
+import { RootState } from "../../../reducers";
+import { IUserReducerState } from "../../../reducers/reducer_user";
+import { ImainMenuProps } from "../../../interface";
 
-function RightMenu(props) {
+const RightMenu: FunctionComponent<ImainMenuProps> = (props) => {
   const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
+  const { me } = useSelector<RootState, IUserReducerState>(
+    (state) => state.user
+  );
 
   const onLogOutSubmit = useCallback(() => {
     dispatch(logoutRequestAction());
-  });
+  }, []);
 
   return (
     <>
@@ -37,6 +42,6 @@ function RightMenu(props) {
       )}
     </>
   );
-}
+};
 
 export default RightMenu;

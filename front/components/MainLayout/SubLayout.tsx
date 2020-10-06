@@ -16,7 +16,7 @@ const SubLayout = () => {
 
   const onButtonClick = useCallback((e) => {
     setImgName(e);
-  });
+  }, []);
 
   return (
     <Layout className="layout sub-layout-one">

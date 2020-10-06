@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Button, Layout, Badge, Card } from "antd";
+import { Row, Col, Layout, Badge, Card } from "antd";
 import styled from "styled-components";
 
 const ColWrapper = styled(Col)`

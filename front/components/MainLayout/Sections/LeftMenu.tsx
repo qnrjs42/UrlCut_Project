@@ -1,8 +1,9 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { Menu } from "antd";
 import Link from "next/link";
+import { ImainMenuProps } from "../../../interface";
 
-function LeftMenu(props) {
+const LeftMenu: FunctionComponent<ImainMenuProps> = (props) => {
   return (
     <Menu mode={props.mode}>
       <Menu.Item key="home" className="main-nav-home">
@@ -22,6 +23,6 @@ function LeftMenu(props) {
       </Menu.Item>
     </Menu>
   );
-}
+};
 
 export default LeftMenu;
