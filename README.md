@@ -62,6 +62,7 @@ npm run build & npm run start
 >
 > - pages/* 타입스크립트 적용
 > - useInput 타입스크립트 적용
+> - HeaderLayout, FooterLayout, ShortenUrlButton 타입스크립트 적용
 
 [20-10-05] 클리어
 
