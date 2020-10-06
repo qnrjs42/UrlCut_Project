@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { logoutRequestAction } from "../../actions/action_user";
-import { SEARCH_URLS_REQUEST } from "../../actions/action_url";
+import { logoutRequestAction} from '../../actions/action_user'
+import {
+  SEARCH_URLS_REQUEST,
+  RESET_SEARCH_URLS_REQUEST,
+} from "../../actions/action_url";
 import DrawerSection from "./SiderSection/DrawerSection";
-import { RootState } from "../../reducers";
-import { IUserReducerState } from "../../reducers/reducer_user";
-import { IUrlReducerState } from "../../reducers/reducer_url";
+import useInput from "../../hooks/useInput";
 
 const { Header } = Layout;
 const { Search } = Input;
@@ -38,23 +39,20 @@ const AvatarWrapper = styled(Avatar)`
 const HeaderLayout = () => {
   const dispatch = useDispatch();
   const uRouter = useRouter();
-  const { logOutLoading, logOutDone } = useSelector<
-    RootState,
-    IUserReducerState
-  >((state) => state.user);
-  const { resetSearchUrlsDone } = useSelector<RootState, IUrlReducerState>(
-    (state) => state.url
+  const { logOutLoading, logOutDone, logInDone } = useSelector(
+    (state) => state.user
   );
-  const [SearchValue, setSearchValue] = useState("");
+  const { resetSearchUrlsDone } = useSelector((state) => state.url);
+  const [SearchValue, onSearchValue, setSearchValue] = useInput("");
 
   useEffect(() => {
-    if (logOutDone) {
+    if (logOutDone && !logInDone) {
       uRouter.push("/");
     }
   }, [logOutDone]);
 
   useEffect(() => {
-    if (resetSearchUrlsDone) setSearchValue("");
+    if (resetSearchUrlsDone) setSearchValue(null);
   }, [resetSearchUrlsDone]);
 
   const onSearch = useCallback((searchData) => {
@@ -64,15 +62,11 @@ const HeaderLayout = () => {
     });
     // 전체 링크관리 페이지로 이동해서 검색한 결과 출력
     uRouter.push("/user/[userPages]", "/user/manage_url");
-  }, []);
+  });
 
   const onLogout = useCallback(() => {
     dispatch(logoutRequestAction());
-  }, []);
-
-  const onSearchValue = useCallback((e) => {
-    setSearchValue(e.target.value);
-  }, []);
+  });
 
   const menu = (
     <Menu>

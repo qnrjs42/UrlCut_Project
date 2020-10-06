@@ -18,8 +18,8 @@ import {
   LOAD_MY_INFO_REQUEST,
   loginRequestAction,
 } from "../actions/action_user";
-import { RootState } from "../reducers";
 import { IUserReducerState } from "../reducers/reducer_user";
+import { RootState } from "../reducers";
 
 const logIn = () => {
   const uRouter = useRouter();
@@ -55,18 +55,23 @@ const logIn = () => {
     }
   }, [logInDone]);
 
+  const onChangeEmail = useCallback(
+    (e) => {
+      setEmail(e.target.value);
+    },
+    [Email]
+  );
+  const onChangePassword = useCallback(
+    (e) => {
+      setPassword(e.target.value);
+    },
+    [Password]
+  );
+
   const onLogInSubmit = useCallback(() => {
     // console.log({data: {Email, Password}});
     dispatch(loginRequestAction({ data: { Email, Password } }));
   }, [Email, Password]);
-
-  const onChangeEmail = useCallback((e) => {
-    setEmail(e.target.value);
-  }, []);
-
-  const onChangePassword = useCallback((e) => {
-    setEmail(e.target.value);
-  }, []);
 
   return (
     <>

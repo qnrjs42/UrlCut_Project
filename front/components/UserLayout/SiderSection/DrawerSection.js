@@ -13,7 +13,7 @@ import {
   MenuOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter, withRouter } from "next/router";
 
 const userIndex = "/user";
 
@@ -69,15 +69,15 @@ const DrawerSection = () => {
   };
 
   // 페이지가 새고로침 되어도 메뉴가 선택 됨
-  const onChangeKey = useCallback((): string[] => {
+  const onChangeKey = useCallback(() => {
     for (const list of userList) {
       // 현재페이지가 정의된 페이지면 정의된 key 반환
       if (router.asPath === list.url || router.asPath === "/user/index") {
-        return [list.key];
+        return list.key;
       }
     }
-    return ["1"];
-  }, []);
+    return "1";
+  });
 
   return (
     <>
@@ -92,7 +92,7 @@ const DrawerSection = () => {
           visible={Visible}
           getContainer={false}
         >
-          <Menu mode="inline" selectedKeys={{ ...onChangeKey() }}>
+          <Menu mode="inline" selectedKeys={`${onChangeKey()}`}>
             <span className="user-sider-header-open">DASHBOARD</span>
             <Menu.Item
               key="dashboard_main"

@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Form, Input, Button, Checkbox, Typography, Layout, Row } from "antd";
-import { UserOutlined, LockOutlined, EditOutlined } from "@ant-design/icons";
+import { Form, Checkbox } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { useRouter } from "next/router";
 
 import NavBar from "../components/MainLayout/NavBar";
@@ -20,8 +19,9 @@ import {
   LOAD_MY_INFO_REQUEST,
   signupRequestAction,
 } from "../actions/action_user";
+import { RootState } from "../link-project-front/reducers";
 import { IUserReducerState } from "../reducers/reducer_user";
-import { RootState } from "../reducers";
+import useInput from "../hooks/useInput";
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -44,15 +44,12 @@ const signUp = () => {
     IUserReducerState
   >((state) => state.user);
 
-  const [Email, setEmail] = useState("");
-  const [NickName, setNickName] = useState("");
-  const [Password, setPassword] = useState("");
+  const [Email, onChangeEmail, setEmail] = useInput("");
+  const [Nickname, onChangeNickname, setNickname] = useInput("");
+  const [Password, onChangePassword, setPassword] = useInput("");
+  const [passwordCheck, onChangePasswordCheck, setPasswordCheck] = useInput("");
 
-  const [passwordCheck, setPasswordCheck] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-
-  const [term, setTerm] = useState("");
-  const [termError, setTermError] = useState(false);
+  const [Term, setTerm] = useState(false);
 
   useEffect(() => {
     // 로그인 한 채로 회원가입 페이지 갔을 때 뒤로가기
@@ -70,50 +67,28 @@ const signUp = () => {
   useEffect(() => {
     if (signUpDone) {
       setEmail("");
-      setNickName("");
+      setNickname("");
       setPassword("");
       setPasswordCheck("");
-      setTerm("");
+      setTerm(false);
       uRouter.push("/");
     }
   }, [signUpDone]);
 
-  const onChangeTerm = useCallback((e) => {
-    setTerm(e.target.checked);
-    setTermError(false);
-  }, []);
-
-  const onChangeEmail = useCallback((e) => {
-    setEmail(e.target.value);
-  }, []);
-
-  const onChangeNickName = useCallback((e) => {
-    setNickName(e.target.value);
-  }, []);
-
-  const onChangePassword = useCallback((e) => {
-    setPassword(e.target.value);
-  }, []);
-
-  const onChangePasswordCheck = useCallback(
-    (e) => {
-      setPasswordCheck(e.target.value);
-      setPasswordError(e.target.value !== Password);
-    },
-    [Password]
-  );
-
   const onSignUpSubmit = useCallback(() => {
     if (Password !== passwordCheck) {
-      return setPasswordError(true);
+      return;
     }
 
-    if (!term) {
-      return setTermError(true);
-    }
-    // console.log({ data: { Email, Password, NickName } });
-    dispatch(signupRequestAction({ data: { Email, Password, NickName } }));
-  }, [Email, NickName, Password, term]);
+    dispatch(signupRequestAction({ data: { Email, Password, Nickname } }));
+  }, [Email, Nickname, Password, Term]);
+
+  const onChangeTerm = useCallback(
+    (e) => {
+      setTerm(e.target.checked);
+    },
+    [Term]
+  );
 
   return (
     <>
@@ -164,8 +139,8 @@ const signUp = () => {
                         <EditOutlined style={{ color: "rgba(0,0,0,.25)" }} />
                       }
                       placeholder="닉네임"
-                      value={NickName}
-                      onChange={onChangeNickName}
+                      value={Nickname}
+                      onChange={onChangeNickname}
                     />
                   </Form.Item>
 
@@ -200,12 +175,10 @@ const signUp = () => {
                         message: "비밀번호를 입력해주세요",
                       },
                       ({ getFieldValue }) => ({
-                        validator(rule, value) {
+                        validator(_, value) {
                           if (!value || getFieldValue("password") === value) {
-                            setPasswordError(false);
                             return Promise.resolve();
                           }
-                          setPasswordError(true);
                           return Promise.reject(
                             "입력한 비밀번호와 동일한지 확인하세요"
                           );
@@ -233,14 +206,14 @@ const signUp = () => {
                         validator: (_, value) =>
                           value
                             ? Promise.resolve()
-                            : Promise.reject("Should accept agreement"),
+                            : Promise.reject("약관에 동의하셔야 합니다."),
                       },
                     ]}
                     {...tailFormItemLayout}
                   >
                     <Checkbox
                       name="user-term"
-                      checked={termError}
+                      checked={Term}
                       onChange={onChangeTerm}
                     >
                       약관에 동의합니다. <a href="">(이용약관)</a>

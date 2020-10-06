@@ -40,7 +40,7 @@ npm run build & npm run start
 
 ## 20-09-05 부터 쓰는 개발 노트
 
-[20-10-05] 진행 중
+[20-10-06] 진행 중
 
 > #### 1. 메인화면
 >
@@ -55,6 +55,13 @@ npm run build & npm run start
 >   + HeaderLayout, FooterLayout, ShortenUrlButton
 > - redux-saga의 getServerSideProps 타입스크립트 적용 필요(store.js pages/*.js)
 > - styled-components 타입스크립트 적용 필요(overlap-styled.js)
+
+[20-10-06] 클리어
+
+> #### 1. 유저화면 수정
+>
+> - login, signup 타입스크립트 적용
+> - useInput 타입스크립트 적용
 
 [20-10-05] 클리어
 

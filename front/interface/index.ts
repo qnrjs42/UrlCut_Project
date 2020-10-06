@@ -59,7 +59,7 @@ interface baseTypes {
   data: {
     Email: string;
     Password: string;
-    NickName?: string;
+    Nickname?: string;
   };
 }
 

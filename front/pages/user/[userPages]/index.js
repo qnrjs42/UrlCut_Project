@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 // import axios from "axios";
 import loadable from "@loadable/component";
 
-// import wrapper, { SagaStore } from "../../../store";
+import wrapper, { SagaStore } from "../../../store";
 
 import UserLayout from "../../../components/UserLayout";
 
@@ -70,7 +70,7 @@ const StaticToDynamic = () => {
       break;
     case "multi_links":
       UserComponent = loadable(
-        (props) =>
+        () =>
           import("../../../components/UserLayout/LinkOption/MultiLinkLayout")
       );
       break;

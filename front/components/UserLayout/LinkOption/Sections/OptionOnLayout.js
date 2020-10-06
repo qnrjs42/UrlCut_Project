@@ -4,6 +4,7 @@ import {
   Typography,
   Row,
   Col,
+  Button,
   Menu,
   Dropdown,
   Switch,
@@ -13,9 +14,9 @@ import {
 } from "antd";
 import { MoreOutlined, MenuOutlined } from "@ant-design/icons";
 import {
-  SortableContainer,
-  SortableElement,
-  SortableHandle,
+  sortableContainer,
+  sortableElement,
+  sortableHandle,
 } from "react-sortable-hoc";
 import arrayMove from "array-move";
 import styled from "styled-components";
@@ -26,7 +27,7 @@ import {
   ButtonDefaultBorderWrapper,
 } from "../../../../css/overlap-styled";
 
-const DragHandle = SortableHandle(() => (
+const DragHandle = sortableHandle(() => (
   <MenuOutlined style={{ cursor: "pointer", color: "#999" }} />
 ));
 
@@ -63,13 +64,7 @@ const columns = [
   },
 ];
 
-interface Idata {
-  key: string;
-  name: string;
-  address: string;
-  index: number;
-}
-const data: Idata[] = [
+const data = [
   {
     key: "1",
     name: "메뉴명을 입력하세요.",
@@ -91,12 +86,8 @@ const data: Idata[] = [
   },
 ];
 
-const SortableItem = SortableElement((props: { props: string }) => (
-  <tr>{props}</tr>
-));
-const SortableContainerComponent = SortableContainer(
-  (props: { props: string }) => <tbody>{props}</tbody>
-);
+const SortableItem = sortableElement((props) => <tr {...props} />);
+const SortableContainer = sortableContainer((props) => <tbody {...props} />);
 
 const MoreOutlinedWrapper = styled(MoreOutlined)`
   font-size: 25px;
@@ -104,10 +95,10 @@ const MoreOutlinedWrapper = styled(MoreOutlined)`
 
 export const OptionOnLayout = () => {
   const [Message, setMessage] = useState(false);
-  const [DataSource, setDataSource] = useState<Idata[]>(data);
+  const [DataSource, setDataSource] = useState(data);
 
-  const DraggableContainer = (props: { props: string }) => (
-    <SortableContainerComponent
+  const DraggableContainer = (props) => (
+    <SortableContainer
       useDragHandle
       helperClass="row-dragging"
       onSortEnd={onSortEnd}
@@ -116,22 +107,24 @@ export const OptionOnLayout = () => {
   );
 
   const onMessageChange = useCallback(() => {
-    setMessage((prev) => !prev);
+    setMessage(!Message);
 
     Message
       ? message.error("멀티링크가 비공개로 설정되었습니다.")
       : message.success("멀티링크가 공개로 설정되었습니다.");
-  }, [Message]);
+  });
 
   const onSortEnd = useCallback(({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
-      const newData = arrayMove(DataSource, oldIndex, newIndex).filter(
-        (el) => !!el
-      );
+      const newData = arrayMove(
+        [].concat(DataSource),
+        oldIndex,
+        newIndex
+      ).filter((el) => !!el);
       console.log("Sorted items: ", newData);
       setDataSource(newData);
     }
-  }, []);
+  });
 
   const DraggableBodyRow = useCallback(({ className, style, ...restProps }) => {
     // function findIndex base on Table rowKey props and should always be a right array index
@@ -139,7 +132,7 @@ export const OptionOnLayout = () => {
       (x) => x.index === restProps["data-row-key"]
     );
     return <SortableItem index={index} {...restProps} />;
-  }, []);
+  });
 
   return (
     <>
